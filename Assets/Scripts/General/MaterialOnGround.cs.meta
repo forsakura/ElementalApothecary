@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scripts/General/MaterialOnGround.cs.meta
+guid: 3e9a1df224e5e2345a1288d0f41944eb
+========
+guid: b50071b02957a3e4f8528123fa6778fb
+>>>>>>>> 13a91d15d3541976bcb8ce36aae489684fb6ad14:Assets/Scripts/Home/FunctionTablePanel.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

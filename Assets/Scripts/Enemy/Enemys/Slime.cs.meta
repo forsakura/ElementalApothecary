@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 05c7e449188e93740b2057385528a1bd
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - characterRestriction: {instanceID: 0}
+  - element: {instanceID: 0}
+  - player: {instanceID: 0}
+  - animator: {instanceID: 0}
+  - enemyData: {fileID: 11400000, guid: 4fd9c00ecef5761438a7e7a5d88572d0, type: 2}
+  - aiPath: {instanceID: 0}
+  - rb: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
