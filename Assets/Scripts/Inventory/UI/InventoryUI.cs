@@ -63,7 +63,6 @@ public class InventoryUI : MonoBehaviour
         for (int i = 0; i < boxSlots.Count; i++)
         {
             boxSlots[i].slotIndex = i;
-            print(i);
         }
         bagOpened = bagUI.activeInHierarchy;
         //playerMoneyText.text = InventoryManager.Instance.playerMoney.ToString();
