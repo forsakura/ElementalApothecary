@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FrameWork;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -12,7 +13,7 @@ public enum areaName
     JungleArea,
     UndergroundArea
 }
-public class EnemyWaveManager : SingletonMono<EnemyWaveManager>
+public class EnemyWaveManager : MonoSingleton<EnemyWaveManager>
 {
     public List<EnemyWave> enemyWaves;
     

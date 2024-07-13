@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using FrameWork;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
@@ -9,7 +10,7 @@ using UnityEngine.SceneManagement;
 /// <summary>
 /// 场景管理类
 /// </summary>
-public class SceneMgr : SingletonMono<SceneMgr>
+public class SceneMgr : MonoSingleton<SceneMgr>
 {
     
     /*

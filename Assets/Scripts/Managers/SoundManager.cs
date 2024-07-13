@@ -2,11 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using FrameWork;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
-public class SoundManager : SingletonMono<SoundManager>
+public class SoundManager : MonoSingleton<SoundManager>
 {
     /// <summary>
     /// 所有声音的源头的父物体

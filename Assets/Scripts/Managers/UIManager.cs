@@ -3,11 +3,12 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using System.Collections.Generic;
+using FrameWork;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
-public class UIManager : SingletonMono<UIManager>
+public class UIManager : MonoSingleton<UIManager>
 {
     /// <summary>
     /// �������ĸ�����

@@ -2,9 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using FrameWork;
 using UnityEngine;
 
-public class ForgingFurnaces : SingletonMono<ForgingFurnaces>
+public class ForgingFurnaces : MonoSingleton<ForgingFurnaces>
 {
     
     // Start is called before the first frame update
@@ -21,7 +22,7 @@ public class ForgingFurnaces : SingletonMono<ForgingFurnaces>
 
 
     /// <summary>
-    /// ìÑÉÕÒ©Ë®
+    /// ï¿½ï¿½ï¿½ï¿½Ò©Ë®
     /// </summary>
     /// <param name="potion"></param>
     public ItemDetails Calcination(PotionEntity potion)
