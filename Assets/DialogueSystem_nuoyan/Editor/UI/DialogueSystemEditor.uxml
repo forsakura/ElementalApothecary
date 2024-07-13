@@ -1,0 +1,20 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/DialogueSystem_nuoyan/Editor/UI/DialogueSystemEditor.uss?fileID=7433441132597879392&amp;guid=4b58541bc5f28784391246d52a1b60fd&amp;type=3#DialogueSystemEditor" />
+    <ui:VisualElement style="flex-grow: 1; flex-direction: row; align-self: stretch;">
+        <ui:VisualElement name="LeftDiv" style="flex-grow: 0.4; flex-direction: column; margin-right: 0; margin-top: 0; padding-top: 0; padding-right: 0; margin-bottom: 0; margin-left: 0; padding-bottom: 0; padding-left: 0; border-right-width: 5px; border-right-color: rgba(255, 255, 255, 0); border-top-width: 5px; border-bottom-width: 5px; border-left-width: 5px; border-top-left-radius: 0; border-top-right-radius: 0; border-bottom-right-radius: 0; border-bottom-left-radius: 0; border-left-color: rgba(255, 255, 255, 0); border-top-color: rgba(255, 255, 255, 0); border-bottom-color: rgba(255, 255, 255, 0); -unity-text-align: upper-center; width: 250px; height: auto; align-self: auto;">
+            <ui:Label tabindex="-1" text="Inspector" parse-escape-sequences="false" display-tooltip-when-elided="true" name="Inspector" style="-unity-font-style: bold; color: rgb(255, 255, 255); -unity-text-align: upper-center; white-space: nowrap; font-size: 24px; top: auto; flex-shrink: 0; flex-grow: 0; margin-top: 5px; margin-bottom: 5px; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-left-color: rgba(255, 255, 255, 0); border-right-color: rgba(255, 255, 255, 0); border-top-color: rgba(255, 255, 255, 0); border-bottom-color: rgba(255, 255, 255, 0); align-items: stretch; margin-right: 5px; margin-left: 5px; width: 450px; height: 40px; align-self: auto; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 5px; justify-content: flex-start;" />
+            <ui:VisualElement style="flex-grow: 1; width: auto;">
+                <ui:ScrollView>
+                    <InspectorView style="flex-grow: 1;" />
+                </ui:ScrollView>
+            </ui:VisualElement>
+            <ui:VisualElement style="flex-grow: 0; flex-shrink: 1; flex-direction: row; bottom: 20px;">
+                <ui:Button text="Update" parse-escape-sequences="true" display-tooltip-when-elided="true" name="update" style="background-color: rgb(40, 255, 0); -unity-font-style: bold; color: rgb(0, 0, 0); font-size: 16px; width: 100px; height: 50px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; -unity-background-image-tint-color: rgb(255, 215, 0);" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="RightDiv" style="flex-grow: 0.6; flex-direction: column; border-left-color: rgba(0, 0, 0, 0); border-right-color: rgba(0, 0, 0, 0); border-top-color: rgba(0, 0, 0, 0); border-bottom-color: rgba(0, 0, 0, 0); border-left-width: 1px;">
+            <ui:Label tabindex="-1" text="DialogueTreeViewer" parse-escape-sequences="true" display-tooltip-when-elided="true" name="DialogueTreeViewer" style="-unity-text-align: upper-center; font-size: 24px; color: rgb(255, 255, 255); -unity-font-style: bold; margin-top: 10px; margin-bottom: 5px;" />
+            <DialogueTreeView focusable="true" style="flex-grow: 1;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
