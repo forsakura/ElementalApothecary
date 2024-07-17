@@ -6,7 +6,7 @@ namespace FrameWork.Base
     /*
      * 不继承Mono的脚本单例类
      */
-    public class Singleton<T> where T : Singleton<T>, new()
+    public class SingletonByQing<T> where T : SingletonByQing<T>, new()
     {
         private static T _instance;
 
@@ -17,16 +17,10 @@ namespace FrameWork.Base
                 if (_instance == null)
                 {
                     _instance = new T();
-                    _instance.Init();
                 }
 
                 return _instance;
             }
-        }
-
-        protected virtual void Init()
-        {
-            
         }
     }
 }

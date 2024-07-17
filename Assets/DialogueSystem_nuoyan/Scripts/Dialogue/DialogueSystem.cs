@@ -1,5 +1,6 @@
 using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
+using Utilities;
 
 public class DialogueSystem : Singleton<DialogueSystem>,ISavable
 {

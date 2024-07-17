@@ -4,6 +4,7 @@ using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.U2D;
 using UnityEngine.UI;
+using Utilities;
 
 public class InventoryManager : Singleton<InventoryManager>
 {

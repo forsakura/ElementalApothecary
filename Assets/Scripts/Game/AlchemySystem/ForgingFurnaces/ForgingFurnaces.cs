@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using FrameWork;
+using FrameWork.Base;
 using UnityEngine;
 
 public class ForgingFurnaces : MonoSingleton<ForgingFurnaces>

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using FrameWork;
+using FrameWork.Base;
 using UnityEngine;
 
 public class SyntheticList : MonoSingleton<SyntheticList>

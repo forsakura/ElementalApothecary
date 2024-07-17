@@ -1,29 +1,32 @@
 using UnityEngine;
 
-namespace FrameWork
+namespace FrameWork.Base
 {
+    /*
+     * 继承Mono的脚本单例类
+     */
     public class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T>
     {
-        private static T instance;
+        private static T _instance;
 
         public static T Instance
         {
             get
             {
-                if (instance != null) return instance;
-                instance = FindObjectOfType<T>();
-                if (instance != null) return instance;
-                instance = new GameObject("Singleton of " + typeof(T)).AddComponent<T>();
-                instance.Init();
+                if (_instance != null) return _instance;
+                _instance = FindObjectOfType<T>();
+                if (_instance != null) return _instance;
+                _instance = new GameObject("Singleton of " + typeof(T)).AddComponent<T>();
+                _instance.Init();
 
-                return instance;
+                return _instance;
             }
         }
 
         private void Awake()
         {
-            if (instance != null) return;
-            instance = this as T;
+            if (_instance != null) return;
+            _instance = this as T;
             Init();
         }
 

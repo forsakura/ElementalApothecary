@@ -2,16 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Utilities;
 
 public class AlchemyCauldron : Singleton<AlchemyCauldron>
 {
     
     
     /// <summary>
-    /// Ò©Ë®Éú³É
+    /// Ò©Ë®ï¿½ï¿½ï¿½ï¿½
     /// </summary>
-    /// <param name="m1">²ÄÁÏ1</param>
-    /// <param name="m2">²ÄÁÏ2</param>
+    /// <param name="m1">ï¿½ï¿½ï¿½ï¿½1</param>
+    /// <param name="m2">ï¿½ï¿½ï¿½ï¿½2</param>
     public void Refining(MaterialEntity m1, MaterialEntity m2)
     {
         foreach (var VARIABLE1 in SyntheticList.Instance.cauldronRecipes.CauldronRecipeEntities)

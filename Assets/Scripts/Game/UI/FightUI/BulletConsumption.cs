@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Xml.Linq;
+using Utilities;
 
 public class BulletConsumption : Singleton<BulletConsumption>
 {

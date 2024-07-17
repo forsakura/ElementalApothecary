@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class MessionSystem : Singleton<MessionSystem>,ISavable
+public class MessionSystem : Utilities.Singleton<MessionSystem>,ISavable
 {
     public MessionPanel messionPanel;
 
