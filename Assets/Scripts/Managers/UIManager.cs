@@ -1,164 +1,58 @@
 using System;
-using System.Collections;
-using Unity.VisualScripting;
-using UnityEngine;
 using System.Collections.Generic;
-using FrameWork;
-using FrameWork.Base;
-using UnityEngine.Rendering;
-using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
+using ProjectBase;
+using UnityEngine;
 
-public class UIManager : MonoSingleton<UIManager>
+namespace Managers
 {
-    /// <summary>
-    /// �������ĸ�����
-    /// </summary>
-    public GameObject ui;
-    
-    /// <summary>
-    /// ��ʼ��Ϸ���?
-    /// </summary>
-    public GameObject startPanel;
-    
-    /// <summary>
-    /// ������Ϸ���?
-    /// </summary>
-    public GameObject loadPanel;
-    
-    /// <summary>
-    /// ���ý���
-    /// </summary>
-    public GameObject settingPanel;
-    
-    /// <summary>
-    /// ��л���?
-    /// </summary>
-    public GameObject thanksPanel;
-    
-    /// <summary>
-    /// ���ؽ���
-    /// </summary>
-    public GameObject loadingPanel;
-
-    public GameObject fightUI;
-    
-    /// <summary>
-    /// �������ļ���
-    /// </summary>
-    public List<GameObject> panels;
-
-    protected override void Init()
+    /*
+     * 统一管理UI面板，提供全局唯一UI面板的访问点
+     */
+    public class UIManager : MonoSingleton<UIManager>
     {
-        base.Init();
-        fightUI.SetActive(false);
-       // SceneMgr.Instance.LoadNextScene("Menu");
-        panels.Add(startPanel);
-        panels.Add(loadPanel);
-        panels.Add(settingPanel);
-        panels.Add(thanksPanel);
-        panels.Add(loadingPanel);
-    }
+        public List<GameObject> panels;
+        
+        public GameObject loadingPanel;
 
-    private void OnEnable()
-    {
-        DontDestroyOnLoad(Instance);
-        DontDestroyOnLoad(ui);
-    }
-
-    private void Start()
-    {
-        //ShowCurrentCanvas(startPanel);
-    }
-
-    /// <summary>
-    /// ��ʼ��ť�����¼�
-    /// </summary>
-    /// <param name="sceneName">������</param>
-    public void OnStartNewGame(string sceneName)
-    {
-        HideAllCanvas();
-        SceneMgr.Instance.LoadNextScene(sceneName);
-    }
-
-    /// <summary>
-    /// ������Ϸ��ť�����¼�
-    /// </summary>
-    public void OnLoadGame()
-    {
-        ShowCurrentCanvas(loadPanel);
-    }
-
-    /// <summary>
-    /// ���ð�ť�����¼�
-    /// </summary>
-    public void OnSetting()
-    {
-        ShowCurrentCanvas(settingPanel);
-    }
-
-    /// <summary>
-    /// ��л��ť�����¼�
-    /// </summary>
-    public void OnThanks()
-    {
-        ShowCurrentCanvas(thanksPanel);
-    }
-
-    /// <summary>
-    /// �˳���ť�����¼�
-    /// </summary>
-    public void OnExitGame()
-    {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#endif
-        Application.Quit();
-    }
-
-    /// <summary>
-    /// ������Ϸ��ť�����¼�
-    /// </summary>
-    public void OnBackGame()
-    {
-        HideAllCanvas();
-    }
-
-    /// <summary>
-    /// �������˵���ť�����¼�
-    /// </summary>
-    public void OnBackToMenu()
-    {
-        ShowCurrentCanvas(startPanel);
-    }
-
-    /// <summary>
-    /// ��ʾ��ǰ��Ҫ��ʾ�����?
-    /// </summary>
-    /// <param name="curCanvas">��ʾ�����?/param>
-    private void ShowCurrentCanvas(GameObject curCanvas)
-    {
-        foreach (var VARIABLE in panels)
+        private void Start()
         {
-            if (VARIABLE != curCanvas)
+            HideAllPanel();
+        }
+
+        public void HideAllPanel()
+        {
+            foreach (var panel in panels)
             {
-                VARIABLE.SetActive(false);
-            }
-            else
-            {
-                VARIABLE.SetActive(true);
+                panel.SetActive(false);
             }
         }
-    }
 
-    /// <summary>
-    /// �����������?
-    /// </summary>
-    private void HideAllCanvas()
-    {
-        foreach (var VARIABLE in panels)
+        public void ShowPanel(GameObject panel)
         {
-            VARIABLE.SetActive(false);
+            foreach (var o in panels)
+            {
+                o.SetActive(o == panel);
+            }
+        }
+
+        public void OnLoadGame()
+        {
+            
+        }
+
+        public void OnSetting()
+        {
+            
+        }
+
+        public void OnThanks()
+        {
+            
+        }
+
+        public void OnExitGame()
+        {
+            
         }
     }
 }
