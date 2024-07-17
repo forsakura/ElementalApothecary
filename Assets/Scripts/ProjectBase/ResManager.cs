@@ -1,17 +1,15 @@
 using System.Collections;
-using FrameWork;
-using FrameWork.Base;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Managers
+namespace ProjectBase
 {
     /*
      * 资源管理器，对资源的进行加载和卸载操作，提供同步和异步操作。
      * Resources文件夹下资源进行处理
      * AssetBundle后续补充          --by 棾
      */
-    public class ResManager
+    public static class ResManager
     {
         #region Resources
 

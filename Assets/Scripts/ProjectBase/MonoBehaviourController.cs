@@ -1,9 +1,7 @@
 using System.Collections.Generic;
-using FrameWork;
 using UnityEngine.Events;
 
-
-namespace Managers
+namespace ProjectBase
 {
     /*
      * Mono管理类，不继承Mono的脚本需要使用Mono的周期函数或功能可调用该脚本，比如更新周期，协程调用         --by 棾

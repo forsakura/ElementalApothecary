@@ -1,10 +1,7 @@
-using Unity.VisualScripting;
-using UnityEngine;
-
-namespace FrameWork.Base
+namespace ProjectBase
 {
     /*
-     * 不继承Mono的脚本单例类
+     * 不继承Mono的脚本单例类        --By 棾
      */
     public class SingletonByQing<T> where T : SingletonByQing<T>, new()
     {

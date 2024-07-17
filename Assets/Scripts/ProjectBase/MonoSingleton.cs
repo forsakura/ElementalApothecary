@@ -1,10 +1,10 @@
 using UnityEngine;
 
-namespace FrameWork.Base
+namespace ProjectBase
 {
     /*
-     * 继承Mono的脚本单例类
-     */
+     * 继承Mono的脚本单例类                    --By 棾
+     */ 
     public class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T>
     {
         private static T _instance;
