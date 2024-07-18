@@ -1,7 +1,8 @@
 using System.Collections.Generic;
+using ProjectBase.Mono;
 using UnityEngine.Events;
 
-namespace ProjectBase
+namespace ProjectBase.Event
 {
     /*
      * 事件中心，集中处理事件，减少物体事件之间耦合度。    --By 棾

@@ -1,4 +1,4 @@
-namespace ProjectBase
+namespace ProjectBase.Mono
 {
     /*
      * 不继承Mono的脚本单例类        --By 棾

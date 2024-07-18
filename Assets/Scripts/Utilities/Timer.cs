@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
-using MonoBehaviourController = ProjectBase.MonoBehaviourController;
+using MonoBehaviourController = ProjectBase.Mono.MonoBehaviourController;
 
 namespace Utilities
 {

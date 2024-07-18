@@ -1,39 +1,40 @@
 using System.Collections.Generic;
+using ProjectBase.Res;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace ProjectBase
+namespace ProjectBase.Pool
 {
     /// <summary>
     /// 对象池本身，包括初始化操作，填充对象池，获取和返回物体。                  --By 棾
     /// </summary>
     public class Pool
     {
-        private string prefabPath;
-        private int initialCapacity = 20;
+        private string _prefabPath;
+        private int _initialCapacity = 20;
 
-        private Queue<GameObject> prefabQueue;
+        private Queue<GameObject> _prefabQueue;
 
-        private Transform parent;
+        private Transform _parent;
 
         public string PrefabPath
         {
-            get => prefabPath;
-            set => prefabPath = value;
+            get => _prefabPath;
+            set => _prefabPath = value;
         }
 
         public int InitialCapacity
         {
-            get => initialCapacity;
-            set => initialCapacity = value;
+            get => _initialCapacity;
+            set => _initialCapacity = value;
         }
 
         public Pool(int capacity, string path, Transform parent)
         {
-            this.parent = parent;
+            this._parent = parent;
             InitialCapacity = capacity;
             PrefabPath = path;
-            prefabQueue = new Queue<GameObject>();
+            _prefabQueue = new Queue<GameObject>();
         }
 
         /// <summary>
@@ -43,7 +44,7 @@ namespace ProjectBase
         {
             for (var i = 0; i < InitialCapacity; i++)
             {
-                prefabQueue.Enqueue(InitGameObject(callback));
+                InitGameObject(obj => _prefabQueue.Enqueue(obj));
             }
         }
         
@@ -52,13 +53,14 @@ namespace ProjectBase
         /// 创建游戏对象
         /// </summary>
         /// <returns></returns>
-        private GameObject InitGameObject(UnityAction<GameObject> callback = null)
+        private void InitGameObject(UnityAction<GameObject> callback = null)
         {
-            var res = ResManager.LoadResource<GameObject>(PrefabPath);
-            res.transform.SetParent(parent);
-            callback?.Invoke(res);
-            res.SetActive(false);
-            return res;
+            ResManager.LoadResourceAsync<GameObject>(PrefabPath, obj =>
+            {
+                obj.transform.SetParent(_parent);
+                callback?.Invoke(obj);
+                obj.SetActive(false);
+            });
         }
 
         /// <summary>
@@ -67,12 +69,13 @@ namespace ProjectBase
         /// <returns></returns>
         private GameObject GetFromPool()
         {
-            if (prefabQueue.Count == 0)
+            if (_prefabQueue.Count == 0)
             {
                 FullPool();
             }
 
-            var obj = prefabQueue.Dequeue();
+            var obj = _prefabQueue.Dequeue();
+            obj.transform.parent = null;
             obj.SetActive(true);
             return obj;
         }
@@ -86,7 +89,8 @@ namespace ProjectBase
         public void ReturnToPool(GameObject gb)
         {
             gb.SetActive(false);
-            prefabQueue.Enqueue(gb);
+            gb.transform.SetParent(_parent);
+            _prefabQueue.Enqueue(gb);
         }
         
         public void PrepareGamObject(Vector3 pos)

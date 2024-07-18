@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ProjectBase
+namespace ProjectBase.Mono
 {
     /*
      * 继承Mono的脚本单例类                    --By 棾

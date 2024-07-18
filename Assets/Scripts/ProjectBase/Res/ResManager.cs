@@ -1,8 +1,9 @@
 using System.Collections;
+using ProjectBase.Mono;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace ProjectBase
+namespace ProjectBase.Res
 {
     /*
      * 资源管理器，对资源的进行加载和卸载操作，提供同步和异步操作。
@@ -26,6 +27,26 @@ namespace ProjectBase
         }
 
         /// <summary>
+        /// 加载所有同名路径资源
+        /// </summary>
+        /// <param name="path">路径</param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public static T[] LoadResources<T>(string path) where T : Object
+        {
+            var res = Resources.LoadAll<T>(path);
+            foreach (var VARIABLE in res)
+            {
+                if (VARIABLE is GameObject)
+                {
+                    Object.Instantiate(VARIABLE);
+                }
+            }
+
+            return res;
+        }
+        
+        /// <summary>
         /// 异步加载资源
         /// </summary>
         /// <param name="path"></param>
@@ -43,7 +64,7 @@ namespace ProjectBase
             yield return res;
             if (res.asset is GameObject)
             {
-                Object.Instantiate(res.asset);
+                callback(Object.Instantiate(res.asset) as T);
             }
             else
             {

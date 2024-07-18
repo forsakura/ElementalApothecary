@@ -1,16 +1,17 @@
 using System.Collections.Generic;
+using ProjectBase.Mono;
 using UnityEngine;
 
-namespace ProjectBase
+namespace ProjectBase.Pool
 {
     /*
      * 对象池管理器，管理所有对象池，包括对象池的创建与删除，初始化对象池信息功能。      --BY 棾
      */
     public class PoolManager : MonoSingleton<PoolManager>
     {
-        private Transform parentTransform;
+        private Transform _parentTransform;
         
-        private Dictionary<string, Pool> poolDic = new();
+        private Dictionary<string, ProjectBase.Pool.Pool> poolDic = new();
 
         private void Start()
         {
@@ -26,8 +27,8 @@ namespace ProjectBase
         {
             if (poolDic.ContainsKey(prefabPath)) return;
             var gb = new GameObject(prefabPath + " pool");
-            gb.transform.SetParent(parentTransform);
-            poolDic.Add(prefabPath, new Pool(capacity, prefabPath, gb.transform));
+            gb.transform.SetParent(_parentTransform);
+            poolDic.Add(prefabPath, new ProjectBase.Pool.Pool(capacity, prefabPath, gb.transform));
             poolDic[prefabPath].FullPool(null);
             
         }

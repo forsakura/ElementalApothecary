@@ -1,17 +1,18 @@
+using ProjectBase.Mono;
 using UnityEngine;
 
-namespace ProjectBase
+namespace ProjectBase.Sound
 {
-    public enum SourceType
-    {
-        BGM,
-        SoundEffect
-    }
     /*
      * 音效管理器 对音效进行管理；
      * 包括对背景音乐，音效的播放，暂停，音源的替换，音量设置，音速调节；
      * 添加和删除新音源。                           --By 棾
      */
+    public enum SourceType
+    {
+        BGM,
+        SoundEffect
+    }
     public class SoundManager : SingletonByQing<SoundManager>
     {
         
@@ -30,6 +31,20 @@ namespace ProjectBase
         }
 
         /// <summary>
+        /// 播放音效
+        /// </summary>
+        /// <param name="audioSource">需要播放的音效音源</param>
+        /// <param name="delay">延迟播放时间（默认0秒）</param>
+        public void PlaySoundEffect(AudioSource audioSource, ulong delay = 0)
+        {
+            if (audioSource == null)
+            {
+                audioSource = new GameObject("AudioSource of SoundEffect").AddComponent<AudioSource>();
+            }
+            audioSource.Play(delay);
+        }
+        
+        /// <summary>
         /// 暂停声音播放
         /// </summary>
         /// <param name="audioSource">需要暂停的音源</param>
@@ -43,24 +58,10 @@ namespace ProjectBase
         /// 停止声音播放
         /// </summary>
         /// <param name="audioSource">需要停止的音源</param>
-        public void StopBGM(AudioSource audioSource)
+        public void StopSound(AudioSource audioSource)
         {
             if (audioSource == null) return;
             audioSource.Stop();
-        }
-
-        /// <summary>
-        /// 播放音效
-        /// </summary>
-        /// <param name="audioSource">需要播放的音效音源</param>
-        /// <param name="delay">延迟播放时间（默认0秒）</param>
-        public void PlaySoundEffect(AudioSource audioSource, ulong delay = 0)
-        {
-            if (audioSource == null)
-            {
-                audioSource = new GameObject("AudioSource of SoundEffect").AddComponent<AudioSource>();
-            }
-            audioSource.Play(delay);
         }
 
         /// <summary>
