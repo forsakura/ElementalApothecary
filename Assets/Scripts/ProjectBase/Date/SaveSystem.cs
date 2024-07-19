@@ -1,14 +1,24 @@
 using System.IO;
 using UnityEngine;
+using LitJson;
 
 namespace ProjectBase.Date
 {
     /*
      * 数据存储工具
      * 包含PlayerPrefs，json两种方式进行数据存储，读取和删除。
-     * json目前不支持字典存储，注意数据存储位置都在StreamingAssets文件夹下面，最好将所有数据类都存储在Date文件夹下。
-     * 当前尚不完善，还有待补充
+     * jsonUtility目前不支持字典存储，null值无法存储，会转换为默认值，注意数据存储位置都在StreamingAssets文件夹下面，最好将所有数据类都存储在Date文件夹下。
+     * 
+     * Json提供两种分别是JsonUtility和JsonMapper。
+     * JsonMapper弥补了JsonUtility的部分缺点，
+     * 就是序列化短板（部分数据无法序列化，如字典可序列化（字典的键类型不能是int，反序列化时会出问题），也可存储null值，直接读取数据集合）。注意私有变量无法使用特性来序列化。
      */
+
+    public enum JsonType
+    {
+        JsonUtility,
+        LitJson
+    }
     public static class SaveSystem
     {
         #region PlayerPrefs
@@ -63,13 +73,19 @@ namespace ProjectBase.Date
         /// </summary>
         /// <param name="fileName">数据存储的文件名</param>
         /// <param name="obj">需存储的对象</param>
-        public static void SaveGameByJson<T>(string fileName, T obj)
+        /// <param name="type">指定使用的Json类型</param>
+        public static void SaveGameByJson<T>(string fileName, T obj, JsonType type)
         {
             var path = Path.Combine(Application.streamingAssetsPath, fileName + ".json");
-            var json = JsonUtility.ToJson(obj);
+            var jsonStr = type switch
+            {
+                JsonType.JsonUtility => JsonUtility.ToJson(obj),
+                JsonType.LitJson => JsonMapper.ToJson(obj),
+                _ => null
+            };
             try
             {
-                File.WriteAllText(path, json);
+                File.WriteAllText(path, jsonStr);
             }
             catch (System.Exception e)
             {
@@ -81,15 +97,23 @@ namespace ProjectBase.Date
         /// 读取数据
         /// </summary>
         /// <param name="fileName">需要读取的文件名</param>
+        /// <param name="type">指定使用的Json类型</param>
         /// <typeparam name="T">需指定的数据类型</typeparam>
         /// <returns></returns>
-        public static T LoadGameFromJson<T>(string fileName)
+        public static T LoadGameFromJson<T>(string fileName, JsonType type)
         {
             var path = Path.Combine(Application.streamingAssetsPath, fileName + ".json");
-            var json = File.ReadAllText(path);
+            if (!File.Exists(path)) return default;
+            var jsonStr = File.ReadAllText(path);
             try
             {
-                var res = JsonUtility.FromJson<T>(json);
+                var res = type switch
+                {
+                    JsonType.JsonUtility => JsonUtility.FromJson<T>(jsonStr),
+                    JsonType.LitJson => JsonMapper.ToObject<T>(jsonStr),
+                    _ => default
+                };
+
                 return res;
             }
             catch (System.Exception e)
