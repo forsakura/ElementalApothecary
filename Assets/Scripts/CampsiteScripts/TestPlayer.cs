@@ -5,6 +5,7 @@ public class TestPlayer : MonoBehaviour
     public float moveSpeed = 5f; // 玩家移动的速度
 
     private Rigidbody2D rb; // 玩家的Rigidbody组件
+    
 
     private void Start()
     {
