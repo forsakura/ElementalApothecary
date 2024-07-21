@@ -1,6 +1,8 @@
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using LitJson;
+using ProjectBase.Mono;
 
 namespace ProjectBase.Date
 {
@@ -19,7 +21,7 @@ namespace ProjectBase.Date
         JsonUtility,
         LitJson
     }
-    public static class SaveSystem
+    public static class SaveSystem 
     {
         #region PlayerPrefs
 
@@ -141,5 +143,38 @@ namespace ProjectBase.Date
         }
 
         #endregion
+
+        #region Binary
+
+        public static void SaveByBinary(object obj, string fileName)
+        {
+            using (FileStream fs = new FileStream(Application.streamingAssetsPath+"/fileName", FileMode.OpenOrCreate, FileAccess.Write))
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                bf.Serialize(fs, obj);
+                fs.Flush();
+                fs.Close();
+            }
+        }
+
+        public static T LoadByBinary<T>(string fileName) where T : class
+        {
+            if (!File.Exists(Application.streamingAssetsPath + "/fileName")) return default;
+            using (FileStream fs =new FileStream(Application.streamingAssetsPath+"/fileName", FileMode.Open, FileAccess.Read))
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                T res = bf.Deserialize(fs) as T;
+                fs.Close();
+                return res;
+            }
+        }
+
+        public static void DeleteBinaryData(string fileName)
+        {
+            File.Delete(Application.streamingAssetsPath+"/fileName");
+        }
+
+        #endregion
+        
     }
 }
