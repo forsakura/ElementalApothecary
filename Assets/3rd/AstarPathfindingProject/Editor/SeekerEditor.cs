@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
+using _3rd.AstarPathfindingProject.Editor;
+using _3rd.AstarPathfindingProject.PackageTools.Editor;
 
 namespace Pathfinding {
 	[CustomEditor(typeof(Seeker))]

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Pathfinding {
 	[CustomEditor(typeof(AnimationLink))]
-	public class AnimationLinkEditor : Editor {
+	public class AnimationLinkEditor : UnityEditor.Editor {
 		public override void OnInspectorGUI () {
 			DrawDefaultInspector();
 

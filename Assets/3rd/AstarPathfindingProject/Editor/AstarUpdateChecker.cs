@@ -5,6 +5,8 @@ using UnityEngine.Networking;
 #endif
 using System.Collections.Generic;
 using System.Linq;
+using _3rd.AstarPathfindingProject.Editor;
+using _3rd.AstarPathfindingProject.PackageTools.Editor;
 
 namespace Pathfinding {
 	/// <summary>Handles update checking for the A* Pathfinding Project</summary>

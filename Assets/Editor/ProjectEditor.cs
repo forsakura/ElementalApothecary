@@ -1,18 +1,21 @@
-using UnityEngine;
 using UnityEditor;
+using UnityEngine;
 
-[CustomEditor(typeof(Element))] 
-public class ElementEditor : Editor
+namespace Editor
 {
-    public override void OnInspectorGUI()
+    [CustomEditor(typeof(Element))] 
+    public class ElementEditor : UnityEditor.Editor
     {
-        base.OnInspectorGUI();
-
-
-        if (GUILayout.Button("ReSet"))
+        public override void OnInspectorGUI()
         {
-            Element ele = (Element)target; 
-            ele.ReSetElement();
+            base.OnInspectorGUI();
+
+
+            if (GUILayout.Button("ReSet"))
+            {
+                Element ele = (Element)target; 
+                ele.ReSetElement();
+            }
         }
     }
 }

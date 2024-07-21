@@ -1,13 +1,14 @@
-using UnityEditor;
-using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using Pathfinding;
+using UnityEditor;
+using UnityEngine;
 
-namespace Pathfinding {
+namespace _3rd.AstarPathfindingProject.PackageTools.Editor {
 	/// <summary>Helper for creating editors</summary>
 	[CustomEditor(typeof(VersionedMonoBehaviour), true)]
 	[CanEditMultipleObjects]
-	public class EditorBase : Editor {
+	public class EditorBase : UnityEditor.Editor {
 		static System.Collections.Generic.Dictionary<string, string> cachedTooltips;
 		static System.Collections.Generic.Dictionary<string, string> cachedURLs;
 		Dictionary<string, SerializedProperty> props = new Dictionary<string, SerializedProperty>();

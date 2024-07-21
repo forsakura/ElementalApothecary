@@ -33,7 +33,7 @@ namespace Pathfinding {
 		GUIStyle labelStyle;
 		GUIStyle areaStyle;
 		bool visible;
-		Editor editor;
+		UnityEditor.Editor editor;
 
 		/// <summary>
 		/// Is this area open.
@@ -45,7 +45,7 @@ namespace Pathfinding {
 		public static bool fancyEffects;
 		const float animationSpeed = 100f;
 
-		public FadeArea (bool open, Editor editor, GUIStyle areaStyle, GUIStyle labelStyle = null) {
+		public FadeArea (bool open, UnityEditor.Editor editor, GUIStyle areaStyle, GUIStyle labelStyle = null) {
 			this.areaStyle = areaStyle;
 			this.labelStyle = labelStyle;
 			this.editor = editor;
