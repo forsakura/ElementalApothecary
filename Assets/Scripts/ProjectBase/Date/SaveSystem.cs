@@ -1,8 +1,11 @@
+using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Text;
 using UnityEngine;
 using LitJson;
-using ProjectBase.Mono;
 
 namespace ProjectBase.Date
 {
@@ -21,8 +24,12 @@ namespace ProjectBase.Date
         JsonUtility,
         LitJson
     }
-    public static class SaveSystem 
+    public static class SaveSystem
     {
+        public static string DATA_BINARY_PATH = Application.streamingAssetsPath + "/Binary/";
+
+        public static Dictionary<string, object> tableDic = new Dictionary<string, object>();
+        
         #region PlayerPrefs
 
         /// <summary>
@@ -172,6 +179,86 @@ namespace ProjectBase.Date
         public static void DeleteBinaryData(string fileName)
         {
             File.Delete(Application.streamingAssetsPath+"/fileName");
+        }
+
+        
+        /// <summary>
+        ///加载表数据到内存中
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="K"></typeparam>
+        public static void LoadTable<T, K>()
+        {
+            using (FileStream fs = File.Open(DATA_BINARY_PATH+typeof(K).Name, FileMode.Open, FileAccess.Read))
+            {
+                byte[] bytes = new byte[fs.Length];
+                fs.Read(bytes, 0, bytes.Length);
+                fs.Close();
+                int index = 0;
+                int count = BitConverter.ToInt32(bytes, index);
+                index += 4;
+                int keyNameLength = BitConverter.ToInt32(bytes, index);
+                index += 4;
+                string keyName = Encoding.UTF8.GetString(bytes, index, keyNameLength);
+                index += keyNameLength;
+
+                Type contrainerType = typeof(T);
+                object contrainerObj = Activator.CreateInstance(contrainerType);
+
+                Type classType = typeof(K);
+                FieldInfo[] fieldInfos = classType.GetFields();
+                for (int i = 0; i < count; i++)
+                {
+                    object classObj = Activator.CreateInstance(classType);
+                    foreach (var info in fieldInfos)
+                    {
+                        if( info.FieldType == typeof(int) )
+                        {
+                            info.SetValue(classObj, BitConverter.ToInt32(bytes, index));
+                            index += 4;
+                        }
+                        else if (info.FieldType == typeof(float))
+                        {
+                            info.SetValue(classObj, BitConverter.ToSingle(bytes, index));
+                            index += 4;
+                        }
+                        else if (info.FieldType == typeof(bool))
+                        {
+                            info.SetValue(classObj, BitConverter.ToBoolean(bytes, index));
+                            index += 1;
+                        }
+                        else if (info.FieldType == typeof(string))
+                        {
+                            int length = BitConverter.ToInt32(bytes, index);
+                            index += 4;
+                            info.SetValue(classObj, Encoding.UTF8.GetString(bytes, index, length));
+                            index += length;
+                        }
+                    }
+
+                    object dicObject = contrainerType.GetField("dataDic").GetValue(contrainerObj);
+                    MethodInfo method = dicObject.GetType().GetMethod("Add");
+                    object keyValue = classType.GetField(keyName).GetValue(classObj);
+                    method.Invoke(dicObject, new object[] { keyValue, classObj });
+                }
+                
+                tableDic.Add(typeof(T).Name, contrainerObj);
+                
+                fs.Close();
+                
+            }
+        }
+
+        /// <summary>
+        /// 获取表信息
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public static T GetTable<T>() where T : class
+        {
+            string tableName = typeof(T).Name;
+            if (tableDic.ContainsKey(tableName)) return tableDic[tableName] as T;
+            return null;
         }
 
         #endregion
