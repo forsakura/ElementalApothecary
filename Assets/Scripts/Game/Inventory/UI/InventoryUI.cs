@@ -173,7 +173,7 @@ public class InventoryUI : MonoBehaviour
     /// </summary>
     /// <param name="location">库存位置</param>
     /// <param name="list">数据列表</param>
-    private void OnUpdateInventoryUI(InventoryLocation location, List<InventoryItem> list)
+    private void OnUpdateInventoryUI(InventoryLocation location, List<LegacyInventoryItem> list)
     {
         switch (location)
         {
@@ -182,7 +182,7 @@ public class InventoryUI : MonoBehaviour
                 {
                     if (list[i].itemAmount > 0)
                     {
-                        ItemDetails item = InventoryManager.Instance.GetItemDetails(list[i].itemID);
+                        LegacyItemDetails item = InventoryManager.Instance.GetItemDetails(list[i].itemID);
                         playerBagSlots[i].UpdateSlot(item, list[i].itemAmount);
                     }
                     else
@@ -197,7 +197,7 @@ public class InventoryUI : MonoBehaviour
                     
                     if (list[i].itemAmount > 0)
                     {
-                        ItemDetails item = InventoryManager.Instance.GetItemDetails(list[i].itemID);
+                        LegacyItemDetails item = InventoryManager.Instance.GetItemDetails(list[i].itemID);
                         boxSlots[i].UpdateSlot(item, list[i].itemAmount);
                     }
                     else
@@ -211,7 +211,7 @@ public class InventoryUI : MonoBehaviour
                 {
                     if (list[i].itemAmount > 0)
                     {
-                        ItemDetails item = InventoryManager.Instance.GetItemDetails(list[i].itemID);
+                        LegacyItemDetails item = InventoryManager.Instance.GetItemDetails(list[i].itemID);
                         falskSlots[i].UpdateSlot(item, list[i].itemAmount);
                     }
                     else
@@ -225,7 +225,7 @@ public class InventoryUI : MonoBehaviour
                 {
                     if (list[i].itemAmount > 0)
                     {
-                        ItemDetails item = InventoryManager.Instance.GetItemDetails(list[i].itemID);
+                        LegacyItemDetails item = InventoryManager.Instance.GetItemDetails(list[i].itemID);
                         potSlots[i].UpdateSlot(item, list[i].itemAmount);
                     }
                     else
@@ -239,7 +239,7 @@ public class InventoryUI : MonoBehaviour
                 {
                     if (list[i].itemAmount > 0)
                     {
-                        ItemDetails item = InventoryManager.Instance.GetItemDetails(list[i].itemID);
+                        LegacyItemDetails item = InventoryManager.Instance.GetItemDetails(list[i].itemID);
                         furnaceSlots[i].UpdateSlot(item, list[i].itemAmount);
                     }
                     else
@@ -253,7 +253,7 @@ public class InventoryUI : MonoBehaviour
                 {
                     if (list[i].itemAmount > 0)
                     {
-                        ItemDetails item = InventoryManager.Instance.GetItemDetails((int)list[i].itemID);
+                        LegacyItemDetails item = InventoryManager.Instance.GetItemDetails((int)list[i].itemID);
                         distllerSlots[i].UpdateSlot(item, list[i].itemAmount);
                     }
                     else

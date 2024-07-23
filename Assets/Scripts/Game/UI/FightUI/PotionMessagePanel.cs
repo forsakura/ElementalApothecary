@@ -47,7 +47,7 @@ public class PotionMessagePanel : MonoBehaviour
         {
             if (item.id == potionID)
             {
-                ItemDetails itemdetails = InventoryManager.Instance.GetItemDetails(potionID);
+                LegacyItemDetails itemdetails = InventoryManager.Instance.GetItemDetails(potionID);
                 icon.sprite = itemdetails.itemIcon;
                 p_name.text = item.potionName;
                 p_purage.text = $"´¿¶È£º{item.purity}";

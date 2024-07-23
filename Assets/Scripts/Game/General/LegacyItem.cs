@@ -4,7 +4,7 @@ using UnityEditor.EditorTools;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Item : MonoBehaviour
+public class LegacyItem : MonoBehaviour
 {
     public int itemID;//加个id分辨物品
     [HideInInspector]public PlayerControll playerControll;
@@ -22,7 +22,7 @@ public class Item : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
 
-    public ItemDetails itemDetails;
+    public LegacyItemDetails itemDetails;
     private BoxCollider2D coll;
     [Header("------")]
     public bool isOnBag;

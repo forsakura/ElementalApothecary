@@ -34,15 +34,15 @@ public class DistillerPanel : BasePanel<DistillerPanel>
         }
     }
 
-    public ItemDetails Distillation(ItemDetails potion1, ItemDetails potion2)
+    public LegacyItemDetails Distillation(LegacyItemDetails potion1, LegacyItemDetails potion2)
     {
-        var newPotion = new ItemDetails();
+        var newPotion = new LegacyItemDetails();
         var newPurity = (potion1.purity + potion1.purity + 2) / 4;
         if (newPurity > 0.99) newPurity = 1;
 
         int purityNum = (int)(newPurity * 100);
         int newitemID=int.Parse(potion1.itemID.ToString().Substring(0,3)+(purityNum*100).ToString());
-        ItemDetails newItem=new ItemDetails();
+        LegacyItemDetails newItem=new LegacyItemDetails();
         foreach (var VARIABLE in InventoryManager.Instance.itemDataList_SO.itemDetailsList)
         {
             if (int.Parse(potion1.itemID.ToString().Substring(0, 3)) == VARIABLE.itemID)
@@ -78,8 +78,8 @@ public class DistillerPanel : BasePanel<DistillerPanel>
                 var items = InventoryManager.Instance.distillerBag.itemList;
                 int amount1 = items[0].itemAmount - refineNum;
                 int amount2 = items[1].itemAmount - refineNum;
-                InventoryManager.Instance.distillerBag.itemList[0] = new InventoryItem { itemID = items[0].itemID, itemAmount = amount1 };
-                InventoryManager.Instance.distillerBag.itemList[1] = new InventoryItem { itemID = items[1].itemID, itemAmount = amount2 };
+                InventoryManager.Instance.distillerBag.itemList[0] = new LegacyInventoryItem { itemID = items[0].itemID, itemAmount = amount1 };
+                InventoryManager.Instance.distillerBag.itemList[1] = new LegacyInventoryItem { itemID = items[1].itemID, itemAmount = amount2 };
 
                 InventoryManager.Instance.AddItem(output.itemDetails.itemID, refineNum);
                 EventHandler.CallUpdateInventoryUI(InventoryLocation.Box, InventoryManager.Instance.boxBag.itemList);

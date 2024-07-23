@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public struct InventoryItem
+public struct LegacyInventoryItem
 {
     public int itemID;
     public int itemAmount;
 }
 
 [System.Serializable]
-public class ItemDetails
+public class LegacyItemDetails
 {
     public int itemID;
     public string itemName;
@@ -29,7 +29,7 @@ public class ItemDetails
 
 
 [System.Serializable]
-public class SceneItem
+public class LegacyPickableItem
 {
     public int itemID;
     public Vector3 position;

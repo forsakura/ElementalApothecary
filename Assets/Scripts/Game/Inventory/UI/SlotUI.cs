@@ -21,7 +21,7 @@ public class SlotUI : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, ID
     public int slotIndex;
 
     //物品信息
-    public ItemDetails itemDetails;
+    public LegacyItemDetails itemDetails;
     public int itemAmount;
 
     public InventoryLocation Location
@@ -55,7 +55,7 @@ public class SlotUI : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, ID
     /// </summary>
     /// <param name="item">ItmDetails</param>
     /// <param name="amount">持有数量</param>
-    public void UpdateSlot(ItemDetails item, int amount)
+    public void UpdateSlot(LegacyItemDetails item, int amount)
     {
         itemDetails = item;
         slotImage.sprite = item.itemIcon;

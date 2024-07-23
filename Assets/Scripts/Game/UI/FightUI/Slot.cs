@@ -40,7 +40,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             potionIcon.gameObject.SetActive(false);
             return;
         }
-        ItemDetails item = InventoryManager.Instance.GetItemDetails(potionID);
+        LegacyItemDetails item = InventoryManager.Instance.GetItemDetails(potionID);
         potionIcon.gameObject.SetActive(true);
         PotionId = potionID;
         potionIcon.sprite = item.itemIcon;

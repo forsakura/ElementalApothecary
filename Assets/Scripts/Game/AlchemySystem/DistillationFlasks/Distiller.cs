@@ -10,9 +10,9 @@ public class Distiller : MonoBehaviour
     /// </summary>
     /// <param name="potion1">药水1</param>
     /// <param name="potion2">药水2</param>
-    public ItemDetails Distillation(PotionEntity potion1,PotionEntity potion2)
+    public LegacyItemDetails Distillation(PotionEntity potion1,PotionEntity potion2)
     {
-        var newPotion = new ItemDetails();
+        var newPotion = new LegacyItemDetails();
         var newPurity = Mathf.Ceil((potion1.purity + potion2.purity + 2) / 4) > 1
             ? 1
             : Mathf.Ceil((potion1.purity + potion2.purity + 2) / 4);
@@ -20,7 +20,7 @@ public class Distiller : MonoBehaviour
         {
             if (VARIABLE.itemID == potion1.id)
             {
-                var potion = new ItemDetails()
+                var potion = new LegacyItemDetails()
                 {
                     itemID = int.Parse(VARIABLE.itemID.ToString()+(newPurity*100).ToString()), itemDescription = VARIABLE.itemDescription, itemIcon = VARIABLE.itemIcon,
                     itemName = VARIABLE.itemName, itemType = VARIABLE.itemType, itemUseRadius = VARIABLE.itemUseRadius,

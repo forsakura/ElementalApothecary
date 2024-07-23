@@ -26,9 +26,9 @@ public class ForgingFurnaces : MonoSingleton<ForgingFurnaces>
     /// ����ҩˮ
     /// </summary>
     /// <param name="potion"></param>
-    public ItemDetails Calcination(PotionEntity potion)
+    public LegacyItemDetails Calcination(PotionEntity potion)
     {
-        var newPotion = new ItemDetails();
+        var newPotion = new LegacyItemDetails();
         foreach (var VARIABLE1 in SyntheticList.Instance.cauldronRecipes.CauldronRecipeEntities)
         {
             if (potion.id == VARIABLE1.productionId)
@@ -36,7 +36,7 @@ public class ForgingFurnaces : MonoSingleton<ForgingFurnaces>
                 var newID = VARIABLE1.productionId;
                 foreach (var potion1 in from VARIABLE2 in InventoryManager.Instance.itemDataList_SO.itemDetailsList
                          where VARIABLE2.itemID == newID
-                         select new ItemDetails()
+                         select new LegacyItemDetails()
                          {
                              itemID = VARIABLE2.itemID, itemName = VARIABLE2.itemName, itemIcon = VARIABLE2.itemIcon,
                              itemDescription = VARIABLE2.itemDescription, itemType = VARIABLE2.itemType,
