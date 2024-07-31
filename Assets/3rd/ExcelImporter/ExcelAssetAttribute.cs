@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
-public class ExcelAssetAttribute : Attribute
+public class ExcelAssetAttribute : System.Attribute
 {
 	public string AssetPath { get; set; }
 	public string ExcelName { get; set; }
