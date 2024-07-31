@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-//using MFarm.Dialogue;
 using UnityEngine;
 public static class EventHandler
 {
@@ -90,7 +89,7 @@ public static class EventHandler
     //    ShowDialogueEvent?.Invoke(piece);
     //}
 
-    //商店开启
+    
     public static event Action<ContainerType, InventoryBag_SO> BaseBagOpenEvent;
     public static void CallBaseBagOpenEvent(ContainerType slotType, InventoryBag_SO bag_SO)
     {
@@ -120,12 +119,7 @@ public static class EventHandler
         ShowAltarUI?.Invoke(locationFrom, fromIndex, locationTarget, targetIndex);
     }
 
-    //建造
-    public static event Action<int, Vector3> BuildFurnitureEvent;
-    public static void CallBuildFurnitureEvent(int ID, Vector3 pos)
-    {
-        BuildFurnitureEvent?.Invoke(ID, pos);
-    }
+    
 
 
     public static event Action<int> StartNewGameEvent;

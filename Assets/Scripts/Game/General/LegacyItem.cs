@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class LegacyItem : MonoBehaviour
 {
-    public int itemID;//加个id分辨物品
+    public ItemID itemID;//加个id分辨物品
     [HideInInspector]public PlayerControll playerControll;
     private EPlayerAttackState currentAttackState;
     public Vector2 startPosition;
@@ -36,7 +36,7 @@ public class LegacyItem : MonoBehaviour
         currentAttackState = playerControll.currentAttackState;
 
         rb = GetComponent<Rigidbody2D>();
-        if (itemID != 0)
+        if (itemID != null)
         {
             Init(itemID);
         }
@@ -124,7 +124,7 @@ public class LegacyItem : MonoBehaviour
     }
   
 
-    public void Init(int ID)
+    public void Init(ItemID ID)
     {
         itemID = ID;
 

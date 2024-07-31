@@ -17,7 +17,7 @@ public class PotPanel : BasePanel<PotPanel>
         sureBtn.onClick.AddListener(() =>
         {
             Refining();
-            FunctionTablePanel.Instance.AddFunction(input1.itemDetails.itemID, input2.itemDetails.itemID);
+            //FunctionTablePanel.Instance.AddFunction(input1.itemDetails.itemID, input2.itemDetails.itemID);
         });
         functionBtn.onClick.AddListener(() =>
         {
@@ -30,7 +30,7 @@ public class PotPanel : BasePanel<PotPanel>
     {
         if (input1.itemAmount>0&&input2.itemAmount>0)
         {
-            output.itemDetails=InventoryManager.Instance.GetItemDetails(InventoryManager.Instance.ReturnProductionID(input1.itemDetails.itemID,input2.itemDetails.itemID));
+            //output.itemDetails=InventoryManager.Instance.GetItemDetails(InventoryManager.Instance.ReturnProductionID(input1.itemDetails.itemID,input2.itemDetails.itemID));
             output.SetOutputMod();
         }
     }
@@ -48,7 +48,7 @@ public class PotPanel : BasePanel<PotPanel>
                 InventoryManager.Instance.potBag.itemList[0]=new LegacyInventoryItem { itemID = items[0].itemID,itemAmount=amount1 };
                 InventoryManager.Instance.potBag.itemList[1] = new LegacyInventoryItem { itemID = items[1].itemID, itemAmount = amount2 };
 
-                InventoryManager.Instance.AddItem(output.itemDetails.itemID, refineNum*10);
+                InventoryManager.Instance.AddItem(output.itemDetails.ID, refineNum*10);
                 EventHandler.CallUpdateInventoryUI(InventoryLocation.Box, InventoryManager.Instance.boxBag.itemList);
                 EventHandler.CallUpdateInventoryUI(InventoryLocation.Pot, InventoryManager.Instance.potBag.itemList);
             }

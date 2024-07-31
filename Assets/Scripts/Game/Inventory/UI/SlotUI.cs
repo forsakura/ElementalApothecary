@@ -153,7 +153,7 @@ public class SlotUI : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, ID
             }
             else if(slotType == ContainerType.Box && targetSlot.slotType == ContainerType.Pot)
             {
-                if(itemDetails.itemType != ItemType.Potion && itemDetails.itemID!=301)
+                //if(itemDetails.itemType != ItemType.Potion && itemDetails.itemID!=301)
                 InventoryManager.Instance.SwapItem(InventoryLocation.Box, slotIndex, InventoryLocation.Pot, targetIndex);
             }
             else if (slotType == ContainerType.Pot && targetSlot.slotType == ContainerType.Box)
