@@ -36,7 +36,7 @@ public class PortableBag : Singleton<PortableBag>
         var itemlist = InventoryManager.Instance.playerBag.itemList;
         foreach (var item in itemlist)
         {
-            if (item.itemID != null)
+            if (item.itemID.id==0)
             {
                 //potions.Add(item.itemID, item.itemAmount);
             }

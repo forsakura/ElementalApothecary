@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Security.Cryptography;
 using UnityEditor.EditorTools;
@@ -36,10 +37,7 @@ public class LegacyItem : MonoBehaviour
         currentAttackState = playerControll.currentAttackState;
 
         rb = GetComponent<Rigidbody2D>();
-        if (itemID != null)
-        {
-            Init(itemID);
-        }
+        Init(itemID);
     }
 
     public virtual void Update() 

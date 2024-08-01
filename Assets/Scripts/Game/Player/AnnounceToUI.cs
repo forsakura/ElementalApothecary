@@ -27,7 +27,7 @@ public class AnnounceToUI : MonoBehaviour
         potions = new Dictionary<int, int>();
         foreach (var item in itemlist)
         {
-            if (item.itemID != null)
+            if (item.itemAmount>0)
             {
                 //potions.Add(item.itemID, item.itemAmount);
             }

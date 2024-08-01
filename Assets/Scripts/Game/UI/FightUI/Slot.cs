@@ -32,9 +32,9 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     // ?????????????
     public void InitSlot(ItemID potionID, int potionCount)
     {
-        if (potionCount == 0 || potionID == null)
+        if (potionCount == 0 || potionID.id == 0)
         {
-            PotionId = null;
+            PotionId = new ItemID();
             this.count.text = "";
             potionCounts = 0;
             potionIcon.gameObject.SetActive(false);
@@ -54,7 +54,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         potionCounts = count;
         if (count == 0)
         {
-            PotionId = null;
+            PotionId = new ItemID();
             this.count.text = "";
             potionIcon.gameObject.SetActive(false);
             return;
@@ -97,7 +97,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     // ??? 1s ???????????
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (PotionId != null)
+        if (PotionId.id==0)
         {
             CreateMessagePanel();
             StartCoroutine(CountDownAndStartDisplay());

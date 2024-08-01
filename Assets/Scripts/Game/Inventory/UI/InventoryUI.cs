@@ -200,6 +200,7 @@ public class InventoryUI : MonoBehaviour
                     {
                         SlotUI cell = ResManager.LoadResource<SlotUI>("Prefab/UI/Solt_bag");
                         cell.transform.parent = content;
+                        boxSlots.Add(cell);
                         LegacyItemDetails item = InventoryManager.Instance.GetItemDetails(list[i].itemID);
                         cell.UpdateSlot(item, list[i].itemAmount);
                     }

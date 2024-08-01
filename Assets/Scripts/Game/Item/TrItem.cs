@@ -15,15 +15,15 @@ public class TrItem
     }
 
     /// <summary>
-    /// 基础模板的id最好从一开始设定
+    /// 基础模板的id最好一开始就设定好
     /// </summary>
-    /// <param name="idGroup"></param>
-    public void SetBaseID(List<int> idGroup)
+    /// <param name="id"></param>
+    public void SetBaseID(int id)
     {
-        ID.BaseId = idGroup;
+        ID.BaseId = id;
     }
 
-    enum Tag
+    public enum ItemTag
     {
         material,
         consumable,
@@ -34,8 +34,9 @@ public class TrItem
 /// <summary>
 /// id数组使得随机组合获得可能
 /// </summary>
-public class ItemID
+public struct ItemID
 {
-    public List<int> BaseId;//基础模板id
+    public int id;//物品自己的id（只是同类区分用的）
+    public int BaseId;//基础模板id
     public List<int> ATTR;//属性id
 }

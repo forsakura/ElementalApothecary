@@ -2,7 +2,6 @@ using System;
 using Unity.Mathematics;
 using UnityEngine;
 
-
 public class Element : MonoBehaviour,ISavable
 {
     //对于元素量（x,y），x为风，-x为土，y为火，-y为水
