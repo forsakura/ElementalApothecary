@@ -1,27 +1,45 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using static TrItem;
 
 [CreateAssetMenu(fileName = "TempletSO", menuName = "ScriptableObjects/TempletSO")]
 public class TempletSO : ScriptableObject
 {
-    List<ItemTemplet> ItemTemplets;
+    [SerializeField]
+    private List<ItemTemplet> itemTemplets;
+
+    public List<ItemTemplet> ItemTemplets => itemTemplets;
+
+    // 根据 ID 查找 ItemTemplet  
+    public ItemTemplet GetItemTempletById(int id)
+    {
+        return itemTemplets.FirstOrDefault(item => item.Id == id);
+    }
+
+    // 根据元素类型查找 ItemTemplet  
+    public List<ItemTemplet> GetItemTempletsByElement(EElement element)
+    {
+        return itemTemplets.Where(item => item.BaseElement == element).ToList();
+    }
 }
 
-/// <summary>
-/// 存初始数据与初始随机效果数据
-/// </summary>
+[Serializable]
 public class ItemTemplet
 {
-    int id;
+    [SerializeField]
+    private int id;
     public int itemUseRadius;
     public string itemDescription;
-    //public Sprite itemIcon;
+    public Sprite itemIcon; // 这里存路径也可以，看需求  
     public string itemName;
-    public List<ItemTag> tags;//这个没有很细的去想，先这么做
+    public List<ItemTag> tags;
     public EElement BaseElement;
     public Vector2 currentElementCount;
+
+    public int Id => id; // 公开的 getter   
 }
 
 

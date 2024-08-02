@@ -6,8 +6,8 @@ using UnityEngine;
 public class SOListForCraft 
 {
     [Header("物品模板表")]
-    TempletSO ItemTempletList;
+    public TempletSO ItemTempletList;
 
     [Header("属性表")]
-    ATTRSO AttributeList;
+    public ATTRSO AttributeList;
 }

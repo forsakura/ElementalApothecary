@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// "That's true music,bro."最表层去使用的一个item数据类基础
+/// 最表层去使用的一个item数据类基础
 /// </summary>
-public class TrItem 
+public class TrItem : ITrItem
 {
     ItemID ID;//物品id(或者tag)
 
@@ -14,6 +14,10 @@ public class TrItem
         ID.ATTR.Add(singleATTR);
     }
 
+    public List<int> GetATTRID()
+    {
+        return ID.ATTR;
+    }
     /// <summary>
     /// 基础模板的id最好一开始就设定好
     /// </summary>
@@ -22,6 +26,12 @@ public class TrItem
     {
         ID.BaseId = id;
     }
+
+    public int GetBaseID()
+    {
+        return ID.BaseId;
+    }
+
 
     public enum ItemTag
     {
