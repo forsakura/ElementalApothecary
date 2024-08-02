@@ -14,14 +14,14 @@ using UnityEngine.SceneManagement;
 
         private void OnEnable()
         {
-            EventHandler.InstantiateItemInScene += OnInstantiateItemInScene;
+            //EventHandler.InstantiateItemInScene += OnInstantiateItemInScene;
             EventHandler.BeforeSceneUnloadEvent += OnBeforeSceneUnloadEvent;
             EventHandler.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
         }
 
         private void OnDisable()
         {
-            EventHandler.InstantiateItemInScene -= OnInstantiateItemInScene;
+            //EventHandler.InstantiateItemInScene -= OnInstantiateItemInScene;
             EventHandler.BeforeSceneUnloadEvent -= OnBeforeSceneUnloadEvent;
             EventHandler.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
         }
@@ -39,7 +39,7 @@ using UnityEngine.SceneManagement;
 
 
 
-        private void OnInstantiateItemInScene(int ID, Vector3 pos)
+        private void OnInstantiateItemInScene(ItemID ID, Vector3 pos)
         {
             var item = Instantiate(itemPrefab, pos, Quaternion.identity);
             item.itemID = ID;
@@ -95,7 +95,7 @@ using UnityEngine.SceneManagement;
                 }
             }
         }
-        private void OnDropItemEvent(int ID, Vector3 pos)/*, ItemType type)*/
+        private void OnDropItemEvent(ItemID ID, Vector3 pos)/*, ItemType type)*/
         {
             LegacyItem item = Instantiate(itemPrefab, pos, Quaternion.identity);
             item.itemID = ID;

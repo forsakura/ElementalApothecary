@@ -17,7 +17,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     [HideInInspector]
     public int potionCounts;
 
-    public int PotionId
+    public ItemID PotionId
     {
         get;
         private set;
@@ -30,11 +30,11 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     // public void InitSlot(int potionId, int count)
     // ?????????????
     // ?????????????
-    public void InitSlot(int potionID, int potionCount)
+    public void InitSlot(ItemID potionID, int potionCount)
     {
-        if (potionCount == 0 || potionID == -1)
+        if (potionCount == 0 || potionID.id == 0)
         {
-            PotionId = -1;
+            PotionId = new ItemID();
             this.count.text = "";
             potionCounts = 0;
             potionIcon.gameObject.SetActive(false);
@@ -54,7 +54,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         potionCounts = count;
         if (count == 0)
         {
-            PotionId = -1;
+            PotionId = new ItemID();
             this.count.text = "";
             potionIcon.gameObject.SetActive(false);
             return;
@@ -97,7 +97,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     // ??? 1s ???????????
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (PotionId != -1)
+        if (PotionId.id==0)
         {
             CreateMessagePanel();
             StartCoroutine(CountDownAndStartDisplay());
@@ -122,7 +122,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         messagePanel = GameObject.Instantiate(Resources.Load<GameObject>(messagePanelPath));
         messagePanel.transform.SetParent(transform);
-        messagePanel.GetComponent<PotionMessagePanel>().InitPanel(PotionId);
+        //messagePanel.GetComponent<PotionMessagePanel>().InitPanel(PotionId);
     }
 
     private IEnumerator CountDownAndStartDisplay()

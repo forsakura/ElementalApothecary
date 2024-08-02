@@ -27,9 +27,9 @@ public class AnnounceToUI : MonoBehaviour
         potions = new Dictionary<int, int>();
         foreach (var item in itemlist)
         {
-            if (item.itemID != 0)
+            if (item.itemAmount>0)
             {
-                potions.Add(item.itemID, item.itemAmount);
+                //potions.Add(item.itemID, item.itemAmount);
             }
         }
         Init(potions);
@@ -48,10 +48,10 @@ public class AnnounceToUI : MonoBehaviour
     {
         // 关于药水选择几号位这个就放在UI里点了，不然还要UI反过来提醒当前选择药剂变了
 
-        int id = PortableBag.Instance.GetCurrentPotionID();
+        int id = 0;
 
         potions[id]--;
-        InventoryManager.Instance.RemoveBagItem(id, 1);
+        //InventoryManager.Instance.RemoveBagItem(id, 1);
         PortableBag.Instance.SetPotionCount(potions[id]);
         // ToDo，子弹Prefab的位置
         //return Resources.Load<GameObject>("");
@@ -78,7 +78,7 @@ public class AnnounceToUI : MonoBehaviour
         {
             return null;
         }
-        BulletConsumption.Instance.Fill(PortableBag.Instance.GetCurrentPotionID());
+        //BulletConsumption.Instance.Fill(PortableBag.Instance.GetCurrentPotionID());
         return bulletPfb;
     }
 

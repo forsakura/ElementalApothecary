@@ -36,9 +36,9 @@ public class PortableBag : Singleton<PortableBag>
         var itemlist = InventoryManager.Instance.playerBag.itemList;
         foreach (var item in itemlist)
         {
-            if (item.itemID != 0)
+            if (item.itemID.id==0)
             {
-                potions.Add(item.itemID, item.itemAmount);
+                //potions.Add(item.itemID, item.itemAmount);
             }
         }
         InitBag(potions);
@@ -53,7 +53,7 @@ public class PortableBag : Singleton<PortableBag>
         int i = 0;
         foreach (var item in potions)
         {
-            transform.GetChild(i).GetComponent<Slot>().InitSlot(item.Key, item.Value);
+            //transform.GetChild(i).GetComponent<Slot>().InitSlot(item.Key, item.Value);
             i++;
             // ����9���������Ĳ�Ҫ��
             if(i >= 10)
@@ -66,7 +66,7 @@ public class PortableBag : Singleton<PortableBag>
         {
             for (i = potions.Count;  i < 10; i++)
             {
-                transform.GetChild(i).GetComponent<Slot>().InitSlot(-1, 0);
+                //transform.GetChild(i).GetComponent<Slot>().InitSlot(-1, 0);
             }
         }
         currentSlot = transform.GetChild(0).GetComponent<Slot>();
@@ -77,10 +77,10 @@ public class PortableBag : Singleton<PortableBag>
         currentSlot = slot;
     }
 
-    public int GetCurrentPotionID()
-    {
-        return currentSlot.PotionId;
-    }
+    //public int GetCurrentPotionID()
+    //{
+    //    return currentSlot.PotionId;
+    //}
 
     public void SetPotionCount(int count)
     {
@@ -137,10 +137,10 @@ public class PortableBag : Singleton<PortableBag>
         }
     }
 
-    public void Test()
-    {
-        int potionID = GetCurrentPotionID();
-        SetPotionCount(10);
-        Debug.Log(potionID);
-    }
+    //public void Test()
+    //{
+    //    int potionID = GetCurrentPotionID();
+    //    SetPotionCount(10);
+    //    Debug.Log(potionID);
+    //}
 }

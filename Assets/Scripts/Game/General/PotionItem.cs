@@ -39,7 +39,7 @@ public class PotionItem : LegacyItem
 
     void InitialzePotion()
     {
-        _thisPotion = GetPotionFromList(itemID);
+        //_thisPotion = GetPotionFromList(itemID);
         //if (_thisPotion != null)
         //{
         //    this.itemDetails.itemName = _thisPotion.potionName;

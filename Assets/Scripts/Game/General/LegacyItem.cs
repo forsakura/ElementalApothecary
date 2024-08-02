@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Security.Cryptography;
 using UnityEditor.EditorTools;
@@ -6,7 +7,7 @@ using UnityEngine.UI;
 
 public class LegacyItem : MonoBehaviour
 {
-    public int itemID;//加个id分辨物品
+    public ItemID itemID;//加个id分辨物品
     [HideInInspector]public PlayerControll playerControll;
     private EPlayerAttackState currentAttackState;
     public Vector2 startPosition;
@@ -36,10 +37,7 @@ public class LegacyItem : MonoBehaviour
         currentAttackState = playerControll.currentAttackState;
 
         rb = GetComponent<Rigidbody2D>();
-        if (itemID != 0)
-        {
-            Init(itemID);
-        }
+        Init(itemID);
     }
 
     public virtual void Update() 
@@ -124,7 +122,7 @@ public class LegacyItem : MonoBehaviour
     }
   
 
-    public void Init(int ID)
+    public void Init(ItemID ID)
     {
         itemID = ID;
 

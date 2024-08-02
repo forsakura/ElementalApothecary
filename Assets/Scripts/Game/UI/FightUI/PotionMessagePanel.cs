@@ -41,11 +41,11 @@ public class PotionMessagePanel : MonoBehaviour
         GetComponent<RectTransform>().offsetMax = Vector2.zero;
     }
 
-    public void InitPanel(int potionID)
+    public void InitPanel(ItemID potionID)
     {
         foreach(var item in InventoryManager.Instance.potions_SO.PotionEntities)
         {
-            if (item.id == potionID)
+            //if (item.id == potionID)
             {
                 LegacyItemDetails itemdetails = InventoryManager.Instance.GetItemDetails(potionID);
                 icon.sprite = itemdetails.itemIcon;

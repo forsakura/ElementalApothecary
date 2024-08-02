@@ -5,23 +5,20 @@ using UnityEngine;
 [System.Serializable]
 public struct LegacyInventoryItem
 {
-    public int itemID;
+    public ItemID itemID;
     public int itemAmount;
 }
 
 [System.Serializable]
-public class LegacyItemDetails
+public class LegacyItemDetails :TrItem
 {
-    public int itemID;
     public string itemName;
     public ItemType itemType;
-
+    
     public Sprite itemIcon;
     public Sprite itemOnWorldSprite;
     public string itemDescription;
     public int itemUseRadius;
-
-    public List<int> effectsIDs;
     public int foeverEffect;
     public float purity;
 }
@@ -31,6 +28,6 @@ public class LegacyItemDetails
 [System.Serializable]
 public class LegacyPickableItem
 {
-    public int itemID;
+    public ItemID itemID;
     public Vector3 position;
 }

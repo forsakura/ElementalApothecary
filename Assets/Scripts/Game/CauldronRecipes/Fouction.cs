@@ -31,8 +31,8 @@ public class Fouction : MonoBehaviour
     }
     private void Update()
     {
-        input1.sprite = InventoryManager.Instance.GetItemDetails(id1).itemIcon;
-        input2.sprite = InventoryManager.Instance.GetItemDetails(id2).itemIcon;
-        output.sprite = InventoryManager.Instance.GetItemDetails(id3).itemIcon;
+        //input1.sprite = InventoryManager.Instance.GetItemDetails(id1).itemIcon;
+        //input2.sprite = InventoryManager.Instance.GetItemDetails(id2).itemIcon;
+        //output.sprite = InventoryManager.Instance.GetItemDetails(id3).itemIcon;
     }
 }
