@@ -12,7 +12,7 @@ public class DataItem : TrItem, IDataItem
     // public Sprite itemIcon { get; set; } // 如果需要，可以取消注释  
     public string itemName { get; set; }
     public List<TrItem.ItemTag> tags { get; set; } = new List<TrItem.ItemTag>(); // 初始化列表  
-    public EElement BaseElement { get; set; }
+    public EElement[] BaseElement { get; set; } = new EElement[2];
     public Vector2 currentElementCount { get; set; }
 
     /// <summary>

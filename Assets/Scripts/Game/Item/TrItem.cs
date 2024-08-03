@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class TrItem : ITrItem
 {
-    public ItemID ID;//物品id(或者tag)
+    ItemID ID; //物品id(或者tag)
 
     public void AddATTRID(int singleATTR)
     {
@@ -44,9 +44,9 @@ public class TrItem : ITrItem
 /// <summary>
 /// id数组使得随机组合获得可能
 /// </summary>
-public struct ItemID
+public class ItemID
 {
     public int id;//物品自己的id（只是同类区分用的）
     public int BaseId;//基础模板id
-    public List<int> ATTR;//属性id
+    public List<int> ATTR = new List<int>(); //属性id
 }
