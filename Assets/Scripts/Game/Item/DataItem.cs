@@ -23,8 +23,8 @@ public class DataItem : TrItem, IDataItem
 
     }
 
-    public void applyATTR(int id)
+    public void applyATTR()
     {
-
+        
     }
 }

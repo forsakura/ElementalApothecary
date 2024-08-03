@@ -16,7 +16,7 @@ public class TempletSO : ScriptableObject
     // 根据 ID 查找 ItemTemplet  
     public ItemTemplet GetItemTempletById(int id)
     {
-        return itemTemplets.FirstOrDefault(item => item.Id == id);
+        return itemTemplets.FirstOrDefault(item => item.id == id);
     }
 
     // 根据元素类型查找 ItemTemplet  
@@ -29,17 +29,14 @@ public class TempletSO : ScriptableObject
 [Serializable]
 public class ItemTemplet
 {
-    [SerializeField]
-    private int id;
+    public int id;
     public int itemUseRadius;
     public string itemDescription;
     public Sprite itemIcon; // 这里存路径也可以，看需求  
     public string itemName;
     public List<ItemTag> tags;
     public EElement BaseElement;
-    public Vector2 currentElementCount;
-
-    public int Id => id; // 公开的 getter   
+    public Vector2 currentElementCount; 
 }
 
 
