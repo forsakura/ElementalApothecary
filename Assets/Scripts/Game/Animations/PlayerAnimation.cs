@@ -7,7 +7,7 @@ public class PlayerAnimation : MonoBehaviour
     private Animator anim;
     private PlayerControll playerControll;
     private float moveX,moveY;
-    private void Awake() 
+    private void Awake()
     {
         anim = GetComponent<Animator>();
         playerControll = GetComponent<PlayerControll>();
