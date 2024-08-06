@@ -1,16 +1,21 @@
 using Cinemachine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Scripting.APIUpdating;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
     public CinemachineVirtualCamera cv;
     public PlayerInputActions inputActions;
+    public EPlayerAttackState currentAttackState;
     [HideInInspector]
     public Rigidbody2D rb;
+    [HideInInspector]
+    public PlayerAnimations anims;
     //[HideInInspector]
     public Vector2 mousePos;
     //[HideInInspector]
@@ -21,7 +26,8 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        inputActions = new PlayerInputActions();
+        anims = GetComponent<PlayerAnimations>();
+        InitInputActions();
     }
 
     private void OnEnable()
@@ -40,6 +46,14 @@ public class PlayerController : MonoBehaviour
         PlayerMove();
     }
 
+    private void InitInputActions()
+    {
+        inputActions = new PlayerInputActions();
+        inputActions.GamePlay.Shift.started += OnShift;
+        inputActions.GamePlay.Fire.started += Shoot;
+        currentAttackState = EPlayerAttackState.Shooting;
+    }
+
     private void UpdateCamera()
     {
         mousePos = Mouse.current.position.ReadValue();
@@ -52,5 +66,36 @@ public class PlayerController : MonoBehaviour
     {
         playerDirection = inputActions.GamePlay.Move.ReadValue<Vector2>();
         rb.velocity = playerDirection * 5.0f;
+    }
+
+    private void OnShift(InputAction.CallbackContext context)
+    {
+        switch (currentAttackState)
+        {
+            case EPlayerAttackState.Throwing:
+                inputActions.GamePlay.Fire.started -= Throw;
+                inputActions.GamePlay.Fire.started += Shoot;
+                currentAttackState = EPlayerAttackState.Shooting;
+                break;
+            case EPlayerAttackState.Shooting:
+                inputActions.GamePlay.Fire.started -= Shoot;
+                inputActions.GamePlay.Fire.started += Throw;
+                currentAttackState = EPlayerAttackState.Throwing;
+                break;
+            case EPlayerAttackState.Drinking:
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void Shoot(InputAction.CallbackContext context)
+    {
+        PlayerActions.OnShoot();
+    }
+
+    private void Throw(InputAction.CallbackContext context)
+    {
+        PlayerActions.OnThrow();
     }
 }
