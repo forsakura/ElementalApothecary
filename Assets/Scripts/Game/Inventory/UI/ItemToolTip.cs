@@ -11,7 +11,7 @@ public class ItemToolTip : MonoBehaviour
     [SerializeField] private TextMeshProUGUI descriptionText;
     [SerializeField] private TextMeshProUGUI BottomPart;
 
-    public void SetupTooltip(ItemDetails itemDetails, ContainerType slotType)
+    public void SetupTooltip(LegacyItemDetails itemDetails, ContainerType slotType)
     {
         if (itemDetails == null) return;
         nameText.text = itemDetails.itemName;

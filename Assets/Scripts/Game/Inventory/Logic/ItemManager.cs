@@ -6,22 +6,22 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
     public class ItemManager : MonoBehaviour
     {
-        public Item itemPrefab;
+        public LegacyItem itemPrefab;
         private Transform itemParent;
 
         //记录场景Item
-        private Dictionary<string, List<SceneItem>> sceneItemDict = new Dictionary<string, List<SceneItem>>();
+        private Dictionary<string, List<LegacyPickableItem>> sceneItemDict = new Dictionary<string, List<LegacyPickableItem>>();
 
         private void OnEnable()
         {
-            EventHandler.InstantiateItemInScene += OnInstantiateItemInScene;
+            //EventHandler.InstantiateItemInScene += OnInstantiateItemInScene;
             EventHandler.BeforeSceneUnloadEvent += OnBeforeSceneUnloadEvent;
             EventHandler.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
         }
 
         private void OnDisable()
         {
-            EventHandler.InstantiateItemInScene -= OnInstantiateItemInScene;
+            //EventHandler.InstantiateItemInScene -= OnInstantiateItemInScene;
             EventHandler.BeforeSceneUnloadEvent -= OnBeforeSceneUnloadEvent;
             EventHandler.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
         }
@@ -39,7 +39,7 @@ using UnityEngine.SceneManagement;
 
 
 
-        private void OnInstantiateItemInScene(int ID, Vector3 pos)
+        private void OnInstantiateItemInScene(ItemID ID, Vector3 pos)
         {
             var item = Instantiate(itemPrefab, pos, Quaternion.identity);
             item.itemID = ID;
@@ -49,11 +49,11 @@ using UnityEngine.SceneManagement;
         /// </summary>
         private void GetAllSceneItems()
         {
-            List<SceneItem> currentSceneItems = new List<SceneItem>();
+            List<LegacyPickableItem> currentSceneItems = new List<LegacyPickableItem>();
 
-            foreach (var item in FindObjectsOfType<Item>())
+            foreach (var item in FindObjectsOfType<LegacyItem>())
             {
-            SceneItem sceneItem = new SceneItem
+            LegacyPickableItem sceneItem = new LegacyPickableItem
             {
                 itemID = item.itemID,
                 position = item.transform.position
@@ -76,28 +76,28 @@ using UnityEngine.SceneManagement;
         /// </summary>
         private void RecreateAllItems()
         {
-            List<SceneItem> currentSceneItems = new List<SceneItem>();
+            List<LegacyPickableItem> currentSceneItems = new List<LegacyPickableItem>();
 
             if (sceneItemDict.TryGetValue(SceneManager.GetActiveScene().name, out currentSceneItems))
             {
                 if (currentSceneItems != null)
                 {
                     //清场
-                    foreach (var item in FindObjectsOfType<Item>())
+                    foreach (var item in FindObjectsOfType<LegacyItem>())
                     {
                         Destroy(item.gameObject);
                     }
                     foreach (var item in currentSceneItems)
                     {
-                        Item newItem = Instantiate(itemPrefab, item.position, Quaternion.identity, itemParent);
+                        LegacyItem newItem = Instantiate(itemPrefab, item.position, Quaternion.identity, itemParent);
                         newItem.Init(item.itemID);
                     }
                 }
             }
         }
-        private void OnDropItemEvent(int ID, Vector3 pos)/*, ItemType type)*/
+        private void OnDropItemEvent(ItemID ID, Vector3 pos)/*, ItemType type)*/
         {
-            Item item = Instantiate(itemPrefab, pos, Quaternion.identity);
+            LegacyItem item = Instantiate(itemPrefab, pos, Quaternion.identity);
             item.itemID = ID;
         }
     }

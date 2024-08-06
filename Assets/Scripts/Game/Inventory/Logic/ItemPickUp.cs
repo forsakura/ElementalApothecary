@@ -7,7 +7,7 @@ public class ItemPickUp : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Item item = other.GetComponent<Item>();
+        LegacyItem item = other.GetComponent<LegacyItem>();
 
         if (item != null)
         {

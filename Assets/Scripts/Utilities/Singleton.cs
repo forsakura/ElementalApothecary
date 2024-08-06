@@ -1,34 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Singleton<T> : MonoBehaviour where T : Singleton<T>
+namespace Utilities
 {
-    private static T instance;
-
-    public static T Instance
+    public class Singleton<T> : MonoBehaviour where T : Singleton<T>
     {
-        get { return instance; }
-    }
+        private static T instance;
 
-    protected virtual void Awake()
-    {
-        if (instance != null)
-            Destroy(gameObject);
-        else
-            instance = (T)this;
-    }
-
-    public static bool IsInitialized
-    {
-        get { return instance != null; }
-    }
-
-    protected virtual void OnDestroy()
-    {
-        if (instance == this)
+        public static T Instance
         {
-            instance = null;
+            get { return instance; }
+        }
+
+        protected virtual void Awake()
+        {
+            if (instance != null)
+                Destroy(gameObject);
+            else
+                instance = (T)this;
+        }
+
+        public static bool IsInitialized
+        {
+            get { return instance != null; }
+        }
+
+        protected virtual void OnDestroy()
+        {
+            if (instance == this)
+            {
+                instance = null;
+            }
         }
     }
 }

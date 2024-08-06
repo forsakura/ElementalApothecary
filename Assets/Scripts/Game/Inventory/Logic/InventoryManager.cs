@@ -1,11 +1,14 @@
+using ProjectBase.Res;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.U2D;
 using UnityEngine.UI;
+using Utilities;
 
-public class InventoryManager : Singleton<InventoryManager>
+public class InventoryManager : Utilities.Singleton<InventoryManager>
 {
     [Header("物品数据")]
     public ItemDataList_SO itemDataList_SO;
@@ -44,42 +47,42 @@ public class InventoryManager : Singleton<InventoryManager>
     public void ReadTable()
     {
         //itemDataList_SO.itemDetailsList.Clear();
-        foreach(var item in materials_SO.MaterialEntities)
-        {
-            if (HasTableContain(item.id)) continue; 
-            ItemDetails itemDetails = new ItemDetails();
-            itemDetails.itemID = item.id;
-            itemDetails.itemName = item.materialName;
-            itemDetails.itemDescription = item.description;
-            itemDetails.itemType = ItemType.Material;
-            itemDetails.itemUseRadius = potionUseEffectRadius;
-            itemDetails.itemIcon = ReturnIcon(item.id);
-            itemDetails.itemOnWorldSprite=ReturnIcon(item.id);
-            itemDataList_SO.itemDetailsList.Add(itemDetails);
-        }
-        foreach(var item in potions_SO.PotionEntities)
-        {
-            if (HasTableContain(item.id)) continue;
-            ItemDetails itemDetails = new ItemDetails();
-            itemDetails.itemID = item.id;
-            itemDetails.itemName = item.potionName;
-            itemDetails.itemDescription = item.description;
-            itemDetails.itemType = ItemType.Potion;
-            itemDetails.itemUseRadius = potionUseEffectRadius;
-            itemDetails.itemIcon = ReturnIcon(item.id);
-            itemDetails.itemOnWorldSprite = ReturnIcon(item.id);
-            itemDetails.foeverEffect = item.foreverEffectId;
-            //itemDetails.effectsIDs.Add(item.toEnemyEffectIds);
-            itemDetails.purity = 80;
-            itemDataList_SO.itemDetailsList.Add(itemDetails);
-        }
+        //foreach(var item in materials_SO.MaterialEntities)
+        //{
+        //    if (HasTableContain(item.id)) continue;
+        //    TrItem itemDetails = new TrItem();
+        //    itemDetails.ID = item.id;
+        //    itemDetails.itemName = item.materialName;
+        //    itemDetails.itemDescription = item.description;
+        //    itemDetails.itemType = ItemType.Material;
+        //    itemDetails.itemUseRadius = potionUseEffectRadius;
+        //    itemDetails.itemIcon = ReturnIcon(item.id);
+        //    itemDetails.itemOnWorldSprite=ReturnIcon(item.id);
+        //    itemDataList_SO.itemDetailsList.Add(itemDetails);
+        //}
+        //foreach(var item in potions_SO.PotionEntities)
+        //{
+        //    if (HasTableContain(item.id)) continue;
+        //    LegacyItemDetails itemDetails = new LegacyItemDetails();
+        //    itemDetails.itemID = item.id;
+        //    itemDetails.itemName = item.potionName;
+        //    itemDetails.itemDescription = item.description;
+        //    itemDetails.itemType = ItemType.Potion;
+        //    itemDetails.itemUseRadius = potionUseEffectRadius;
+        //    itemDetails.itemIcon = ReturnIcon(item.id);
+        //    itemDetails.itemOnWorldSprite = ReturnIcon(item.id);
+        //    itemDetails.foeverEffect = item.foreverEffectId;
+        //    //itemDetails.effectsIDs.Add(item.toEnemyEffectIds);
+        //    itemDetails.purity = 80;
+        //    itemDataList_SO.itemDetailsList.Add(itemDetails);
+        //}
     }
 
-    private bool HasTableContain(int id)
+    private bool HasTableContain(ItemID id)
     {
         foreach(var item in itemDataList_SO.itemDetailsList)
         {
-            if(item.itemID == id) return true;
+            if(item.ID.Equals(id)) return true;
         }
         return false;
     }
@@ -107,9 +110,9 @@ public class InventoryManager : Singleton<InventoryManager>
     /// </summary>
     /// <param name="ID">Item ID</param>
     /// <returns></returns>
-    public ItemDetails GetItemDetails(int ID)
+    public LegacyItemDetails GetItemDetails(ItemID ID)
     {
-        return itemDataList_SO.itemDetailsList.Find(i => i.itemID == ID);
+        return itemDataList_SO.itemDetailsList.Find(i => i.ID.Equals(ID));
     }
     public MaterialEntity GetMaterialEntity(int ID)
     {
@@ -125,7 +128,7 @@ public class InventoryManager : Singleton<InventoryManager>
     /// </summary>
     /// <param name="item"></param>
     /// <param name="toDestory">是否要销毁物品</param>
-    public void AddItem(Item item, bool toDestory)
+    public void AddItem(LegacyItem item, bool toDestory)
     {
         //是否已经有该物品
         int index = GetItemIndexInBag(item.itemID);
@@ -146,7 +149,7 @@ public class InventoryManager : Singleton<InventoryManager>
     /// <param name="itemId"></param>
     /// <param name="itemCount"></param>
     /// <param name="toDestory"></param>
-    public void AddItem(int itemId, int itemCount)
+    public void AddItem(ItemID itemId, int itemCount)
     {
         //是否已经有该物品
         int index = GetItemIndexInBox(itemId);
@@ -165,7 +168,7 @@ public class InventoryManager : Singleton<InventoryManager>
     {
         for (int i = 0; i < playerBag.itemList.Count; i++)
         {
-            if (playerBag.itemList[i].itemID == 0)
+            if (playerBag.itemList[i].itemID.IsUnityNull())
                 return true;
         }
         return false;
@@ -174,7 +177,7 @@ public class InventoryManager : Singleton<InventoryManager>
     {
         for (int i = 0; i < boxBag.itemList.Count; i++)
         {
-            if (boxBag.itemList[i].itemID == 0)
+            if (boxBag.itemList[i].itemAmount==0)
                 return true;
         }
         return false;
@@ -187,20 +190,20 @@ public class InventoryManager : Singleton<InventoryManager>
     /// </summary>
     /// <param name="ID">物品ID</param>
     /// <returns>-1则没有这个物品否则返回序号</returns>
-    public int GetItemIndexInBag(int ID)
+    public int GetItemIndexInBag(ItemID ID)
     {
         for (int i = 0; i < playerBag.itemList.Count; i++)
         {
-            if (playerBag.itemList[i].itemID == ID)
+            if (playerBag.itemList[i].itemID.Equals(ID))
                 return i;
         }
         return -1;
     }
-    public int GetItemIndexInBox(int ID)
+    public int GetItemIndexInBox(ItemID ID)
     {
         for(int i = 0; i < boxBag.itemList.Count; i++)
         {
-            if (boxBag.itemList[i].itemID == ID)
+            if (boxBag.itemList[i].itemID.Equals(ID))
                 return i;
         }
         return -1;
@@ -214,14 +217,14 @@ public class InventoryManager : Singleton<InventoryManager>
     /// <param name="ID">物品ID</param>
     /// <param name="index">序号</param>
     /// <param name="amount">数量</param>
-    private void AddItemAtIndex(int ID, int index, int amount)
+    private void AddItemAtIndex(ItemID ID,int index,int amount)
     {
         if (index == -1 && CheckBoxCapacity())
         {
-            InventoryItem item = new InventoryItem { itemID = ID, itemAmount = amount };
+            LegacyInventoryItem item = new LegacyInventoryItem { itemID = ID, itemAmount = amount };
             for (int i = 0; i < boxBag.itemList.Count; i++)
             {
-                if (boxBag.itemList[i].itemID == 0)
+                if (boxBag.itemList[i].itemAmount == 0)
                 {
                     boxBag.itemList[i] = item;
                     break;
@@ -231,8 +234,7 @@ public class InventoryManager : Singleton<InventoryManager>
         else
         {
             int currentAmount = boxBag.itemList[index].itemAmount + amount;
-            InventoryItem item = new InventoryItem { itemID = ID, itemAmount = currentAmount };
-
+            LegacyInventoryItem item = new LegacyInventoryItem { itemID = ID, itemAmount = currentAmount };
             boxBag.itemList[index] = item;
         }
     }
@@ -246,10 +248,10 @@ public class InventoryManager : Singleton<InventoryManager>
     /// <param name="targetIndex">目标数据序号</param>
     public void SwapItem(int fromIndex, int targetIndex)
     {
-        InventoryItem currentItem = playerBag.itemList[fromIndex];
-        InventoryItem targetItem = playerBag.itemList[targetIndex];
-        if (currentItem.itemID == targetItem.itemID) return;
-        if (targetItem.itemID != 0)
+        LegacyInventoryItem currentItem = playerBag.itemList[fromIndex];
+        LegacyInventoryItem targetItem = playerBag.itemList[targetIndex];
+        if (currentItem.itemID.Equals(targetItem.itemID)) return;
+        if (targetItem.itemAmount>0)
         {
             playerBag.itemList[fromIndex] = targetItem;
             playerBag.itemList[targetIndex] = currentItem;
@@ -257,7 +259,7 @@ public class InventoryManager : Singleton<InventoryManager>
         else
         {
             playerBag.itemList[targetIndex] = currentItem;
-            playerBag.itemList[fromIndex] = new InventoryItem();
+            playerBag.itemList[fromIndex] = new LegacyInventoryItem();
         }
 
         EventHandler.CallUpdateInventoryUI(InventoryLocation.Bag, playerBag.itemList);
@@ -272,30 +274,30 @@ public class InventoryManager : Singleton<InventoryManager>
     /// <param name="targetIndex"></param>
     public void SwapItem(InventoryLocation locationFrom, int fromIndex, InventoryLocation locationTarget, int targetIndex)
     {
-        List<InventoryItem> currentList = GetItemList(locationFrom);
-        List<InventoryItem> targetList = GetItemList(locationTarget);
+        List<LegacyInventoryItem> currentList = GetItemList(locationFrom);
+        List<LegacyInventoryItem> targetList = GetItemList(locationTarget);
 
-        InventoryItem currentItem = currentList[fromIndex];
+        LegacyInventoryItem currentItem = currentList[fromIndex];
 
         if (targetIndex < targetList.Count)
         {
-            InventoryItem targetItem = targetList[targetIndex];
+            LegacyInventoryItem targetItem = targetList[targetIndex];
 
-            if (targetItem.itemID != 0 && currentItem.itemID != targetItem.itemID)  //有不相同的两个物品
+            if (targetItem.itemAmount>0 && currentItem.itemID.Equals( targetItem.itemID))  //有不相同的两个物品
             {
                 currentList[fromIndex] = targetItem;
                 targetList[targetIndex] = currentItem;
             }
-            else if (currentItem.itemID == targetItem.itemID) //相同的两个物品
+            else if (currentItem.itemID.Equals(targetItem.itemID) )//相同的两个物品
             {
                 targetItem.itemAmount += currentItem.itemAmount;
                 targetList[targetIndex] = targetItem;
-                currentList[fromIndex] = new InventoryItem();
+                currentList[fromIndex] = new LegacyInventoryItem();
             }
             else    //目标空格子
             {
                 targetList[targetIndex] = currentItem;
-                currentList[fromIndex] = new InventoryItem();
+                currentList[fromIndex] = new LegacyInventoryItem();
             }
             EventHandler.CallUpdateInventoryUI(locationFrom, currentList);
             EventHandler.CallUpdateInventoryUI(locationTarget, targetList);
@@ -307,7 +309,7 @@ public class InventoryManager : Singleton<InventoryManager>
     /// </summary>
     /// <param name="location"></param>
     /// <returns></returns>
-    private List<InventoryItem> GetItemList(InventoryLocation location)
+    private List<LegacyInventoryItem> GetItemList(InventoryLocation location)
     {
         return location switch
         {
@@ -326,19 +328,19 @@ public class InventoryManager : Singleton<InventoryManager>
     /// </summary>
     /// <param name="ID">物品ID</param>
     /// <param name="removeAmount">数量</param>
-    public void RemoveItem(int ID, int removeAmount)
+    public void RemoveItem(ItemID ID, int removeAmount)
     {
         var index = GetItemIndexInBox(ID);
 
         if (boxBag.itemList[index].itemAmount > removeAmount)
         {
             var amount = boxBag.itemList[index].itemAmount - removeAmount;
-            var item = new InventoryItem { itemID = ID, itemAmount = amount };
+            var item = new LegacyInventoryItem { itemID = ID, itemAmount = amount };
             boxBag.itemList[index] = item;
         }
         else if (boxBag.itemList[index].itemAmount == removeAmount)
         {
-            var item = new InventoryItem();
+            var item = new LegacyInventoryItem();
             boxBag.itemList[index] = item;
         }
 
@@ -350,18 +352,18 @@ public class InventoryManager : Singleton<InventoryManager>
     /// </summary>
     /// <param name="ID">物品ID</param>
     /// <param name="removeAmount">数量</param>
-    public void RemoveBagItem(int ID, int removeAmount)
+    public void RemoveBagItem(ItemID ID, int removeAmount)
     {
         var index = GetItemIndexInBag(ID);
         if (playerBag.itemList[index].itemAmount > removeAmount)
         {
             var amount = playerBag.itemList[index].itemAmount - removeAmount;
-            var item = new InventoryItem { itemID = ID, itemAmount = amount };
+            var item = new LegacyInventoryItem { itemID = ID, itemAmount = amount };
             playerBag.itemList[index] = item;
         }
         else if (playerBag.itemList[index].itemAmount == removeAmount)
         {
-            var item = new InventoryItem();
+            var item = new LegacyInventoryItem();
             playerBag.itemList[index] = item;
         }
 
@@ -389,11 +391,11 @@ public class InventoryManager : Singleton<InventoryManager>
     {
         for(int i = 0; i < playerBag.itemList.Count; i++)
         {
-            InventoryItem item = playerBag.itemList[i];
+            LegacyInventoryItem item = playerBag.itemList[i];
             if(item.itemAmount>0)
             {
                 AddItem(item.itemID, item.itemAmount);
-                InventoryItem empty=new InventoryItem();
+                LegacyInventoryItem empty=new LegacyInventoryItem();
                 playerBag.itemList[i]= empty;
             }
         }

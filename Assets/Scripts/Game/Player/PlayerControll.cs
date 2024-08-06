@@ -168,8 +168,8 @@ public class PlayerControll : MonoBehaviour
     
         var obj = Instantiate(go,rightHand.position,Quaternion.identity,null);
         obj.GetComponent<SpriteRenderer>().sprite = PortableBag.Instance.currentSlot.potionIcon.sprite;
-        obj.GetComponent<Item>().startPosition = rightHand.position;
-        obj.GetComponent<Item>().movePosition = mousePosition;
+        obj.GetComponent<LegacyItem>().startPosition = rightHand.position;
+        obj.GetComponent<LegacyItem>().movePosition = mousePosition;
     }
     public void UsePotion()
     {

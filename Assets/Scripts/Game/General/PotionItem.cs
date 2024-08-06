@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 
-public class PotionItem : Item
+public class PotionItem : LegacyItem
 {
 
     [SerializeField]
@@ -39,7 +39,7 @@ public class PotionItem : Item
 
     void InitialzePotion()
     {
-        _thisPotion = GetPotionFromList(itemID);
+        //_thisPotion = GetPotionFromList(itemID);
         //if (_thisPotion != null)
         //{
         //    this.itemDetails.itemName = _thisPotion.potionName;

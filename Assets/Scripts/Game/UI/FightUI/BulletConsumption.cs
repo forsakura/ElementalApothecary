@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Xml.Linq;
+using Utilities;
 
 public class BulletConsumption : Singleton<BulletConsumption>
 {
@@ -22,9 +23,9 @@ public class BulletConsumption : Singleton<BulletConsumption>
 
     // 装填子弹
     // public void Fill(Sprite potion)
-    public void Fill(int potionID)
+    public void Fill(ItemID potionID)
     {
-        ItemDetails itemdetails = InventoryManager.Instance.GetItemDetails(potionID);
+        LegacyItemDetails itemdetails = InventoryManager.Instance.GetItemDetails(potionID);
         cover.fillAmount = 0.0f;
         potionIcon.sprite = itemdetails.itemIcon;
         potionName.text = itemdetails.itemName;

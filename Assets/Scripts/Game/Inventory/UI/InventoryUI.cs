@@ -1,5 +1,7 @@
+using ProjectBase.Res;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +11,8 @@ public class InventoryUI : MonoBehaviour
     public ItemToolTip itemToolTip;
     
     public ItemDataList_SO itemList;
+
+    public Transform content;
 
     [Header("拖拽图片")]
     public Image dragItem;
@@ -39,7 +43,6 @@ public class InventoryUI : MonoBehaviour
         EventHandler.BeforeSceneUnloadEvent += OnBeforeSceneUnloadedEvent;
         EventHandler.BaseBagOpenEvent += OnBaseBagOpenEvent;
         EventHandler.BaseBagCloseEvent += OnBaseBagCloseEvent;
-        //EventHandler.ShowTradeUI += OnShowTradeUI;
     }
 
     private void OnDisable()
@@ -48,7 +51,6 @@ public class InventoryUI : MonoBehaviour
         EventHandler.BeforeSceneUnloadEvent -= OnBeforeSceneUnloadedEvent;
         EventHandler.BaseBagOpenEvent -= OnBaseBagOpenEvent;
         EventHandler.BaseBagCloseEvent -= OnBaseBagCloseEvent;
-        //EventHandler.ShowTradeUI -= OnShowTradeUI;
     }
 
     private void Awake()
@@ -173,7 +175,7 @@ public class InventoryUI : MonoBehaviour
     /// </summary>
     /// <param name="location">库存位置</param>
     /// <param name="list">数据列表</param>
-    private void OnUpdateInventoryUI(InventoryLocation location, List<InventoryItem> list)
+    private void OnUpdateInventoryUI(InventoryLocation location, List<LegacyInventoryItem> list)
     {
         switch (location)
         {
@@ -182,7 +184,7 @@ public class InventoryUI : MonoBehaviour
                 {
                     if (list[i].itemAmount > 0)
                     {
-                        ItemDetails item = InventoryManager.Instance.GetItemDetails(list[i].itemID);
+                        LegacyItemDetails item = InventoryManager.Instance.GetItemDetails(list[i].itemID);
                         playerBagSlots[i].UpdateSlot(item, list[i].itemAmount);
                     }
                     else
@@ -192,26 +194,37 @@ public class InventoryUI : MonoBehaviour
                 }
                 break;
             case InventoryLocation.Box:
-                for (int i = 0; i < boxSlots.Count; i++)
+                for(int i = 0; i < list.Count; i++)
                 {
-                    
-                    if (list[i].itemAmount > 0)
+                    if(list[i].itemAmount > 0)
                     {
-                        ItemDetails item = InventoryManager.Instance.GetItemDetails(list[i].itemID);
-                        boxSlots[i].UpdateSlot(item, list[i].itemAmount);
-                    }
-                    else
-                    {
-                        boxSlots[i].UpdateEmptySlot();
+                        SlotUI cell = ResManager.LoadResource<SlotUI>("Prefab/UI/Solt_bag");
+                        cell.transform.parent = content;
+                        boxSlots.Add(cell);
+                        LegacyItemDetails item = InventoryManager.Instance.GetItemDetails(list[i].itemID);
+                        cell.UpdateSlot(item, list[i].itemAmount);
                     }
                 }
+                //for (int i = 0; i < boxSlots.Count; i++)
+                //{
+                    
+                //    if (list[i].itemAmount > 0)
+                //    {
+                //        LegacyItemDetails item = InventoryManager.Instance.GetItemDetails(list[i].itemID);
+                //        boxSlots[i].UpdateSlot(item, list[i].itemAmount);
+                //    }
+                //    else
+                //    {
+                //        boxSlots[i].UpdateEmptySlot();
+                //    }
+                //}
                 break;
             case InventoryLocation.Flask:
                 for (int i = 0; i < falskSlots.Length; i++)
                 {
                     if (list[i].itemAmount > 0)
                     {
-                        ItemDetails item = InventoryManager.Instance.GetItemDetails(list[i].itemID);
+                        LegacyItemDetails item = InventoryManager.Instance.GetItemDetails(list[i].itemID);
                         falskSlots[i].UpdateSlot(item, list[i].itemAmount);
                     }
                     else
@@ -225,7 +238,7 @@ public class InventoryUI : MonoBehaviour
                 {
                     if (list[i].itemAmount > 0)
                     {
-                        ItemDetails item = InventoryManager.Instance.GetItemDetails(list[i].itemID);
+                        LegacyItemDetails item = InventoryManager.Instance.GetItemDetails(list[i].itemID);
                         potSlots[i].UpdateSlot(item, list[i].itemAmount);
                     }
                     else
@@ -239,7 +252,7 @@ public class InventoryUI : MonoBehaviour
                 {
                     if (list[i].itemAmount > 0)
                     {
-                        ItemDetails item = InventoryManager.Instance.GetItemDetails(list[i].itemID);
+                        LegacyItemDetails item = InventoryManager.Instance.GetItemDetails(list[i].itemID);
                         furnaceSlots[i].UpdateSlot(item, list[i].itemAmount);
                     }
                     else
@@ -253,7 +266,7 @@ public class InventoryUI : MonoBehaviour
                 {
                     if (list[i].itemAmount > 0)
                     {
-                        ItemDetails item = InventoryManager.Instance.GetItemDetails((int)list[i].itemID);
+                        LegacyItemDetails item = InventoryManager.Instance.GetItemDetails(list[i].itemID);
                         distllerSlots[i].UpdateSlot(item, list[i].itemAmount);
                     }
                     else

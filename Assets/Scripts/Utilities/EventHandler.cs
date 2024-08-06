@@ -1,12 +1,10 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-//using MFarm.Dialogue;
 using UnityEngine;
 public static class EventHandler
 {
-    public static event Action<InventoryLocation, List<InventoryItem>> UpdateInventoryUI;
-    public static void CallUpdateInventoryUI(InventoryLocation location, List<InventoryItem> list)
+    public static event Action<InventoryLocation, List<LegacyInventoryItem>> UpdateInventoryUI;
+    public static void CallUpdateInventoryUI(InventoryLocation location, List<LegacyInventoryItem> list)
     {
         UpdateInventoryUI?.Invoke(location, list);
     }
@@ -23,8 +21,8 @@ public static class EventHandler
         DropItemEvent?.Invoke(ID, pos, itemType);
     }
 
-    public static event Action<ItemDetails, bool> ItemSelectedEvent;
-    public static void CallItemSelectedEvent(ItemDetails itemDetails, bool isSelected)
+    public static event Action<LegacyItemDetails, bool> ItemSelectedEvent;
+    public static void CallItemSelectedEvent(LegacyItemDetails itemDetails, bool isSelected)
     {
         ItemSelectedEvent?.Invoke(itemDetails, isSelected);
     }
@@ -53,14 +51,14 @@ public static class EventHandler
         MoveToPosition?.Invoke(targetPosition);
     }
 
-    public static event Action<Vector3, ItemDetails> MouseClickedEvent;
-    public static void CallMouseClickedEvent(Vector3 pos, ItemDetails itemDetails)
+    public static event Action<Vector3, LegacyItemDetails> MouseClickedEvent;
+    public static void CallMouseClickedEvent(Vector3 pos, LegacyItemDetails itemDetails)
     {
         MouseClickedEvent?.Invoke(pos, itemDetails);
     }
 
-    public static event Action<Vector3, ItemDetails> ExecuteActionAfterAnimation;
-    public static void CallExecuteActionAfterAnimation(Vector3 pos, ItemDetails itemDetails)
+    public static event Action<Vector3, LegacyItemDetails> ExecuteActionAfterAnimation;
+    public static void CallExecuteActionAfterAnimation(Vector3 pos, LegacyItemDetails itemDetails)
     {
         ExecuteActionAfterAnimation?.Invoke(pos, itemDetails);
     }
@@ -90,7 +88,7 @@ public static class EventHandler
     //    ShowDialogueEvent?.Invoke(piece);
     //}
 
-    //商店开启
+    
     public static event Action<ContainerType, InventoryBag_SO> BaseBagOpenEvent;
     public static void CallBaseBagOpenEvent(ContainerType slotType, InventoryBag_SO bag_SO)
     {
@@ -109,8 +107,8 @@ public static class EventHandler
     //    UpdateGameStateEvent?.Invoke(gameState);
     //}
 
-    public static event Action<ItemDetails, bool> ShowTradeUI;
-    public static void CallShowTradeUI(ItemDetails item, bool isSell)
+    public static event Action<LegacyItemDetails, bool> ShowTradeUI;
+    public static void CallShowTradeUI(LegacyItemDetails item, bool isSell)
     {
         ShowTradeUI?.Invoke(item, isSell);
     }
@@ -120,12 +118,7 @@ public static class EventHandler
         ShowAltarUI?.Invoke(locationFrom, fromIndex, locationTarget, targetIndex);
     }
 
-    //建造
-    public static event Action<int, Vector3> BuildFurnitureEvent;
-    public static void CallBuildFurnitureEvent(int ID, Vector3 pos)
-    {
-        BuildFurnitureEvent?.Invoke(ID, pos);
-    }
+    
 
 
     public static event Action<int> StartNewGameEvent;

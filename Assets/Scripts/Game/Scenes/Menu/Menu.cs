@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using ProjectBase.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,11 +16,11 @@ public class Menu : MonoBehaviour
     public Vector3 posToGo;
     private void Awake() 
     {
-        start.onClick.AddListener(OnStart);
+        /*start.onClick.AddListener(OnStart);
         load.onClick.AddListener(OnLoad);
         tk.onClick.AddListener(OnTK);
         setting.onClick.AddListener(OnSetting);
-        exit.onClick.AddListener(OnExit);
+        exit.onClick.AddListener(OnExit);*/
     }
 
 
@@ -33,7 +34,7 @@ public class Menu : MonoBehaviour
         startNew.RaiseLoadScenetEvent("Menu","Home",posToGo);
         
     }
-    private void OnLoad()
+    /*private void OnLoad()
     {
         UIManager.Instance.OnLoadGame();
     }
@@ -48,5 +49,5 @@ public class Menu : MonoBehaviour
     private void OnExit()
     {
         UIManager.Instance.OnExitGame();
-    }
+    }*/
 }
