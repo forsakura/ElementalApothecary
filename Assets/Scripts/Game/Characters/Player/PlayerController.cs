@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D rb;
     [HideInInspector]
     public PlayerAnimations anims;
+    [HideInInspector]
+    public Characters characters;
     //[HideInInspector]
     public Vector2 mousePos;
     //[HideInInspector]
@@ -27,6 +29,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anims = GetComponent<PlayerAnimations>();
+        characters = GetComponent<Characters>();
         InitInputActions();
     }
 
@@ -70,6 +73,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnShift(InputAction.CallbackContext context)
     {
+        // PlayerActions.SwitchWeapon.Invoke();
         switch (currentAttackState)
         {
             case EPlayerAttackState.Throwing:
@@ -84,18 +88,18 @@ public class PlayerController : MonoBehaviour
                 break;
             case EPlayerAttackState.Drinking:
                 break;
-            default:
-                break;
         }
     }
 
     private void Shoot(InputAction.CallbackContext context)
     {
-        PlayerActions.OnShoot();
+        // PlayerActions.OnShoot.Invoke();
+        characters.Shoot(mouseWorldPos);
     }
 
     private void Throw(InputAction.CallbackContext context)
     {
-        PlayerActions.OnThrow();
+        // PlayerActions.OnThrow.Invoke();
+        characters.Throw(mouseWorldPos);
     }
 }
