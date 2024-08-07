@@ -55,10 +55,18 @@ public class ATTRSO : ScriptableObject
 public  class Attribute:ScriptableObject
 {
     public int id;
+    public AttributeType Type;
     public EElement baseElement;
     public float Duration;
     public float _remainingTime;
-    public bool IsPermanent=true;
+    public bool IsPermanent= true;
+
+    public enum AttributeType
+    { 
+        Main,
+        Aux
+    }
+
 
     public virtual void Apply(GameObject target) { }
     public virtual void Update(GameObject target, float deltaTime) { }
