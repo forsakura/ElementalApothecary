@@ -1,10 +1,15 @@
 using ProjectBase.Date;
 using Unity.Burst.Intrinsics;
+using UnityEngine;
 
 namespace Game.Level.TranslatePoints.Data
 {
     public class CommonTransformPointData : TransformPointDataBase
     {
+        public CommonTransformPointData()
+        {
+            
+        }
         public CommonTransformPointData(string fileName)
         {
             InitData(fileName);
@@ -13,7 +18,8 @@ namespace Game.Level.TranslatePoints.Data
         {
             base.InitData(fileName);
             var res = SaveSystem.LoadGameFromJson<CommonTransformPointData>(fileName, JsonType.LitJson);
-            destinationPoint = res.destinationPoint;
+            destinationPointName = res.destinationPointName;
+            destinationPoint = GameObject.Find(destinationPointName).transform;
             type = res.type;
         }
 

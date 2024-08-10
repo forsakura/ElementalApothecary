@@ -85,7 +85,7 @@ namespace ProjectBase.Date
         /// <param name="type">指定使用的Json类型</param>
         public static void SaveGameByJson<T>(string fileName, T obj, JsonType type)
         {
-            var path = Path.Combine(Application.streamingAssetsPath, fileName + ".json");
+            var path = Application.streamingAssetsPath + "/" + fileName + ".json";
             var jsonStr = type switch
             {
                 JsonType.JsonUtility => JsonUtility.ToJson(obj),
@@ -111,7 +111,7 @@ namespace ProjectBase.Date
         /// <returns></returns>
         public static T LoadGameFromJson<T>(string fileName, JsonType type)
         {
-            var path = Path.Combine(Application.streamingAssetsPath, fileName + ".json");
+            var path = Application.streamingAssetsPath + "/" + fileName + ".json";
             if (!File.Exists(path)) return default;
             var jsonStr = File.ReadAllText(path);
             try
@@ -138,7 +138,7 @@ namespace ProjectBase.Date
         /// <param name="fileName">需删除的数据文件</param>
         public static void DeleteGameDateByJson(string fileName)
         {
-            var path = Path.Combine(Application.streamingAssetsPath, fileName + ".json");
+            var path = Application.streamingAssetsPath + "/" + fileName + ".json";
             try
             {
                 File.Delete(path);

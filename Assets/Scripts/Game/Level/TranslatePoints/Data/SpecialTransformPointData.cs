@@ -7,6 +7,11 @@ namespace Game.Level.TranslatePoints.Data
         public string nextSceneName;
         public string currentSceneName;
 
+
+        public SpecialTransformPointData()
+        {
+            
+        }
         public SpecialTransformPointData(string fileName)
         {
             InitData(fileName);

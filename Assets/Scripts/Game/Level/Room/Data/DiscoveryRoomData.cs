@@ -1,23 +1,20 @@
 using System.Collections.Generic;
 using ProjectBase.Date;
-using UnityEngine;
 
 namespace Game.Level.Room.Data
 {
-    public class FightRoomData : RoomDataBase
+    //有传送点和素材数据
+    public class DiscoveryRoomData : RoomDataBase
     {
-        //敌人预制体路径
-        public List<string> enemiesPath;
-        
-        //素材资源路径
         public List<string> materialsPath;
+        public List<string> enemiesPath;
 
-        public FightRoomData()
+        public DiscoveryRoomData()
         {
             
         }
 
-        public FightRoomData(string fileName)
+        public DiscoveryRoomData(string fileName)
         {
             LoadData(fileName);
         }
@@ -26,20 +23,20 @@ namespace Game.Level.Room.Data
         public override void LoadData(string fileName)
         {
             base.LoadData(fileName);
-            var res = SaveSystem.LoadGameFromJson<FightRoomData>(fileName, JsonType.LitJson);
+            var res = SaveSystem.LoadGameFromJson<DiscoveryRoomData>(fileName, JsonType.LitJson);
             transformPointsPath = new List<string>();
             for (int i = 0; i < res.transformPointsPath.Count; i++)
             {
                 transformPointsPath.Add(res.transformPointsPath[i]);
             }
 
-            materialsPath = new List<string>();
+            materialsPath = new List<string>(res.materialsPath.Count);
             for (int j = 0; j < res.materialsPath.Count; j++)
             {
                 materialsPath.Add(res.materialsPath[j]);
             }
 
-            enemiesPath = new List<string>();
+            enemiesPath = new List<string>(res.enemiesPath.Count);
             for (int k = 0; k < res.enemiesPath.Count; k++)
             {
                 enemiesPath.Add(res.enemiesPath[k]);

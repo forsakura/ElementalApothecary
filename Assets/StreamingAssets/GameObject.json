@@ -1,0 +1,5 @@
+{
+	"transformPointsPath": ["Prefab/Teleports/Teleport1", "Prefab/Teleports/Teleport2"],
+	"materialsPath": ["Prefab/Materials/material1", "Prefab/Materials/material2"],
+	"enemiesPath": ["Prefab/Enemies/Enemy1", "Prefab/Enemies/Enemy2"]
+}

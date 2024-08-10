@@ -3,33 +3,16 @@ using Game.Level.Room.Data;
 using Game.Level.TranslatePoints.View;
 using UnityEngine;
 
-namespace Game.Level.Room.View
+namespace Game.Level.Room
 {
-    public class RoomViewBase : MonoBehaviour
+    public class RoomBase : MonoBehaviour
     {
         public RoomDataBase data;
 
         //传送点坐标集合
         public List<Transform> pointsTransforms = new List<Transform>();
-
-        //生成传送点
-        public virtual void InitTransformPoints()
-        {
-            
-        }
-
-        //生成材料
-        public virtual void InitMaterials()
-        {
-            
-        }
-
-        //生成敌人
-        public virtual void InitEnemies()
-        {
-            
-        }
-
+        
+        
         /// <summary>
         /// 设置物品父节点和位置
         /// </summary>
@@ -61,5 +44,6 @@ namespace Game.Level.Room.View
                     break;
             }
         }
+
     }
 }

@@ -11,6 +11,8 @@ namespace Game.Level.TranslatePoints.Data
     }
     public class TransformPointDataBase
     {
+        public string destinationPointName;
+        
         public Transform destinationPoint;
 
         public PointType type;

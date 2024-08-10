@@ -6,6 +6,11 @@ namespace Game.Level.TranslatePoints.Data
     {
         public bool isTransform;
 
+        public FightTransformPointData()
+        {
+            
+        }
+
         public FightTransformPointData(string fileName)
         {
             InitData(fileName);
