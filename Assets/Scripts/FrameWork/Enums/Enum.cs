@@ -43,3 +43,9 @@ public enum InventoryLocation
 }
 
 
+// 发射子弹方式
+public enum BulletType
+{
+    Throw,
+    Shoot
+}

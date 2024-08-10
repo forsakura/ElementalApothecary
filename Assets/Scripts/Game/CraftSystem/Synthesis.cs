@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Attribute;
 
 public class Synthesis
 {
@@ -15,11 +16,15 @@ public class Synthesis
     public bool isExpolsive;
     bool isExploded;
 
-    public int GachaTimes = 1;//先默认为1
+    public int MainGachaTimes = 1;//先默认为1
+
+    public int AuxGachaTimes = 1;//先默认为1
+    public float AuxGachaProbability;
 
     bool AddStabilizers;//还没做相关
 
     bool isSuccess;
+
     void addMaterial(int order, IDataItem Item)
     {
         try
@@ -52,12 +57,22 @@ public class Synthesis
         production.currentElementCount = CalculateElement();
         production.BaseElement = CalculateBaseElement(production.currentElementCount);
 
-        for (int i = GachaTimes; i > 0; i--)
+        for (int i = MainGachaTimes; i > 0; i--)
         {
-            int mainATTR = GachaATTR(production.BaseElement);
+            int mainATTR = GachaATTR(production.BaseElement,AttributeType.Main);
             if (mainATTR != -1) 
                 production.AddATTRID(mainATTR);
         }
+        if (ProbabilityTool.Instance.CheckProbability(AuxGachaProbability)) 
+        {
+            for(int i = AuxGachaTimes;i > 0;i--)
+            {
+                int AuxATTR = GachaATTR(production.BaseElement, AttributeType.Aux);
+                if (AuxATTR != -1)
+                    production.AddATTRID(AuxATTR);
+            }
+        }
+
 
         checkSecceed();
         if (isSuccess)
@@ -134,15 +149,33 @@ public class Synthesis
         return output;
     }
 
-    int GachaATTR(EElement[] baseElement)
+    int GachaATTR(EElement[] baseElement,AttributeType attributeType)
     {
         List<int> pool = new();
         foreach (var material in Materials.Values)
         {
             foreach(var ATTR in material.GetATTRID())
             {
-                EElement attrElement = SOList.AttributeList.GetAttributeById(ATTR).baseElement;
-                if (attrElement == baseElement[1] || (attrElement == baseElement[0])) 
+                Attribute currentAttribute = SOList.AttributeList.GetAttributeById(ATTR);
+                if (currentAttribute == null)
+                {
+                    Debug.LogError($"ATTRId {ATTR} is invalid!");
+                }
+                AttributeType type = currentAttribute.Type;
+                if(type != attributeType)
+                {
+                    continue;
+                }
+
+                if (attributeType == AttributeType.Main)
+                {
+                    EElement attrElement = currentAttribute.baseElement;
+                    if (attrElement == baseElement[1] || attrElement == baseElement[0]) 
+                    {
+                       pool.Add(ATTR);
+                    }
+                }
+                else if(attributeType == AttributeType.Aux)
                 {
                     pool.Add(ATTR);
                 }
