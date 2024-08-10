@@ -45,7 +45,7 @@ namespace Game.Level.Room
                 int i1 = i;
                 ResManager.LoadResourceAsync<GameObject>(((BossRoomData)data).transformPointsPath[i1], arg0 =>
                 {
-                    SetGameObject(arg0, pointsTransforms[i1].transform, gameObject.transform);
+                    SetGameObject(arg0, TeleportPositions[i1].transform, gameObject.transform);
                     SetTransformView(arg0);
                     transformObjects.Add(arg0);
                 });

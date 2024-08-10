@@ -23,7 +23,7 @@ namespace Game.Level.Room
                 int i1 = i;
                 ResManager.LoadResourceAsync<GameObject>(((StrengtheningRoomData)data).transformPointsPath[i1], arg0 =>
                 {
-                    SetGameObject(arg0, pointsTransforms[i1], gameObject.transform);
+                    SetGameObject(arg0, TeleportPositions[i1], gameObject.transform);
                     SetTransformView(arg0);
                 });
             }

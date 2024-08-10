@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Game.Level.Room.Data;
 using Game.Level.TranslatePoints.View;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Game.Level.Room
 {
@@ -10,7 +11,7 @@ namespace Game.Level.Room
         public RoomDataBase data;
 
         //传送点坐标集合
-        public List<Transform> pointsTransforms = new List<Transform>();
+        public List<Transform> TeleportPositions = new List<Transform>();
         
         
         /// <summary>

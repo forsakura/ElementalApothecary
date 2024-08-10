@@ -53,7 +53,7 @@ namespace Game.Level.Room
                 var i1 = i;
                 ResManager.LoadResourceAsync<GameObject>(((FightRoomData)data).transformPointsPath[i], arg0 =>
                 {
-                    SetGameObject(arg0, pointsTransforms[i1].transform, gameObject.transform);
+                    SetGameObject(arg0, TeleportPositions[i1].transform, gameObject.transform);
                     SetTransformView(arg0);
                     transformObjects.Add(arg0);
                 });

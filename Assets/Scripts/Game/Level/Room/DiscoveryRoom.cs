@@ -4,6 +4,7 @@ using Game.Level.Room.Data;
 using Game.Level.RoomInterface;
 using ProjectBase.Res;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Game.Level.Room
 {
@@ -13,8 +14,8 @@ namespace Game.Level.Room
      */
     public class DiscoveryRoom : RoomBase, IInitEnemy, IInitOtherObject, IInitTeleport
     {
-        public List<Transform> materialsPoints = new List<Transform>();
-        public List<Transform> enemiesTransforms = new List<Transform>();
+        public List<Transform> materialPositions = new List<Transform>();
+        public List<Transform> enemyPositions = new List<Transform>();
 
         private void Start()
         {
@@ -32,7 +33,7 @@ namespace Game.Level.Room
                 var i1 = i;
                 ResManager.LoadResourceAsync<GameObject>(((DiscoveryRoomData)data).enemiesPath[i], arg0 =>
                 {
-                    SetGameObject(arg0, enemiesTransforms[i1].transform, gameObject.transform);
+                    SetGameObject(arg0, enemyPositions[i1].transform, gameObject.transform);
                 });
             }
         }
@@ -45,7 +46,7 @@ namespace Game.Level.Room
                 var i1 = i;
                 ResManager.LoadResourceAsync<GameObject>(((DiscoveryRoomData)data).materialsPath[i], arg0 =>
                 {
-                    SetGameObject(arg0, materialsPoints[i1].transform, gameObject.transform);
+                    SetGameObject(arg0, materialPositions[i1].transform, gameObject.transform);
                 });
             }
         }
@@ -58,7 +59,7 @@ namespace Game.Level.Room
                 var i1 = i;
                 ResManager.LoadResourceAsync<GameObject>(((DiscoveryRoomData)data).transformPointsPath[i], arg0 =>
                 {
-                    SetGameObject(arg0, pointsTransforms[i1].transform, gameObject.transform);
+                    SetGameObject(arg0, TeleportPositions[i1].transform, gameObject.transform);
                     SetTransformView(arg0);
                 });
             }
