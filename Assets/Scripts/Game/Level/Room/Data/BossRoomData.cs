@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using ProjectBase.Date;
+using ProjectBase.Event;
 using ProjectBase.Res;
 using UnityEngine;
 
@@ -9,18 +10,25 @@ namespace Game.Level.Room.Data
     {
         //boss预制体的文件路径
         public string bossPrefabPath;
-        //boss生成时在房间的位置
-        public Transform bossInitTranform;
 
-        public BossRoomData()
+        public BossRoomData() : base()
         {
             
         }
 
-        public BossRoomData(string fileName)
+        public BossRoomData(string fileName) : base(fileName)
         {
             LoadData(fileName);
         }
+
+        ~BossRoomData()
+        {
+            EventCenter.Instance.RemoveEventLister(fileName, () =>
+            {
+                SaveData(fileName);
+            });
+        }
+        
         public override void SaveData(string fileName)
         {
             base.SaveData(fileName);
@@ -37,7 +45,6 @@ namespace Game.Level.Room.Data
                 transformPointsPath.Add(res.transformPointsPath[i]);
             }
             bossPrefabPath = res.bossPrefabPath;
-            bossInitTranform = res.bossInitTranform;
         }
     }
 }

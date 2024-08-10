@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using ProjectBase.Date;
+using ProjectBase.Event;
 
 namespace Game.Level.Room.Data
 {
@@ -9,14 +10,22 @@ namespace Game.Level.Room.Data
         public List<string> materialsPath;
         public List<string> enemiesPath;
 
-        public DiscoveryRoomData()
+        public DiscoveryRoomData() : base()
         {
             
         }
 
-        public DiscoveryRoomData(string fileName)
+        public DiscoveryRoomData(string fileName) : base(fileName)
         {
             LoadData(fileName);
+        }
+
+        ~DiscoveryRoomData()
+        {
+            EventCenter.Instance.RemoveEventLister(fileName, () =>
+            {
+                SaveData(fileName);
+            });
         }
         
         //初始化改房间数据，在该房间生成时触发

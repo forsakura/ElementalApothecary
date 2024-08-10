@@ -1,5 +1,5 @@
 {
-	"transformPointsPath": ["Prefab/Teleports/Teleport1", "Prefab/Teleports/Teleport2"],
+	"transformPointsPath": ["Prefab/Teleports/CommonTeleportEnter", "Prefab/Teleports/CommonTeleportExit"],
 	"materialsPath": ["Prefab/Materials/material1", "Prefab/Materials/material2"],
 	"enemiesPath": ["Prefab/Enemies/Enemy1", "Prefab/Enemies/Enemy2"]
 }

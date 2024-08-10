@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Game.Level.Room.Data;
 using Game.Level.RoomInterface;
+using ProjectBase.Event;
 using ProjectBase.Res;
 using UnityEngine;
 using UnityEngine.Serialization;

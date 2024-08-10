@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using ProjectBase.Date;
+using ProjectBase.Event;
 using UnityEngine;
 
 namespace Game.Level.Room.Data
@@ -8,18 +9,23 @@ namespace Game.Level.Room.Data
     {
         //敌人预制体路径
         public List<string> enemiesPath;
-        
-        //素材资源路径
-        public List<string> materialsPath;
 
-        public FightRoomData()
+        public FightRoomData() : base()
         {
             
         }
 
-        public FightRoomData(string fileName)
+        public FightRoomData(string fileName) : base(fileName)
         {
             LoadData(fileName);
+        }
+
+        ~FightRoomData()
+        {
+            EventCenter.Instance.RemoveEventLister(fileName, () =>
+            {
+                SaveData(fileName);
+            });
         }
         
         //初始化改房间数据，在该房间生成时触发
@@ -31,12 +37,6 @@ namespace Game.Level.Room.Data
             for (int i = 0; i < res.transformPointsPath.Count; i++)
             {
                 transformPointsPath.Add(res.transformPointsPath[i]);
-            }
-
-            materialsPath = new List<string>();
-            for (int j = 0; j < res.materialsPath.Count; j++)
-            {
-                materialsPath.Add(res.materialsPath[j]);
             }
 
             enemiesPath = new List<string>();

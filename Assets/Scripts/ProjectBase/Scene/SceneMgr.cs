@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using ProjectBase.Event;
 using ProjectBase.Mono;
@@ -22,6 +23,7 @@ namespace ProjectBase.Scene
         public void LoadScene(string sceneName, bool isAddType, UnityAction callback)
         {
             SceneManager.LoadScene(sceneName, isAddType ? LoadSceneMode.Additive : LoadSceneMode.Single);
+            GC.Collect();
             callback?.Invoke();
         }
 
@@ -45,6 +47,7 @@ namespace ProjectBase.Scene
                 EventCenter.Instance.EventTrigger("进度更新", res.progress);
                 yield return res.progress;
             }
+            GC.Collect();
             UIManager.Instance.HidePanel("loadingPanel");
             callback?.Invoke();
         }

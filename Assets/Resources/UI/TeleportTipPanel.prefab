@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 5664023001824455279}
   - component: {fileID: 4809202820569223232}
   m_Layer: 5
-  m_Name: TranslateTipPanel
+  m_Name: TeleportTipPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

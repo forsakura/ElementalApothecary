@@ -19,7 +19,7 @@ namespace Game.Level.Room
         public List<Transform> enemiesTransforms = new List<Transform>();
 
         //当前房间传送门集合
-        public List<GameObject> transformObjects = new List<GameObject>();
+        private List<GameObject> _transformObjects = new List<GameObject>();
 
         public int enemyCount;
 
@@ -55,7 +55,7 @@ namespace Game.Level.Room
                 {
                     SetGameObject(arg0, TeleportPositions[i1].transform, gameObject.transform);
                     SetTransformView(arg0);
-                    transformObjects.Add(arg0);
+                    _transformObjects.Add(arg0);
                 });
             }
         }
@@ -65,7 +65,7 @@ namespace Game.Level.Room
         {
             enemyCount--;
             if (enemyCount != 0) return;
-            foreach (var gb in transformObjects)
+            foreach (var gb in _transformObjects)
             {
                 if (gb.CompareTag("Fight"))
                 {

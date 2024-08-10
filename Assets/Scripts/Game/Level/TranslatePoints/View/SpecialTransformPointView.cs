@@ -1,4 +1,4 @@
-using System;
+using Game.Level.Room;
 using Game.Level.TranslatePoints.Data;
 using Game.Level.UI;
 using ProjectBase.Event;
@@ -19,6 +19,9 @@ namespace Game.Level.TranslatePoints.View
         protected override void TransformToNext()
         {
             base.TransformToNext();
+            EventCenter.Instance.EventTrigger(data.fileName);
+            var component = gameObject.GetComponentInParent<RoomBase>();
+            EventCenter.Instance.EventTrigger(component.gameObject.name);
             UIManager.Instance.ShowPanel<LoadingPanel>("LoadingPanel", E_UI_Layer.system);
             SceneMgr.Instance.LoadSceneAsync(((SpecialTransformPointData)data).nextSceneName, true, () =>
             {
@@ -36,7 +39,7 @@ namespace Game.Level.TranslatePoints.View
             base.OnTriggerExit2D(other);
             if (other.CompareTag("Player")&&((SpecialTransformPointData)data).type==PointType.Enter)
             {
-                UIManager.Instance.ShowPanel<TranslateTipPanel>(tipPanelName, E_UI_Layer.system);
+                UIManager.Instance.ShowPanel<TranslateTipPanel>(((SpecialTransformPointData)data).tipPanelName, E_UI_Layer.system);
                 EventCenter.Instance.AddEventListener("传送点", TransformToNext);
             }
         }
@@ -46,7 +49,7 @@ namespace Game.Level.TranslatePoints.View
             base.OnTriggerEnter2D(other);
             if (other.CompareTag("Player")&&((SpecialTransformPointData)data).type==PointType.Enter)
             {
-                UIManager.Instance.HidePanel(tipPanelName);
+                UIManager.Instance.HidePanel(((SpecialTransformPointData)data).tipPanelName);
                 EventCenter.Instance.RemoveEventLister("传送点", TransformToNext);
             }
         }

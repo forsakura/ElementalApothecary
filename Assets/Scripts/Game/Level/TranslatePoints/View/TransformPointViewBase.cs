@@ -7,7 +7,6 @@ namespace Game.Level.TranslatePoints.View
     //显示隐藏，进行传送
     public class TransformPointViewBase : MonoBehaviour
     {
-        public string tipPanelName;
 
         public TransformPointDataBase data;
 

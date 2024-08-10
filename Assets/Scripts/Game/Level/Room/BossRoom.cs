@@ -13,13 +13,13 @@ namespace Game.Level.Room
     //boss房间
     public class BossRoom : RoomBase, IInitEnemy, IInitTeleport
     {
-        public List<string> bossPrefabPath = new List<string>();
-        
         //当前房间的boss名
         public string bossName;
+
+        public Transform bossInitTransform;
         
         //当前房间传送门集合
-        public List<GameObject> transformObjects = new List<GameObject>();
+        private List<GameObject> transformObjects = new List<GameObject>();
         
         private void Start()
         {
@@ -34,7 +34,7 @@ namespace Game.Level.Room
         {
             ResManager.LoadResourceAsync<GameObject>(((BossRoomData)data).bossPrefabPath, arg0 =>
             {
-                SetGameObject(arg0, ((BossRoomData)data).bossInitTranform, gameObject.transform);
+                SetGameObject(arg0, bossInitTransform, gameObject.transform);
             });
         }
         //初始化传送点

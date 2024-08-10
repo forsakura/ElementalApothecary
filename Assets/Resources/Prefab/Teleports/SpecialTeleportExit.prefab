@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3145525413888099121}
   m_Layer: 0
-  m_Name: Teleport2
+  m_Name: SpecialTeleportExit
   m_TagString: Special
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

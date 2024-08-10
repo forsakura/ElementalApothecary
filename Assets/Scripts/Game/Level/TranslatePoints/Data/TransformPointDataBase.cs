@@ -11,6 +11,10 @@ namespace Game.Level.TranslatePoints.Data
     }
     public class TransformPointDataBase
     {
+        public string fileName;
+        
+        public string tipPanelName;
+        
         public string destinationPointName;
         
         public Transform destinationPoint;

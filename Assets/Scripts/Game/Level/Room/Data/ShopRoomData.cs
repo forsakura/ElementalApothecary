@@ -5,11 +5,11 @@ namespace Game.Level.Room.Data
 {
     public class ShopRoomData : RoomDataBase
     {
-        public ShopRoomData()
+        public ShopRoomData() : base()
         {
             
         }
-        public ShopRoomData(string fileName)
+        public ShopRoomData(string fileName) : base(fileName)
         {
             LoadData(fileName);
         }

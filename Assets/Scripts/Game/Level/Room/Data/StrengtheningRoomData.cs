@@ -1,17 +1,26 @@
 using System.Collections.Generic;
 using ProjectBase.Date;
+using ProjectBase.Event;
 
 namespace Game.Level.Room.Data
 {
     public class StrengtheningRoomData : RoomDataBase
     {
-        public StrengtheningRoomData()
+        public StrengtheningRoomData() : base()
         {
             
         }
-        public StrengtheningRoomData(string fileName)
+        public StrengtheningRoomData(string fileName) : base(fileName)
         {
             LoadData(fileName);
+        }
+
+        ~StrengtheningRoomData()
+        {
+            EventCenter.Instance.RemoveEventLister(fileName, () =>
+            {
+                SaveData(fileName);
+            });
         }
         public override void SaveData(string fileName)
         {
