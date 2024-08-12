@@ -1,83 +1,78 @@
-using System;
-using System.Collections.Generic;
-using Game.Level.Room.Data;
-using Game.Level.RoomInterface;
-using Game.Level.TranslatePoints.Data;
-using Game.Level.TranslatePoints.View;
-using ProjectBase.Event;
+using Game.Level.Room.RoomData;
+using Game.Level.Room.RoomInterface;
+using ProjectBase.Date;
 using ProjectBase.Res;
 using UnityEngine;
 
 namespace Game.Level.Room
 {
-    /*
-     * 战斗房间
-     */
-    public class FightRoom : RoomBase, IInitEnemy, IInitTeleport
+    public class FightRoom : RoomBase, IInitEnemy, IInitTeleport, IInitOtherObject
     {
-        //敌人坐标集合
-        public List<Transform> enemiesTransforms = new List<Transform>();
-
-        //当前房间传送门集合
-        private List<GameObject> _transformObjects = new List<GameObject>();
-
-        public int enemyCount;
-
-        private void Start()
+        private FightRoomData _fightRoomData;
+        // Start is called before the first frame update
+        void Start()
         {
-            data = new FightRoomData(gameObject.name);
+            LoadData();
+            _fightRoomData = data as FightRoomData;
             InitTeleport();
             InitEnemies();
-            EventCenter.Instance.AddEventListener(gameObject.name, DecreaseEnemyCount);
+            InitOtherObjects();
         }
 
-        //生成敌人
+        // Update is called once per frame
+        void OnDestroy()
+        {
+            SaveData();
+        }
+
+        public override void LoadData()
+        {
+            data = SaveSystem.LoadGameFromJson<FightRoomData>(fileName, JsonType.JsonUtility);
+        }
+
+        public override void SaveData()
+        {
+            SaveSystem.SaveGameByJson(fileName, _fightRoomData, JsonType.JsonUtility);
+        }
+
         public void InitEnemies()
         {
-            for (int i = 0; i < ((FightRoomData)data).enemiesPath.Count; i++)
-            {
-                var i1 = i;
-                ResManager.LoadResourceAsync<GameObject>(((FightRoomData)data).enemiesPath[i], arg0 =>
+            if (_fightRoomData != null)
+                for (int i = 0; i < _fightRoomData.enemyPrefabPaths.Count; i++)
                 {
-                    SetGameObject(arg0, enemiesTransforms[i1].transform, gameObject.transform);
-                });
-                enemyCount++;
-            }
+                    int i1 = i;
+                    ResManager.LoadResourceAsync<GameObject>(_fightRoomData.enemyPrefabPaths[i1], arg0 =>
+                    {
+                        SetGameObject(arg0, _fightRoomData.enemyPositions[i1], gameObject.transform);
+                    });
+                }
         }
 
-        //生成传送门
         public void InitTeleport()
         {
-            for (int i = 0; i < ((FightRoomData)data).transformPointsPath.Count; i++)
-            {
-                var i1 = i;
-                ResManager.LoadResourceAsync<GameObject>(((FightRoomData)data).transformPointsPath[i], arg0 =>
+            if (_fightRoomData != null)
+                for (int i = 0; i < _fightRoomData.teleportPrefabPaths.Count; i++)
                 {
-                    SetGameObject(arg0, TeleportPositions[i1].transform, gameObject.transform);
-                    SetTransformView(arg0);
-                    _transformObjects.Add(arg0);
-                });
-            }
-        }
-        
-        //用于触发该房间数据中敌人数减少
-        private void DecreaseEnemyCount()
-        {
-            enemyCount--;
-            if (enemyCount != 0) return;
-            foreach (var gb in _transformObjects)
-            {
-                if (gb.CompareTag("Fight"))
-                {
-                    ((FightTransformPointData)gb.GetComponent<FightTransformPointView>().data).isTransform = true;
+                    int i1 = i;
+                    ResManager.LoadResourceAsync<GameObject>(_fightRoomData.teleportPrefabPaths[i1], arg0 =>
+                    {
+                        SetGameObject(arg0, _fightRoomData.teleportPositions[i1], gameObject.transform);
+                        SetTransformView(arg0);
+                    });
                 }
-            }
         }
 
-        private void OnDestroy()
+        public void InitOtherObjects()
         {
-            ((FightRoomData)data).SaveData(gameObject.name);
-            EventCenter.Instance.RemoveEventLister(gameObject.name, DecreaseEnemyCount);
+            if (_fightRoomData != null)
+                for (int i = 0; i < _fightRoomData.materialPrefabPaths.Count; i++)
+                {
+                    int i1 = i;
+                    ResManager.LoadResourceAsync<GameObject>(_fightRoomData.materialPrefabPaths[i1], arg0 =>
+                    {
+                        SetGameObject(arg0, _fightRoomData.materialPositions[i1], gameObject.transform);
+                    });
+                }
         }
     }
 }

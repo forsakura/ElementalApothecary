@@ -1,68 +1,81 @@
-using System;
-using System.Collections.Generic;
-using Game.Level.Room.Data;
-using Game.Level.RoomInterface;
-using ProjectBase.Event;
+using Game.Level.Room.RoomData;
+using Game.Level.Room.RoomInterface;
+using ProjectBase.Date;
 using ProjectBase.Res;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Game.Level.Room
 {
-    
-    /*
-     * 探索房间
-     */
     public class DiscoveryRoom : RoomBase, IInitEnemy, IInitOtherObject, IInitTeleport
     {
-        public List<Transform> materialPositions = new List<Transform>();
-        public List<Transform> enemyPositions = new List<Transform>();
-
+        private DiscoveryRoomData _discoveryRoomData;
         private void Start()
         {
-            data = new DiscoveryRoomData(gameObject.name);
+            LoadData();
+            _discoveryRoomData = data as DiscoveryRoomData;
             InitEnemies();
-            InitOtherObjects();
             InitTeleport();
+            InitOtherObjects();
         }
 
-        //初始化敌人在房间中
+        private void OnDestroy()
+        {
+            SaveData();
+        }
+
+        public override void LoadData()
+        {
+            data = SaveSystem.LoadGameFromJson<DiscoveryRoomData>(fileName, JsonType.JsonUtility);
+        }
+
+        public override void SaveData()
+        {
+            SaveSystem.SaveGameByJson(fileName, _discoveryRoomData, JsonType.JsonUtility);
+        }
         public void InitEnemies()
         {
-            for (int i = 0; i < ((DiscoveryRoomData)data).enemiesPath.Count; i++)
+            if (_discoveryRoomData != null)
             {
-                var i1 = i;
-                ResManager.LoadResourceAsync<GameObject>(((DiscoveryRoomData)data).enemiesPath[i], arg0 =>
+                for (int i = 0; i < _discoveryRoomData.enemyPrefabPaths.Count; i++)
                 {
-                    SetGameObject(arg0, enemyPositions[i1].transform, gameObject.transform);
-                });
+                    int i1 = i;
+                    ResManager.LoadResourceAsync<GameObject>(_discoveryRoomData.enemyPrefabPaths[i1], arg0 =>
+                    {
+                        SetGameObject(arg0, _discoveryRoomData.enemyPositions[i1], gameObject.transform);
+                    });
+                }
             }
         }
 
-        //初始化房间中其他环境对象
         public void InitOtherObjects()
         {
-            for (int i = 0; i < ((DiscoveryRoomData)data).materialsPath.Count; i++)
+            if (_discoveryRoomData != null)
             {
-                var i1 = i;
-                ResManager.LoadResourceAsync<GameObject>(((DiscoveryRoomData)data).materialsPath[i], arg0 =>
+                for (int i = 0; i < _discoveryRoomData.materialPrefabPaths.Count; i++)
                 {
-                    SetGameObject(arg0, materialPositions[i1].transform, gameObject.transform);
-                });
+                    int i1 = i;
+                    ResManager.LoadResourceAsync<GameObject>(_discoveryRoomData.materialPrefabPaths[i1], arg0 =>
+                    {
+                        SetGameObject(arg0, _discoveryRoomData.materialPositions[i1], gameObject.transform);
+                    });
+                }
             }
         }
 
-        //初始化传送门对象
         public void InitTeleport()
         {
-            for (int i = 0; i < ((DiscoveryRoomData)data).transformPointsPath.Count; i++)
+            DiscoveryRoomData discoveryRoomData = data as DiscoveryRoomData;
+            if (discoveryRoomData != null)
             {
-                var i1 = i;
-                ResManager.LoadResourceAsync<GameObject>(((DiscoveryRoomData)data).transformPointsPath[i], arg0 =>
+                for (int i = 0; i < discoveryRoomData.teleportPrefabPaths.Count; i++)
                 {
-                    SetGameObject(arg0, TeleportPositions[i1].transform, gameObject.transform);
-                    SetTransformView(arg0);
-                });
+                    int i1 = i;
+                    ResManager.LoadResourceAsync<GameObject>(discoveryRoomData.teleportPrefabPaths[i1], arg0 =>
+                    {
+                        SetGameObject(arg0, discoveryRoomData.teleportPositions[i1], gameObject.transform);
+                        SetTransformView(arg0);
+                    });
+                }
             }
         }
     }

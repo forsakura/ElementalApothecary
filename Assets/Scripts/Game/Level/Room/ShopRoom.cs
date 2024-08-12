@@ -1,36 +1,65 @@
-using System;
-using Game.Level.Room.Data;
-using Game.Level.RoomInterface;
+using Game.Level.Room.RoomData;
+using Game.Level.Room.RoomInterface;
+using ProjectBase.Date;
 using ProjectBase.Res;
 using UnityEngine;
 
 namespace Game.Level.Room
 {
-    //商店房间
     public class ShopRoom : RoomBase, IInitTeleport, IInitOtherObject
     {
-        private void Start()
+        private ShopRoomData _shopRoomData;
+        // Start is called before the first frame update
+        void Start()
         {
-            data = new ShopRoomData(gameObject.name);
+            LoadData();
+            _shopRoomData = data as ShopRoomData;
+            InitTeleport();
+            InitOtherObjects();
+        }
+
+        // Update is called once per frame
+        private void OnDestroy()
+        {
+            SaveData();
+        }
+
+        public override void LoadData()
+        {
+            data = SaveSystem.LoadGameFromJson<ShopRoomData>(fileName, JsonType.JsonUtility);
+        }
+
+        public override void SaveData()
+        {
+            SaveSystem.SaveGameByJson(fileName, _shopRoomData, JsonType.JsonUtility);
         }
 
         public void InitTeleport()
         {
-            for (int i = 0; i < ((ShopRoomData)data).transformPointsPath.Count; i++)
+            if (_shopRoomData != null)
             {
-                int i1 = i;
-                ResManager.LoadResourceAsync<GameObject>(((ShopRoomData)data).transformPointsPath[i1], arg0 =>
+                for (int i = 0; i < _shopRoomData.teleportPrefabPaths.Count; i++)
                 {
-                    SetGameObject(arg0, TeleportPositions[i1].transform, gameObject.transform);
-                    SetTransformView(arg0);
-                });
+                    int i1 = i;
+                    ResManager.LoadResourceAsync<GameObject>(_shopRoomData.teleportPrefabPaths[i1], arg0 =>
+                    {
+                        SetGameObject(arg0, _shopRoomData.teleportPositions[i1], gameObject.transform);
+                        SetTransformView(arg0);
+                    });
+                }
             }
         }
 
-        //初始化商店中的对象
         public void InitOtherObjects()
         {
-            
+            for (int i = 0; i < _shopRoomData.materialPrefabPaths.Count; i++)
+            {
+                int i1 = i;
+                ResManager.LoadResourceAsync<GameObject>(_shopRoomData.materialPrefabPaths[i1], arg0 =>
+                {
+                    SetGameObject(arg0, _shopRoomData.materialPositions[i1], gameObject.transform);
+                });
+            }
         }
     }
 }
