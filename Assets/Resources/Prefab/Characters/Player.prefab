@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aac95e187f2ef09449baec4a3923eed7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cv: {fileID: 0}
+  cv: {fileID: 2553519820158217588, guid: 244c885f7e43d4e47aeff6bb65fb7b6e, type: 3}
   currentAttackState: 0
   rb: {fileID: 0}
   anims: {fileID: 0}

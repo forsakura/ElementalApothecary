@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractTest : MonoBehaviour, IInteractable
+public class InteractTest : PlayerInteraction
 {
-    public void Interact()
+    public override void Interact()
     {
         Debug.Log("This is interact message.");
     }
