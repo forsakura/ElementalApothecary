@@ -19,12 +19,13 @@ public class Player : Characters
     // 此时若离开原来的，因为原来的与现在的可交互物不同，所以此时不会清除可交互内容
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        interactableObject = collision.gameObject.GetComponent<IInteractable>();
-        if (interactableObject != null)
+        IInteractable interactObject = collision.gameObject.GetComponent<IInteractable>();
+        if (interactObject != null)
         {
             //防止添加多个
             PlayerInputManager.Instance.GamePlay.Interact.started -= Interact;
             PlayerInputManager.Instance.GamePlay.Interact.started += Interact;
+            interactableObject = interactObject;
         }
     }
 
