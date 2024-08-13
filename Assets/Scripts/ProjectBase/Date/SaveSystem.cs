@@ -29,6 +29,8 @@ namespace ProjectBase.Date
         public static string DATA_BINARY_PATH = Application.streamingAssetsPath + "/Binary/";
 
         public static Dictionary<string, object> tableDic = new Dictionary<string, object>();
+
+        public static string applicationPath = Application.streamingAssetsPath;
         
         #region PlayerPrefs
 
@@ -111,7 +113,7 @@ namespace ProjectBase.Date
         /// <returns></returns>
         public static T LoadGameFromJson<T>(string fileName, JsonType type)
         {
-            var path = Application.streamingAssetsPath + "/" + fileName + ".json";
+            var path = applicationPath + "/" + fileName + ".json";
             if (!File.Exists(path)) return default;
             var jsonStr = File.ReadAllText(path);
             try
@@ -138,7 +140,7 @@ namespace ProjectBase.Date
         /// <param name="fileName">需删除的数据文件</param>
         public static void DeleteGameDateByJson(string fileName)
         {
-            var path = Application.streamingAssetsPath + "/" + fileName + ".json";
+            var path = applicationPath + "/" + fileName + ".json";
             try
             {
                 File.Delete(path);
@@ -155,7 +157,7 @@ namespace ProjectBase.Date
 
         public static void SaveByBinary(object obj, string fileName)
         {
-            using (FileStream fs = new FileStream(Application.streamingAssetsPath+"/fileName", FileMode.OpenOrCreate, FileAccess.Write))
+            using (FileStream fs = new FileStream(applicationPath+"/fileName", FileMode.OpenOrCreate, FileAccess.Write))
             {
                 BinaryFormatter bf = new BinaryFormatter();
                 bf.Serialize(fs, obj);
@@ -166,8 +168,8 @@ namespace ProjectBase.Date
 
         public static T LoadByBinary<T>(string fileName) where T : class
         {
-            if (!File.Exists(Application.streamingAssetsPath + "/fileName")) return default;
-            using (FileStream fs =new FileStream(Application.streamingAssetsPath+"/fileName", FileMode.Open, FileAccess.Read))
+            if (!File.Exists(applicationPath + "/fileName")) return default;
+            using (FileStream fs =new FileStream(applicationPath+"/fileName", FileMode.Open, FileAccess.Read))
             {
                 BinaryFormatter bf = new BinaryFormatter();
                 T res = bf.Deserialize(fs) as T;
@@ -178,7 +180,7 @@ namespace ProjectBase.Date
 
         public static void DeleteBinaryData(string fileName)
         {
-            File.Delete(Application.streamingAssetsPath+"/fileName");
+            File.Delete(applicationPath+"/fileName");
         }
 
         

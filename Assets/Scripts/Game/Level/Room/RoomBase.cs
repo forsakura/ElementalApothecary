@@ -1,18 +1,18 @@
-using System.Collections.Generic;
-using Game.Level.Room.Data;
-using Game.Level.TranslatePoints.View;
+using Game.Level.Room.RoomData;
+using Game.Level.Room.Teleport;
+using Game.Level.Room.Teleport.Data;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Game.Level.Room
 {
-    public class RoomBase : MonoBehaviour
+    public abstract class RoomBase : MonoBehaviour
     {
+        public string fileName;
         public RoomDataBase data;
 
-        //传送点坐标集合
-        public List<Transform> TeleportPositions = new List<Transform>();
-        
+        public abstract void LoadData();
+
+        public abstract void SaveData();
         
         /// <summary>
         /// 设置物品父节点和位置
@@ -20,9 +20,9 @@ namespace Game.Level.Room
         /// <param name="gb">物品对象</param>
         /// <param name="tr">对象坐标</param>
         /// <param name="parentTransform">对象父节点</param>
-        protected void SetGameObject(GameObject gb, Transform  tr, Transform parentTransform)
+        protected void SetGameObject(GameObject gb, Vector3 tr, Transform parentTransform)
         {
-            gb.transform.position = tr.position;
+            gb.transform.position = tr;
             gb.transform.SetParent(parentTransform);
         }
 
@@ -35,16 +35,15 @@ namespace Game.Level.Room
             switch (gb.tag)
             {
                 case "Common" :
-                    gb.AddComponent<CommonTransformPointView>();
+                    gb.AddComponent<CommonTeleportView>();
                     break;
                 case "Special" :
-                    gb.AddComponent<SpecialTransformPointView>();
+                    gb.AddComponent<SpecialTeleportView>();
                     break;
                 case "Fight" :
-                    gb.AddComponent<FightTransformPointView>();
+                    gb.AddComponent<FightTeleportView>();
                     break;
             }
         }
-
     }
 }
