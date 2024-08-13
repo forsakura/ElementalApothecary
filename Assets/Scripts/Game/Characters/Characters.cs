@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class Characters : MonoBehaviour
 {
     public CharacterData characterData;
-    public ECharacterType characterType = ECharacterType.Player;
+    public ECharacterType characterType;
     public int CurrentHealth;
     public float CurrentSpeed;
     public GameObject bulletPrefab;
@@ -14,11 +15,21 @@ public class Characters : MonoBehaviour
     public int[] ElementContain = new int[2] { 0, 0 };
     public EElement[] ElementName = new EElement[2];
 
+    private float invincibleTimer;
+
     public bool isInvincible;
     public bool isDead = false;
 
     private void Awake()
     {
+        if (GetComponent<PlayerController>()  != null)
+        {
+            characterType = ECharacterType.Player;
+        }
+        else
+        {
+            characterType = ECharacterType.Enemy;
+        }
         CurrentHealth = characterData.MaxHealth;
         CurrentSpeed = characterData.MoveSpeed;
         ElementContain = new int[2] { 0, 0 };
@@ -27,43 +38,33 @@ public class Characters : MonoBehaviour
         isInvincible = false;
     }
 
-    private void OnTriggerEnter2D(Collider2D collider)
-    {
-        GameObject go = collider.gameObject;
-        Debug.Log(go.name);
-        if (go.tag == "Bullet" && go.GetComponent<BulletControl>().hitInstance.Source != gameObject)
-        {
-            GetHit(go.GetComponent<BulletControl>().hitInstance);
-            Destroy(go);
-        }
-        if (characterType == ECharacterType.Player && go.tag == "Enemy")
-        {
-
-        }
-    }
-
-    public virtual void GetHit(HitInstance hit)
+    public virtual bool GetHit(HitInstance hit)
     {
         if (hit == null)
         {
-            return;
+            return false;
         }
         if(!hit.IgnoreInvincible && isInvincible)
         {
-            return;
+            return false;
         }
-        // PlayerActions.BeforeGetHit.Invoke(hit);
+        CharacterActions.BeforeGetHit.Invoke(gameObject, hit);
         int elemDmg = CalculateElementDamage(hit);
         CurrentHealth -= hit.Damage + elemDmg;
-        Debug.Log("Received hit from " + hit.Source.name + ", damage is: " + hit.Damage);
         if (CurrentHealth <= 0)
         {
             isDead = true;
-            Debug.Log(gameObject.name + " is dead.");
+            CharacterActions.OnCharacterDeath.Invoke(gameObject, hit);
         }
-        // PlayerActions.AfterGetHit.Invoke(hit);
-    }
 
+        isInvincible = true;
+        invincibleTimer = characterData.InvincibleTime;
+        StartCoroutine(InvincibleCountDown());
+
+        CharacterActions.AfterGetHit.Invoke(gameObject, hit);
+        return true;
+    }
+    
     protected virtual int CalculateElementDamage(HitInstance hit)
     {
         int dmg = 0;
@@ -114,6 +115,7 @@ public class Characters : MonoBehaviour
         GameObject bul = Instantiate(bulletPrefab, transform.position, new Quaternion());
         HitInstance hit = new();
         hit.Source = gameObject;
+        hit.Damage = characterData.Damage;
         bul.GetComponent<BulletControl>().SetBullet(target, hit, BulletType.Shoot);
     }
 
@@ -122,6 +124,17 @@ public class Characters : MonoBehaviour
         GameObject bul = Instantiate(bulletPrefab, transform.position, new Quaternion());
         HitInstance hit = new();
         hit.Source = gameObject;
+        hit.Damage = characterData.Damage;
         bul.GetComponent<BulletControl>().SetBullet(target, hit, BulletType.Throw);
+    }
+
+    private IEnumerator InvincibleCountDown()
+    {
+        while(invincibleTimer > 0)
+        {
+            invincibleTimer -= Time.deltaTime;
+            yield return null;
+        }
+        isInvincible = false;
     }
 }

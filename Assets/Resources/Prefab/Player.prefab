@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 8856804756395645599}
   - component: {fileID: 2719344920713117594}
   - component: {fileID: 218681525000273004}
+  - component: {fileID: 3861195680237763118}
   - component: {fileID: 8433630079253054987}
   - component: {fileID: 8389287807079963058}
-  - component: {fileID: 5514619948280236005}
   - component: {fileID: 80374294766226342}
   - component: {fileID: 4180930107975332994}
   m_Layer: 0
@@ -117,7 +117,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &8433630079253054987
+--- !u!114 &3861195680237763118
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -126,46 +126,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 874153456973347893}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aac95e187f2ef09449baec4a3923eed7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cv: {fileID: 0}
-  currentAttackState: 0
-  rb: {fileID: 0}
-  anims: {fileID: 0}
-  characters: {fileID: 0}
-  mousePos: {x: 0, y: 0}
-  mouseWorldPos: {x: 0, y: 0}
-  playerDirection: {x: 0, y: 0}
---- !u!114 &8389287807079963058
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 874153456973347893}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b0700d95a2bfde4fa980d77a8d0f6be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerController: {fileID: 0}
-  anim: {fileID: 0}
-  direction: 0
---- !u!114 &5514619948280236005
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 874153456973347893}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fcf14b9d44100946bbaf1a6051d5a8b, type: 3}
+  m_Script: {fileID: 11500000, guid: 351e06da81d35764fbbce50e1be71fca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   characterData:
-    Name: gugugu
+    Name: gugugug
     ID: 0
     MaxHealth: 500
     MaxAer: 0
@@ -185,6 +150,42 @@ MonoBehaviour:
   ElementName: 0000000000000000
   isInvincible: 0
   isDead: 0
+  PlayerArm: {fileID: 0}
+--- !u!114 &8433630079253054987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 874153456973347893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aac95e187f2ef09449baec4a3923eed7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cv: {fileID: 0}
+  currentAttackState: 0
+  rb: {fileID: 0}
+  anims: {fileID: 0}
+  player: {fileID: 0}
+  mousePos: {x: 0, y: 0}
+  mouseWorldPos: {x: 0, y: 0}
+  playerDirection: {x: 0, y: 0}
+--- !u!114 &8389287807079963058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 874153456973347893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b0700d95a2bfde4fa980d77a8d0f6be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerController: {fileID: 0}
+  anim: {fileID: 0}
+  direction: 0
 --- !u!95 &80374294766226342
 Animator:
   serializedVersion: 5
