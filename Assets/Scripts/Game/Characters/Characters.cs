@@ -10,6 +10,8 @@ public class Characters : MonoBehaviour
     public ECharacterType characterType;
     public int CurrentHealth;
     public float CurrentSpeed;
+
+    public int remainingBullet;
     public GameObject bulletPrefab;
     // [Ë®/»ð, ·ç/ÍÁ]
     public int[] ElementContain = new int[2] { 0, 0 };

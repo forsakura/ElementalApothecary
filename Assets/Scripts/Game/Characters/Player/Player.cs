@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,27 +14,35 @@ public class Player : Characters
 {
     public GameObject PlayerArm;
 
+    // 当前会交互的物体
     private PlayerInteraction interactableObject;
+    private List<PlayerInteraction> interactableObjects;
 
-    // 此处逻辑为进入一个，可交互变为当前，后若离开前进入另一个，则会覆盖原来的，变为新的
-    // 此时若离开原来的，因为原来的与现在的可交互物不同，所以此时不会清除可交互内容
+    private void Start()
+    {
+        interactableObjects = new List<PlayerInteraction>();
+    }
+
+    // 使用List存储交互物体，后进入的在List最后，离开某个时将其移除，若为最后一个，则显示移出后倒数第一个的交互提示
     private void OnTriggerEnter2D(Collider2D collision)
     {
         PlayerInteraction interactObject = collision.gameObject.GetComponent<PlayerInteraction>();
-        if (interactObject != null)
+        if (interactObject == null)
         {
-            //防止添加多个
-            if (interactableObject != null)
-            {
-                interactableObject.HideInteractTip();
-            }
-            else
-            {
-                PlayerInputManager.Instance.GamePlay.Interact.started += Interact;
-            }
-            interactableObject = interactObject;
-            interactableObject.ShowInteractTip();
+            return;
         }
+        if (interactableObjects.Count != 0)
+        {
+            // 隐藏当前
+            interactableObject.HideInteractTip();
+        }
+        else
+        {
+            PlayerInputManager.Instance.GamePlay.Interact.started += Interact;
+        }
+        interactableObject = interactObject;
+        interactableObjects.Add(interactableObject);
+        interactableObject.ShowInteractTip();
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -43,13 +52,20 @@ public class Player : Characters
         {
             return;
         }
-        if (interactObject == interactableObject)
+        // 离开可交互物体触发器范围
+        interactObject.HideInteractTip();
+        interactableObjects.Remove(interactObject);
+        if (interactableObjects.Count == 0)
         {
             PlayerInputManager.Instance.GamePlay.Interact.started -= Interact;
-            interactableObject.HideInteractTip();
             this.interactableObject = null;
         }
-    }
+        else
+        {
+            interactableObject = interactableObjects.Last();
+            interactableObject.ShowInteractTip();
+        }
+}
 
     private void Interact(InputAction.CallbackContext context)
     {
@@ -60,6 +76,11 @@ public class Player : Characters
     }
 
     public void Drink()
+    {
+
+    }
+
+    public void Fill()
     {
 
     }
