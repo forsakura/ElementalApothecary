@@ -36,7 +36,7 @@ public class PlayerControll : MonoBehaviour
         character = GetComponent<Character>();
         playerAnimation = GetComponent<PlayerAnimation>();
 
-        inputAction.GamePlay.Fire.started += OnFire;
+        inputAction.GamePlay.Shoot.started += OnFire;
         inputAction.GamePlay.Shift.started += OnShift;
         inputAction.GamePlay.Fill.started += OnFill;
         

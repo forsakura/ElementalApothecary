@@ -10,14 +10,14 @@ using UnityEngine.Scripting.APIUpdating;
 public class PlayerController : MonoBehaviour
 {
     public CinemachineVirtualCamera cv;
-    public PlayerInputActions inputActions;
+    // public PlayerInputActions inputActions;
     public EPlayerAttackState currentAttackState;
     [HideInInspector]
     public Rigidbody2D rb;
     [HideInInspector]
     public PlayerAnimations anims;
     [HideInInspector]
-    public Characters characters;
+    public Player player;
     //[HideInInspector]
     public Vector2 mousePos;
     //[HideInInspector]
@@ -29,18 +29,8 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anims = GetComponent<PlayerAnimations>();
-        characters = GetComponent<Characters>();
+        player = GetComponent<Player>();
         InitInputActions();
-    }
-
-    private void OnEnable()
-    {
-        inputActions.Enable();
-    }
-
-    private void OnDisable()
-    {
-        inputActions.Disable();
     }
 
     private void Update()
@@ -51,9 +41,9 @@ public class PlayerController : MonoBehaviour
 
     private void InitInputActions()
     {
-        inputActions = new PlayerInputActions();
-        inputActions.GamePlay.Shift.started += OnShift;
-        inputActions.GamePlay.Fire.started += Shoot;
+        PlayerInputManager.Instance.GamePlay.Shift.started += OnShift;
+        PlayerInputManager.Instance.GamePlay.Shoot.started += Shoot;
+        PlayerInputManager.Instance.GamePlay.Drink.started += Drink;
         currentAttackState = EPlayerAttackState.Shooting;
     }
 
@@ -67,23 +57,23 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerMove()
     {
-        playerDirection = inputActions.GamePlay.Move.ReadValue<Vector2>();
-        rb.velocity = playerDirection * 5.0f;
+        playerDirection = PlayerInputManager.Instance.GamePlay.Move.ReadValue<Vector2>();
+        rb.velocity = playerDirection * player.characterData.MoveSpeed;
     }
 
     private void OnShift(InputAction.CallbackContext context)
     {
-        // PlayerActions.SwitchWeapon.Invoke();
+        CharacterActions.SwitchWeapon.Invoke();
         switch (currentAttackState)
         {
             case EPlayerAttackState.Throwing:
-                inputActions.GamePlay.Fire.started -= Throw;
-                inputActions.GamePlay.Fire.started += Shoot;
+                PlayerInputManager.Instance.GamePlay.Shoot.started -= Throw;
+                PlayerInputManager.Instance.GamePlay.Shoot.started += Shoot;
                 currentAttackState = EPlayerAttackState.Shooting;
                 break;
             case EPlayerAttackState.Shooting:
-                inputActions.GamePlay.Fire.started -= Shoot;
-                inputActions.GamePlay.Fire.started += Throw;
+                PlayerInputManager.Instance.GamePlay.Shoot.started -= Shoot;
+                PlayerInputManager.Instance.GamePlay.Shoot.started += Throw;
                 currentAttackState = EPlayerAttackState.Throwing;
                 break;
             case EPlayerAttackState.Drinking:
@@ -93,13 +83,19 @@ public class PlayerController : MonoBehaviour
 
     private void Shoot(InputAction.CallbackContext context)
     {
-        // PlayerActions.OnShoot.Invoke();
-        characters.Shoot(mouseWorldPos);
+        CharacterActions.OnShoot.Invoke();
+        player.Shoot(mouseWorldPos);
     }
 
     private void Throw(InputAction.CallbackContext context)
     {
-        // PlayerActions.OnThrow.Invoke();
-        characters.Throw(mouseWorldPos);
+        CharacterActions.OnThrow.Invoke();
+        player.Throw(mouseWorldPos);
+    }
+
+    private void Drink(InputAction.CallbackContext context)
+    {
+        CharacterActions.OnDrink.Invoke();
+        player.Drink();
     }
 }

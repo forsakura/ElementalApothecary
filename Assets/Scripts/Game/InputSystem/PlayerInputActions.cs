@@ -37,16 +37,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Look"",
-                    ""type"": ""Value"",
-                    ""id"": ""774b7232-fbe4-4720-b0d1-70b07d388c2a"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Fire"",
+                    ""name"": ""Shoot"",
                     ""type"": ""Button"",
                     ""id"": ""e31359e9-078c-4198-ae18-ab3c11a33aa2"",
                     ""expectedControlType"": ""Button"",
@@ -73,6 +64,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Drink"",
+                    ""type"": ""Button"",
+                    ""id"": ""420101eb-d8e1-400e-bd55-a14bf83ef83c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""373fb3cd-27dd-411c-aaa8-dda7348e0bf3"",
@@ -83,17 +83,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""5f29acff-09de-47c7-8aca-d1f0edf6b967"",
-                    ""path"": ""<Gamepad>/leftStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Gamepad"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": ""WASD"",
                     ""id"": ""3e9ee5dd-1771-4eb5-929e-a32bd6ce0ba6"",
@@ -195,111 +184,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""c4cc8a9e-94cc-420d-b590-0cecc0b1dc18"",
-                    ""path"": ""<XRController>/{Primary2DAxis}"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""XR"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""05b71aec-6f86-4397-aca0-230d429b732c"",
-                    ""path"": ""<Joystick>/stick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Joystick"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""fbe4face-df3a-488c-b083-ebaf92f2c9b2"",
-                    ""path"": ""<Gamepad>/rightStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Gamepad"",
-                    ""action"": ""Look"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""8328de17-3118-452b-94c5-e95618010111"",
-                    ""path"": ""<Pointer>/delta"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse;Touch"",
-                    ""action"": ""Look"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""6adb86a9-56cb-45c8-bb60-9d8544ba63d6"",
-                    ""path"": ""<Joystick>/{Hatswitch}"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Joystick"",
-                    ""action"": ""Look"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""ca2c4a1c-31ec-41fc-a055-e5c21f2125d1"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Gamepad"",
-                    ""action"": ""Fire"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""b2340348-149e-4049-a581-1f1a98ed48a2"",
-                    ""path"": ""<Mouse>/rightButton"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Fire"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""47033050-da47-49c3-ac22-2630562ec11f"",
-                    ""path"": ""<Touchscreen>/primaryTouch/tap"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Touch"",
-                    ""action"": ""Fire"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""8608283a-1b39-466f-8851-f7fe358f220c"",
-                    ""path"": ""<Joystick>/trigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Joystick"",
-                    ""action"": ""Fire"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""3edf6356-0059-455b-a2bd-5eaee297eaf8"",
-                    ""path"": ""<XRController>/{PrimaryAction}"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""XR"",
-                    ""action"": ""Fire"",
+                    ""action"": ""Shoot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -335,6 +225,85 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""198173fe-6515-476c-a9db-82cad45cc691"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Drink"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""FIghtUI"",
+            ""id"": ""a3e51591-c0c9-4bd0-83d3-d63537d76238"",
+            ""actions"": [
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""1107b335-996a-46d1-a67e-2fda385dd591"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""33601ed0-1cda-425b-809c-aa9cb67b9de4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""37f64ee3-07cb-47af-b158-f31436d5a81c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""22fb86db-885a-42f9-b6f6-a81840b1f09b"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a01c10a9-18b9-4a1c-877f-926f6cf392a0"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""aba5077c-4f84-4187-b135-28421d3c0734"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -344,11 +313,16 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         // GamePlay
         m_GamePlay = asset.FindActionMap("GamePlay", throwIfNotFound: true);
         m_GamePlay_Move = m_GamePlay.FindAction("Move", throwIfNotFound: true);
-        m_GamePlay_Look = m_GamePlay.FindAction("Look", throwIfNotFound: true);
-        m_GamePlay_Fire = m_GamePlay.FindAction("Fire", throwIfNotFound: true);
+        m_GamePlay_Shoot = m_GamePlay.FindAction("Shoot", throwIfNotFound: true);
         m_GamePlay_Shift = m_GamePlay.FindAction("Shift", throwIfNotFound: true);
         m_GamePlay_Fill = m_GamePlay.FindAction("Fill", throwIfNotFound: true);
+        m_GamePlay_Drink = m_GamePlay.FindAction("Drink", throwIfNotFound: true);
         m_GamePlay_Interact = m_GamePlay.FindAction("Interact", throwIfNotFound: true);
+        // FIghtUI
+        m_FIghtUI = asset.FindActionMap("FIghtUI", throwIfNotFound: true);
+        m_FIghtUI_Pause = m_FIghtUI.FindAction("Pause", throwIfNotFound: true);
+        m_FIghtUI_SwitchLeft = m_FIghtUI.FindAction("SwitchLeft", throwIfNotFound: true);
+        m_FIghtUI_SwitchRight = m_FIghtUI.FindAction("SwitchRight", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -411,20 +385,20 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_GamePlay;
     private List<IGamePlayActions> m_GamePlayActionsCallbackInterfaces = new List<IGamePlayActions>();
     private readonly InputAction m_GamePlay_Move;
-    private readonly InputAction m_GamePlay_Look;
-    private readonly InputAction m_GamePlay_Fire;
+    private readonly InputAction m_GamePlay_Shoot;
     private readonly InputAction m_GamePlay_Shift;
     private readonly InputAction m_GamePlay_Fill;
+    private readonly InputAction m_GamePlay_Drink;
     private readonly InputAction m_GamePlay_Interact;
     public struct GamePlayActions
     {
         private @PlayerInputActions m_Wrapper;
         public GamePlayActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_GamePlay_Move;
-        public InputAction @Look => m_Wrapper.m_GamePlay_Look;
-        public InputAction @Fire => m_Wrapper.m_GamePlay_Fire;
+        public InputAction @Shoot => m_Wrapper.m_GamePlay_Shoot;
         public InputAction @Shift => m_Wrapper.m_GamePlay_Shift;
         public InputAction @Fill => m_Wrapper.m_GamePlay_Fill;
+        public InputAction @Drink => m_Wrapper.m_GamePlay_Drink;
         public InputAction @Interact => m_Wrapper.m_GamePlay_Interact;
         public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
         public void Enable() { Get().Enable(); }
@@ -438,18 +412,18 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
-            @Look.started += instance.OnLook;
-            @Look.performed += instance.OnLook;
-            @Look.canceled += instance.OnLook;
-            @Fire.started += instance.OnFire;
-            @Fire.performed += instance.OnFire;
-            @Fire.canceled += instance.OnFire;
+            @Shoot.started += instance.OnShoot;
+            @Shoot.performed += instance.OnShoot;
+            @Shoot.canceled += instance.OnShoot;
             @Shift.started += instance.OnShift;
             @Shift.performed += instance.OnShift;
             @Shift.canceled += instance.OnShift;
             @Fill.started += instance.OnFill;
             @Fill.performed += instance.OnFill;
             @Fill.canceled += instance.OnFill;
+            @Drink.started += instance.OnDrink;
+            @Drink.performed += instance.OnDrink;
+            @Drink.canceled += instance.OnDrink;
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
@@ -460,18 +434,18 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
-            @Look.started -= instance.OnLook;
-            @Look.performed -= instance.OnLook;
-            @Look.canceled -= instance.OnLook;
-            @Fire.started -= instance.OnFire;
-            @Fire.performed -= instance.OnFire;
-            @Fire.canceled -= instance.OnFire;
+            @Shoot.started -= instance.OnShoot;
+            @Shoot.performed -= instance.OnShoot;
+            @Shoot.canceled -= instance.OnShoot;
             @Shift.started -= instance.OnShift;
             @Shift.performed -= instance.OnShift;
             @Shift.canceled -= instance.OnShift;
             @Fill.started -= instance.OnFill;
             @Fill.performed -= instance.OnFill;
             @Fill.canceled -= instance.OnFill;
+            @Drink.started -= instance.OnDrink;
+            @Drink.performed -= instance.OnDrink;
+            @Drink.canceled -= instance.OnDrink;
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
@@ -492,13 +466,81 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         }
     }
     public GamePlayActions @GamePlay => new GamePlayActions(this);
+
+    // FIghtUI
+    private readonly InputActionMap m_FIghtUI;
+    private List<IFIghtUIActions> m_FIghtUIActionsCallbackInterfaces = new List<IFIghtUIActions>();
+    private readonly InputAction m_FIghtUI_Pause;
+    private readonly InputAction m_FIghtUI_SwitchLeft;
+    private readonly InputAction m_FIghtUI_SwitchRight;
+    public struct FIghtUIActions
+    {
+        private @PlayerInputActions m_Wrapper;
+        public FIghtUIActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Pause => m_Wrapper.m_FIghtUI_Pause;
+        public InputAction @SwitchLeft => m_Wrapper.m_FIghtUI_SwitchLeft;
+        public InputAction @SwitchRight => m_Wrapper.m_FIghtUI_SwitchRight;
+        public InputActionMap Get() { return m_Wrapper.m_FIghtUI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(FIghtUIActions set) { return set.Get(); }
+        public void AddCallbacks(IFIghtUIActions instance)
+        {
+            if (instance == null || m_Wrapper.m_FIghtUIActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_FIghtUIActionsCallbackInterfaces.Add(instance);
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
+            @SwitchLeft.started += instance.OnSwitchLeft;
+            @SwitchLeft.performed += instance.OnSwitchLeft;
+            @SwitchLeft.canceled += instance.OnSwitchLeft;
+            @SwitchRight.started += instance.OnSwitchRight;
+            @SwitchRight.performed += instance.OnSwitchRight;
+            @SwitchRight.canceled += instance.OnSwitchRight;
+        }
+
+        private void UnregisterCallbacks(IFIghtUIActions instance)
+        {
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
+            @SwitchLeft.started -= instance.OnSwitchLeft;
+            @SwitchLeft.performed -= instance.OnSwitchLeft;
+            @SwitchLeft.canceled -= instance.OnSwitchLeft;
+            @SwitchRight.started -= instance.OnSwitchRight;
+            @SwitchRight.performed -= instance.OnSwitchRight;
+            @SwitchRight.canceled -= instance.OnSwitchRight;
+        }
+
+        public void RemoveCallbacks(IFIghtUIActions instance)
+        {
+            if (m_Wrapper.m_FIghtUIActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IFIghtUIActions instance)
+        {
+            foreach (var item in m_Wrapper.m_FIghtUIActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_FIghtUIActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public FIghtUIActions @FIghtUI => new FIghtUIActions(this);
     public interface IGamePlayActions
     {
         void OnMove(InputAction.CallbackContext context);
-        void OnLook(InputAction.CallbackContext context);
-        void OnFire(InputAction.CallbackContext context);
+        void OnShoot(InputAction.CallbackContext context);
         void OnShift(InputAction.CallbackContext context);
         void OnFill(InputAction.CallbackContext context);
+        void OnDrink(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+    }
+    public interface IFIghtUIActions
+    {
+        void OnPause(InputAction.CallbackContext context);
+        void OnSwitchLeft(InputAction.CallbackContext context);
+        void OnSwitchRight(InputAction.CallbackContext context);
     }
 }
