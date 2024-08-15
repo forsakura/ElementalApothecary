@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.U2D.Aseprite;
-using UnityEngine;
+using ProjectBase.UI;
 using UnityEngine.UI;
 
-public class DistillerPanel : BasePanel<DistillerPanel>
+public class DistillerPanel : BasePanel
 {
     public Button foreverEffect;
     public Button sureBtn;
@@ -12,19 +9,36 @@ public class DistillerPanel : BasePanel<DistillerPanel>
     public SlotUI input1;
     public SlotUI input2;
     public SlotUI output;
-    public override void Init()
+
+    protected override void Awake()
     {
-        foreverEffect.onClick.AddListener(() =>
+        base.Awake();
+        GetControl<Button>("ForeverEffect").onClick.AddListener(() =>
         {
-            ForeverEffectTable.Instance.ShowMe();
-            HideMe();
+            UIManager.Instance.ShowPanel<DistillerPanel>("ForeverEffectPanel", E_UI_Layer.top);
         });
-        sureBtn.onClick.AddListener(() =>
+        GetControl<Button>("SureBtn").onClick.AddListener(() =>
         {
-            //Distillering();
+            
         });
-        HideMe();
+        GetControl<InputField>("AllBtn").onSubmit.AddListener((num) =>
+        {
+            
+        });
     }
+    //public override void Init()
+    //{
+    //    foreverEffect.onClick.AddListener(() =>
+    //    {
+    //        ForeverEffectTable.Instance.ShowMe();
+    //        HideMe();
+    //    });
+    //    sureBtn.onClick.AddListener(() =>
+    //    {
+    //        //Distillering();
+    //    });
+    //    HideMe();
+    //}
     private void Update()
     {
         if (input1.itemAmount > 0 && input2.itemAmount > 0)
