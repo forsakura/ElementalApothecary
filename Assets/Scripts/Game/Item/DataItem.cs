@@ -7,6 +7,7 @@ using UnityEngine;
 /// </summary>
 public class DataItem : TrItem, IDataItem
 {
+    public int useTimes { get; set; }
     public int itemUseRadius { get; set; }
     public string itemDescription { get; set; }
     // public Sprite itemIcon { get; set; } // 如果需要，可以取消注释  
