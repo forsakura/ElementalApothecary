@@ -9,14 +9,8 @@ public class ShowToolUI : PlayerInteraction
 {
     public GameObject UIPannel;
 
-    private void Update()
+    public override void Interact()
     {
-        if (canOpenUI)
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                UIPannel.SetActive(!UIPannel.activeSelf);
-            }
-        }
+        UIPannel.SetActive(!UIPannel.activeSelf);
     }
 }

@@ -46,6 +46,21 @@ public class BulletControl : MonoBehaviour
         timer += Time.deltaTime;
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (bulletType == BulletType.Throw)
+        {
+            return;
+        }
+        if (collision.gameObject != hitInstance.Source && (collision.tag.Equals("Player") || collision.tag.Equals("Enemy")))
+        {
+            if (collision.gameObject.GetComponent<Characters>().GetHit(hitInstance))
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
+
     public void SetBullet(Vector2 target, HitInstance hit, BulletType type)
     {
         this.target = target;

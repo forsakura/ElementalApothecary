@@ -1,0 +1,5 @@
+{
+	"tipPanelName": "TeleportTipPanel",
+	"destinationPointName":"CommonTeleportEnter(Clone)",
+	"type":2
+}

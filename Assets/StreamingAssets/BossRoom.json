@@ -1,0 +1,5 @@
+{
+	"bossPrefabPath":"Prefab/Enemies/Enemy1",
+	"fileName":"BossRoom",
+	"transformPointsPath":["Prefab/Teleports/FightTeleportEnter","Prefab/Teleports/FightTeleportExit"]
+}

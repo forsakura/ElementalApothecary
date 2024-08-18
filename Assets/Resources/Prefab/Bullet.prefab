@@ -161,3 +161,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02274b9304f55bf449ccf2aea5522368, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitInstance:
+    Source: {fileID: 0}
+    Damage: 0
+    ElementContain: 0000000000000000
+    ElementName: 0000000000000000
+    IgnoreInvincible: 0

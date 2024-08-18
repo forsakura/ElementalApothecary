@@ -6,23 +6,19 @@ using UnityEngine;
 /// </summary>
 public abstract class PlayerInteraction : MonoBehaviour
 {
-    public GameObject signUI;//交互标志
-    public bool canOpenUI => signUI.activeSelf;
+    public GameObject InteractTip;//交互标志
 
-    protected virtual void OnTriggerEnter2D(Collider2D collision)
+    private GameObject tip;
+
+    public void ShowInteractTip()
     {
-        if (collision.tag == "Player")
-        {
-            signUI.SetActive(true);
-        }
+        tip = Instantiate(InteractTip, new Vector3(transform.position.x, transform.position.y + 1.0f * transform.localScale.y), new Quaternion(), transform);
+    }
+    public void HideInteractTip()
+    {
+        Destroy(tip);
     }
 
-    protected virtual void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.tag == "Player")
-        {
-            signUI.SetActive(false);
-        }
-    }
+    public abstract void Interact();
 
 }
