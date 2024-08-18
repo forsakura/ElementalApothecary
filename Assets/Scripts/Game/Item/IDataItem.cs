@@ -11,6 +11,7 @@ public interface IDataItem:ITrItem
     List<TrItem.ItemTag> tags { get; set; }
     Vector2 currentElementCount { get; set; }
     EElement[] BaseElement { get; set; }
+    int useTimes { get; set; }
 
     void initByTemplet();
     void applyATTR();
