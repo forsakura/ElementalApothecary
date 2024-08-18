@@ -57,6 +57,7 @@ public class BoxPannel : BasePanel
     /// <param name="itemType"></param>
     public void ShowSlot(ItemType itemType)
     {
+        
         foreach(SlotUI slot in inventoryUI.boxSlots)
         {
             if (slot.itemDetails != null)

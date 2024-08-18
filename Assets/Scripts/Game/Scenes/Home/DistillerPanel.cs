@@ -3,9 +3,9 @@ using UnityEngine.UI;
 
 public class DistillerPanel : BasePanel
 {
-    public Button foreverEffect;
-    public Button sureBtn;
-    public InputField potionNum;
+    //public Button foreverEffect;
+    //public Button sureBtn;
+    //public InputField potionNum;
     public SlotUI input1;
     public SlotUI input2;
     public SlotUI output;
@@ -18,10 +18,6 @@ public class DistillerPanel : BasePanel
             UIManager.Instance.ShowPanel<DistillerPanel>("ForeverEffectPanel", E_UI_Layer.top);
         });
         GetControl<Button>("SureBtn").onClick.AddListener(() =>
-        {
-            
-        });
-        GetControl<InputField>("AllBtn").onSubmit.AddListener((num) =>
         {
             
         });
