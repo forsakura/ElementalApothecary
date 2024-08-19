@@ -39,8 +39,8 @@ public class InventoryManager : Utilities.Singleton<InventoryManager>
     {
         ReadTable();
         EventHandler.CallUpdateInventoryUI(InventoryLocation.Box, boxBag.itemList);
-        EventHandler.CallUpdateInventoryUI(InventoryLocation.Pot, potBag.itemList);
-        EventHandler.CallUpdateInventoryUI(InventoryLocation.Distiller, distillerBag.itemList);
+        //EventHandler.CallUpdateInventoryUI(InventoryLocation.Pot, potBag.itemList);
+        //EventHandler.CallUpdateInventoryUI(InventoryLocation.Distiller, distillerBag.itemList);
         //DontDestroyOnLoad(this);
     }
 

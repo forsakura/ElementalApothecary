@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 18806402228901939}
   - component: {fileID: 2985517235107881612}
   - component: {fileID: 7728156291268586151}
+  - component: {fileID: 6880146393292462157}
+  - component: {fileID: 5412974786138830597}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -105,6 +107,58 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &6880146393292462157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165687509119606228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2b7f7d59157ce547832c9d096836d10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemToolTip: {fileID: 0}
+  itemList: {fileID: 11400000, guid: a0b392f1cbb7eb94295e4fd503b3c7d6, type: 2}
+  dragItem: {fileID: 0}
+  content: {fileID: 0}
+  baseBag: {fileID: 0}
+  boxSlots: []
+  playerBagSlots: []
+  falskSlots: []
+  potSlots: []
+  distllerSlots: []
+  furnaceSlots: []
+--- !u!114 &5412974786138830597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165687509119606228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0951bf40d7fd591409fc3e8bb2ea3e9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDataList_SO: {fileID: 11400000, guid: a0b392f1cbb7eb94295e4fd503b3c7d6, type: 2}
+  materials_SO: {fileID: 0}
+  potions_SO: {fileID: 0}
+  playerBag: {fileID: 0}
+  boxBag: {fileID: 11400000, guid: a147dbbd60311cc4987182fc74b89a0f, type: 2}
+  potBag: {fileID: 0}
+  flaskBag: {fileID: 0}
+  furnaceBag: {fileID: 0}
+  distillerBag: {fileID: 0}
+  InstantEffectSO: {fileID: 0}
+  StatsSO: {fileID: 0}
+  cauldronRecipes_SO: {fileID: 0}
+  potionUseEffectRadius: 0
+  haveFlask: 0
+  haveDistiller: 0
+  haveFurnace: 0
+  havePot: 0
 --- !u!1 &3450484912174400633
 GameObject:
   m_ObjectHideFlags: 0

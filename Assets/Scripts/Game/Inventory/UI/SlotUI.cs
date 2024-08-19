@@ -58,7 +58,7 @@ public class SlotUI : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, ID
     public void UpdateSlot(LegacyItemDetails item, int amount)
     {
         itemDetails = item;
-        slotImage.sprite = item.itemIcon;
+        //slotImage.sprite = item.itemIcon;
         itemAmount = amount;
         amountText.text = amount.ToString();
         slotImage.enabled = true;

@@ -10,6 +10,7 @@ public struct LegacyInventoryItem
 [System.Serializable]
 public class LegacyItemDetails :TrItem
 {
+    public ItemID itemId;
     public string itemName;
     public ItemType itemType;
     

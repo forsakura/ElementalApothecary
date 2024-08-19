@@ -40,7 +40,7 @@ public class TrItem : ITrItem
         QuestItem
     }
 }
-
+[System.Serializable]
 /// <summary>
 /// id数组使得随机组合获得可能
 /// </summary>
