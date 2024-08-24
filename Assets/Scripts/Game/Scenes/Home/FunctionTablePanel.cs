@@ -2,22 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Windows;
+using ProjectBase.UI;
 
-public class FunctionTablePanel : BasePanel<FunctionTablePanel>
+public class FunctionTablePanel : BasePanel
 {
     public Button backBtn;
     public GameObject perFabFunction;
     public Transform content;
     public List<Fouction> fouctionList;
-    public override void Init()
+    protected override void Awake()
     {
         backBtn.onClick.AddListener(() =>
         {
-            HideMe();
-            PotPanel.Instance.ShowMe();
+            UIManager.Instance.HidePanel("FunctionTablePanel");
+            UIManager.Instance.ShowPanel<PotPanel>("PotPanel", E_UI_Layer.top);
         });
-        HideMe();
+        
     }
     public void AddFunction(int id1,int id2)
     {

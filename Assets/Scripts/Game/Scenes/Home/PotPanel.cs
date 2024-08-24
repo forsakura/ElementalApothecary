@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using UnityEngine;
-using UnityEngine.UI;
 
-public class PotPanel : BasePanel<PotPanel>
+using TMPro;
+using UnityEngine.UI;
+using ProjectBase.UI;
+
+public class PotPanel : BasePanel
 {
     public Button sureBtn;
     public Button functionBtn;
@@ -12,19 +11,19 @@ public class PotPanel : BasePanel<PotPanel>
     public SlotUI input1;
     public SlotUI input2;
     public SlotUI output;
-    public override void Init()
+    protected override void Awake()
     {
-        sureBtn.onClick.AddListener(() =>
+        base.Awake();
+        GetControl<Button>("SureBtn").onClick.AddListener(() =>
         {
             Refining();
             //FunctionTablePanel.Instance.AddFunction(input1.itemDetails.itemID, input2.itemDetails.itemID);
         });
-        functionBtn.onClick.AddListener(() =>
+        GetControl<Button>("FunctionBtn").onClick.AddListener(() =>
         {
-            FunctionTablePanel.Instance.ShowMe();
-            HideMe();
+            UIManager.Instance.ShowPanel<FunctionTablePanel>("FunctionTablePanel", E_UI_Layer.top);
+            UIManager.Instance.HidePanel("PotPanel");
         });
-        HideMe();
     }
     private void Update()
     {

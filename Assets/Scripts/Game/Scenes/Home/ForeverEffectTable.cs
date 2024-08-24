@@ -1,18 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
+using ProjectBase.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ForeverEffectTable : BasePanel<ForeverEffectTable>
+public class ForeverEffectTable : BasePanel
 {
-    public Button button;
-    public override void Init()
+    
+    protected override void Awake()
     {
-        button.onClick.AddListener(() =>
+        base.Awake();
+        GetControl<Button>("PotBtn").onClick.AddListener(() =>
         {
-            DistillerPanel.Instance.ShowMe();
-            HideMe();
+            UIManager.Instance.ShowPanel<DistillerPanel>("DistillerPanel", E_UI_Layer.top);
+            UIManager.Instance.HidePanel("ForeverEffectTable");
         });
-        HideMe();
     }
 }
