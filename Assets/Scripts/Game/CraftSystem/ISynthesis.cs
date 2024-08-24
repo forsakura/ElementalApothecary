@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public interface ISynthesis
@@ -11,15 +12,16 @@ public interface ISynthesis
     bool AddStabilizers { get; set; }
     bool isSuccess { get; set; }
     bool isExplosive { get; set; }
- 
+    int MaxMaterialEnum { get; set; }
 
     void addMaterial(int order, IDataItem Item);
     EElement[] CalculateBaseElement(Vector2 ElementCount);
     Vector2 CalculateElement();
-    void checkSecceed();
+    void checkSucceed();
     int GachaATTR(List<int> pool);
     void init();
     void initATTRpool(EElement[] baseElement, Attribute.AttributeType attributeType);
     IDataItem output();
+    Task<IDataItem> OutputAsync();
     void removeMaterial(int order);
 }

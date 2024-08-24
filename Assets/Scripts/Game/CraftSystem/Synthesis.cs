@@ -2,6 +2,7 @@ using ProjectBase.Pool;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using static Attribute;
 
@@ -12,6 +13,8 @@ public class Synthesis : MonoBehaviour, ISynthesis
 
     private Dictionary<int, IDataItem> Materials;
     private IDataItem production;
+
+    public int MaxMaterialEnum { get; set; }
 
     public bool isExplosive { get; set; }
     public bool isExploded { get; set; }
@@ -44,15 +47,27 @@ public class Synthesis : MonoBehaviour, ISynthesis
     public bool AddStabilizers { get; set; } // 还没做相关  
     public bool isSuccess { get; set; }
 
+    /// <summary>
+    /// 顺序从0开始
+    /// </summary>
+    /// <param name="order"></param>
+    /// <param name="Item"></param>
     public void addMaterial(int order, IDataItem Item)
     {
-        try
+        if(order < MaxMaterialEnum)
         {
-            Materials.Add(order, Item);
-        }
-        catch (ArgumentException e)
-        {
+            try
+            {
+                Materials.Add(order, Item);
+            }
+            catch (ArgumentException e)
+            {
             Console.WriteLine("An element with the same key already exists.");
+            }
+        }
+        else
+        {
+            Console.WriteLine($"the Material order {order} overrun the upper limit");
         }
     }
 
@@ -70,7 +85,6 @@ public class Synthesis : MonoBehaviour, ISynthesis
 
     public IDataItem output()
     {
-        init();
         production = new DataItem();
 
         production.currentElementCount = CalculateElement();
@@ -96,7 +110,7 @@ public class Synthesis : MonoBehaviour, ISynthesis
         }
 
 
-        checkSecceed();
+        checkSucceed();
         if (isSuccess)
         {
             production.initByTemplet();
@@ -106,7 +120,46 @@ public class Synthesis : MonoBehaviour, ISynthesis
         return production;
     }
 
-    public void checkSecceed()
+    public async Task<IDataItem> OutputAsync()
+    {
+        production = new DataItem();
+
+        production.currentElementCount = CalculateElement();
+        production.BaseElement = CalculateBaseElement(production.currentElementCount);
+
+        initATTRpool(production.BaseElement, AttributeType.Main);
+        initATTRpool(production.BaseElement, AttributeType.Aux);
+
+        await Task.Run(() =>
+        {
+            for (int i = MainGachaTimes; i > 0; i--)
+            {
+                int MainATTR = GachaATTR(mainATTR);
+                if (MainATTR != -1)
+                    production.AddATTRID(MainATTR);
+            }
+            if (ProbabilityTool.Instance.CheckProbability(AuxGachaProbability))
+            {
+                for (int i = AuxGachaTimes; i > 0; i--)
+                {
+                    int AuxATTR = GachaATTR(auxATTR);
+                    if (AuxATTR != -1)
+                        production.AddATTRID(AuxATTR);
+                }
+            }
+        });
+
+        checkSucceed();
+        if (isSuccess)
+        {
+            production.initByTemplet();
+            production.applyATTR();
+        }
+
+        return production;
+    }
+
+    public void checkSucceed()
     {
         if (production.BaseElement != new EElement[2] { EElement.None, EElement.None } ||
             production.GetATTRID().Count == 0)
@@ -226,6 +279,8 @@ public class Synthesis : MonoBehaviour, ISynthesis
         production = null;
 
         Explosion = 0;
+        isSuccess = false;
+        isExploded = false;
     }
 }
 
