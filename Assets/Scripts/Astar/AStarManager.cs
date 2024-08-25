@@ -112,15 +112,6 @@ namespace AStarPathFinding
 
         public Vector2? GetNext(Vector2Int startPos, Vector2Int endPos)
         {
-            //string filePath = @"C:\Users\QAQ\Desktop\map.txt";
-            //for (int i = 0; i < mapWidth; i++)
-            //{
-            //    for (int j = 0; j < mapHeight; j++)
-            //    {
-            //        File.AppendAllText(filePath, cells[i, j].CostHere + " ");
-            //    }
-            //    File.AppendAllText(filePath, "\r\n");
-            //}
             List<AStarCell> cell = GetPath(startPos, endPos);
             if (cell.Count == 0)
             {
