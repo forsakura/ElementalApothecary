@@ -283,6 +283,50 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8856804756395645599, guid: cce4f77973f1a2249b7c6eaaeab4a762, type: 3}
   m_PrefabInstance: {fileID: 756409787466262899}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &202555530
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 202555532}
+  - component: {fileID: 202555531}
+  m_Layer: 0
+  m_Name: Test
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &202555531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 202555530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 661440961a9398c4f9115f5a21216061, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &202555532
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 202555530}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.46711084, y: -3.6339788, z: -0.1412668}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -803,18 +847,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1308900558}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fcf14b9d44100946bbaf1a6051d5a8b, type: 3}
+  m_Script: {fileID: 11500000, guid: 29add762fc32dab4db11dc31acc94467, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   characterData:
     Name: 
-    ID: 0
-    MaxHealth: 50
+    ID: 1
+    MaxHealth: 45
     MaxAer: 0
     MaxTerra: 0
     MaxIgnis: 0
     MaxAqua: 0
-    Damage: 5
+    Damage: 10
     AttackInterval: 0
     AttackDistance: 0
     MoveSpeed: 0
@@ -822,11 +866,14 @@ MonoBehaviour:
   characterType: 0
   CurrentHealth: 0
   CurrentSpeed: 0
-  bulletPrefab: {fileID: 0}
   ElementContain: 0000000000000000
   ElementName: 0000000000000000
+  remainingBullet: 0
+  bulletPrefab: {fileID: 0}
   isInvincible: 0
   isDead: 0
+  target: {x: 0, y: 0}
+  threshold: 0.5
 --- !u!1 &1512304649
 GameObject:
   m_ObjectHideFlags: 0
@@ -1110,3 +1157,4 @@ SceneRoots:
   - {fileID: 35952244}
   - {fileID: 1512304653}
   - {fileID: 1260753114}
+  - {fileID: 202555532}

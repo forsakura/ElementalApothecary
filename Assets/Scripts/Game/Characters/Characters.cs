@@ -2,20 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
-public class Characters : MonoBehaviour
+public class Characters : MonoBehaviour, IHitable
 {
     public CharacterData characterData;
     public ECharacterType characterType;
     public int CurrentHealth;
     public float CurrentSpeed;
 
-    public int remainingBullet;
-    public GameObject bulletPrefab;
     // [Ë®/»ð, ·ç/ÍÁ]
     public int[] ElementContain = new int[2] { 0, 0 };
     public EElement[] ElementName = new EElement[2];
+
+    public int remainingBullet;
+    public GameObject bulletPrefab;
+
+    public CharacterActions characterActions = new CharacterActions();
 
     private float invincibleTimer;
 
@@ -40,6 +42,16 @@ public class Characters : MonoBehaviour
         isInvincible = false;
     }
 
+    private void OnEnable()
+    {
+        CharacterManager.Instance.Register(this);
+    }
+
+    private void OnDisable()
+    {
+        CharacterManager.Instance.Unregister(this);
+    }
+
     public virtual bool GetHit(HitInstance hit)
     {
         if (hit == null)
@@ -50,20 +62,20 @@ public class Characters : MonoBehaviour
         {
             return false;
         }
-        CharacterActions.BeforeGetHit.Invoke(gameObject, hit);
+        characterActions.BeforeGetHit.Invoke(this, hit);
         int elemDmg = CalculateElementDamage(hit);
         CurrentHealth -= hit.Damage + elemDmg;
         if (CurrentHealth <= 0)
         {
             isDead = true;
-            CharacterActions.OnCharacterDeath.Invoke(gameObject, hit);
+            characterActions.OnCharacterDeath.Invoke(this, hit);
         }
 
         isInvincible = true;
         invincibleTimer = characterData.InvincibleTime;
         StartCoroutine(InvincibleCountDown());
 
-        CharacterActions.AfterGetHit.Invoke(gameObject, hit);
+        characterActions.AfterGetHit.Invoke(this, hit);
         return true;
     }
     

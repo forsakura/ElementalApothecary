@@ -20,6 +20,7 @@ public class Player : Characters
 
     private void Start()
     {
+        bulletPrefab = Resources.Load<GameObject>("Prefab/Bullets/Bullet");
         interactableObjects = new List<PlayerInteraction>();
     }
 

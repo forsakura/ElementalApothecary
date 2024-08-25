@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BulletControl : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class BulletControl : MonoBehaviour
 
     Rigidbody2D rb;
     float timer = 0.0f;
+
+    public delegate void OnBulletHitSomethingHandler(Collider2D collision);
+    public OnBulletHitSomethingHandler OnBulletHitSomething;
 
     private void Start()
     {
@@ -54,11 +58,12 @@ public class BulletControl : MonoBehaviour
         }
         if (collision.gameObject != hitInstance.Source && (collision.tag.Equals("Player") || collision.tag.Equals("Enemy")))
         {
-            if (collision.gameObject.GetComponent<Characters>().GetHit(hitInstance))
+            if (collision.GetComponent<IHitable>().GetHit(hitInstance))
             {
                 Destroy(gameObject);
             }
         }
+        // OnBulletHitSomething(collision);
     }
 
     public void SetBullet(Vector2 target, HitInstance hit, BulletType type)
