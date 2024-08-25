@@ -1,3 +1,4 @@
+using ProjectBase.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,12 +22,12 @@ public class HomeMainPannel : BasePanel<HomeMainPannel>
         });
         flaskBtn.onClick.AddListener(() =>
         {
-            FlaskPannel.Instance.ShowMe();
+            UIManager.Instance.ShowPanel<FlaskPannel>("FlaskPannel", E_UI_Layer.top);
             inventoryUI.OpenBoxUI();
         });
         distillerBtn.onClick.AddListener(() =>
         {
-            DistillerPanel.Instance.ShowMe();
+            //DistillerPanel.Instance.ShowMe();
             inventoryUI.OpenBoxUI();
         });
         inventroyBtn.onClick.AddListener(() =>
@@ -36,7 +37,7 @@ public class HomeMainPannel : BasePanel<HomeMainPannel>
         });
         potBtn.onClick.AddListener(() =>
         {
-            PotPanel.Instance.ShowMe();
+            UIManager.Instance.ShowPanel<PotPanel>("PotPanel", E_UI_Layer.top);
             inventoryUI.OpenBoxUI();
         });
         furnaceBtn.onClick.AddListener(() =>

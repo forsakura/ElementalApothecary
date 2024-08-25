@@ -1,12 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
+using ProjectBase.UI;
 using UnityEngine;
 
-public class FlaskPannel : BasePanel<FlaskPannel>
+public class FlaskPannel : BasePanel
 {
-    public override void Init()
+    protected override void Awake()
     {
-        HideMe();
+        base.Awake();
+
     }
     
 }

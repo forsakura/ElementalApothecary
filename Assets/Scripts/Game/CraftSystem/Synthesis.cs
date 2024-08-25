@@ -1,31 +1,50 @@
+using ProjectBase.Pool;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static Attribute;
 
-public class Synthesis
+public class Synthesis : MonoBehaviour, ISynthesis
 {
     [SerializeField]
-    SOListForCraft SOList;
+    private SOListForCraft SOList;
 
-    Dictionary<int, IDataItem> Materials;
-    IDataItem production;
+    private Dictionary<int, IDataItem> Materials;
+    private IDataItem production;
 
-    float Explosion;
-    public bool isExpolsive;
-    bool isExploded;
+    public bool isExplosive { get; set; }
+    public bool isExploded { get; set; }
+    public float Explosion { get; set; }
 
-    public int MainGachaTimes = 1;//先默认为1
+    private List<int> mainATTR;
+    private List<int> auxATTR;
 
-    public int AuxGachaTimes = 1;//先默认为1
-    public float AuxGachaProbability;
+    private int mainGachaTimes = 1; // 默认值  
+    public int MainGachaTimes
+    {
+        get => mainGachaTimes;
+        set => mainGachaTimes = value;
+    }
 
-    bool AddStabilizers;//还没做相关
+    private int auxGachaTimes = 1; // 默认值  
+    public int AuxGachaTimes
+    {
+        get => auxGachaTimes;
+        set => auxGachaTimes = value;
+    }
 
-    bool isSuccess;
+    private float auxGachaProbability = 100; // 默认值  
+    public float AuxGachaProbability
+    {
+        get => auxGachaProbability;
+        set => auxGachaProbability = value;
+    }
 
-    void addMaterial(int order, IDataItem Item)
+    public bool AddStabilizers { get; set; } // 还没做相关  
+    public bool isSuccess { get; set; }
+
+    public void addMaterial(int order, IDataItem Item)
     {
         try
         {
@@ -37,7 +56,7 @@ public class Synthesis
         }
     }
 
-    void removeMaterial(int order)
+    public void removeMaterial(int order)
     {
         if (Materials.Remove(order))
         {
@@ -49,7 +68,7 @@ public class Synthesis
         }
     }
 
-    IDataItem output()
+    public IDataItem output()
     {
         init();
         production = new DataItem();
@@ -57,17 +76,20 @@ public class Synthesis
         production.currentElementCount = CalculateElement();
         production.BaseElement = CalculateBaseElement(production.currentElementCount);
 
+        initATTRpool(production.BaseElement, AttributeType.Main);
+        initATTRpool(production.BaseElement, AttributeType.Aux);
+
         for (int i = MainGachaTimes; i > 0; i--)
         {
-            int mainATTR = GachaATTR(production.BaseElement,AttributeType.Main);
-            if (mainATTR != -1) 
-                production.AddATTRID(mainATTR);
+            int MainATTR = GachaATTR(mainATTR);
+            if (MainATTR != -1)
+                production.AddATTRID(MainATTR);
         }
-        if (ProbabilityTool.Instance.CheckProbability(AuxGachaProbability)) 
+        if (ProbabilityTool.Instance.CheckProbability(AuxGachaProbability))
         {
-            for(int i = AuxGachaTimes;i > 0;i--)
+            for (int i = AuxGachaTimes; i > 0; i--)
             {
-                int AuxATTR = GachaATTR(production.BaseElement, AttributeType.Aux);
+                int AuxATTR = GachaATTR(auxATTR);
                 if (AuxATTR != -1)
                     production.AddATTRID(AuxATTR);
             }
@@ -84,7 +106,7 @@ public class Synthesis
         return production;
     }
 
-    void checkSecceed()
+    public void checkSecceed()
     {
         if (production.BaseElement != new EElement[2] { EElement.None, EElement.None } ||
             production.GetATTRID().Count == 0)
@@ -106,7 +128,7 @@ public class Synthesis
         }
     }
 
-    Vector2 CalculateElement()
+    public Vector2 CalculateElement()
     {
         Vector2 output = new Vector2();
         foreach (var material in Materials.Values)
@@ -114,31 +136,31 @@ public class Synthesis
             var origin = output;
             output += material.currentElementCount;
 
-            if (Math.Abs(output.x) < Math.Abs(origin.x)) 
+            if (Math.Abs(output.x) < Math.Abs(origin.x))
             {
-                Explosion += (Math.Abs(origin.x) - Math.Abs(output.x))*2;
+                Explosion += (Math.Abs(origin.x) - Math.Abs(output.x)) * 2;
             }
             if (Math.Abs(output.y) < Math.Abs(origin.y))
             {
-                Explosion += (Math.Abs(origin.y) - Math.Abs(output.y))*2;
+                Explosion += (Math.Abs(origin.y) - Math.Abs(output.y)) * 2;
             }
         }
         return output;
     }
 
-    EElement[] CalculateBaseElement(Vector2 ElementCount)
+    public EElement[] CalculateBaseElement(Vector2 ElementCount)
     {
         EElement[] output = new EElement[2] { EElement.None, EElement.None };
-        if (ElementCount.x > 0) 
+        if (ElementCount.x > 0)
         {
             output[0] = EElement.Aer;
         }
-        else if(ElementCount.x < 0)
+        else if (ElementCount.x < 0)
         {
             output[0] = EElement.Terra;
         }
 
-        if(ElementCount.y > 0)
+        if (ElementCount.y > 0)
         {
             output[1] = EElement.Ignis;
         }
@@ -149,12 +171,13 @@ public class Synthesis
         return output;
     }
 
-    int GachaATTR(EElement[] baseElement,AttributeType attributeType)
+    public void initATTRpool(EElement[] baseElement, AttributeType attributeType)
     {
-        List<int> pool = new();
+        mainATTR = new();
+        auxATTR = new();
         foreach (var material in Materials.Values)
         {
-            foreach(var ATTR in material.GetATTRID())
+            foreach (var ATTR in material.GetATTRID())
             {
                 Attribute currentAttribute = SOList.AttributeList.GetAttributeById(ATTR);
                 if (currentAttribute == null)
@@ -162,7 +185,7 @@ public class Synthesis
                     Debug.LogError($"ATTRId {ATTR} is invalid!");
                 }
                 AttributeType type = currentAttribute.Type;
-                if(type != attributeType)
+                if (type != attributeType)
                 {
                     continue;
                 }
@@ -170,18 +193,21 @@ public class Synthesis
                 if (attributeType == AttributeType.Main)
                 {
                     EElement attrElement = currentAttribute.baseElement;
-                    if (attrElement == baseElement[1] || attrElement == baseElement[0]) 
+                    if (attrElement == baseElement[1] || attrElement == baseElement[0])
                     {
-                       pool.Add(ATTR);
+                        mainATTR.Add(ATTR);
                     }
                 }
-                else if(attributeType == AttributeType.Aux)
+                else if (attributeType == AttributeType.Aux)
                 {
-                    pool.Add(ATTR);
+                    auxATTR.Add(ATTR);
                 }
             }
         }
+    }
 
+    public int GachaATTR(List<int> pool)
+    {
         if (pool == null || pool.Count == 0)
         {
             Debug.Log("List is null or empty");
@@ -189,7 +215,9 @@ public class Synthesis
         }
 
         int index = UnityEngine.Random.Range(0, pool.Count);
-        return pool[index];
+        int output = pool[index];
+        pool.Remove(index);
+        return output;
     }
 
     public void init()
