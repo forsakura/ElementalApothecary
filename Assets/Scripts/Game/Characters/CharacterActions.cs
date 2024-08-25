@@ -35,7 +35,7 @@ public static class CharacterActions
         Debug.Log("Drink.");
     };
 
-    // ?????????
+    // ×óÓÒÑ¡ÔñÒ©Ë®
     public static Action SwitchToLeftPotion = () => 
     {
         Debug.Log("Switch potion to left.");

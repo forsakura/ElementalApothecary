@@ -1,3 +1,4 @@
+using ProjectBase.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,8 +19,8 @@ public class Fouction : MonoBehaviour
         button=GetComponent<Button>();
         button.onClick.AddListener(() =>
         {
-            FunctionTablePanel.Instance.HideMe();
-            PotPanel.Instance.ShowMe();
+            UIManager.Instance.HidePanel("FunctionTablePanel");
+            UIManager.Instance.ShowPanel<PotPanel>("PotPanel",E_UI_Layer.top); 
         });
     }
 
