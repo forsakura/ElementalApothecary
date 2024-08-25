@@ -238,74 +238,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
-        },
-        {
-            ""name"": ""FIghtUI"",
-            ""id"": ""a3e51591-c0c9-4bd0-83d3-d63537d76238"",
-            ""actions"": [
-                {
-                    ""name"": ""Pause"",
-                    ""type"": ""Button"",
-                    ""id"": ""1107b335-996a-46d1-a67e-2fda385dd591"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""SwitchLeft"",
-                    ""type"": ""Button"",
-                    ""id"": ""33601ed0-1cda-425b-809c-aa9cb67b9de4"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""SwitchRight"",
-                    ""type"": ""Button"",
-                    ""id"": ""37f64ee3-07cb-47af-b158-f31436d5a81c"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""22fb86db-885a-42f9-b6f6-a81840b1f09b"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Pause"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""a01c10a9-18b9-4a1c-877f-926f6cf392a0"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SwitchLeft"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""aba5077c-4f84-4187-b135-28421d3c0734"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SwitchRight"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
         }
     ],
     ""controlSchemes"": []
@@ -318,11 +250,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_GamePlay_Fill = m_GamePlay.FindAction("Fill", throwIfNotFound: true);
         m_GamePlay_Drink = m_GamePlay.FindAction("Drink", throwIfNotFound: true);
         m_GamePlay_Interact = m_GamePlay.FindAction("Interact", throwIfNotFound: true);
-        // FIghtUI
-        m_FIghtUI = asset.FindActionMap("FIghtUI", throwIfNotFound: true);
-        m_FIghtUI_Pause = m_FIghtUI.FindAction("Pause", throwIfNotFound: true);
-        m_FIghtUI_SwitchLeft = m_FIghtUI.FindAction("SwitchLeft", throwIfNotFound: true);
-        m_FIghtUI_SwitchRight = m_FIghtUI.FindAction("SwitchRight", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -466,68 +393,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         }
     }
     public GamePlayActions @GamePlay => new GamePlayActions(this);
-
-    // FIghtUI
-    private readonly InputActionMap m_FIghtUI;
-    private List<IFIghtUIActions> m_FIghtUIActionsCallbackInterfaces = new List<IFIghtUIActions>();
-    private readonly InputAction m_FIghtUI_Pause;
-    private readonly InputAction m_FIghtUI_SwitchLeft;
-    private readonly InputAction m_FIghtUI_SwitchRight;
-    public struct FIghtUIActions
-    {
-        private @PlayerInputActions m_Wrapper;
-        public FIghtUIActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Pause => m_Wrapper.m_FIghtUI_Pause;
-        public InputAction @SwitchLeft => m_Wrapper.m_FIghtUI_SwitchLeft;
-        public InputAction @SwitchRight => m_Wrapper.m_FIghtUI_SwitchRight;
-        public InputActionMap Get() { return m_Wrapper.m_FIghtUI; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(FIghtUIActions set) { return set.Get(); }
-        public void AddCallbacks(IFIghtUIActions instance)
-        {
-            if (instance == null || m_Wrapper.m_FIghtUIActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_FIghtUIActionsCallbackInterfaces.Add(instance);
-            @Pause.started += instance.OnPause;
-            @Pause.performed += instance.OnPause;
-            @Pause.canceled += instance.OnPause;
-            @SwitchLeft.started += instance.OnSwitchLeft;
-            @SwitchLeft.performed += instance.OnSwitchLeft;
-            @SwitchLeft.canceled += instance.OnSwitchLeft;
-            @SwitchRight.started += instance.OnSwitchRight;
-            @SwitchRight.performed += instance.OnSwitchRight;
-            @SwitchRight.canceled += instance.OnSwitchRight;
-        }
-
-        private void UnregisterCallbacks(IFIghtUIActions instance)
-        {
-            @Pause.started -= instance.OnPause;
-            @Pause.performed -= instance.OnPause;
-            @Pause.canceled -= instance.OnPause;
-            @SwitchLeft.started -= instance.OnSwitchLeft;
-            @SwitchLeft.performed -= instance.OnSwitchLeft;
-            @SwitchLeft.canceled -= instance.OnSwitchLeft;
-            @SwitchRight.started -= instance.OnSwitchRight;
-            @SwitchRight.performed -= instance.OnSwitchRight;
-            @SwitchRight.canceled -= instance.OnSwitchRight;
-        }
-
-        public void RemoveCallbacks(IFIghtUIActions instance)
-        {
-            if (m_Wrapper.m_FIghtUIActionsCallbackInterfaces.Remove(instance))
-                UnregisterCallbacks(instance);
-        }
-
-        public void SetCallbacks(IFIghtUIActions instance)
-        {
-            foreach (var item in m_Wrapper.m_FIghtUIActionsCallbackInterfaces)
-                UnregisterCallbacks(item);
-            m_Wrapper.m_FIghtUIActionsCallbackInterfaces.Clear();
-            AddCallbacks(instance);
-        }
-    }
-    public FIghtUIActions @FIghtUI => new FIghtUIActions(this);
     public interface IGamePlayActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -536,11 +401,5 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnFill(InputAction.CallbackContext context);
         void OnDrink(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
-    }
-    public interface IFIghtUIActions
-    {
-        void OnPause(InputAction.CallbackContext context);
-        void OnSwitchLeft(InputAction.CallbackContext context);
-        void OnSwitchRight(InputAction.CallbackContext context);
     }
 }
