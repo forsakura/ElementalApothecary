@@ -58,7 +58,7 @@ public class SlotUI : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, ID
     public void UpdateSlot(LegacyItemDetails item, int amount)
     {
         itemDetails = item;
-        //slotImage.sprite = item.itemIcon;
+        slotImage.sprite = item.itemIcon;
         itemAmount = amount;
         amountText.text = amount.ToString();
         slotImage.enabled = true;
@@ -101,7 +101,6 @@ public class SlotUI : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, ID
         
         if (itemAmount>0)
         {
-            
             inventoryUI.dragItem.enabled = true;
             inventoryUI.dragItem.sprite = slotImage.sprite;
 
@@ -124,6 +123,8 @@ public class SlotUI : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, ID
     public void OnEndDrag(PointerEventData eventData)
     {
         inventoryUI.dragItem.enabled = false;
+        inventoryUI.dragItem.sprite = null;
+
 
         if (eventData.pointerCurrentRaycast.gameObject != null)
         {
@@ -134,6 +135,7 @@ public class SlotUI : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, ID
             
             int targetIndex = targetSlot.slotIndex;
             if (slotType == targetSlot.slotType && slotIndex == targetIndex) return;
+            print(targetSlot.gameObject);
             //在Player自身背包范围内交换
             if (slotType == ContainerType.Bag && targetSlot.slotType == ContainerType.Bag)
             {
@@ -170,7 +172,14 @@ public class SlotUI : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, ID
             {
                 InventoryManager.Instance.SwapItem(InventoryLocation.Distiller, slotIndex, InventoryLocation.Box, targetIndex);
             }
-
+            else if (slotType == ContainerType.Box && targetSlot.slotType == ContainerType.Flask)
+            {
+                InventoryManager.Instance.SwapItem(InventoryLocation.Box, slotIndex, InventoryLocation.Flask, targetIndex);
+            }
+            else if (slotType == ContainerType.Flask && targetSlot.slotType == ContainerType.Box)
+            {
+                InventoryManager.Instance.SwapItem(InventoryLocation.Flask, slotIndex, InventoryLocation.Box, targetIndex);
+            }
             //清空所有高亮显示
             inventoryUI.UpdateSlotHightlight(-1);
         }

@@ -108,8 +108,10 @@ namespace ProjectBase.UI
 
                 var panel = obj.GetComponent<T>();
                 panel.ShowMe();
-                callback?.Invoke(panel);
+                
                 panelsDic.Add(panelName, panel);
+                callback?.Invoke(panel);
+
             });
         }
 

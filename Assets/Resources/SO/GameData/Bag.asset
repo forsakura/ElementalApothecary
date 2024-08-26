@@ -10,21 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f0ce4f0f47d71da4b9ac70ffe12ab2ff, type: 3}
-  m_Name: Box
+  m_Name: Bag
   m_EditorClassIdentifier: 
-  itemList:
-  - itemID:
-      id: 1
-      BaseId: 1
-      ATTR: 
-    itemAmount: 1
-  - itemID:
-      id: 3
-      BaseId: 3
-      ATTR: 
-    itemAmount: 3
-  - itemID:
-      id: 2
-      BaseId: 2
-      ATTR: 
-    itemAmount: 2
+  itemList: []

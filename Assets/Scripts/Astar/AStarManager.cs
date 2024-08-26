@@ -2,7 +2,6 @@ using SelfCollections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.IO.LowLevel.Unsafe;
-using UnityEditor.Build.Pipeline;
 using UnityEngine;
 using static UnityEditor.PlayerSettings;
 

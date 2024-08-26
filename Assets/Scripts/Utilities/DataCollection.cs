@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
@@ -8,9 +9,9 @@ public struct LegacyInventoryItem
 }
 
 [System.Serializable]
-public class LegacyItemDetails :TrItem
+public class LegacyItemDetails
 {
-    public ItemID itemId;
+    public ItemID itemID;
     public string itemName;
     public ItemType itemType;
     
@@ -20,6 +21,7 @@ public class LegacyItemDetails :TrItem
     public int itemUseRadius;
     public int foeverEffect;
     public float purity;
+
 }
 
 
