@@ -2,27 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class EnemyBase : Characters
+namespace Enemy
 {
-    // 碰撞伤害从这里来
-    HitInstance enemyHit;
-
-    private void Start()
+    public abstract class EnemyBase : Characters
     {
-        InitHit();
-    }
+        [SerializeField]
+        protected GameObject target;
 
-    protected virtual void InitHit()
-    {
-        enemyHit.Source = gameObject;
-        enemyHit.Damage = characterData.Damage;
-    }
+        // 碰撞伤害从这里来
+        HitInstance enemyHit;
 
-    protected virtual void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.tag.Equals("Player"))
+        protected virtual void InitHit()
         {
-            collision.gameObject.GetComponent<Characters>().GetHit(enemyHit);
+            enemyHit = new HitInstance();
+            enemyHit.Source = gameObject;
+            enemyHit.Damage = characterData.Damage;
+        }
+
+        // 碰撞伤害
+        protected virtual void OnTriggerStay2D(Collider2D collision)
+        {
+            if (collision.tag.Equals("Player"))
+            {
+                InitHit();
+                collision.gameObject.GetComponent<Characters>().GetHit(enemyHit);
+            }
         }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using ProjectBase.UI;
 
-public class BoxPannel : BasePanel
+public class BoxPanel : BasePanel
 {
     //public Button materialBtn;
     //public Button lotionBtn;
@@ -27,6 +27,10 @@ public class BoxPannel : BasePanel
             {
                 slot.gameObject.SetActive(true);
             }
+        });
+        GetControl<Button>("CloseBtn").onClick.AddListener(() => 
+        {
+            UIManager.Instance.HidePanel("BoxPanel");
         });
     }
 
@@ -71,8 +75,8 @@ public class BoxPannel : BasePanel
                     slot.gameObject.SetActive(false);
                 }
             }
-            
         }
+        
     }
 
 

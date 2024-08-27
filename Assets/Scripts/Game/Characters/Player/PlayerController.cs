@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnShift(InputAction.CallbackContext context)
     {
-        CharacterActions.SwitchWeapon.Invoke();
+        player.characterActions.OnSwitchWeapon.Invoke();
         switch (currentAttackState)
         {
             case EPlayerAttackState.Throwing:
@@ -83,19 +83,19 @@ public class PlayerController : MonoBehaviour
 
     private void Shoot(InputAction.CallbackContext context)
     {
-        CharacterActions.OnShoot.Invoke();
+        player.characterActions.OnShoot.Invoke();
         player.Shoot(mouseWorldPos);
     }
 
     private void Throw(InputAction.CallbackContext context)
     {
-        CharacterActions.OnThrow.Invoke();
+        player.characterActions.OnThrow.Invoke();
         player.Throw(mouseWorldPos);
     }
 
     private void Drink(InputAction.CallbackContext context)
     {
-        CharacterActions.OnDrink.Invoke();
+        player.characterActions.OnDrink.Invoke();
         player.Drink();
     }
 }
