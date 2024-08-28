@@ -35,7 +35,7 @@ public enum ItemType
 
 public enum ContainerType
 {
-    Bag,Box,Falsk,Furnace,Pot,Distiller
+    Bag,Box,Flask,Furnace,Pot,Distiller
 }
 public enum InventoryLocation
 {

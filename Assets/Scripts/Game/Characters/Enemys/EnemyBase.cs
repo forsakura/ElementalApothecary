@@ -7,13 +7,14 @@ namespace Enemy
     public abstract class EnemyBase : Characters
     {
         [SerializeField]
-        protected Vector2 target;
+        protected GameObject target;
 
         // 碰撞伤害从这里来
         HitInstance enemyHit;
 
         protected virtual void InitHit()
         {
+            enemyHit = new HitInstance();
             enemyHit.Source = gameObject;
             enemyHit.Damage = characterData.Damage;
         }

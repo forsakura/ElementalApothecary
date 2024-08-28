@@ -1,6 +1,7 @@
 using ProjectBase.Res;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
@@ -39,8 +40,8 @@ public class InventoryManager : Utilities.Singleton<InventoryManager>
     {
         ReadTable();
         EventHandler.CallUpdateInventoryUI(InventoryLocation.Box, boxBag.itemList);
-        EventHandler.CallUpdateInventoryUI(InventoryLocation.Pot, potBag.itemList);
-        EventHandler.CallUpdateInventoryUI(InventoryLocation.Distiller, distillerBag.itemList);
+        //EventHandler.CallUpdateInventoryUI(InventoryLocation.Pot, potBag.itemList);
+        //EventHandler.CallUpdateInventoryUI(InventoryLocation.Distiller, distillerBag.itemList);
         //DontDestroyOnLoad(this);
     }
 
@@ -82,7 +83,7 @@ public class InventoryManager : Utilities.Singleton<InventoryManager>
     {
         foreach(var item in itemDataList_SO.itemDetailsList)
         {
-            if(item.ID.Equals(id)) return true;
+            if(EqualID(id,item.itemID)) return true;
         }
         return false;
     }
@@ -112,15 +113,24 @@ public class InventoryManager : Utilities.Singleton<InventoryManager>
     /// <returns></returns>
     public LegacyItemDetails GetItemDetails(ItemID ID)
     {
-        return itemDataList_SO.itemDetailsList.Find(i => i.ID.Equals(ID));
+        return itemDataList_SO.itemDetailsList.Find(i => EqualID(ID,i.itemID));
+    }
+    public bool EqualID(ItemID id1,ItemID id2)
+    {
+        if(id1 == null || id2 == null) return false;
+        if(id1.id == id2.id && id1.BaseId == id2.BaseId)
+        {
+            if(id1.ATTR.SequenceEqual(id2.ATTR))return true;
+        }
+        return false;
     }
     public MaterialEntity GetMaterialEntity(int ID)
     {
-        return materials_SO.MaterialEntities.Find(i=>i.id == ID);
+        return materials_SO.MaterialEntities.Find(i => i.id==ID);
     }
     public PotionEntity GetPotionEntity(int ID)
     {
-        return potions_SO.PotionEntities.Find(i=>i.id == ID);
+        return potions_SO.PotionEntities.Find(i => i.id == ID);
     }
 
     /// <summary>
@@ -250,7 +260,7 @@ public class InventoryManager : Utilities.Singleton<InventoryManager>
     {
         LegacyInventoryItem currentItem = playerBag.itemList[fromIndex];
         LegacyInventoryItem targetItem = playerBag.itemList[targetIndex];
-        if (currentItem.itemID.Equals(targetItem.itemID)) return;
+        if (EqualID(currentItem.itemID, targetItem.itemID)) return;
         if (targetItem.itemAmount>0)
         {
             playerBag.itemList[fromIndex] = targetItem;
@@ -278,26 +288,32 @@ public class InventoryManager : Utilities.Singleton<InventoryManager>
         List<LegacyInventoryItem> targetList = GetItemList(locationTarget);
 
         LegacyInventoryItem currentItem = currentList[fromIndex];
+        print(targetIndex);
 
         if (targetIndex < targetList.Count)
         {
             LegacyInventoryItem targetItem = targetList[targetIndex];
 
-            if (targetItem.itemAmount>0 && currentItem.itemID.Equals( targetItem.itemID))  //有不相同的两个物品
+            if (targetItem.itemAmount>0 && !EqualID(currentItem.itemID, targetItem.itemID))  //有不相同的两个物品
             {
                 currentList[fromIndex] = targetItem;
                 targetList[targetIndex] = currentItem;
             }
-            else if (currentItem.itemID.Equals(targetItem.itemID) )//相同的两个物品
+            else if (EqualID(currentItem.itemID, targetItem.itemID))//相同的两个物品
             {
                 targetItem.itemAmount += currentItem.itemAmount;
                 targetList[targetIndex] = targetItem;
-                currentList[fromIndex] = new LegacyInventoryItem();
+                //currentList[fromIndex] = new LegacyInventoryItem();
             }
             else    //目标空格子
             {
                 targetList[targetIndex] = currentItem;
-                currentList[fromIndex] = new LegacyInventoryItem();
+                if(locationFrom!= InventoryLocation.Box)
+                    currentList[fromIndex] = new LegacyInventoryItem();
+                else
+                {
+                    boxBag.itemList.Remove(currentItem);
+                }
             }
             EventHandler.CallUpdateInventoryUI(locationFrom, currentList);
             EventHandler.CallUpdateInventoryUI(locationTarget, targetList);

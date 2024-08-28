@@ -7,6 +7,7 @@ using UnityEngine;
 /// </summary>
 public class TrItem : ITrItem
 {
+    
     public ItemID ID { get; set; } //物品id(或者tag)
 
     public void AddATTRID(int singleATTR)
@@ -40,7 +41,7 @@ public class TrItem : ITrItem
         QuestItem
     }
 }
-
+[System.Serializable]
 /// <summary>
 /// id数组使得随机组合获得可能
 /// </summary>
