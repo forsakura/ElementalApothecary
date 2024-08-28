@@ -12,11 +12,18 @@ public abstract class PlayerInteraction : MonoBehaviour
 
     public void ShowInteractTip()
     {
-        tip = Instantiate(InteractTip, new Vector3(transform.position.x, transform.position.y + 1.0f * transform.localScale.y), new Quaternion(), transform);
+        if (tip == null)
+        {
+            tip = Instantiate(InteractTip, new Vector3(transform.position.x, transform.position.y + 1.0f * transform.localScale.y, 1.0f), new Quaternion(), transform);
+
+        }
     }
     public void HideInteractTip()
     {
-        Destroy(tip);
+        if (tip != null)
+        {
+            Destroy(tip);
+        }
     }
 
     public abstract void Interact();

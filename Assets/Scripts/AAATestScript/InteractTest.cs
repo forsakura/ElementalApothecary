@@ -6,6 +6,6 @@ public class InteractTest : PlayerInteraction
 {
     public override void Interact()
     {
-        Debug.Log("This is interact message.");
+        Debug.Log("This is" + gameObject.name + "'s interact message.");
     }
 }
