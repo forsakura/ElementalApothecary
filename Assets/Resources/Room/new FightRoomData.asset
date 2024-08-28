@@ -16,17 +16,17 @@ MonoBehaviour:
   - Prefab/Teleports/FightTeleportEnter
   - Prefab/Teleports/FightTeleportExit
   teleportPositions:
-  - {x: 3, y: 2, z: 0}
-  - {x: 3, y: -2, z: 0}
+  - {x: -6, y: 2, z: 0}
+  - {x: -6, y: -2, z: 0}
   materialPrefabPaths:
   - Prefab/Materials/material1
   - Prefab/Materials/material2
   materialPositions:
-  - {x: 4, y: 3, z: 0}
-  - {x: 4, y: -3, z: 0}
+  - {x: 0, y: 3, z: 0}
+  - {x: 0, y: -3, z: 0}
   enemyPrefabPaths:
   - Prefab/Enemies/Enemy1
   - Prefab/Enemies/Enemy2
   enemyPositions:
-  - {x: -3, y: 2, z: 0}
-  - {x: -3, y: -2, z: 0}
+  - {x: 6, y: 2, z: 0}
+  - {x: 6, y: -2, z: 0}
