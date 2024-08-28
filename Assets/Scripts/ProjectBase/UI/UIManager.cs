@@ -11,9 +11,9 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 namespace ProjectBase.UI
 {
     /*
-     * ¹ÜÀíËùÓĞÏÔÊ¾µÄÃæ°å
-     *      Çë½«ËùÓĞÃæ°åÔ¤ÖÆÌå·ÅÖÃÔÚResources/UIÎÄ¼ş¼ĞÏÂ¡£
-     *      Ìá¹©ÏÔÊ¾£¬Òş²ØºÍ»ñÈ¡Ãæ°åµÄ¹¦ÄÜ¡£             ×¢Òâ£ºÏÔÊ¾ºÍÒş²ØµÄ·½Ê½²»ÊÇSetActive¶øÊÇ¼ÓÔØºÍĞ¶ÔØ
+     * ç®¡ç†æ‰€æœ‰æ˜¾ç¤ºçš„é¢æ¿
+     *      è¯·å°†æ‰€æœ‰é¢æ¿é¢„åˆ¶ä½“æ”¾ç½®åœ¨Resources/UIæ–‡ä»¶å¤¹ä¸‹ã€‚
+     *      æä¾›æ˜¾ç¤ºï¼Œéšè—å’Œè·å–é¢æ¿çš„åŠŸèƒ½ã€‚             æ³¨æ„ï¼šæ˜¾ç¤ºå’Œéšè—çš„æ–¹å¼ä¸æ˜¯SetActiveè€Œæ˜¯åŠ è½½å’Œå¸è½½
      */
 
     public enum E_UI_Layer
@@ -48,7 +48,7 @@ namespace ProjectBase.UI
         }
 
         /// <summary>
-        /// Í¨¹ı²ã¼¶¶ÔÏóµÃµ½¶ÔÓ¦²ã¼¶¸¸¶ÔÏó
+        /// é€šè¿‡å±‚çº§å¯¹è±¡å¾—åˆ°å¯¹åº”å±‚çº§çˆ¶å¯¹è±¡
         /// </summary>
         /// <param name="layer"></param>
         /// <returns></returns>
@@ -72,11 +72,11 @@ namespace ProjectBase.UI
         
         
         /// <summary>
-        /// ÏÔÊ¾Ãæ°å
+        /// æ˜¾ç¤ºé¢æ¿
         /// </summary>
-        /// <param name="panelName">ĞèÒªÏÔÊ¾µÄÃæ°åÃû</param>
-        /// <param name="layer">ÏÔÊ¾ÔÚÄÄÒ»²ã</param>
-        /// <param name="callback">Ãæ°åÏÔÊ¾Íê³Éºó£¬ĞèÒª¶Ô¸ÃÃæ°å×öµÄÊÂ£¬Ä¬ÈÏÖÃ¿Õ</param>
+        /// <param name="panelName">éœ€è¦æ˜¾ç¤ºçš„é¢æ¿å</param>
+        /// <param name="layer">æ˜¾ç¤ºåœ¨å“ªä¸€å±‚</param>
+        /// <param name="callback">é¢æ¿æ˜¾ç¤ºå®Œæˆåï¼Œéœ€è¦å¯¹è¯¥é¢æ¿åšçš„äº‹ï¼Œé»˜è®¤ç½®ç©º</param>
         /// <typeparam name="T"></typeparam>
         public void ShowPanel<T>(string panelName, E_UI_Layer layer, UnityAction<T> callback = null) where T : BasePanel
         {
@@ -116,9 +116,9 @@ namespace ProjectBase.UI
         }
 
         /// <summary>
-        /// Òş²ØÃæ°å
+        /// éšè—é¢æ¿
         /// </summary>
-        /// <param name="panelName">ĞèÒªÒş²ØµÄÃæ°åÃû</param>
+        /// <param name="panelName">éœ€è¦éšè—çš„é¢æ¿å</param>
         public void HidePanel(string panelName)
         {
             if (panelsDic[panelName] == null) return;
@@ -128,9 +128,9 @@ namespace ProjectBase.UI
         }
 
         /// <summary>
-        /// »ñÈ¡ÒÑ¼ÓÔØµÄÃæ°å
+        /// è·å–å·²åŠ è½½çš„é¢æ¿
         /// </summary>
-        /// <param name="panelName">Ãæ°åÃû³Æ</param>
+        /// <param name="panelName">é¢æ¿åç§°</param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
         public T GetPanel<T>(string panelName) where T : BasePanel
@@ -139,11 +139,11 @@ namespace ProjectBase.UI
         }
 
         /// <summary>
-        /// ¸ø¿Ø¼ş¶ÔÏóÌí¼Ó×Ô¶¨ÒåÊÂ¼ş
+        /// ç»™æ§ä»¶å¯¹è±¡æ·»åŠ è‡ªå®šä¹‰äº‹ä»¶
         /// </summary>
-        /// <param name="control">¿Ø¼ş¶ÔÏó</param>
-        /// <param name="type">ÊÂ¼şÀàĞÍ</param>
-        /// <param name="callback">ÊÂ¼şÏìÓ¦º¯Êı</param>
+        /// <param name="control">æ§ä»¶å¯¹è±¡</param>
+        /// <param name="type">äº‹ä»¶ç±»å‹</param>
+        /// <param name="callback">äº‹ä»¶å“åº”å‡½æ•°</param>
         public static void AddCustomEvent(UIBehaviour control, EventTriggerType type, UnityAction<BaseEventData> callback)
         {
             var eventTrigger = control.GetComponent<EventTrigger>();
