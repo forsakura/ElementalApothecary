@@ -1,10 +1,8 @@
 using SelfCollections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using Unity.IO.LowLevel.Unsafe;
-using UnityEditor.Build.Pipeline;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 namespace AStarPathFinding
 {
@@ -53,6 +51,16 @@ namespace AStarPathFinding
             }
         }
 
+        public void AddObstacle(Vector2Int pos)
+        {
+            if (pos.x < startX || pos.x > startX + mapWidth || pos.y < startY || pos.y > startY + mapHeight)
+            {
+                return;
+            }
+            Debug.Log("(" + pos.x + ", " + pos.y + ")");
+            GetCell(pos).CostHere = 999;
+        }
+
         public List<AStarCell> GetPath(Vector2Int startPos, Vector2Int endPos)
         {
             PriorityQueue<AStarCell, float> frontier = new PriorityQueue<AStarCell, float>();
@@ -68,10 +76,10 @@ namespace AStarPathFinding
 
             AStarCell current = null;
 
-            while(frontier.Count != 0)
+            while (frontier.Count != 0)
             {
                 current = frontier.Dequeue();
-                if(current == GetCell(endPos))
+                if (current == GetCell(endPos))
                 {
                     break;
                 }
@@ -81,7 +89,7 @@ namespace AStarPathFinding
                     if (!costSoFar.ContainsKey(next) || newCost < costSoFar[next])
                     {
                         costSoFar[next] = newCost;
-                        float priority = newCost + Cost(next, GetCell(endPos));
+                        float priority = newCost + Distance(new Vector2(next.x, next.y), new Vector2(GetCell(endPos).x, GetCell(endPos).y));
                         frontier.Enqueue(next, priority);
                         cameFrom[next] = current;
                     }
@@ -104,13 +112,12 @@ namespace AStarPathFinding
 
         public Vector2? GetNext(Vector2Int startPos, Vector2Int endPos)
         {
-
             List<AStarCell> cell = GetPath(startPos, endPos);
             if (cell.Count == 0)
             {
                 return null;
             }
-            return cell.Last().GetCenter() - new Vector2(startX, startY);
+            return cell.Last().GetCenter() + new Vector2(startX, startY);
         }
 
         private AStarCell GetCell(Vector2Int pos)
@@ -165,7 +172,7 @@ namespace AStarPathFinding
                 // 应该排除自身格（？），此处不管了，因为可行走位置的cost是0
                 cost += GetCellAbs(item).CostHere;
             }
-            return cost + Distance(from, to);
+            return cost + Distance(from, to) + cells[toInt.x, toInt.y].CostHere;
         }
 
         public float Cost(AStarCell start, AStarCell end)

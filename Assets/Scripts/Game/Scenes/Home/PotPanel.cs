@@ -47,7 +47,7 @@ public class PotPanel : BasePanel
                 InventoryManager.Instance.potBag.itemList[0]=new LegacyInventoryItem { itemID = items[0].itemID,itemAmount=amount1 };
                 InventoryManager.Instance.potBag.itemList[1] = new LegacyInventoryItem { itemID = items[1].itemID, itemAmount = amount2 };
 
-                InventoryManager.Instance.AddItem(output.itemDetails.ID, refineNum*10);
+                InventoryManager.Instance.AddItem(output.itemDetails.itemID, refineNum*10);
                 EventHandler.CallUpdateInventoryUI(InventoryLocation.Box, InventoryManager.Instance.boxBag.itemList);
                 EventHandler.CallUpdateInventoryUI(InventoryLocation.Pot, InventoryManager.Instance.potBag.itemList);
             }

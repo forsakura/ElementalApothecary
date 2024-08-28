@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 81041152381240678}
   - component: {fileID: 8176675104005045245}
   - component: {fileID: 1455340873324161861}
-  - component: {fileID: 9205803224365635220}
+  - component: {fileID: 5295296041340128275}
   m_Layer: 0
   m_Name: EnemyTest
   m_TagString: Enemy
@@ -159,7 +159,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &9205803224365635220
+--- !u!114 &5295296041340128275
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 684013348240567663}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fcf14b9d44100946bbaf1a6051d5a8b, type: 3}
+  m_Script: {fileID: 11500000, guid: 4514ff5c8e827144fa2433c38a4c5fe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   characterData:
@@ -179,16 +179,18 @@ MonoBehaviour:
     MaxTerra: 0
     MaxIgnis: 0
     MaxAqua: 0
-    Damage: 5
+    Damage: 0
     AttackInterval: 0
     AttackDistance: 0
-    MoveSpeed: 0
+    MoveSpeed: 5
     InvincibleTime: 0
   characterType: 0
   CurrentHealth: 0
   CurrentSpeed: 0
-  bulletPrefab: {fileID: 0}
   ElementContain: 0000000000000000
   ElementName: 0000000000000000
+  remainingBullet: 0
+  bulletPrefab: {fileID: 0}
   isInvincible: 0
   isDead: 0
+  target: {x: 0, y: 0}

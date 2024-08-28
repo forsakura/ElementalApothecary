@@ -218,7 +218,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3122450517425949708
 RectTransform:
   m_ObjectHideFlags: 0
@@ -294,9 +294,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6ca1a88081140d42aeaaf22528d72c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foreverEffect: {fileID: 4357788167717720953}
-  sureBtn: {fileID: 4806835519128094210}
-  potionNum: {fileID: 4632166987181219474}
   input1: {fileID: 619182277577378173}
   input2: {fileID: 6405989346515054656}
   output: {fileID: 224458961011967489}
