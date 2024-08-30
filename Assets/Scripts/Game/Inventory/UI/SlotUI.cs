@@ -3,8 +3,8 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
-
 
 public class SlotUI : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
@@ -21,7 +21,7 @@ public class SlotUI : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, ID
     public int slotIndex;
 
     //物品信息
-    public LegacyItemDetails itemDetails;
+    public DataItem itemDetails;
     public int itemAmount;
 
     public InventoryLocation Location
@@ -55,10 +55,10 @@ public class SlotUI : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, ID
     /// </summary>
     /// <param name="item">ItmDetails</param>
     /// <param name="amount">持有数量</param>
-    public void UpdateSlot(LegacyItemDetails item, int amount)
+    public void UpdateSlot(DataItem item, int amount)
     {
         itemDetails = item;
-        slotImage.sprite = item.itemIcon;
+        //slotImage.sprite = item.itemIcon;
         itemAmount = amount;
         amountText.text = amount.ToString();
         slotImage.enabled = true;
@@ -111,8 +111,10 @@ public class SlotUI : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, ID
 
     public void OnDrag(PointerEventData eventData)
     {
-        
-        Vector3 mouseScreenPos = Input.mousePosition;
+        // 使用InputSystem获取鼠标位置
+        Vector2 mousePosition = Mouse.current.position.ReadValue();
+
+        Vector3 mouseScreenPos = Camera.main.ScreenToWorldPoint(mousePosition);
         //mouseScreenPos.z = 10;
         //Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(mouseScreenPos);
         inventoryUI.dragItem.preserveAspect = true;
@@ -165,7 +167,7 @@ public class SlotUI : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, ID
             else if (slotType == ContainerType.Box && targetSlot.slotType == ContainerType.Distiller)
             {
 
-                if (itemDetails.itemType == ItemType.Potion)
+                //if (itemDetails.itemType == ItemType.Potion)
                 InventoryManager.Instance.SwapItem(InventoryLocation.Box, slotIndex, InventoryLocation.Distiller, targetIndex);
             }
             else if (slotType == ContainerType.Distiller && targetSlot.slotType == ContainerType.Box)
@@ -188,7 +190,7 @@ public class SlotUI : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, ID
     public void SetOutputMod()
     {
         slotImage.enabled = true;
-        slotImage.sprite = itemDetails.itemIcon;
+        //slotImage.sprite = itemDetails.itemIcon;
 
         button.interactable = false;
         amountText.enabled = false;

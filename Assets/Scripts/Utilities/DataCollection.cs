@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public struct LegacyInventoryItem
+public struct InventoryItem
 {
     public ItemID itemID;
     public int itemAmount;

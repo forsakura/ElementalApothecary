@@ -16,6 +16,17 @@ public class DataItem : TrItem, IDataItem
     private EElement[] _baseElement = new EElement[2];
     private Vector2 _currentElementCount;
 
+    public DataItem()
+    {
+        this.useTimes = 0;
+        this.itemUseRadius = 0;
+        this.itemDescription = null;
+        this.itemName = null;
+        this.tags = null;
+        BaseElement = null;
+        this.currentElementCount =new Vector2(0,0);
+    }
+
     public int useTimes
     {
         get => _useTimes;
