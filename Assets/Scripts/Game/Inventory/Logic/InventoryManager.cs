@@ -133,26 +133,7 @@ public class InventoryManager : Utilities.Singleton<InventoryManager>
         return potions_SO.PotionEntities.Find(i => i.id == ID);
     }
 
-    /// <summary>
-    /// 添加物品到Player背包里
-    /// </summary>
-    /// <param name="item"></param>
-    /// <param name="toDestory">是否要销毁物品</param>
-    public void AddItem(LegacyItem item, bool toDestory)
-    {
-        //是否已经有该物品
-        int index = GetItemIndexInBag(item.itemID);
-
-        AddItemAtIndex(item.itemID, index, 1);
-
-        if (toDestory)
-        {
-            Destroy(item.gameObject);
-        }
-
-        //更新UI
-        EventHandler.CallUpdateInventoryUI(InventoryLocation.Bag, playerBag.itemList);
-    }
+   
     /// <summary>
     /// 通过物品ID添加物品
     /// </summary>
@@ -202,9 +183,10 @@ public class InventoryManager : Utilities.Singleton<InventoryManager>
     /// <returns>-1则没有这个物品否则返回序号</returns>
     public int GetItemIndexInBag(ItemID ID)
     {
-        for (int i = 0; i < playerBag.itemList.Count; i++)
+        for(int i = 0; i < playerBag.itemList.Count; i++)
         {
-            if (playerBag.itemList[i].itemID.Equals(ID))
+
+            if (EqualID(playerBag.itemList[i].itemID, ID))
                 return i;
         }
         return -1;
@@ -213,7 +195,8 @@ public class InventoryManager : Utilities.Singleton<InventoryManager>
     {
         for(int i = 0; i < boxBag.itemList.Count; i++)
         {
-            if (boxBag.itemList[i].itemID.Equals(ID))
+
+            if (EqualID(boxBag.itemList[i].itemID, ID))
                 return i;
         }
         return -1;
@@ -229,17 +212,10 @@ public class InventoryManager : Utilities.Singleton<InventoryManager>
     /// <param name="amount">数量</param>
     private void AddItemAtIndex(ItemID ID,int index,int amount)
     {
-        if (index == -1 && CheckBoxCapacity())
+        if (index == -1)
         {
             LegacyInventoryItem item = new LegacyInventoryItem { itemID = ID, itemAmount = amount };
-            for (int i = 0; i < boxBag.itemList.Count; i++)
-            {
-                if (boxBag.itemList[i].itemAmount == 0)
-                {
-                    boxBag.itemList[i] = item;
-                    break;
-                }
-            }
+            boxBag.itemList.Add(item);
         }
         else
         {

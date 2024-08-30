@@ -29,7 +29,6 @@ public class PotPanel : BasePanel
     {
         if (input1.itemAmount>0&&input2.itemAmount>0)
         {
-            //output.itemDetails=InventoryManager.Instance.GetItemDetails(InventoryManager.Instance.ReturnProductionID(input1.itemDetails.itemID,input2.itemDetails.itemID));
             output.SetOutputMod();
         }
     }
