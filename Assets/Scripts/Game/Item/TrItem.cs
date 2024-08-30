@@ -7,8 +7,12 @@ using UnityEngine;
 /// </summary>
 public class TrItem : ITrItem
 {
-    
-    public ItemID ID { get; set; } //物品id(或者tag)
+    private ItemID id;
+    public ItemID ID 
+    {
+        get => id;
+        set => id = value; 
+    } //物品id(或者tag)
 
     public void AddATTRID(int singleATTR)
     {

@@ -4,14 +4,14 @@ using UnityEngine;
 
 public interface ISynthesis
 {
-    bool isExploded { get; set; }
+    bool IsExploded { get; set; }
     float Explosion { get; set; }
     int MainGachaTimes { get; set; }
     int AuxGachaTimes { get; set; }
     float AuxGachaProbability { get; set; }
     bool AddStabilizers { get; set; }
-    bool isSuccess { get; set; }
-    bool isExplosive { get; set; }
+    bool IsSuccess { get; set; }
+    bool IsExplosive { get; set; }
     int MaxMaterialEnum { get; set; }
 
     void addMaterial(int order, IDataItem Item);

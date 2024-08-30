@@ -14,15 +14,42 @@ public class Synthesis : MonoBehaviour, ISynthesis
     private Dictionary<int, IDataItem> Materials;
     private IDataItem production;
 
-    public int MaxMaterialEnum { get; set; }
+    [SerializeField]
+    private int maxMaterialEnum;
+    public int MaxMaterialEnum
+    {
+        get => maxMaterialEnum;
+        set => maxMaterialEnum = value;
+    }
 
-    public bool isExplosive { get; set; }
-    public bool isExploded { get; set; }
-    public float Explosion { get; set; }
+    [SerializeField]
+    private bool isExplosive;
+    public bool IsExplosive
+    {
+        get => isExplosive;
+        set => isExplosive = value;
+    }
+
+    [SerializeField]
+    private bool isExploded;
+    public bool IsExploded
+    {
+        get => isExploded;
+        set => isExploded = value;
+    }
+
+    [SerializeField]
+    private float explosion;
+    public float Explosion
+    {
+        get => explosion;
+        set => explosion = value;
+    }
 
     private List<int> mainATTR;
     private List<int> auxATTR;
 
+    [SerializeField]
     private int mainGachaTimes = 1; // 默认值  
     public int MainGachaTimes
     {
@@ -30,6 +57,7 @@ public class Synthesis : MonoBehaviour, ISynthesis
         set => mainGachaTimes = value;
     }
 
+    [SerializeField]
     private int auxGachaTimes = 1; // 默认值  
     public int AuxGachaTimes
     {
@@ -37,6 +65,7 @@ public class Synthesis : MonoBehaviour, ISynthesis
         set => auxGachaTimes = value;
     }
 
+    [SerializeField]
     private float auxGachaProbability = 100; // 默认值  
     public float AuxGachaProbability
     {
@@ -44,8 +73,21 @@ public class Synthesis : MonoBehaviour, ISynthesis
         set => auxGachaProbability = value;
     }
 
-    public bool AddStabilizers { get; set; } // 还没做相关  
-    public bool isSuccess { get; set; }
+    [SerializeField]
+    private bool addStabilizers;
+    public bool AddStabilizers
+    {
+        get => addStabilizers;
+        set => addStabilizers = value;
+    }
+
+    [SerializeField]
+    private bool isSuccess;
+    public bool IsSuccess
+    {
+        get => isSuccess;
+        set => isSuccess = value;
+    }
 
     /// <summary>
     /// 顺序从0开始
@@ -111,7 +153,7 @@ public class Synthesis : MonoBehaviour, ISynthesis
 
 
         checkSucceed();
-        if (isSuccess)
+        if (IsSuccess)
         {
             production.initByTemplet();
             production.applyATTR();
@@ -150,7 +192,7 @@ public class Synthesis : MonoBehaviour, ISynthesis
         });
 
         checkSucceed();
-        if (isSuccess)
+        if (IsSuccess)
         {
             production.initByTemplet();
             production.applyATTR();
@@ -164,20 +206,20 @@ public class Synthesis : MonoBehaviour, ISynthesis
         if (production.BaseElement != new EElement[2] { EElement.None, EElement.None } ||
             production.GetATTRID().Count == 0)
         {
-            isSuccess = false;
+            IsSuccess = false;
             if (Explosion > 0)
             {
-                isExploded = true;//待定
+                IsExploded = true;//待定
             }
         }
         else if (!AddStabilizers && Explosion > 0)
         {
-            isSuccess = false;
-            isExploded = true;
+            IsSuccess = false;
+            IsExploded = true;
         }
         else
         {
-            isSuccess = true;
+            IsSuccess = true;
         }
     }
 
@@ -279,8 +321,8 @@ public class Synthesis : MonoBehaviour, ISynthesis
         production = null;
 
         Explosion = 0;
-        isSuccess = false;
-        isExploded = false;
+        IsSuccess = false;
+        IsExploded = false;
     }
 }
 
