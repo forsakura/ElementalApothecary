@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 最表层去使用的一个item数据类基础
+/// 最表层去使用的一个item数据类基础(看子类！！！)
 /// </summary>
 public class TrItem : ITrItem
 {
