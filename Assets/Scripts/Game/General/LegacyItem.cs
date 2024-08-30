@@ -23,7 +23,7 @@ public class LegacyItem : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
 
-    public LegacyItemDetails itemDetails;
+    public DataItem itemDetails;
     private BoxCollider2D coll;
     [Header("------")]
     public bool isOnBag;

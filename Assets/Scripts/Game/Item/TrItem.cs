@@ -37,7 +37,7 @@ public class TrItem : ITrItem
         return ID.BaseId;
     }
 
-
+    
     public enum ItemTag
     {
         material,

@@ -12,7 +12,7 @@ public class InventoryUI : MonoBehaviour
     public ItemToolTip itemToolTip;
     private string itemToolTipPath = "Prefab/UI/ItemToolTip";
     
-    public ItemDataList_SO itemList;
+    //public ItemDataList_SO itemList;
 
     [Header("拖拽图片")]
     public Image dragItem;
@@ -86,10 +86,10 @@ public class InventoryUI : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            OpenBagUI();
-        }
+        //if (Input.GetKeyDown(KeyCode.B))
+        //{
+        //    OpenBagUI();
+        //}
     }
 
     //private void OnShowTradeUI(ItemDetails item, bool isSell)
@@ -175,7 +175,7 @@ public class InventoryUI : MonoBehaviour
     /// </summary>
     /// <param name="location">库存位置</param>
     /// <param name="list">数据列表</param>
-    private void OnUpdateInventoryUI(InventoryLocation location, List<LegacyInventoryItem> list)
+    private void OnUpdateInventoryUI(InventoryLocation location, List<InventoryItem> list)
     {
         switch (location)
         {
@@ -184,7 +184,7 @@ public class InventoryUI : MonoBehaviour
                 {
                     if (list[i].itemAmount > 0)
                     {
-                        LegacyItemDetails item = InventoryManager.Instance.GetItemDetails(list[i].itemID);
+                        DataItem item = InventoryManager.Instance.GetItemDetails(list[i].itemID);
                         playerBagSlots[i].UpdateSlot(item, list[i].itemAmount);
                     }
                     else
@@ -213,7 +213,7 @@ public class InventoryUI : MonoBehaviour
                         cell.transform.parent = content;
                         cell.slotType = ContainerType.Box;
                         boxSlots.Add(cell);
-                        LegacyItemDetails item = InventoryManager.Instance.GetItemDetails(list[i].itemID);
+                        DataItem item = InventoryManager.Instance.GetItemDetails(list[i].itemID);
                         cell.UpdateSlot(item, list[i].itemAmount);
                     }
                 }
@@ -232,10 +232,10 @@ public class InventoryUI : MonoBehaviour
                 }
                 for (int i = 0; i < flaskSlots.Length; i++)
                 {
-                    print(i);
+                    
                     if (list[i].itemAmount > 0)
                     {
-                        LegacyItemDetails item = InventoryManager.Instance.GetItemDetails(list[i].itemID);
+                        DataItem item = InventoryManager.Instance.GetItemDetails(list[i].itemID);
                         flaskSlots[i].UpdateSlot(item, list[i].itemAmount);
                     }
                     else
@@ -249,7 +249,7 @@ public class InventoryUI : MonoBehaviour
                 {
                     if (list[i].itemAmount > 0)
                     {
-                        LegacyItemDetails item = InventoryManager.Instance.GetItemDetails(list[i].itemID);
+                        DataItem item = InventoryManager.Instance.GetItemDetails(list[i].itemID);
                         potSlots[i].UpdateSlot(item, list[i].itemAmount);
                     }
                     else
@@ -263,7 +263,7 @@ public class InventoryUI : MonoBehaviour
                 {
                     if (list[i].itemAmount > 0)
                     {
-                        LegacyItemDetails item = InventoryManager.Instance.GetItemDetails(list[i].itemID);
+                        DataItem item = InventoryManager.Instance.GetItemDetails(list[i].itemID);
                         furnaceSlots[i].UpdateSlot(item, list[i].itemAmount);
                     }
                     else
@@ -277,7 +277,7 @@ public class InventoryUI : MonoBehaviour
                 {
                     if (list[i].itemAmount > 0)
                     {
-                        LegacyItemDetails item = InventoryManager.Instance.GetItemDetails(list[i].itemID);
+                        DataItem item = InventoryManager.Instance.GetItemDetails(list[i].itemID);
                         distllerSlots[i].UpdateSlot(item, list[i].itemAmount);
                     }
                     else

@@ -19,7 +19,7 @@ public class FlaskPanel : BasePanel
                 if (InventoryManager.Instance.flaskBag.itemList[i].itemID != null)
                 {
                     InventoryManager.Instance.boxBag.itemList.Add(InventoryManager.Instance.flaskBag.itemList[i]);
-                    InventoryManager.Instance.flaskBag.itemList[i]= new LegacyInventoryItem();
+                    InventoryManager.Instance.flaskBag.itemList[i]= new InventoryItem();
                 }
             }
             foreach(var slot in falskSlots)

@@ -25,9 +25,9 @@ public class BulletConsumption : Singleton<BulletConsumption>
     // public void Fill(Sprite potion)
     public void Fill(ItemID potionID)
     {
-        LegacyItemDetails itemdetails = InventoryManager.Instance.GetItemDetails(potionID);
+        DataItem itemdetails = InventoryManager.Instance.GetItemDetails(potionID);
         cover.fillAmount = 0.0f;
-        potionIcon.sprite = itemdetails.itemIcon;
+        //potionIcon.sprite = itemdetails.itemIcon;
         potionName.text = itemdetails.itemName;
     }
 

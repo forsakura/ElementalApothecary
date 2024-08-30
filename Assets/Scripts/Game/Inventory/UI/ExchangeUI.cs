@@ -11,7 +11,7 @@ public class ExchangeUI : MonoBehaviour
     public Button submitButton;
     public Button cancelButton;
 
-    private LegacyItemDetails item;
+    private DataItem item;
 
     private void Awake()
     {
@@ -24,10 +24,10 @@ public class ExchangeUI : MonoBehaviour
     /// </summary>
     /// <param name="item"></param>
     /// <param name="isSell"></param>
-    public void SetupExchangeUI(LegacyItemDetails item)
+    public void SetupExchangeUI(DataItem item)
     {
         this.item = item;
-        itemIcon.sprite = item.itemIcon;
+        //itemIcon.sprite = item.itemIcon;
         itemName.text = item.itemName;
         tradeAmount.text = string.Empty;
     }

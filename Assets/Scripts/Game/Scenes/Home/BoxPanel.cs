@@ -15,11 +15,11 @@ public class BoxPanel : BasePanel
         base.Awake();
         GetControl<Button>("MaterialBtn").onClick.AddListener(() =>
         {
-            ShowSlot(ItemType.Material);
+            ShowSlot(TrItem.ItemTag.material);
         });
         GetControl<Button>("LotionBtn").onClick.AddListener(() =>
         {
-            ShowSlot(ItemType.Potion);
+            ShowSlot(TrItem.ItemTag.consumable);
         });
         GetControl<Button>("AllBtn").onClick.AddListener(() =>
         {
@@ -59,14 +59,14 @@ public class BoxPanel : BasePanel
     /// 显示特定类型的物品，待修改
     /// </summary>
     /// <param name="itemType"></param>
-    public void ShowSlot(ItemType itemType)
+    public void ShowSlot(TrItem.ItemTag itemType)
     {
         
         foreach(SlotUI slot in inventoryUI.boxSlots)
         {
             if (slot.itemDetails != null)
             {
-                if (slot.itemDetails.itemType == itemType)
+                if (slot.itemDetails.tags.Contains(itemType))
                 {
                     slot.gameObject.SetActive(true);
                 }
