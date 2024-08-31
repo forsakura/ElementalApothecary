@@ -63,6 +63,10 @@ public class StateMachine
 
     public State GetState(string name)
     {
+        if (!states.ContainsKey(name))
+        {
+            return null;
+        }
         return states[name];
     }
 
@@ -74,6 +78,18 @@ public class StateMachine
     public State GetPreviousState()
     {
         return previousState;
+    }
+
+    public void ChangeStateTo(string name)
+    {
+        if (!states.ContainsKey(name) || currentState.Name == name)
+        {
+            return;
+        }
+        previousState = currentState;
+        currentState.Exit();
+        currentState = states[name];
+        currentState.Enter();
     }
 
     public void Clear()

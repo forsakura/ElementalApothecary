@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using CharacterDelegates;
 
 /// <summary>
 /// 玩家独有的方法：喝药
@@ -76,12 +77,27 @@ public class Player : Characters
         }
     }
 
-    public void Drink()
+    public override void OnBulletHitTarget(BulletControl bullet, Collider2D collision)
     {
-
+        if (collision.transform.parent == null)
+        {
+            return;
+        }
+        if (collision.transform.parent.CompareTag("Enemy"))
+        {
+            HitInstance hitInstance = new()
+            {
+                Source = gameObject,
+                Damage = characterData.Damage
+            };
+            if (collision.GetComponent<IHitable>().GetHit(hitInstance))
+            {
+                Destroy(bullet.gameObject);
+            }
+        }
     }
 
-    public void Fill()
+    public void Drink()
     {
 
     }

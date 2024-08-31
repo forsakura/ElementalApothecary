@@ -37,7 +37,6 @@ public class PlayerControll : MonoBehaviour
         playerAnimation = GetComponent<PlayerAnimation>();
 
         inputAction.GamePlay.Shoot.started += OnFire;
-        inputAction.GamePlay.Shift.started += OnShift;
         inputAction.GamePlay.Fill.started += OnFill;
         
         currentBaseState = EPlayerBaseState.Default;

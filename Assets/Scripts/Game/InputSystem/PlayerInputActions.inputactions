@@ -24,15 +24,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Shift",
-                    "type": "Button",
-                    "id": "25e9e590-e675-4228-a83f-4a806c6a26da",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Fill",
                     "type": "Button",
                     "id": "aa95a251-a05c-4488-ad12-617392430497",
@@ -42,7 +33,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Drink",
+                    "name": "UsePotion",
                     "type": "Button",
                     "id": "420101eb-d8e1-400e-bd55-a14bf83ef83c",
                     "expectedControlType": "Button",
@@ -173,17 +164,6 @@
                 },
                 {
                     "name": "",
-                    "id": "b8ca3c89-bc8e-43cf-be30-aa50fcba0eb7",
-                    "path": "<Keyboard>/shift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Shift",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "be641485-2c7a-48e1-9760-00620792c90e",
                     "path": "<Keyboard>/r",
                     "interactions": "",
@@ -211,7 +191,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Drink",
+                    "action": "UsePotion",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

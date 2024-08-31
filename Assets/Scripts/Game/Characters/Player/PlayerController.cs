@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Scripting.APIUpdating;
+using CharacterDelegates;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
@@ -25,6 +25,11 @@ public class PlayerController : MonoBehaviour
 
     public Vector2 playerDirection;
 
+    public event ShootEventHandler OnShoot;
+    public event ThrowEventHandler OnThrow;
+    public event DrinkEventHandler OnDrink;
+    public event FillBulletEventHandler OnFill;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -41,9 +46,9 @@ public class PlayerController : MonoBehaviour
 
     private void InitInputActions()
     {
-        PlayerInputManager.Instance.GamePlay.Shift.started += OnShift;
         PlayerInputManager.Instance.GamePlay.Shoot.started += Shoot;
-        PlayerInputManager.Instance.GamePlay.Drink.started += Drink;
+        PlayerInputManager.Instance.GamePlay.UsePotion.started += UsePotion;
+        PlayerInputManager.Instance.GamePlay.Fill.started += Fill;
         currentAttackState = EPlayerAttackState.Shooting;
     }
 
@@ -61,41 +66,33 @@ public class PlayerController : MonoBehaviour
         rb.velocity = playerDirection * player.characterData.MoveSpeed;
     }
 
-    private void OnShift(InputAction.CallbackContext context)
-    {
-        player.characterActions.OnSwitchWeapon.Invoke();
-        switch (currentAttackState)
-        {
-            case EPlayerAttackState.Throwing:
-                PlayerInputManager.Instance.GamePlay.Shoot.started -= Throw;
-                PlayerInputManager.Instance.GamePlay.Shoot.started += Shoot;
-                currentAttackState = EPlayerAttackState.Shooting;
-                break;
-            case EPlayerAttackState.Shooting:
-                PlayerInputManager.Instance.GamePlay.Shoot.started -= Shoot;
-                PlayerInputManager.Instance.GamePlay.Shoot.started += Throw;
-                currentAttackState = EPlayerAttackState.Throwing;
-                break;
-            case EPlayerAttackState.Drinking:
-                break;
-        }
-    }
-
     private void Shoot(InputAction.CallbackContext context)
     {
-        player.characterActions.OnShoot.Invoke();
+        OnShoot?.Invoke();
         player.Shoot(mouseWorldPos);
+    }
+
+    private void UsePotion(InputAction.CallbackContext context)
+    {
+        Throw(context);
+        // Drink(context);
     }
 
     private void Throw(InputAction.CallbackContext context)
     {
-        player.characterActions.OnThrow.Invoke();
+        OnThrow?.Invoke();
         player.Throw(mouseWorldPos);
     }
 
     private void Drink(InputAction.CallbackContext context)
     {
-        player.characterActions.OnDrink.Invoke();
+        OnDrink?.Invoke();
         player.Drink();
+    }
+
+    private void Fill(InputAction.CallbackContext context)
+    {
+        OnFill?.Invoke();
+        player.Fill();
     }
 }

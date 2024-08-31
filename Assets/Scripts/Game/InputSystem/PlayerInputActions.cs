@@ -46,15 +46,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Shift"",
-                    ""type"": ""Button"",
-                    ""id"": ""25e9e590-e675-4228-a83f-4a806c6a26da"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Fill"",
                     ""type"": ""Button"",
                     ""id"": ""aa95a251-a05c-4488-ad12-617392430497"",
@@ -64,7 +55,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Drink"",
+                    ""name"": ""UsePotion"",
                     ""type"": ""Button"",
                     ""id"": ""420101eb-d8e1-400e-bd55-a14bf83ef83c"",
                     ""expectedControlType"": ""Button"",
@@ -195,17 +186,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""b8ca3c89-bc8e-43cf-be30-aa50fcba0eb7"",
-                    ""path"": ""<Keyboard>/shift"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Shift"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""be641485-2c7a-48e1-9760-00620792c90e"",
                     ""path"": ""<Keyboard>/r"",
                     ""interactions"": """",
@@ -233,7 +213,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Drink"",
+                    ""action"": ""UsePotion"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -246,9 +226,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_GamePlay = asset.FindActionMap("GamePlay", throwIfNotFound: true);
         m_GamePlay_Move = m_GamePlay.FindAction("Move", throwIfNotFound: true);
         m_GamePlay_Shoot = m_GamePlay.FindAction("Shoot", throwIfNotFound: true);
-        m_GamePlay_Shift = m_GamePlay.FindAction("Shift", throwIfNotFound: true);
         m_GamePlay_Fill = m_GamePlay.FindAction("Fill", throwIfNotFound: true);
-        m_GamePlay_Drink = m_GamePlay.FindAction("Drink", throwIfNotFound: true);
+        m_GamePlay_UsePotion = m_GamePlay.FindAction("UsePotion", throwIfNotFound: true);
         m_GamePlay_Interact = m_GamePlay.FindAction("Interact", throwIfNotFound: true);
     }
 
@@ -313,9 +292,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private List<IGamePlayActions> m_GamePlayActionsCallbackInterfaces = new List<IGamePlayActions>();
     private readonly InputAction m_GamePlay_Move;
     private readonly InputAction m_GamePlay_Shoot;
-    private readonly InputAction m_GamePlay_Shift;
     private readonly InputAction m_GamePlay_Fill;
-    private readonly InputAction m_GamePlay_Drink;
+    private readonly InputAction m_GamePlay_UsePotion;
     private readonly InputAction m_GamePlay_Interact;
     public struct GamePlayActions
     {
@@ -323,9 +301,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public GamePlayActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_GamePlay_Move;
         public InputAction @Shoot => m_Wrapper.m_GamePlay_Shoot;
-        public InputAction @Shift => m_Wrapper.m_GamePlay_Shift;
         public InputAction @Fill => m_Wrapper.m_GamePlay_Fill;
-        public InputAction @Drink => m_Wrapper.m_GamePlay_Drink;
+        public InputAction @UsePotion => m_Wrapper.m_GamePlay_UsePotion;
         public InputAction @Interact => m_Wrapper.m_GamePlay_Interact;
         public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
         public void Enable() { Get().Enable(); }
@@ -342,15 +319,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Shoot.started += instance.OnShoot;
             @Shoot.performed += instance.OnShoot;
             @Shoot.canceled += instance.OnShoot;
-            @Shift.started += instance.OnShift;
-            @Shift.performed += instance.OnShift;
-            @Shift.canceled += instance.OnShift;
             @Fill.started += instance.OnFill;
             @Fill.performed += instance.OnFill;
             @Fill.canceled += instance.OnFill;
-            @Drink.started += instance.OnDrink;
-            @Drink.performed += instance.OnDrink;
-            @Drink.canceled += instance.OnDrink;
+            @UsePotion.started += instance.OnUsePotion;
+            @UsePotion.performed += instance.OnUsePotion;
+            @UsePotion.canceled += instance.OnUsePotion;
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
@@ -364,15 +338,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Shoot.started -= instance.OnShoot;
             @Shoot.performed -= instance.OnShoot;
             @Shoot.canceled -= instance.OnShoot;
-            @Shift.started -= instance.OnShift;
-            @Shift.performed -= instance.OnShift;
-            @Shift.canceled -= instance.OnShift;
             @Fill.started -= instance.OnFill;
             @Fill.performed -= instance.OnFill;
             @Fill.canceled -= instance.OnFill;
-            @Drink.started -= instance.OnDrink;
-            @Drink.performed -= instance.OnDrink;
-            @Drink.canceled -= instance.OnDrink;
+            @UsePotion.started -= instance.OnUsePotion;
+            @UsePotion.performed -= instance.OnUsePotion;
+            @UsePotion.canceled -= instance.OnUsePotion;
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
@@ -397,9 +368,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
-        void OnShift(InputAction.CallbackContext context);
         void OnFill(InputAction.CallbackContext context);
-        void OnDrink(InputAction.CallbackContext context);
+        void OnUsePotion(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
     }
 }

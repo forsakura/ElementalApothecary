@@ -15,8 +15,7 @@ public class EnemyTest : EnemyBase
     // Update is called once per frame
     void Update()
     {
-        Vector2 targetPos = new Vector2(target.transform.position.x, target.transform.position.y);
-        Vector2 ?next = AStarPathFinding.AStarManager.Instance.GetNext(new Vector2Int(Mathf.FloorToInt(transform.position.x), Mathf.FloorToInt(transform.position.y)), new Vector2Int(Mathf.FloorToInt(targetPos.x), Mathf.FloorToInt(targetPos.y)));
+        Vector2 ?next = AStarPathFinding.AStarManager.Instance.GetNext(new Vector2Int(Mathf.FloorToInt(transform.position.x), Mathf.FloorToInt(transform.position.y)), new Vector2Int(Mathf.FloorToInt(target.transform.position.x), Mathf.FloorToInt(target.transform.position.y)));
         if (next != null) 
         {
             rb.velocity = characterData.MoveSpeed * ((Vector2)next - new Vector2(transform.position.x, transform.position.y)).normalized;

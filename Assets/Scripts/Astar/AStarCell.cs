@@ -13,13 +13,13 @@ namespace AStarPathFinding
     {
         public readonly int x;
         public readonly int y;
-        public float CostHere;
+        public float Cost;
 
         public AStarCell(int x, int y, float costOfCell)
         {
             this.x = x;
             this.y = y;
-            this.CostHere = costOfCell;
+            Cost = costOfCell;
         }
 
         public bool ContainsPoint(float x, float y)

@@ -51,14 +51,13 @@ namespace AStarPathFinding
             }
         }
 
-        public void AddObstacle(Vector2Int pos)
+        public void SetCost(Vector2Int pos, float cost)
         {
             if (pos.x < startX || pos.x > startX + mapWidth || pos.y < startY || pos.y > startY + mapHeight)
             {
                 return;
             }
-            Debug.Log("(" + pos.x + ", " + pos.y + ")");
-            GetCell(pos).CostHere = 999;
+            GetCell(pos).Cost = cost;
         }
 
         public List<AStarCell> GetPath(Vector2Int startPos, Vector2Int endPos)
@@ -85,7 +84,8 @@ namespace AStarPathFinding
                 }
                 foreach (AStarCell next in GetNeighbours(current))
                 {
-                    float newCost = costSoFar[current] + Cost(current, next);
+                    // float newCost = costSoFar[current] + Cost(current, next);
+                    float newCost = costSoFar[current] + next.Cost + Distance(new Vector2(current.x, current.y), new Vector2(next.x, next.y));
                     if (!costSoFar.ContainsKey(next) || newCost < costSoFar[next])
                     {
                         costSoFar[next] = newCost;
@@ -146,7 +146,7 @@ namespace AStarPathFinding
             int[,] board = new int[8, 2] { { -1, 1 }, { 0, 1 }, { 1, 1 }, { -1, 0 }, { 1, 0 }, { -1, -1 }, { 0, -1 }, { 1, -1 } };
             for (int i = 0; i < 8; i++)
             {
-                if (cell.x + board[i, 0] < 0 || cell.x + board[i, 0] > mapWidth || cell.y + board[i, 1] < 0 || cell.y + board[i, 1] > mapHeight)
+                if (cell.x + board[i, 0] < 0 || cell.x + board[i, 0] >= mapWidth || cell.y + board[i, 1] < 0 || cell.y + board[i, 1] >= mapHeight)
                 {
                     continue;
                 }
@@ -170,9 +170,9 @@ namespace AStarPathFinding
             foreach (Vector2Int item in list)
             {
                 // 应该排除自身格（？），此处不管了，因为可行走位置的cost是0
-                cost += GetCellAbs(item).CostHere;
+                cost += GetCellAbs(item).Cost;
             }
-            return cost + Distance(from, to) + cells[toInt.x, toInt.y].CostHere;
+            return cost + Distance(from, to) + cells[toInt.x, toInt.y].Cost;
         }
 
         public float Cost(AStarCell start, AStarCell end)

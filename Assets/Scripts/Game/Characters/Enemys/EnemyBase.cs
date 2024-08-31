@@ -10,11 +10,10 @@ namespace Enemy
         protected GameObject target;
 
         // 碰撞伤害从这里来
-        HitInstance enemyHit;
+        protected HitInstance enemyHit = new();
 
         protected virtual void InitHit()
         {
-            enemyHit = new HitInstance();
             enemyHit.Source = gameObject;
             enemyHit.Damage = characterData.Damage;
         }
