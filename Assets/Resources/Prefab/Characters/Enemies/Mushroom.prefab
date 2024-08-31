@@ -126,6 +126,7 @@ MonoBehaviour:
   isDead: 0
   target: {fileID: 0}
   threshold: 0.5
+  announceDistanceLimit: 10
 --- !u!114 &7262987956664834949
 MonoBehaviour:
   m_ObjectHideFlags: 0

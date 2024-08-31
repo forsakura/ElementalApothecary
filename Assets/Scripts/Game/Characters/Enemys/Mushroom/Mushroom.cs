@@ -10,6 +10,8 @@ namespace Enemy.Mushroom
         [Header("SpecialPropertyOfMushroom")]
         [SerializeField]
         private float threshold;
+        [SerializeField]
+        private float announceDistanceLimit;
 
         MushroomAnimation anim;
         Rigidbody2D rb;
@@ -37,6 +39,12 @@ namespace Enemy.Mushroom
             {
                 // Start animation;
                 anim.FSM.ChangeStateTo("CreateSpore");
+                if (moveCoroutine != null)
+                {
+                    StopCoroutine(moveCoroutine);
+                    moveCoroutine = null;
+                }
+                rb.velocity = Vector2.zero;
 
                 CreateSporeArea();
                 anim.FinishCreateSpore();
@@ -56,6 +64,10 @@ namespace Enemy.Mushroom
                 Mushroom mushroom = item as Mushroom;
                 if (mushroom != this)
                 {
+                    if((mushroom.transform.position - transform.position).magnitude > announceDistanceLimit)
+                    {
+                        continue;
+                    }
                     mushroom.AssembleTo(gameObject);
                 }
             }
@@ -91,13 +103,13 @@ namespace Enemy.Mushroom
                 }
                 else
                 {
-                    rb.velocity = new Vector2();
+                    rb.velocity = Vector2.zero;
                     moveCoroutine = null;
                     yield break;
                 }
                 yield return null;
             }
-            rb.velocity = new Vector2();
+            rb.velocity = Vector2.zero;
             moveCoroutine = null;
         }
     }
