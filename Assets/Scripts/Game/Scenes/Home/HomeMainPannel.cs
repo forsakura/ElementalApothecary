@@ -22,7 +22,7 @@ public class HomeMainPannel : BasePanel<HomeMainPannel>
         });
         flaskBtn.onClick.AddListener(() =>
         {
-            UIManager.Instance.ShowPanel<FlaskPannel>("FlaskPannel", E_UI_Layer.top);
+            UIManager.Instance.ShowPanel<FlaskPanel>("FlaskPannel", E_UI_Layer.top);
             inventoryUI.OpenBoxUI();
         });
         distillerBtn.onClick.AddListener(() =>

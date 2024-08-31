@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 public static class EventHandler
 {
-    public static event Action<InventoryLocation, List<LegacyInventoryItem>> UpdateInventoryUI;
-    public static void CallUpdateInventoryUI(InventoryLocation location, List<LegacyInventoryItem> list)
+    public static event Action<InventoryLocation, List<InventoryItem>> UpdateInventoryUI;
+    public static void CallUpdateInventoryUI(InventoryLocation location, List<InventoryItem> list)
     {
         UpdateInventoryUI?.Invoke(location, list);
     }
@@ -21,8 +21,8 @@ public static class EventHandler
         DropItemEvent?.Invoke(ID, pos, itemType);
     }
 
-    public static event Action<LegacyItemDetails, bool> ItemSelectedEvent;
-    public static void CallItemSelectedEvent(LegacyItemDetails itemDetails, bool isSelected)
+    public static event Action<DataItem, bool> ItemSelectedEvent;
+    public static void CallItemSelectedEvent(DataItem itemDetails, bool isSelected)
     {
         ItemSelectedEvent?.Invoke(itemDetails, isSelected);
     }
@@ -51,14 +51,14 @@ public static class EventHandler
         MoveToPosition?.Invoke(targetPosition);
     }
 
-    public static event Action<Vector3, LegacyItemDetails> MouseClickedEvent;
-    public static void CallMouseClickedEvent(Vector3 pos, LegacyItemDetails itemDetails)
+    public static event Action<Vector3, DataItem> MouseClickedEvent;
+    public static void CallMouseClickedEvent(Vector3 pos, DataItem itemDetails)
     {
         MouseClickedEvent?.Invoke(pos, itemDetails);
     }
 
-    public static event Action<Vector3, LegacyItemDetails> ExecuteActionAfterAnimation;
-    public static void CallExecuteActionAfterAnimation(Vector3 pos, LegacyItemDetails itemDetails)
+    public static event Action<Vector3, DataItem> ExecuteActionAfterAnimation;
+    public static void CallExecuteActionAfterAnimation(Vector3 pos, DataItem itemDetails)
     {
         ExecuteActionAfterAnimation?.Invoke(pos, itemDetails);
     }
@@ -107,8 +107,8 @@ public static class EventHandler
     //    UpdateGameStateEvent?.Invoke(gameState);
     //}
 
-    public static event Action<LegacyItemDetails, bool> ShowTradeUI;
-    public static void CallShowTradeUI(LegacyItemDetails item, bool isSell)
+    public static event Action<DataItem, bool> ShowTradeUI;
+    public static void CallShowTradeUI(DataItem item, bool isSell)
     {
         ShowTradeUI?.Invoke(item, isSell);
     }

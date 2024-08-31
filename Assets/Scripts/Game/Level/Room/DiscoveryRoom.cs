@@ -64,15 +64,14 @@ namespace Game.Level.Room
 
         public void InitTeleport()
         {
-            DiscoveryRoomData discoveryRoomData = data as DiscoveryRoomData;
-            if (discoveryRoomData != null)
+            if (_discoveryRoomData != null)
             {
-                for (int i = 0; i < discoveryRoomData.teleportPrefabPaths.Count; i++)
+                for (int i = 0; i < _discoveryRoomData.teleportPrefabPaths.Count; i++)
                 {
                     int i1 = i;
-                    ResManager.LoadResourceAsync<GameObject>(discoveryRoomData.teleportPrefabPaths[i1], arg0 =>
+                    ResManager.LoadResourceAsync<GameObject>(_discoveryRoomData.teleportPrefabPaths[i1], arg0 =>
                     {
-                        SetGameObject(arg0, discoveryRoomData.teleportPositions[i1], gameObject.transform);
+                        SetGameObject(arg0, _discoveryRoomData.teleportPositions[i1], gameObject.transform);
                         SetTransformView(arg0);
                     });
                 }

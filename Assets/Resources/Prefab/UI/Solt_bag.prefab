@@ -71,14 +71,16 @@ MonoBehaviour:
   isSelected: 0
   slotIndex: 0
   itemDetails:
-    itemID: 0
+    itemID:
+      id: 0
+      BaseId: 0
+      ATTR: 
     itemName: 
     itemType: 0
     itemIcon: {fileID: 0}
     itemOnWorldSprite: {fileID: 0}
     itemDescription: 
     itemUseRadius: 0
-    effectsIDs: 
     foeverEffect: 0
     purity: 0
   itemAmount: 0
@@ -146,8 +148,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c4eb691b1f60dbf45985c4445ffd19e9, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4

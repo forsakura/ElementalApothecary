@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 最表层去使用的一个item数据类基础
+/// 最表层去使用的一个item数据类基础(看子类！！！)
 /// </summary>
 public class TrItem : ITrItem
 {
-    public ItemID ID { get; set; } //物品id(或者tag)
+    private ItemID id;
+    public ItemID ID 
+    {
+        get => id;
+        set => id = value; 
+    } //物品id(或者tag)
 
     public void AddATTRID(int singleATTR)
     {
@@ -32,7 +37,7 @@ public class TrItem : ITrItem
         return ID.BaseId;
     }
 
-
+    
     public enum ItemTag
     {
         material,
@@ -40,7 +45,7 @@ public class TrItem : ITrItem
         QuestItem
     }
 }
-
+[System.Serializable]
 /// <summary>
 /// id数组使得随机组合获得可能
 /// </summary>
