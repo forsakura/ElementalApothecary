@@ -37,7 +37,10 @@ namespace Enemy.Mushroom
             {
                 // Start animation;
                 anim.FSM.ChangeStateTo("CreateSpore");
+
                 CreateSporeArea();
+                anim.FinishCreateSpore();
+
                 target = gameObject;
                 AfterGetHit -= ThresholdCheck;
             }
