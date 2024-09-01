@@ -25,11 +25,6 @@ public class PlayerController : MonoBehaviour
 
     public Vector2 playerDirection;
 
-    public event ShootEventHandler OnShoot;
-    public event ThrowEventHandler OnThrow;
-    public event DrinkEventHandler OnDrink;
-    public event FillBulletEventHandler OnFill;
-
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -68,7 +63,6 @@ public class PlayerController : MonoBehaviour
 
     private void Shoot(InputAction.CallbackContext context)
     {
-        OnShoot?.Invoke();
         player.Shoot(mouseWorldPos);
     }
 
@@ -80,19 +74,16 @@ public class PlayerController : MonoBehaviour
 
     private void Throw(InputAction.CallbackContext context)
     {
-        OnThrow?.Invoke();
         player.Throw(mouseWorldPos);
     }
 
     private void Drink(InputAction.CallbackContext context)
     {
-        OnDrink?.Invoke();
         player.Drink();
     }
 
     private void Fill(InputAction.CallbackContext context)
     {
-        OnFill?.Invoke();
         player.Fill();
     }
 }

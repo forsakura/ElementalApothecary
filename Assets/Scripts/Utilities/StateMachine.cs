@@ -92,6 +92,13 @@ public class StateMachine
         currentState.Enter();
     }
 
+    public void ExitStateMachine()
+    {
+        currentState.Exit();
+        previousState = currentState;
+        currentState = null;
+    }
+
     public void Clear()
     {
         states.Clear();

@@ -26,6 +26,11 @@ public class Characters : MonoBehaviour
     public event BeforeGetHitEventHandler BeforeGetHit;
     public event AfterGetHitEventHandler AfterGetHit;
     public event CharacterDeathEventHandler OnDeath;
+    public event OnHealthChangeEventHandler OnHealthChange;
+
+    public event ShootEventHandler OnShoot;
+    public event ThrowEventHandler OnThrow;
+    public event FillBulletEventHandler OnFill;
 
     private void Awake()
     {
@@ -41,6 +46,7 @@ public class Characters : MonoBehaviour
             tag = "Enemy";
         }
         CurrentHealth = characterData.MaxHealth;
+        OnHealthChange?.Invoke(this, CurrentHealth);
         CurrentSpeed = characterData.MoveSpeed;
         ElementContain = new int[2] { 0, 0 };
         ElementName = new EElement[2] {EElement.None, EElement.None};
@@ -71,8 +77,9 @@ public class Characters : MonoBehaviour
 
         BeforeGetHit?.Invoke(this, hit);
 
-        int elemDmg = CalculateElementDamage(hit);
-        CurrentHealth -= hit.Damage + elemDmg;
+        int totalDmg = hit.Damage + CalculateElementDamage(hit);
+        CurrentHealth -= totalDmg;
+        OnHealthChange?.Invoke(this, CurrentHealth);
         if (CurrentHealth <= 0)
         {
             isDead = true;
@@ -140,27 +147,34 @@ public class Characters : MonoBehaviour
             return;
         }
         GameObject bul = Instantiate(bulletPrefab, transform.position, new Quaternion());
-        HitInstance hit = new();
-        hit.Source = gameObject;
-        hit.Damage = characterData.Damage;
+        HitInstance hit = new()
+        {
+            Source = gameObject,
+            Damage = characterData.Damage
+        };
         BulletControl bulletControl = bul.GetComponent<BulletControl>();
         bulletControl.SetBullet(target, BulletType.Shoot);
         bulletControl.OnBulletHitTarget += OnBulletHitTarget;
         remainingBullet -= 1;
+        OnShoot?.Invoke(this, 1);
     }
 
     public virtual void Throw(Vector2 target)
     {
         GameObject bul = Instantiate(bulletPrefab, transform.position, new Quaternion());
-        HitInstance hit = new();
-        hit.Source = gameObject;
-        hit.Damage = characterData.Damage;
+        HitInstance hit = new()
+        {
+            Source = gameObject,
+            Damage = characterData.Damage
+        };
         bul.GetComponent<BulletControl>().SetBullet(target, BulletType.Throw);
+        OnThrow?.Invoke(this);
     }
 
     public virtual void Fill()
     {
         remainingBullet = characterData.MaxBulletCount;
+        OnFill?.Invoke(this, remainingBullet);
     }
 
     public virtual void OnBulletHitTarget(BulletControl bullet, Collider2D collision)

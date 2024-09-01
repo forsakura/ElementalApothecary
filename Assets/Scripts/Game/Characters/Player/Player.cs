@@ -19,6 +19,8 @@ public class Player : Characters
     private PlayerInteraction interactableObject;
     private List<PlayerInteraction> interactableObjects;
 
+    public event DrinkEventHandler OnDrink;
+
     private void Start()
     {
         bulletPrefab = Resources.Load<GameObject>("Prefab/Bullets/Bullet");
@@ -99,6 +101,6 @@ public class Player : Characters
 
     public void Drink()
     {
-
+        OnDrink?.Invoke(this);
     }
 }

@@ -54,6 +54,11 @@ public class BulletControl : MonoBehaviour
         {
             return;
         }
+        if (collision.CompareTag("Obstacle"))
+        {
+            Destroy(gameObject);
+            return;
+        }
         OnBulletHitTarget?.Invoke(this, collision);
     }
 
