@@ -46,10 +46,8 @@ public class InventoryManager : Utilities.Singleton<InventoryManager>
         //EventHandler.CallUpdateInventoryUI(InventoryLocation.Pot, potBag.itemList);
         //EventHandler.CallUpdateInventoryUI(InventoryLocation.Distiller, distillerBag.itemList);
         //DontDestroyOnLoad(this);
-        foreach(var  item in itemDetailsList)
-        {
-            print(item.ID);
-        }
+        DontDestroyOnLoad(this);
+        
     }
     //目前没有表，先做测试
     public void ReadTable()
@@ -59,35 +57,38 @@ public class InventoryManager : Utilities.Singleton<InventoryManager>
         {
             DataItem itemDetails = new DataItem();
             itemDetails.ID = item.itemID;
+            itemDetails.itemIcon = item.itemIcon;
+            itemDetails.itemName = item.itemName;
+            itemDetails.itemDescription = item.itemDescription;
             itemDetailsList.Add(itemDetails);
         }
         
-        //foreach(var item in materials_SO.MaterialEntities)
+        //foreach(var itemID in materials_SO.MaterialEntities)
         //{
-        //    if (HasTableContain(item.id)) continue;
+        //    if (HasTableContain(itemID.id)) continue;
         //    TrItem itemDetails = new TrItem();
-        //    itemDetails.ID = item.id;
-        //    itemDetails.itemName = item.materialName;
-        //    itemDetails.itemDescription = item.description;
+        //    itemDetails.ID = itemID.id;
+        //    itemDetails.itemName = itemID.materialName;
+        //    itemDetails.itemDescription = itemID.description;
         //    itemDetails.itemType = ItemType.Material;
         //    itemDetails.itemUseRadius = potionUseEffectRadius;
-        //    itemDetails.itemIcon = ReturnIcon(item.id);
-        //    itemDetails.itemOnWorldSprite=ReturnIcon(item.id);
+        //    itemDetails.itemIcon = ReturnIcon(itemID.id);
+        //    itemDetails.itemOnWorldSprite=ReturnIcon(itemID.id);
         //    itemDetailsList.Add(itemDetails);
         //}
-        //foreach(var item in potions_SO.PotionEntities)
+        //foreach(var itemID in potions_SO.PotionEntities)
         //{
-        //    if (HasTableContain(item.id)) continue;
+        //    if (HasTableContain(itemID.id)) continue;
         //    DataItem itemDetails = new DataItem();
-        //    itemDetails.itemID = item.id;
-        //    itemDetails.itemName = item.potionName;
-        //    itemDetails.itemDescription = item.description;
+        //    itemDetails.itemID = itemID.id;
+        //    itemDetails.itemName = itemID.potionName;
+        //    itemDetails.itemDescription = itemID.description;
         //    itemDetails.itemType = ItemType.Potion;
         //    itemDetails.itemUseRadius = potionUseEffectRadius;
-        //    itemDetails.itemIcon = ReturnIcon(item.id);
-        //    itemDetails.itemOnWorldSprite = ReturnIcon(item.id);
-        //    itemDetails.foeverEffect = item.foreverEffectId;
-        //    //itemDetails.effectsIDs.Add(item.toEnemyEffectIds);
+        //    itemDetails.itemIcon = ReturnIcon(itemID.id);
+        //    itemDetails.itemOnWorldSprite = ReturnIcon(itemID.id);
+        //    itemDetails.foeverEffect = itemID.foreverEffectId;
+        //    //itemDetails.effectsIDs.Add(itemID.toEnemyEffectIds);
         //    itemDetails.purity = 80;
         //    itemDetailsList.Add(itemDetails);
         //}
@@ -149,7 +150,7 @@ public class InventoryManager : Utilities.Singleton<InventoryManager>
 
    
     /// <summary>
-    /// 通过物品ID添加物品
+    /// 通过物品ID添加物品到仓库
     /// </summary>
     /// <param name="itemId"></param>
     /// <param name="itemCount"></param>

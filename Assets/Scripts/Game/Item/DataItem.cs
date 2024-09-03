@@ -10,7 +10,7 @@ public class DataItem : TrItem, IDataItem
     private int _useTimes;
     private int _itemUseRadius;
     private string _itemDescription;
-    private Sprite _itemIcon;  
+    private Sprite _itemIcon; // 如果需要，可以取消注释并添加相应的属性  
     private string _itemName;
     private List<TrItem.ItemTag> _tags = new List<TrItem.ItemTag>();
     private EElement _baseElement ;
@@ -21,6 +21,7 @@ public class DataItem : TrItem, IDataItem
         this.useTimes = 0;
         this.itemUseRadius = 0;
         this.itemDescription = null;
+        this.itemIcon = null;
         this.itemName = null;
         this.tags = null;
         BaseElement = EElement.None;

@@ -12,7 +12,7 @@ public class ItemPickUp : MonoBehaviour
         if (item != null)
         {
             //拾取物品添加到背包
-            //InventoryManager.Instance.AddItem(item, true);
+            //InventoryManager.Instance.AddItem(itemID, true);
         }
     }
 }

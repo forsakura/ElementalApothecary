@@ -1,18 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.U2D.Animation;
 using UnityEngine;
 
-public class JKAnimation : MonoBehaviour
+namespace Enemy.JungleKid
 {
-    // Start is called before the first frame update
-    void Start()
+    public class JKAnimation : MonoBehaviour
     {
-        
-    }
+        public JKMain jk;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public StateMachine CurrentFSM;
+        public StateMachine CommonFSM;
+        public StateMachine FollowFSM;
+        public Rigidbody2D rb;
+
+        private void Start()
+        {
+            InitFSM();
+            jk = GetComponent<JKMain>();
+            rb = GetComponent<Rigidbody2D>();
+        }
+
+        private void Update()
+        {
+            CurrentFSM.Excute();
+        }
+
+        private void InitFSM()
+        {
+            
+            
+        }
     }
 }

@@ -5,8 +5,6 @@ using UnityEngine.Events;
 
 public class BulletControl : MonoBehaviour
 {
-    public HitInstance hitInstance;
-
     bool initFinish = false;
     BulletType bulletType;
     Vector2 start;
@@ -15,8 +13,8 @@ public class BulletControl : MonoBehaviour
     Rigidbody2D rb;
     float timer = 0.0f;
 
-    public delegate void OnBulletHitSomethingHandler(Collider2D collision);
-    public OnBulletHitSomethingHandler OnBulletHitSomething;
+    public delegate void OnBulletHitEventHandler(BulletControl bullet, Collider2D collision);
+    public event OnBulletHitEventHandler OnBulletHitTarget;
 
     private void Start()
     {
@@ -35,7 +33,7 @@ public class BulletControl : MonoBehaviour
                     if (timer > 1.0f)
                     {
                         Destroy(gameObject);
-                        // 此处生成范围碰撞箱
+                        OnBulletHitTarget?.Invoke(this, null);
                     }
                     break;
                 case BulletType.Shoot:
@@ -56,20 +54,17 @@ public class BulletControl : MonoBehaviour
         {
             return;
         }
-        if (collision.gameObject != hitInstance.Source && (collision.tag.Equals("Player") || collision.tag.Equals("Enemy")))
+        if (collision.CompareTag("Obstacle"))
         {
-            if (collision.GetComponent<IHitable>().GetHit(hitInstance))
-            {
-                Destroy(gameObject);
-            }
+            Destroy(gameObject);
+            return;
         }
-        // OnBulletHitSomething(collision);
+        OnBulletHitTarget?.Invoke(this, collision);
     }
 
-    public void SetBullet(Vector2 target, HitInstance hit, BulletType type)
+    public void SetBullet(Vector2 target, BulletType type)
     {
         this.target = target;
-        this.hitInstance = hit;
         this.bulletType = type;
         initFinish = true;
     }

@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using CharacterDelegates;
 
-public class Characters : MonoBehaviour, IHitable
+public class Characters : MonoBehaviour
 {
     public CharacterData characterData;
     public ECharacterType characterType;
@@ -17,24 +18,35 @@ public class Characters : MonoBehaviour, IHitable
     public int remainingBullet;
     public GameObject bulletPrefab;
 
-    public CharacterActions characterActions = new CharacterActions();
-
     private float invincibleTimer;
 
     public bool isInvincible;
     public bool isDead = false;
+
+    public event BeforeGetHitEventHandler BeforeGetHit;
+    public event AfterGetHitEventHandler AfterGetHit;
+    public event CharacterDeathEventHandler OnDeath;
+    public event OnHealthChangeEventHandler OnHealthChange;
+
+    public event ShootEventHandler OnShoot;
+    public event ThrowEventHandler OnThrow;
+    public event FillBulletEventHandler OnFill;
 
     private void Awake()
     {
         if (GetComponent<PlayerController>()  != null)
         {
             characterType = ECharacterType.Player;
+            tag = "Player";
+            
         }
         else
         {
             characterType = ECharacterType.Enemy;
+            tag = "Enemy";
         }
         CurrentHealth = characterData.MaxHealth;
+        OnHealthChange?.Invoke(this, CurrentHealth);
         CurrentSpeed = characterData.MoveSpeed;
         ElementContain = new int[2] { 0, 0 };
         ElementName = new EElement[2] {EElement.None, EElement.None};
@@ -62,20 +74,24 @@ public class Characters : MonoBehaviour, IHitable
         {
             return false;
         }
-        characterActions.BeforeGetHit.Invoke(this, hit);
-        int elemDmg = CalculateElementDamage(hit);
-        CurrentHealth -= hit.Damage + elemDmg;
+
+        BeforeGetHit?.Invoke(this, hit);
+
+        int totalDmg = hit.Damage + CalculateElementDamage(hit);
+        CurrentHealth -= totalDmg;
+        OnHealthChange?.Invoke(this, CurrentHealth);
         if (CurrentHealth <= 0)
         {
             isDead = true;
-            characterActions.OnCharacterDeath.Invoke(this, hit);
+            OnDeath?.Invoke(this, hit);
         }
 
         isInvincible = true;
         invincibleTimer = characterData.InvincibleTime;
         StartCoroutine(InvincibleCountDown());
 
-        characterActions.AfterGetHit.Invoke(this, hit);
+        AfterGetHit?.Invoke(this, hit);
+
         return true;
     }
     
@@ -124,22 +140,46 @@ public class Characters : MonoBehaviour, IHitable
         return dmg;
     }
 
-    public void Shoot(Vector2 target)
+    public virtual void Shoot(Vector2 target)
     {
+        if (remainingBullet == 0)
+        {
+            return;
+        }
         GameObject bul = Instantiate(bulletPrefab, transform.position, new Quaternion());
-        HitInstance hit = new();
-        hit.Source = gameObject;
-        hit.Damage = characterData.Damage;
-        bul.GetComponent<BulletControl>().SetBullet(target, hit, BulletType.Shoot);
+        HitInstance hit = new()
+        {
+            Source = gameObject,
+            Damage = characterData.Damage
+        };
+        BulletControl bulletControl = bul.GetComponent<BulletControl>();
+        bulletControl.SetBullet(target, BulletType.Shoot);
+        bulletControl.OnBulletHitTarget += OnBulletHitTarget;
+        remainingBullet -= 1;
+        OnShoot?.Invoke(this, 1);
     }
 
-    public void Throw(Vector2 target)
+    public virtual void Throw(Vector2 target)
     {
         GameObject bul = Instantiate(bulletPrefab, transform.position, new Quaternion());
-        HitInstance hit = new();
-        hit.Source = gameObject;
-        hit.Damage = characterData.Damage;
-        bul.GetComponent<BulletControl>().SetBullet(target, hit, BulletType.Throw);
+        HitInstance hit = new()
+        {
+            Source = gameObject,
+            Damage = characterData.Damage
+        };
+        bul.GetComponent<BulletControl>().SetBullet(target, BulletType.Throw);
+        OnThrow?.Invoke(this);
+    }
+
+    public virtual void Fill()
+    {
+        remainingBullet = characterData.MaxBulletCount;
+        OnFill?.Invoke(this, remainingBullet);
+    }
+
+    public virtual void OnBulletHitTarget(BulletControl bullet, Collider2D collision)
+    {
+
     }
 
     private IEnumerator InvincibleCountDown()

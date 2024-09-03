@@ -19,6 +19,7 @@ public class PlayerAnimations : MonoBehaviour
     {
         direction = playerController.mouseWorldPos.x - transform.position.x;
         anim.SetFloat("direction", direction);
+        anim.SetFloat("speed", playerController.rb.velocity.magnitude);
     }
 
     public void ShootAnimation()

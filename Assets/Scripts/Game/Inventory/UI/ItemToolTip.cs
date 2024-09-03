@@ -15,7 +15,7 @@ public class ItemToolTip : MonoBehaviour
     {
         if (itemDetails == null) return;
         nameText.text = itemDetails.itemName;
-        //typeText.text = GetItemType(itemDetails.itemType);
+        //typeText.text = GetItemType(itemDetails.tags);
         descriptionText.text = itemDetails.itemDescription;
         //BottomPart.text ="纯度："+ itemDetails.purity;
        

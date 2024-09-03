@@ -165,7 +165,7 @@ namespace Pathfinding {
 
 			// Add or replace the start point
 			// Disable adding of points if the mode is SnapToNode since then
-			// the first item in vectorPath will very likely be the same as the
+			// the first itemID in vectorPath will very likely be the same as the
 			// position of the first node
 			if ((forceAddStartPoint || addPoints) && exactStartPoint != Exactness.SnapToNode) {
 				p.vectorPath.Insert(0, pStart);

@@ -43,7 +43,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         DataItem item = InventoryManager.Instance.GetItemDetails(potionID);
         potionIcon.gameObject.SetActive(true);
         PotionId = potionID;
-        //potionIcon.sprite = item.itemIcon;
+        //potionIcon.sprite = itemID.itemIcon;
         // potionIcon.sprite = Resources.Load<Sprite>($"ToolUI/药水/{potionID}");
         count.text = potionCount.ToString();
         potionCounts = potionCount;

@@ -3,46 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterActions
+namespace CharacterDelegates
 {
-    public Action<Characters, HitInstance> BeforeGetHit = (go, e) =>
-    {
-        Debug.Log("Before damage calculate action. " + go.name + " received hit from " + e.Source.name + ", damage value is " + e.Damage + ".");
-    };
-    public Action<Characters, HitInstance> AfterGetHit = (go, e) =>
-    {
-        Debug.Log("After damage calculate action. Damage value " + go.name + " received now is " + e.Damage + ".");
-    };
-    public Action<Characters, HitInstance> OnCharacterDeath = (go, e) =>
-    {
-        Debug.Log(go.name + "is killed by: " + e.Source.name);
-    };
+    public delegate void BeforeGetHitEventHandler(Characters go, HitInstance hit);
+    public delegate void AfterGetHitEventHandler(Characters go, HitInstance hit);
+    public delegate void CharacterDeathEventHandler(Characters go, HitInstance hit);
+    public delegate void OnHealthChangeEventHandler(Characters go, int health);
+    public delegate void ShootEventHandler(Characters go, int useBulletCount);
+    public delegate void ThrowEventHandler(Characters go);
+    public delegate void DrinkEventHandler(Characters go);
+    public delegate void FillBulletEventHandler(Characters go, int maxBulletCount);
+    public delegate void SwitchLeftPotionEventHandler();
+    public delegate void SwitchRightPotionEventHandler();
 
-    public Action OnSwitchWeapon = () => 
-    {
-        Debug.Log("Switch weapon.");
-    };
-    public Action OnShoot = () =>
-    {
-        Debug.Log("Shoot.");
-    };
-    public Action OnThrow = () =>
-    {
-        Debug.Log("Throw.");
-    };
-    public Action OnDrink = () =>
-    {
-        Debug.Log("Drink.");
-    };
-
-    // ×óÓÒÑ¡ÔñÒ©Ë®
-    public Action SwitchToLeftPotion = () => 
-    {
-        Debug.Log("Switch potion to left.");
-    };
-
-    public Action SwitchToRightPotion = () =>
-    {
-        Debug.Log("Switch potion to right.");
-    };
+    public delegate void OnEnemyTargetSetEventHandler();
 }

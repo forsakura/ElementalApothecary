@@ -15,6 +15,7 @@ public class CharacterData
     public int MaxAqua;
 
     public int Damage;
+    public int MaxBulletCount;
     public float AttackInterval;
     public float AttackDistance;
 

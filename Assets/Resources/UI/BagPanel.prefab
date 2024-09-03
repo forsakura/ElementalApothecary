@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 924222608854037315}
   - component: {fileID: 8607623333528661808}
   - component: {fileID: 355288720258809280}
+  - component: {fileID: 8535205199723640761}
   m_Layer: 5
   m_Name: BagPanel
   m_TagString: Untagged
@@ -33,6 +34,7 @@ RectTransform:
   - {fileID: 7943716335145929553}
   - {fileID: 5761976373275459622}
   - {fileID: 771770704337775045}
+  - {fileID: 8567836063078892298}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -78,6 +80,29 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8535205199723640761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 18631045802939587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b96cc13bdf10acf4a9cedd976498ce0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bagSlots:
+  - {fileID: 1038510590106588434}
+  - {fileID: 8364610283845848357}
+  - {fileID: 8345641150659914759}
+  - {fileID: 8018769295109060763}
+  - {fileID: 5257916022907142092}
+  - {fileID: 3747029094574055010}
+  - {fileID: 7757297278533948835}
+  - {fileID: 2927788330880628483}
+  - {fileID: 2526047640018867132}
+  - {fileID: 3873375223946049704}
 --- !u!1 &2099663319274224609
 GameObject:
   m_ObjectHideFlags: 0
@@ -119,11 +144,11 @@ RectTransform:
   - {fileID: 3725331824040743534}
   - {fileID: 4043331441517246161}
   - {fileID: 3373864939195080133}
-  m_Father: {fileID: 7943716335145929553}
+  m_Father: {fileID: 924222608854037315}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 19.080032, y: -256.945}
+  m_AnchoredPosition: {x: -0.000045776367, y: 169.54001}
   m_SizeDelta: {x: 700, y: 339.08}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5205805218771159126
@@ -280,7 +305,7 @@ GameObject:
   - component: {fileID: 3305274083355781741}
   - component: {fileID: 1688433582456921562}
   m_Layer: 5
-  m_Name: Back
+  m_Name: CloseBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -298,14 +323,13 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8567836063078892298}
   - {fileID: 4391481108013565240}
   m_Father: {fileID: 924222608854037315}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 159, y: 160.97}
-  m_SizeDelta: {x: 356.16003, y: 368.97}
+  m_AnchoredPosition: {x: 350, y: -65}
+  m_SizeDelta: {x: 146.6761, y: 88.4111}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &5531432578929623435
 CanvasRenderer:
@@ -437,7 +461,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -226.51, y: -402.76}
+  m_AnchoredPosition: {x: -255, y: -71}
   m_SizeDelta: {x: 177.98, y: 55.48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8896882913291879186
@@ -698,7 +722,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &771770704337775045
 RectTransform:
   m_ObjectHideFlags: 0
@@ -946,6 +970,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30c2048e8ec765647a3d992db9ef4e19, type: 3}
+--- !u!114 &1038510590106588434 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 66680941832769975, guid: 30c2048e8ec765647a3d992db9ef4e19, type: 3}
+  m_PrefabInstance: {fileID: 1046350342477038757}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dd0f35bf45294a4c93aad9a9430310d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1547859032307183743 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2017185479220229338, guid: 30c2048e8ec765647a3d992db9ef4e19, type: 3}
@@ -959,6 +994,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8567836063078892298}
     m_Modifications:
+    - target: {fileID: 66680941832769975, guid: 30c2048e8ec765647a3d992db9ef4e19, type: 3}
+      propertyPath: slotIndex
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1801535914281917050, guid: 30c2048e8ec765647a3d992db9ef4e19, type: 3}
       propertyPath: m_Name
       value: Solt_bag (8)
@@ -1048,6 +1087,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30c2048e8ec765647a3d992db9ef4e19, type: 3}
+--- !u!114 &2526047640018867132 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 66680941832769975, guid: 30c2048e8ec765647a3d992db9ef4e19, type: 3}
+  m_PrefabInstance: {fileID: 2585830378739778059}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dd0f35bf45294a4c93aad9a9430310d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &4043331441517246161 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2017185479220229338, guid: 30c2048e8ec765647a3d992db9ef4e19, type: 3}
@@ -1061,6 +1111,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8567836063078892298}
     m_Modifications:
+    - target: {fileID: 66680941832769975, guid: 30c2048e8ec765647a3d992db9ef4e19, type: 3}
+      propertyPath: slotIndex
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 1801535914281917050, guid: 30c2048e8ec765647a3d992db9ef4e19, type: 3}
       propertyPath: m_Name
       value: Solt_bag (7)
@@ -1150,6 +1204,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30c2048e8ec765647a3d992db9ef4e19, type: 3}
+--- !u!114 &2927788330880628483 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 66680941832769975, guid: 30c2048e8ec765647a3d992db9ef4e19, type: 3}
+  m_PrefabInstance: {fileID: 2904102743819380404}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dd0f35bf45294a4c93aad9a9430310d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &3725331824040743534 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2017185479220229338, guid: 30c2048e8ec765647a3d992db9ef4e19, type: 3}
@@ -1163,6 +1228,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8567836063078892298}
     m_Modifications:
+    - target: {fileID: 66680941832769975, guid: 30c2048e8ec765647a3d992db9ef4e19, type: 3}
+      propertyPath: slotIndex
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1801535914281917050, guid: 30c2048e8ec765647a3d992db9ef4e19, type: 3}
       propertyPath: m_Name
       value: Solt_bag (5)
@@ -1257,6 +1326,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2017185479220229338, guid: 30c2048e8ec765647a3d992db9ef4e19, type: 3}
   m_PrefabInstance: {fileID: 3813698882338607061}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3747029094574055010 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 66680941832769975, guid: 30c2048e8ec765647a3d992db9ef4e19, type: 3}
+  m_PrefabInstance: {fileID: 3813698882338607061}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dd0f35bf45294a4c93aad9a9430310d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3831467929231255839
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1265,6 +1345,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8567836063078892298}
     m_Modifications:
+    - target: {fileID: 66680941832769975, guid: 30c2048e8ec765647a3d992db9ef4e19, type: 3}
+      propertyPath: slotIndex
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 1801535914281917050, guid: 30c2048e8ec765647a3d992db9ef4e19, type: 3}
       propertyPath: m_Name
       value: Solt_bag (9)
@@ -1359,6 +1443,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2017185479220229338, guid: 30c2048e8ec765647a3d992db9ef4e19, type: 3}
   m_PrefabInstance: {fileID: 3831467929231255839}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3873375223946049704 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 66680941832769975, guid: 30c2048e8ec765647a3d992db9ef4e19, type: 3}
+  m_PrefabInstance: {fileID: 3831467929231255839}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dd0f35bf45294a4c93aad9a9430310d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5195811696052924027
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1367,6 +1462,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8567836063078892298}
     m_Modifications:
+    - target: {fileID: 66680941832769975, guid: 30c2048e8ec765647a3d992db9ef4e19, type: 3}
+      propertyPath: slotIndex
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1801535914281917050, guid: 30c2048e8ec765647a3d992db9ef4e19, type: 3}
       propertyPath: m_Name
       value: Solt_bag (4)
@@ -1456,6 +1555,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30c2048e8ec765647a3d992db9ef4e19, type: 3}
+--- !u!114 &5257916022907142092 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 66680941832769975, guid: 30c2048e8ec765647a3d992db9ef4e19, type: 3}
+  m_PrefabInstance: {fileID: 5195811696052924027}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dd0f35bf45294a4c93aad9a9430310d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &6045309216685726369 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2017185479220229338, guid: 30c2048e8ec765647a3d992db9ef4e19, type: 3}
@@ -1469,6 +1579,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8567836063078892298}
     m_Modifications:
+    - target: {fileID: 66680941832769975, guid: 30c2048e8ec765647a3d992db9ef4e19, type: 3}
+      propertyPath: slotIndex
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1801535914281917050, guid: 30c2048e8ec765647a3d992db9ef4e19, type: 3}
       propertyPath: m_Name
       value: Solt_bag (6)
@@ -1558,6 +1672,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30c2048e8ec765647a3d992db9ef4e19, type: 3}
+--- !u!114 &7757297278533948835 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 66680941832769975, guid: 30c2048e8ec765647a3d992db9ef4e19, type: 3}
+  m_PrefabInstance: {fileID: 7731432824869602324}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dd0f35bf45294a4c93aad9a9430310d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &8121655551208370382 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2017185479220229338, guid: 30c2048e8ec765647a3d992db9ef4e19, type: 3}
@@ -1571,6 +1696,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8567836063078892298}
     m_Modifications:
+    - target: {fileID: 66680941832769975, guid: 30c2048e8ec765647a3d992db9ef4e19, type: 3}
+      propertyPath: slotIndex
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1801535914281917050, guid: 30c2048e8ec765647a3d992db9ef4e19, type: 3}
       propertyPath: m_Name
       value: Solt_bag (3)
@@ -1660,6 +1789,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30c2048e8ec765647a3d992db9ef4e19, type: 3}
+--- !u!114 &8018769295109060763 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 66680941832769975, guid: 30c2048e8ec765647a3d992db9ef4e19, type: 3}
+  m_PrefabInstance: {fileID: 8044697525316479276}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dd0f35bf45294a4c93aad9a9430310d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &8384288842090061302 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2017185479220229338, guid: 30c2048e8ec765647a3d992db9ef4e19, type: 3}
@@ -1673,6 +1813,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8567836063078892298}
     m_Modifications:
+    - target: {fileID: 66680941832769975, guid: 30c2048e8ec765647a3d992db9ef4e19, type: 3}
+      propertyPath: slotIndex
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1801535914281917050, guid: 30c2048e8ec765647a3d992db9ef4e19, type: 3}
       propertyPath: m_Name
       value: Solt_bag (2)
@@ -1767,6 +1911,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2017185479220229338, guid: 30c2048e8ec765647a3d992db9ef4e19, type: 3}
   m_PrefabInstance: {fileID: 8303874232317410736}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8345641150659914759 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 66680941832769975, guid: 30c2048e8ec765647a3d992db9ef4e19, type: 3}
+  m_PrefabInstance: {fileID: 8303874232317410736}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dd0f35bf45294a4c93aad9a9430310d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8429037879368162450
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1775,6 +1930,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8567836063078892298}
     m_Modifications:
+    - target: {fileID: 66680941832769975, guid: 30c2048e8ec765647a3d992db9ef4e19, type: 3}
+      propertyPath: slotIndex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1801535914281917050, guid: 30c2048e8ec765647a3d992db9ef4e19, type: 3}
       propertyPath: m_Name
       value: Solt_bag (1)
@@ -1869,3 +2028,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2017185479220229338, guid: 30c2048e8ec765647a3d992db9ef4e19, type: 3}
   m_PrefabInstance: {fileID: 8429037879368162450}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8364610283845848357 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 66680941832769975, guid: 30c2048e8ec765647a3d992db9ef4e19, type: 3}
+  m_PrefabInstance: {fileID: 8429037879368162450}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dd0f35bf45294a4c93aad9a9430310d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

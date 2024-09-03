@@ -27,7 +27,7 @@ public class ExchangeUI : MonoBehaviour
     public void SetupExchangeUI(DataItem item)
     {
         this.item = item;
-        //itemIcon.sprite = item.itemIcon;
+        //itemIcon.sprite = itemID.itemIcon;
         itemName.text = item.itemName;
         tradeAmount.text = string.Empty;
     }
