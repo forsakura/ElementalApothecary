@@ -45,7 +45,7 @@ public class PotionMessagePanel : MonoBehaviour
     {
         foreach(var item in InventoryManager.Instance.potions_SO.PotionEntities)
         {
-            //if (item.id == potionID)
+            //if (itemID.id == potionID)
             {
                 DataItem itemdetails = InventoryManager.Instance.GetItemDetails(potionID);
                 //icon.sprite = itemdetails.itemIcon;

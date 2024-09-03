@@ -160,7 +160,7 @@ namespace Pathfinding {
 		}
 
 		/// <summary>
-		/// Pops the next item off the queue.
+		/// Pops the next itemID off the queue.
 		/// This call will block if there are no items in the queue or if the queue is currently blocked.
 		///
 		/// Returns: A Path object, guaranteed to be not null.
@@ -236,7 +236,7 @@ namespace Pathfinding {
 		}
 
 		/// <summary>
-		/// Pops the next item off the queue, this call will not block.
+		/// Pops the next itemID off the queue, this call will not block.
 		/// To ensure stability, the caller must follow this pattern.
 		/// 1. Call PopNoBlock(false), if a null value is returned, wait for a bit (e.g yield return null in a Unity coroutine)
 		/// 2. try again with PopNoBlock(true), if still null, wait for a bit

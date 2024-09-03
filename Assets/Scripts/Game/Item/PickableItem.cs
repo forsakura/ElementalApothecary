@@ -15,7 +15,7 @@ public class PickableItem : TrItem
     /// </summary>
     public void initByTemplet()
     {
-
+        itemOnWorldSprite=InventoryManager.Instance.GetItemDetails(ID).itemIcon;
     }
 
     public void applyATTR(int id)

@@ -493,12 +493,12 @@ public class AstarPath : VersionedMonoBehaviour {
 	public bool IsAnyWorkItemInProgress { get { return workItems.workItemsInProgress; } }
 
 	/// <summary>
-	/// Returns if this code is currently being exectuted inside a work item.
+	/// Returns if this code is currently being exectuted inside a work itemID.
 	/// Note: This includes pretty much all types of graph updates.
 	/// Such as normal graph updates, navmesh cutting and anything added by <see cref="RegisterSafeUpdate"/> or <see cref="AddWorkItem"/>.
 	///
-	/// In contrast to <see cref="IsAnyWorkItemInProgress"/> this is only true when work item code is being executed, it is not
-	/// true in-between the updates to a work item that takes several frames to complete.
+	/// In contrast to <see cref="IsAnyWorkItemInProgress"/> this is only true when work itemID code is being executed, it is not
+	/// true in-between the updates to a work itemID that takes several frames to complete.
 	/// </summary>
 	internal bool IsInsideWorkItem { get { return workItems.workItemsInProgressRightNow; } }
 
@@ -888,7 +888,7 @@ public class AstarPath : VersionedMonoBehaviour {
 
 	/// <summary>
 	/// Call during work items to queue a flood fill.
-	/// Deprecated: This method has been moved. Use the method on the context object that can be sent with work item delegates instead
+	/// Deprecated: This method has been moved. Use the method on the context object that can be sent with work itemID delegates instead
 	/// <code>
 	/// AstarPath.active.AddWorkItem(new AstarWorkItem(() => {
 	///     // Safe to update graphs here
@@ -906,7 +906,7 @@ public class AstarPath : VersionedMonoBehaviour {
 
 	/// <summary>
 	/// If a WorkItem needs to have a valid flood fill during execution, call this method to ensure there are no pending flood fills.
-	/// Deprecated: This method has been moved. Use the method on the context object that can be sent with work item delegates instead
+	/// Deprecated: This method has been moved. Use the method on the context object that can be sent with work itemID delegates instead
 	/// <code>
 	/// AstarPath.active.AddWorkItem(new AstarWorkItem(() => {
 	///     // Safe to update graphs here
@@ -923,7 +923,7 @@ public class AstarPath : VersionedMonoBehaviour {
 	}
 
 	/// <summary>
-	/// Add a work item to be processed when pathfinding is paused.
+	/// Add a work itemID to be processed when pathfinding is paused.
 	/// Convenience method that is equivalent to
 	/// <code>
 	/// AddWorkItem(new AstarWorkItem(callback));
@@ -936,7 +936,7 @@ public class AstarPath : VersionedMonoBehaviour {
 	}
 
 	/// <summary>
-	/// Add a work item to be processed when pathfinding is paused.
+	/// Add a work itemID to be processed when pathfinding is paused.
 	/// Convenience method that is equivalent to
 	/// <code>
 	/// AddWorkItem(new AstarWorkItem(callback));
@@ -949,9 +949,9 @@ public class AstarPath : VersionedMonoBehaviour {
 	}
 
 	/// <summary>
-	/// Add a work item to be processed when pathfinding is paused.
+	/// Add a work itemID to be processed when pathfinding is paused.
 	///
-	/// The work item will be executed when it is safe to update nodes. This is defined as between the path searches.
+	/// The work itemID will be executed when it is safe to update nodes. This is defined as between the path searches.
 	/// When using more threads than one, calling this often might decrease pathfinding performance due to a lot of idling in the threads.
 	/// Not performance as in it will use much CPU power, but performance as in the number of paths per second will probably go down
 	/// (though your framerate might actually increase a tiny bit).
@@ -1007,7 +1007,7 @@ public class AstarPath : VersionedMonoBehaviour {
 			graphUpdatesWorkItemAdded = true;
 			var workItem = graphUpdates.GetWorkItem();
 
-			// Add a new work item which first
+			// Add a new work itemID which first
 			// sets the graphUpdatesWorkItemAdded flag to false
 			// and then processes the graph updates
 			AddWorkItem(new AstarWorkItem(() => {

@@ -191,7 +191,7 @@ namespace Pathfinding {
 			numberOfItems--;
 			if (numberOfItems == 0) return returnItem;
 
-			// Last item in the heap array
+			// Last itemID in the heap array
 			var swapItem = heap[numberOfItems];
 			var swapItemG = swapItem.node.G;
 

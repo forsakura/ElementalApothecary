@@ -65,7 +65,7 @@ namespace Pathfinding.Util {
 
 		static int FindCandidate (List<List<T> > pool, int capacity) {
 			// Loop through the last MaxCapacitySearchLength items
-			// and check if any item has a capacity greater or equal to the one that
+			// and check if any itemID has a capacity greater or equal to the one that
 			// is desired. If so return it.
 			// Otherwise take the largest one or if there are no lists in the pool
 			// then allocate a new one with the desired capacity
@@ -73,7 +73,7 @@ namespace Pathfinding.Util {
 			int listIndex = -1;
 
 			for (int i = 0; i < pool.Count && i < MaxCapacitySearchLength; i++) {
-				// ith last item
+				// ith last itemID
 				var candidate = pool[pool.Count-1-i];
 
 				// Find the largest list that is not too large (arbitrary decision to try to prevent some memory bloat if the list was not just a temporary list).
@@ -118,7 +118,7 @@ namespace Pathfinding.Util {
 					return new List<T>(capacity);
 				} else {
 					var list = currentPool[listIndex];
-					// Swap current item and last item to enable a more efficient removal
+					// Swap current itemID and last itemID to enable a more efficient removal
 					inPool.Remove(list);
 					currentPool[listIndex] = currentPool[currentPool.Count-1];
 					currentPool.RemoveAt(currentPool.Count-1);

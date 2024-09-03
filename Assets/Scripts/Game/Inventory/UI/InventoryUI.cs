@@ -19,8 +19,6 @@ public class InventoryUI : MonoBehaviour
     [Header("背包格子位置")]
     public Transform content;
 
-    //[Header("玩家背包")]
-    //[SerializeField] private GameObject bagUI;
 
     [Header("仓库")]
     [SerializeField] private GameObject baseBag;
@@ -66,10 +64,10 @@ public class InventoryUI : MonoBehaviour
         {
             boxSlots[i].slotIndex = i;
         }
-        for (int i = 0; i < playerBagSlots.Length; i++)
-        {
-            playerBagSlots[i].slotIndex = i;
-        }
+        //for (int i = 0; i < playerBagSlots.Length; i++)
+        //{
+        //    playerBagSlots[i].slotIndex = i;
+        //}
         for(int i=0;i<potSlots.Length;i++)
         {
             potSlots[i].slotIndex = i;
@@ -92,11 +90,6 @@ public class InventoryUI : MonoBehaviour
         //}
     }
 
-    //private void OnShowTradeUI(ItemDetails item, bool isSell)
-    //{
-    //    tradeUI.gameObject.SetActive(true);
-    //    //tradeUI.SetupExchangeUI(item, isSell);
-    //}
 
     /// <summary>
     /// 打开通用包裹UI事件
@@ -180,6 +173,11 @@ public class InventoryUI : MonoBehaviour
         switch (location)
         {
             case InventoryLocation.Bag:
+                if (!UIManager.Instance.panelsDic.ContainsKey("BagPanel")) return;
+                foreach (SlotUI slot in UIManager.Instance.GetPanel<BagPanel>("BagPanel").bagSlots)
+                {
+                    playerBagSlots[slot.slotIndex] = slot;
+                }
                 for (int i = 0; i < playerBagSlots.Length; i++)
                 {
                     if (list[i].itemAmount > 0)
@@ -210,7 +208,7 @@ public class InventoryUI : MonoBehaviour
                     {
                         SlotUI cell = ResManager.LoadResource<GameObject>("Prefab/UI/Solt_bag").GetComponent<SlotUI>();
                         if (content != null)
-                        cell.transform.parent = content;
+                            cell.transform.parent = content;
                         cell.slotType = ContainerType.Box;
                         boxSlots.Add(cell);
                         DataItem item = InventoryManager.Instance.GetItemDetails(list[i].itemID);
@@ -225,10 +223,8 @@ public class InventoryUI : MonoBehaviour
             case InventoryLocation.Flask:
                 if (!UIManager.Instance.panelsDic.ContainsKey("FlaskPanel")) return;
                 foreach(SlotUI slot in UIManager.Instance.GetPanel<FlaskPanel>("FlaskPanel").falskSlots)
-                {
-                    
+                {  
                     flaskSlots[slot.slotIndex]= slot;
-
                 }
                 for (int i = 0; i < flaskSlots.Length; i++)
                 {

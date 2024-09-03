@@ -29,7 +29,7 @@ public class AnnounceToUI : MonoBehaviour
         {
             if (item.itemAmount>0)
             {
-                //potions.Add(item.itemID, item.itemAmount);
+                //potions.Add(itemID.itemID, itemID.itemAmount);
             }
         }
         Init(potions);

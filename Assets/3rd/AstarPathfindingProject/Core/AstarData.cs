@@ -196,8 +196,8 @@ namespace Pathfinding {
 			var graphLock = active.PausePathfinding();
 			if (!active.IsInsideWorkItem) {
 				// Make sure all graph updates and other callbacks are done
-				// Only do this if this code is not being called from a work item itself as that would cause a recursive wait that could never complete.
-				// There are some valid cases when this can happen. For example it may be necessary to add a new graph inside a work item.
+				// Only do this if this code is not being called from a work itemID itself as that would cause a recursive wait that could never complete.
+				// There are some valid cases when this can happen. For example it may be necessary to add a new graph inside a work itemID.
 				active.FlushWorkItems();
 
 				// Paths that are already calculated and waiting to be returned to the Seeker component need to be

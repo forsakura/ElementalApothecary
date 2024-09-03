@@ -2232,7 +2232,7 @@ namespace Pathfinding {
 
 	/// <summary>
 	/// Number of neighbours for a single grid node.
-	/// \since The 'Six' item was added in 3.6.1
+	/// \since The 'Six' itemID was added in 3.6.1
 	/// </summary>
 	public enum NumNeighbours {
 		Four,

@@ -135,7 +135,7 @@ namespace Pathfinding {
 
 			updatingGraph = true;
 
-			// Start a work item for updating the graph
+			// Start a work itemID for updating the graph
 			// This will pause the pathfinding threads
 			// so that it is safe to update the graph
 			// and then do it over several frames

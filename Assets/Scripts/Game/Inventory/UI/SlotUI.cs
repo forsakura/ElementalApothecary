@@ -58,7 +58,7 @@ public class SlotUI : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, ID
     public void UpdateSlot(DataItem item, int amount)
     {
         itemDetails = item;
-        //slotImage.sprite = item.itemIcon;
+        slotImage.sprite = item.itemIcon;
         itemAmount = amount;
         amountText.text = amount.ToString();
         slotImage.enabled = true;
@@ -111,14 +111,13 @@ public class SlotUI : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, ID
 
     public void OnDrag(PointerEventData eventData)
     {
-        // 使用InputSystem获取鼠标位置
+        
         Vector2 mousePosition = Mouse.current.position.ReadValue();
-
-        Vector3 mouseScreenPos = Camera.main.ScreenToWorldPoint(mousePosition);
+        //Vector3 mouseScreenPos = Camera.main.ScreenToWorldPoint(mousePosition);
         //mouseScreenPos.z = 10;
         //Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(mouseScreenPos);
-        inventoryUI.dragItem.preserveAspect = true;
-        inventoryUI.dragItem.transform.position = mouseScreenPos;
+        //inventoryUI.dragItem.preserveAspect = true;
+        inventoryUI.dragItem.transform.position = mousePosition;
         
     }
 
@@ -190,7 +189,7 @@ public class SlotUI : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, ID
     public void SetOutputMod()
     {
         slotImage.enabled = true;
-        //slotImage.sprite = itemDetails.itemIcon;
+        slotImage.sprite = itemDetails.itemIcon;
 
         button.interactable = false;
         amountText.enabled = false;

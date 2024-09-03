@@ -12,4 +12,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0ce4f0f47d71da4b9ac70ffe12ab2ff, type: 3}
   m_Name: Bag
   m_EditorClassIdentifier: 
-  itemList: []
+  itemList:
+  - itemID:
+      id: 0
+      BaseId: 0
+      ATTR: 
+    itemAmount: 0
+  - itemID:
+      id: 0
+      BaseId: 0
+      ATTR: 
+    itemAmount: 0
+  - itemID:
+      id: 0
+      BaseId: 0
+      ATTR: 
+    itemAmount: 0
+  - itemID:
+      id: 0
+      BaseId: 0
+      ATTR: 
+    itemAmount: 0
+  - itemID:
+      id: 0
+      BaseId: 0
+      ATTR: 
+    itemAmount: 0
+  - itemID:
+      id: 0
+      BaseId: 0
+      ATTR: 
+    itemAmount: 0
+  - itemID:
+      id: 0
+      BaseId: 0
+      ATTR: 
+    itemAmount: 0
+  - itemID:
+      id: 0
+      BaseId: 0
+      ATTR: 
+    itemAmount: 0
+  - itemID:
+      id: 0
+      BaseId: 0
+      ATTR: 
+    itemAmount: 0
+  - itemID:
+      id: 0
+      BaseId: 0
+      ATTR: 
+    itemAmount: 0

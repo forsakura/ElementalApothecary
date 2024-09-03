@@ -39,9 +39,9 @@ namespace ProjectBase.UI
             var obj = ResManager.LoadResource<GameObject>("UI/Canvas");
             canvas = obj.transform as RectTransform;
             top = canvas.Find("Top");
-            top = canvas.Find("Mid");
-            top = canvas.Find("Down");
-            top = canvas.Find("System");
+            mid = canvas.Find("Mid");
+            down = canvas.Find("Down");
+            system = canvas.Find("System");
             Object.DontDestroyOnLoad(obj);
             obj = ResManager.LoadResource<GameObject>("UI/EventSystem");
             Object.DontDestroyOnLoad(obj);
