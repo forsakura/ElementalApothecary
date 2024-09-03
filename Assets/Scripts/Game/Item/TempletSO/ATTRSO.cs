@@ -8,22 +8,17 @@ using UnityEditor;
 [CreateAssetMenu(fileName = "ATTRSO", menuName = "ScriptableObjects/ATTRSO")]
 public class ATTRSO : ScriptableObject
 {
-    public List<Attribute> attributes;
+    public List<BaseAttribute> attributes = new List<BaseAttribute>();
     public bool keepUpdating;
 
-    private Dictionary<int, Attribute> attributesById = new Dictionary<int, Attribute>();
+    private Dictionary<int, BaseAttribute> attributesById = new Dictionary<int, BaseAttribute>();
 
-    public List<Attribute> Attributes => attributes;
+    public List<BaseAttribute> Attributes => attributes;
 
-    public Attribute GetAttributeById(int id)
+    public BaseAttribute GetAttributeById(int id)
     {
         attributesById.TryGetValue(id, out var attribute);
         return attribute;
-    }
-
-    public List<Attribute> GetAttributesByElement(EElement element)
-    {
-        return attributes.Where(attribute => attribute.baseElement == element).ToList();
     }
 
     private void OnEnable()
@@ -52,13 +47,18 @@ public class ATTRSO : ScriptableObject
 }
 
 [Serializable]
-public  class Attribute:ScriptableObject
+public abstract class BaseAttribute : ScriptableObject
 {
+    public string Name;
     public int id;
+    public List<int> effectId;//涉及的效果id(意思说属性可以组合)
+    public List<int> buffId;//涉及的buffid
+    public string description;
     public AttributeType Type;
     public EElement baseElement;
     public float Duration;
     public float _remainingTime;
+    public float leak = 0;
     public bool IsPermanent= true;
 
     public enum AttributeType
@@ -68,9 +68,11 @@ public  class Attribute:ScriptableObject
     }
 
 
-    public virtual void Apply(GameObject target) { }
+
+    //这些GameObject估计要改
+    public virtual void OnApply(GameObject target) { }
+    public virtual void OnExpired(GameObject target) { }
     public virtual void Update(GameObject target, float deltaTime) { }
-    public virtual void Expire(GameObject target) { }
     public virtual bool IsExpired()
     {
         return !IsPermanent && _remainingTime <= 0;

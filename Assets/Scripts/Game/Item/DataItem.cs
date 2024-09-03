@@ -13,8 +13,8 @@ public class DataItem : TrItem, IDataItem
     private Sprite _itemIcon;  
     private string _itemName;
     private List<TrItem.ItemTag> _tags = new List<TrItem.ItemTag>();
-    private EElement[] _baseElement = new EElement[2];
-    private Vector2 _currentElementCount;
+    private EElement _baseElement ;
+    private float _currentElementCount;
 
     public DataItem()
     {
@@ -23,8 +23,8 @@ public class DataItem : TrItem, IDataItem
         this.itemDescription = null;
         this.itemName = null;
         this.tags = null;
-        BaseElement = null;
-        this.currentElementCount =new Vector2(0,0);
+        BaseElement = EElement.None;
+        this.currentElementCount = 0;
     }
 
     public int useTimes
@@ -63,13 +63,13 @@ public class DataItem : TrItem, IDataItem
         set => _tags = value;
     }
 
-    public EElement[] BaseElement
+    public EElement BaseElement
     {
         get => _baseElement;
         set => _baseElement = value;
     }
 
-    public Vector2 currentElementCount
+    public float currentElementCount
     {
         get => _currentElementCount;
         set => _currentElementCount = value;

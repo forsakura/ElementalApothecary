@@ -51,7 +51,7 @@ public class TrItem : ITrItem
 /// </summary>
 public class ItemID
 {
-    public int id;//物品自己的id（只是同类区分用的）
+    public int id;//物品自己的id（只是同类区分用的）还要搞guid生成
     public int BaseId;//基础模板id
     public List<int> ATTR = new List<int>(); //属性id
 }
