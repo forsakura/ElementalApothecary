@@ -38,7 +38,7 @@ public class PortableBag : Singleton<PortableBag>
         {
             if (item.itemID.id==0)
             {
-                //potions.Add(item.itemID, item.itemAmount);
+                //potions.Add(itemID.itemID, itemID.itemAmount);
             }
         }
         InitBag(potions);
@@ -53,7 +53,7 @@ public class PortableBag : Singleton<PortableBag>
         int i = 0;
         foreach (var item in potions)
         {
-            //transform.GetChild(i).GetComponent<Slot>().InitSlot(item.Key, item.Value);
+            //transform.GetChild(i).GetComponent<Slot>().InitSlot(itemID.Key, itemID.Value);
             i++;
             // ����9���������Ĳ�Ҫ��
             if(i >= 10)

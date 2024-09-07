@@ -1331,7 +1331,7 @@ namespace _3rd.AstarPathfindingProject.Editor {
 			// Serialize all graphs (including serialized editor data)
 			bytes = script.data.SerializeGraphs(settings, out tmpChecksum);
 
-			// Make sure the above work item is executed immediately
+			// Make sure the above work itemID is executed immediately
 			AstarPath.active.FlushWorkItems();
 			checksum = tmpChecksum;
 			return bytes;

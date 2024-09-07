@@ -1,18 +1,20 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 因为实际做的还是更像buff所以也是参考做的，实际功能上并不应该替代buff
+/// 本质上就是个buff系统，但主要负责的不是buff的能力
 /// </summary>
 public class ATTRManager : MonoBehaviour
 {
-    private List<Attribute> activeATTR = new List<Attribute>();
+    private List<BaseAttribute> activeATTR = new List<BaseAttribute>();
+    public GameObject m_gameObject;
 
-    public void Add(Attribute buff, GameObject target)
+    public void Add(BaseAttribute attribute)
     {
-        buff.Apply(target);
-        activeATTR.Add(buff);
+        attribute.OnApply(m_gameObject);
+        activeATTR.Add(attribute);
     }
 
     void Update()
@@ -20,17 +22,22 @@ public class ATTRManager : MonoBehaviour
         float deltaTime = Time.deltaTime;
         for (int i = activeATTR.Count - 1; i >= 0; i--)
         {
+            activeATTR[i].Update(m_gameObject, deltaTime);
             if (!activeATTR[i].IsPermanent)
             {
-                activeATTR[i].Update(gameObject, deltaTime);
                 if (activeATTR[i].IsExpired())
                 {
+                    activeATTR[i].OnExpired(m_gameObject);
                     activeATTR.RemoveAt(i);
                 }
             }
         }
     }
 
+    /// <summary>
+    /// 处理对外
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnCollisionEnter2D(Collision2D collision)
     {
         

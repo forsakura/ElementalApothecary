@@ -7,7 +7,7 @@ namespace Pathfinding {
 	using UnityEngine;
 
 	/// <summary>
-	/// An item of work that can be executed when graphs are safe to update.
+	/// An itemID of work that can be executed when graphs are safe to update.
 	/// See: <see cref="AstarPath.UpdateGraphs"/>
 	/// See: <see cref="AstarPath.AddWorkItem"/>
 	/// </summary>
@@ -26,37 +26,37 @@ namespace Pathfinding {
 		///
 		/// A context object is sent as a parameter. This can be used
 		/// to for example queue a flood fill that will be executed either
-		/// when a work item calls EnsureValidFloodFill or all work items have
+		/// when a work itemID calls EnsureValidFloodFill or all work items have
 		/// been completed. If multiple work items are updating nodes
 		/// so that they need a flood fill afterwards, using the QueueFloodFill
 		/// method is preferred since then only a single flood fill needs
 		/// to be performed for all of the work items instead of one
-		/// per work item.
+		/// per work itemID.
 		/// </summary>
 		public System.Action<IWorkItemContext> initWithContext;
 
 		/// <summary>
-		/// Update function, called once per frame when the work item executes.
-		/// Takes a param force. If that is true, the work item should try to complete the whole item in one go instead
+		/// Update function, called once per frame when the work itemID executes.
+		/// Takes a param force. If that is true, the work itemID should try to complete the whole itemID in one go instead
 		/// of spreading it out over multiple frames.
-		/// Returns: True when the work item is completed.
+		/// Returns: True when the work itemID is completed.
 		/// </summary>
 		public System.Func<bool, bool> update;
 
 		/// <summary>
-		/// Update function, called once per frame when the work item executes.
-		/// Takes a param force. If that is true, the work item should try to complete the whole item in one go instead
+		/// Update function, called once per frame when the work itemID executes.
+		/// Takes a param force. If that is true, the work itemID should try to complete the whole itemID in one go instead
 		/// of spreading it out over multiple frames.
-		/// Returns: True when the work item is completed.
+		/// Returns: True when the work itemID is completed.
 		///
 		/// A context object is sent as a parameter. This can be used
 		/// to for example queue a flood fill that will be executed either
-		/// when a work item calls EnsureValidFloodFill or all work items have
+		/// when a work itemID calls EnsureValidFloodFill or all work items have
 		/// been completed. If multiple work items are updating nodes
 		/// so that they need a flood fill afterwards, using the QueueFloodFill
 		/// method is preferred since then only a single flood fill needs
 		/// to be performed for all of the work items instead of one
-		/// per work item.
+		/// per work itemID.
 		/// </summary>
 		public System.Func<IWorkItemContext, bool, bool> updateWithContext;
 
@@ -157,9 +157,9 @@ namespace Pathfinding {
 
 		/// <summary>
 		/// True while a batch of work items are being processed.
-		/// Set to true when a work item is started to be processed, reset to false when all work items are complete.
+		/// Set to true when a work itemID is started to be processed, reset to false when all work items are complete.
 		///
-		/// Work item updates are often spread out over several frames, this flag will be true during the whole time the
+		/// Work itemID updates are often spread out over several frames, this flag will be true during the whole time the
 		/// updates are in progress.
 		/// </summary>
 		public bool workItemsInProgress { get; private set; }
@@ -241,7 +241,7 @@ namespace Pathfinding {
 		}
 
 		/// <summary>
-		/// Add a work item to be processed when pathfinding is paused.
+		/// Add a work itemID to be processed when pathfinding is paused.
 		///
 		/// See: ProcessWorkItems
 		/// </summary>
@@ -275,12 +275,12 @@ namespace Pathfinding {
 					queuedWorkItemFloodFill = false;
 				}
 
-				// Peek at first item in the queue
+				// Peek at first itemID in the queue
 				AstarWorkItem itm = workItems[0];
 				bool status;
 
 				try {
-					// Call init the first time the item is seen
+					// Call init the first time the itemID is seen
 					if (itm.init != null) {
 						itm.init();
 						itm.init = null;
@@ -291,7 +291,7 @@ namespace Pathfinding {
 						itm.initWithContext = null;
 					}
 
-					// Make sure the item in the queue is up to date
+					// Make sure the itemID in the queue is up to date
 					workItems[0] = itm;
 
 					if (itm.update != null) {

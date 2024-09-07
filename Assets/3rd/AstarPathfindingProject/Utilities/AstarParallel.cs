@@ -15,8 +15,8 @@ namespace Pathfinding.Util {
 	/// </summary>
 	public class ParallelWorkQueue<T> {
 		/// <summary>
-		/// Callback to run for each item in the queue.
-		/// The callback takes the item as the first parameter and the thread index as the second parameter.
+		/// Callback to run for each itemID in the queue.
+		/// The callback takes the itemID as the first parameter and the thread index as the second parameter.
 		/// </summary>
 		public System.Action<T, int> action;
 

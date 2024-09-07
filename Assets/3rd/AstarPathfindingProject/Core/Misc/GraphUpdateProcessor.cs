@@ -80,7 +80,7 @@ namespace Pathfinding {
 			this.astar = astar;
 		}
 
-		/// <summary>Work item which can be used to apply all queued updates</summary>
+		/// <summary>Work itemID which can be used to apply all queued updates</summary>
 		public AstarWorkItem GetWorkItem () {
 			return new AstarWorkItem(QueueGraphUpdatesInternal, ProcessGraphUpdates);
 		}

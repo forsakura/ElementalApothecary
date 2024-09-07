@@ -50,8 +50,8 @@ public class MaterialFloating : MonoBehaviour
 
     public void InitSet(int materialID, int count, MaterialFloatingContainer parent)
     {
-        //DataItem item = InventoryManager.Instance.GetItemDetails(materialID);
-        //MaterialIcon.sprite = item.itemIcon;
+        //DataItem itemID = InventoryManager.Instance.GetItemDetails(materialID);
+        //MaterialIcon.sprite = itemID.itemIcon;
         //Count.text = "x" + count;
         //container = parent;
     }

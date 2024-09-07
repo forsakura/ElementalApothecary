@@ -15,12 +15,11 @@ public interface ISynthesis
     int MaxMaterialEnum { get; set; }
 
     void addMaterial(int order, IDataItem Item);
-    EElement[] CalculateBaseElement(Vector2 ElementCount);
-    Vector2 CalculateElement();
+    float CalculateElement(out EElement baseElement);
     void checkSucceed();
     int GachaATTR(List<int> pool);
     void init();
-    void initATTRpool(EElement[] baseElement, Attribute.AttributeType attributeType);
+    void initATTRpool(EElement baseElement, BaseAttribute.AttributeType attributeType);
     IDataItem output();
     Task<IDataItem> OutputAsync();
     void removeMaterial(int order);

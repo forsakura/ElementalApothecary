@@ -20,15 +20,4 @@ public class LegacyItemDetails
     public string itemDescription;
     public int itemUseRadius;
     public int foeverEffect;
-    public float purity;
-
-}
-
-
-
-[System.Serializable]
-public class LegacyPickableItem
-{
-    public ItemID itemID;
-    public Vector3 position;
 }

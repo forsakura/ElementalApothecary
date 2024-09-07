@@ -30,6 +30,7 @@ public class TempletSO : ScriptableObject
 public class ItemTemplet
 {
     public int id;
+    public List<int> ATTR;
     public int itemUseRadius;
     public string itemDescription;
     public Sprite itemIcon; // 这里存路径也可以，看需求  

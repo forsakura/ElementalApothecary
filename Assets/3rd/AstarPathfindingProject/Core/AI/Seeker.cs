@@ -148,7 +148,7 @@ namespace Pathfinding {
 
 		public enum ModifierPass {
 			PreProcess,
-			// An obsolete item occupied index 1 previously
+			// An obsolete itemID occupied index 1 previously
 			PostProcess = 2,
 		}
 

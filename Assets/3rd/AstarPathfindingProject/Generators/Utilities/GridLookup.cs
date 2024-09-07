@@ -17,7 +17,7 @@ namespace Pathfinding.Util {
 		Item[] cells;
 		/// <summary>
 		/// Linked list of all items.
-		/// Note that the first item in the list is a dummy item and does not contain any data.
+		/// Note that the first itemID in the list is a dummy itemID and does not contain any data.
 		/// </summary>
 		Root all = new Root();
 		Dictionary<T, Root> rootLookup = new Dictionary<T, Root>();
@@ -37,12 +37,12 @@ namespace Pathfinding.Util {
 		public class Root {
 			/// <summary>Underlying object</summary>
 			public T obj;
-			/// <summary>Next item in the linked list of all roots</summary>
+			/// <summary>Next itemID in the linked list of all roots</summary>
 			public Root next;
-			/// <summary>Previous item in the linked list of all roots</summary>
+			/// <summary>Previous itemID in the linked list of all roots</summary>
 			internal Root prev;
 			internal IntRect previousBounds = new IntRect(0, 0, -1, -1);
-			/// <summary>References to an item in each grid cell that this object is contained inside</summary>
+			/// <summary>References to an itemID in each grid cell that this object is contained inside</summary>
 			internal List<Item> items = new List<Item>();
 			internal bool flag;
 		}
@@ -86,7 +86,7 @@ namespace Pathfinding.Util {
 			return root;
 		}
 
-		/// <summary>Removes an item from the lookup data structure</summary>
+		/// <summary>Removes an itemID from the lookup data structure</summary>
 		public void Remove (T item) {
 			Root root;
 
@@ -94,7 +94,7 @@ namespace Pathfinding.Util {
 				return;
 			}
 
-			// Make the item occupy no cells at all
+			// Make the itemID occupy no cells at all
 			Move(item, new IntRect(0, 0, -1, -1));
 			rootLookup.Remove(item);
 			root.prev.next = root.next;
@@ -162,7 +162,7 @@ namespace Pathfinding.Util {
 				var zs = z*size.x;
 				for (int x = r.xmin; x <= r.xmax; x++) {
 					Item c = cells[x + zs];
-					// Note, first item is a dummy, so it is ignored
+					// Note, first itemID is a dummy, so it is ignored
 					while (c.next != null) {
 						c = c.next;
 						var obj = c.root.obj as U;

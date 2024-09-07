@@ -10,21 +10,22 @@ public class DataItem : TrItem, IDataItem
     private int _useTimes;
     private int _itemUseRadius;
     private string _itemDescription;
-    // private Sprite _itemIcon; // 如果需要，可以取消注释并添加相应的属性  
+    private Sprite _itemIcon; // 如果需要，可以取消注释并添加相应的属性  
     private string _itemName;
     private List<TrItem.ItemTag> _tags = new List<TrItem.ItemTag>();
-    private EElement[] _baseElement = new EElement[2];
-    private Vector2 _currentElementCount;
+    private EElement _baseElement ;
+    private float _currentElementCount;
 
     public DataItem()
     {
         this.useTimes = 0;
         this.itemUseRadius = 0;
         this.itemDescription = null;
+        this.itemIcon = null;
         this.itemName = null;
         this.tags = null;
-        BaseElement = null;
-        this.currentElementCount =new Vector2(0,0);
+        BaseElement = EElement.None;
+        this.currentElementCount = 0;
     }
 
     public int useTimes
@@ -45,11 +46,11 @@ public class DataItem : TrItem, IDataItem
         set => _itemDescription = value;
     }
 
-    // public Sprite itemIcon  
-    // {  
-    //     get => _itemIcon;  
-    //     set => _itemIcon = value;  
-    // }  
+    public Sprite itemIcon
+    {
+        get => _itemIcon;
+        set => _itemIcon = value;
+    }
 
     public string itemName
     {
@@ -63,13 +64,13 @@ public class DataItem : TrItem, IDataItem
         set => _tags = value;
     }
 
-    public EElement[] BaseElement
+    public EElement BaseElement
     {
         get => _baseElement;
         set => _baseElement = value;
     }
 
-    public Vector2 currentElementCount
+    public float currentElementCount
     {
         get => _currentElementCount;
         set => _currentElementCount = value;

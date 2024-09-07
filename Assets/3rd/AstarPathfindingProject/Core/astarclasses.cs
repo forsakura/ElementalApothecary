@@ -650,7 +650,7 @@ namespace Pathfinding {
 		///
 		/// Note: Not all data is saved. The saved data includes: penalties, walkability, tags, area, position and for grid graphs (not layered) it also includes connection data.
 		///
-		/// This method modifies the graph. So it must be called inside while it is safe to modify the graph, for example inside a work item as shown in the example below.
+		/// This method modifies the graph. So it must be called inside while it is safe to modify the graph, for example inside a work itemID as shown in the example below.
 		///
 		/// \miscsnippets MiscSnippets.cs GraphUpdateObject.RevertFromBackup
 		///

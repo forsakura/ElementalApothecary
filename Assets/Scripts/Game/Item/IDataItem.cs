@@ -9,10 +9,11 @@ public interface IDataItem:ITrItem
     // Sprite itemIcon { get; set; } // 如果需要，可以取消注释  
     string itemName { get; set; }
     List<TrItem.ItemTag> tags { get; set; }
-    Vector2 currentElementCount { get; set; }
-    EElement[] BaseElement { get; set; }
+    float currentElementCount { get; set; }
+    EElement BaseElement { get; set; }
     int useTimes { get; set; }
 
     void initByTemplet();
     void applyATTR();
+    void DebugDisplayData();
 }

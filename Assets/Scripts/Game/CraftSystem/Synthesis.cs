@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
-using static Attribute;
+using static BaseAttribute;
 
 public class Synthesis : MonoBehaviour, ISynthesis
 {
@@ -129,8 +129,8 @@ public class Synthesis : MonoBehaviour, ISynthesis
     {
         production = new DataItem();
 
-        production.currentElementCount = CalculateElement();
-        production.BaseElement = CalculateBaseElement(production.currentElementCount);
+        production.currentElementCount = CalculateElement(out EElement outBaseElement);
+        production.BaseElement = outBaseElement;
 
         initATTRpool(production.BaseElement, AttributeType.Main);
         initATTRpool(production.BaseElement, AttributeType.Aux);
@@ -158,6 +158,11 @@ public class Synthesis : MonoBehaviour, ISynthesis
             production.initByTemplet();
             production.applyATTR();
         }
+        else
+        {
+            Debug.Log("Synthesis failed!");
+            return null;
+        }
 
         return production;
     }
@@ -166,8 +171,8 @@ public class Synthesis : MonoBehaviour, ISynthesis
     {
         production = new DataItem();
 
-        production.currentElementCount = CalculateElement();
-        production.BaseElement = CalculateBaseElement(production.currentElementCount);
+        production.currentElementCount = CalculateElement(out EElement outBaseElement);
+        production.BaseElement = outBaseElement;
 
         initATTRpool(production.BaseElement, AttributeType.Main);
         initATTRpool(production.BaseElement, AttributeType.Aux);
@@ -203,7 +208,7 @@ public class Synthesis : MonoBehaviour, ISynthesis
 
     public void checkSucceed()
     {
-        if (production.BaseElement != new EElement[2] { EElement.None, EElement.None } ||
+        if (production.BaseElement != EElement.None ||
             production.GetATTRID().Count == 0)
         {
             IsSuccess = false;
@@ -223,50 +228,64 @@ public class Synthesis : MonoBehaviour, ISynthesis
         }
     }
 
-    public Vector2 CalculateElement()
+    public float CalculateElement(out EElement baseElement)
     {
-        Vector2 output = new Vector2();
+        Vector2 elementCount = new Vector2();
         foreach (var material in Materials.Values)
         {
-            var origin = output;
-            output += material.currentElementCount;
-
-            if (Math.Abs(output.x) < Math.Abs(origin.x))
+            var origin = elementCount;
+            switch(material.BaseElement)
             {
-                Explosion += (Math.Abs(origin.x) - Math.Abs(output.x)) * 2;
+                case EElement.Aer:
+                    origin.x += material.currentElementCount;
+                    break;
+                case EElement.Terra:
+                    origin.x -= material.currentElementCount;
+                    break;
+                case EElement.Ignis:
+                    origin.y += material.currentElementCount;
+                    break;
+                case EElement.Aqua:
+                    origin.y -= material.currentElementCount;
+                    break;
             }
-            if (Math.Abs(output.y) < Math.Abs(origin.y))
+
+            if (Math.Abs(elementCount.x) < Math.Abs(origin.x))
             {
-                Explosion += (Math.Abs(origin.y) - Math.Abs(output.y)) * 2;
+                Explosion += (Math.Abs(origin.x) - Math.Abs(elementCount.x)) * 2;
+            }
+            if (Math.Abs(elementCount.y) < Math.Abs(origin.y))
+            {
+                Explosion += (Math.Abs(origin.y) - Math.Abs(elementCount.y)) * 2;
             }
         }
-        return output;
+
+        if (Math.Abs(elementCount.x) > Math.Abs(elementCount.y))
+        {
+            if (elementCount.x >= 0) //其实是不可能等于的
+                baseElement = EElement.Aer;
+            else 
+                baseElement = EElement.Terra;
+
+            return Math.Abs(elementCount.x) - Math.Abs(elementCount.y);
+        }
+        else if (Math.Abs(elementCount.x) < Math.Abs(elementCount.y))
+        {
+            if (elementCount.y >= 0)
+                baseElement = EElement.Ignis;
+            else
+                baseElement = EElement.Aqua;
+
+            return Math.Abs(elementCount.y) - Math.Abs(elementCount.x);
+        }
+        else
+        {
+            baseElement = EElement.None;
+            return 0;
+        }
     }
 
-    public EElement[] CalculateBaseElement(Vector2 ElementCount)
-    {
-        EElement[] output = new EElement[2] { EElement.None, EElement.None };
-        if (ElementCount.x > 0)
-        {
-            output[0] = EElement.Aer;
-        }
-        else if (ElementCount.x < 0)
-        {
-            output[0] = EElement.Terra;
-        }
-
-        if (ElementCount.y > 0)
-        {
-            output[1] = EElement.Ignis;
-        }
-        else if (ElementCount.y < 0)
-        {
-            output[1] = EElement.Aqua;
-        }
-        return output;
-    }
-
-    public void initATTRpool(EElement[] baseElement, AttributeType attributeType)
+    public void initATTRpool(EElement baseElement, AttributeType attributeType)
     {
         mainATTR = new();
         auxATTR = new();
@@ -274,7 +293,7 @@ public class Synthesis : MonoBehaviour, ISynthesis
         {
             foreach (var ATTR in material.GetATTRID())
             {
-                Attribute currentAttribute = SOList.AttributeList.GetAttributeById(ATTR);
+                BaseAttribute currentAttribute = SOList.AttributeList.GetAttributeById(ATTR);
                 if (currentAttribute == null)
                 {
                     Debug.LogError($"ATTRId {ATTR} is invalid!");
@@ -288,10 +307,11 @@ public class Synthesis : MonoBehaviour, ISynthesis
                 if (attributeType == AttributeType.Main)
                 {
                     EElement attrElement = currentAttribute.baseElement;
-                    if (attrElement == baseElement[1] || attrElement == baseElement[0])
+                    if (attrElement == baseElement)
                     {
                         mainATTR.Add(ATTR);
                     }
+                    
                 }
                 else if (attributeType == AttributeType.Aux)
                 {
