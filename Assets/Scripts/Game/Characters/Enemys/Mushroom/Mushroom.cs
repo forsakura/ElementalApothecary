@@ -26,7 +26,7 @@ namespace Enemy.Mushroom
             AfterGetHit += ThresholdCheck;
         }
 
-        protected override void InitHit()
+        public override void InitHit()
         {
             base.InitHit();
             enemyHit.ElementName[1] = EElement.Terra;

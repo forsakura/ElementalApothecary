@@ -15,7 +15,7 @@ namespace Enemy
         // ≈ˆ◊≤…À∫¶¥”’‚¿Ô¿¥
         public HitInstance enemyHit = new();
 
-        protected virtual void InitHit()
+        public virtual void InitHit()
         {
             enemyHit.Source = gameObject;
             enemyHit.Damage = characterData.Damage;
@@ -28,13 +28,17 @@ namespace Enemy
         }
 
         // ≈ˆ◊≤…À∫¶
-        protected virtual void OnTriggerStay2D(Collider2D collision)
-        {
-            if (collision.CompareTag("Player"))
-            {
-                InitHit();
-                collision.gameObject.GetComponent<Characters>().GetHit(enemyHit);
-            }
-        }
+        //protected virtual void OnTriggerStay2D(Collider2D collision)
+        //{
+        //    if (collision.transform.parent == null)
+        //    {
+        //        return;
+        //    }
+        //    if (collision.transform.parent.CompareTag("Player"))
+        //    {
+        //        InitHit();
+        //        collision.gameObject.GetComponent<HitArea>().GetHit(enemyHit);
+        //    }
+        //}
     }
 }

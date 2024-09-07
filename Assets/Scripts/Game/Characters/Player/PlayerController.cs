@@ -9,7 +9,7 @@ using CharacterDelegates;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
-    public CinemachineVirtualCamera cv;
+    public CinemachineVirtualCamera cv => GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCamera>();
     // public PlayerInputActions inputActions;
     public EPlayerAttackState currentAttackState;
     [HideInInspector]

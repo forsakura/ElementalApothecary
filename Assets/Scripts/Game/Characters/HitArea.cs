@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class HitArea : MonoBehaviour, IHitable
 {
-    Characters parent;
+    protected Characters parent;
 
-    private void Start()
+    protected virtual void Start()
     {
         parent = GetComponentInParent<Characters>();
         tag = transform.parent.tag;

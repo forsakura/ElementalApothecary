@@ -94,7 +94,7 @@ Rigidbody2D:
     serializedVersion: 2
     m_Bits: 0
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 4
 --- !u!1773428102 &3357737027149609879
@@ -218,7 +218,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 5719ff0e46deaf344b9e0493846664d8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
@@ -251,7 +251,7 @@ Rigidbody2D:
     serializedVersion: 2
     m_Bits: 0
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 4
 --- !u!70 &4180930107975332994
@@ -304,7 +304,7 @@ MonoBehaviour:
   characterData:
     Name: gugugug
     ID: 0
-    MaxHealth: 500
+    MaxHealth: 100
     MaxAer: 0
     MaxTerra: 0
     MaxIgnis: 0
@@ -314,7 +314,7 @@ MonoBehaviour:
     AttackInterval: 0
     AttackDistance: 0
     MoveSpeed: 8
-    InvincibleTime: 5
+    InvincibleTime: 2
   characterType: 1
   CurrentHealth: 0
   CurrentSpeed: 0
