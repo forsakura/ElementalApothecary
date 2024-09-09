@@ -22,9 +22,9 @@ public class ATTRManager : MonoBehaviour
         float deltaTime = Time.deltaTime;
         for (int i = activeATTR.Count - 1; i >= 0; i--)
         {
+            activeATTR[i].Update(m_gameObject, deltaTime);
             if (!activeATTR[i].IsPermanent)
             {
-                activeATTR[i].Update(m_gameObject, deltaTime);
                 if (activeATTR[i].IsExpired())
                 {
                     activeATTR[i].OnExpired(m_gameObject);

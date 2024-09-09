@@ -109,7 +109,7 @@ MonoBehaviour:
     MaxTerra: 0
     MaxIgnis: 0
     MaxAqua: 0
-    Damage: 0
+    Damage: 10
     MaxBulletCount: 1
     AttackInterval: 0
     AttackDistance: 0
@@ -125,6 +125,12 @@ MonoBehaviour:
   isInvincible: 0
   isDead: 0
   target: {fileID: 0}
+  enemyHit:
+    Source: {fileID: 0}
+    Damage: 0
+    ElementContain: 0000000000000000
+    ElementName: 0000000000000000
+    IgnoreInvincible: 0
   threshold: 0.5
   announceDistanceLimit: 10
 --- !u!114 &7262987956664834949
@@ -198,8 +204,8 @@ GameObject:
   - component: {fileID: 1866384769882957009}
   - component: {fileID: 4908603374342560957}
   - component: {fileID: 3475733007151267460}
-  - component: {fileID: 834227685019282771}
   - component: {fileID: 3318364855322403841}
+  - component: {fileID: 3262331424467347108}
   m_Layer: 11
   m_Name: Body
   m_TagString: Enemy
@@ -246,7 +252,7 @@ Rigidbody2D:
     serializedVersion: 2
     m_Bits: 0
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 4
 --- !u!1773428102 &3475733007151267460
@@ -276,18 +282,6 @@ ParentConstraint:
   m_Sources:
   - sourceTransform: {fileID: 9143583917711323739}
     weight: 1
---- !u!114 &834227685019282771
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3907639540774849789}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b33fec94065a23949ae6cc344c262a65, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!58 &3318364855322403841
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -323,3 +317,15 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &3262331424467347108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3907639540774849789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f44592de220b05a42a1e310abf0dea3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
