@@ -6,6 +6,7 @@ public class CalBagToolUI : PlayerInteraction
     {
         UIManager.Instance.ShowPanel<BagPanel>("BagPanel", E_UI_Layer.top, (t) =>
         {
+            //UIManager.Instance.GetPanel("BagPanel").transform
             EventHandler.CallUpdateInventoryUI(InventoryLocation.Bag, InventoryManager.Instance.playerBag.itemList);
         });
 

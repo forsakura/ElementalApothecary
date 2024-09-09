@@ -136,7 +136,7 @@ public class SlotUI : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, ID
             
             int targetIndex = targetSlot.slotIndex;
             if (slotType == targetSlot.slotType && slotIndex == targetIndex) return;
-            print(targetSlot.gameObject);
+            //print(targetSlot.gameObject);
             //在Player自身背包范围内交换
             if (slotType == ContainerType.Bag && targetSlot.slotType == ContainerType.Bag)
             {

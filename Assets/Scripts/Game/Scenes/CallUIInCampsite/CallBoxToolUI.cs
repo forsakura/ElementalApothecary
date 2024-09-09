@@ -9,6 +9,7 @@ public class CallBoxToolUI : PlayerInteraction
     {
         UIManager.Instance.ShowPanel<BoxPanel>("BoxPanel", E_UI_Layer.top, (t) =>
         {
+
             EventHandler.CallUpdateInventoryUI(InventoryLocation.Box, InventoryManager.Instance.boxBag.itemList);
         });
         

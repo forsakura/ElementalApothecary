@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class BulletBarController : MonoBehaviour
 {
-    public Player player;
+    public Player player => GameObject.Find("Player").GetComponent<Player>();
 
     Image bar;
 

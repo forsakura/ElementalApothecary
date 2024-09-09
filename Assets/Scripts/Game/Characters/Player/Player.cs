@@ -25,6 +25,7 @@ public class Player : Characters
     {
         bulletPrefab = Resources.Load<GameObject>("Prefab/Bullets/Bullet");
         interactableObjects = new List<PlayerInteraction>();
+        //DontDestroyOnLoad(gameObject);
     }
 
     // 使用List存储交互物体，后进入的在List最后，离开某个时将其移除，若为最后一个，则显示移出后倒数第一个的交互提示

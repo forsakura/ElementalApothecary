@@ -102,7 +102,7 @@ public class Synthesis : MonoBehaviour, ISynthesis
             {
                 Materials.Add(order, Item);
             }
-            catch (ArgumentException e)
+            catch (ArgumentException)
             {
             Console.WriteLine("An element with the same key already exists.");
             }

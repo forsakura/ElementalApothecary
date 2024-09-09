@@ -7,9 +7,10 @@ using UnityEngine.InputSystem;
 using CharacterDelegates;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : SingletonScript<PlayerController>
 {
-    public CinemachineVirtualCamera cv;
+
+    private CinemachineVirtualCamera cv=>GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCamera>();
     // public PlayerInputActions inputActions;
     public EPlayerAttackState currentAttackState;
     [HideInInspector]
@@ -25,12 +26,14 @@ public class PlayerController : MonoBehaviour
 
     public Vector2 playerDirection;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         rb = GetComponent<Rigidbody2D>();
         anims = GetComponent<PlayerAnimations>();
         player = GetComponent<Player>();
         InitInputActions();
+        DontDestroyOnLoad(this);
     }
 
     private void Update()
