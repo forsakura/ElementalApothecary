@@ -103,7 +103,7 @@ public class SlotUI : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, ID
         {
             inventoryUI.dragItem.enabled = true;
             inventoryUI.dragItem.sprite = slotImage.sprite;
-
+            //inventoryUI.dragItem.SetNativeSize();
             isSelected = true;
             inventoryUI.UpdateSlotHightlight(slotIndex);
         }

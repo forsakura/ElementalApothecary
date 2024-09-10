@@ -280,7 +280,6 @@ public class InventoryManager : Utilities.Singleton<InventoryManager>
         List<InventoryItem> targetList = GetItemList(locationTarget);
 
         InventoryItem currentItem = currentList[fromIndex];
-        //print(targetIndex);
 
         if (targetIndex < targetList.Count)
         {
@@ -288,7 +287,7 @@ public class InventoryManager : Utilities.Singleton<InventoryManager>
 
             if (targetItem.itemAmount>0 && !EqualID(currentItem.itemID, targetItem.itemID))  //有不相同的两个物品
             {
-                print(targetIndex);
+                //print(targetIndex);
                 currentList[fromIndex] = targetItem;
                 targetList[targetIndex] = currentItem;
             }

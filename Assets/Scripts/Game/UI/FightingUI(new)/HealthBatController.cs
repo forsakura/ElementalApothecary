@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class HealthBatController : MonoBehaviour
 {
-    public Player player => GameObject.Find("Player").GetComponent<Player>();
+    public Player player;
 
     [SerializeField]
     Image bar;
@@ -20,6 +20,7 @@ public class HealthBatController : MonoBehaviour
     
     void Start()
     {
+        player=PlayerController.Instance?.GetComponent<Player>();
         // bar = GetComponent<Image>();
         // parentBar = GetComponentInParent<Image>();
         maxHealth = player.characterData.MaxHealth;

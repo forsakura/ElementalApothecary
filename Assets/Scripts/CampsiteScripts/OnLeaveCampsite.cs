@@ -10,8 +10,6 @@ public class OnLeaveCampsite : PlayerInteraction
     public override void Interact()
     {
         PlayerController.Instance.transform.position = targetPos;
-        SceneManager.LoadScene("Test");
+        SceneManager.LoadScene("Sample Level");
     }
-
-    
 }
