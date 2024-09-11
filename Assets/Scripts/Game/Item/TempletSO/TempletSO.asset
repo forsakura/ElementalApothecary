@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d95d417f3a4ce5e4d8b39aa02e5d02c9, type: 3}
+  m_Name: TempletSO
+  m_EditorClassIdentifier: 
+  itemTemplets:
+  - id: 0
+    ATTR: 
+    itemUseRadius: 0
+    itemDescription: for test
+    itemIcon: {fileID: 0}
+    itemName: testPotion
+    tags: 01000000
+    BaseElement: 0
+    currentElementCount: {x: 0, y: 0}

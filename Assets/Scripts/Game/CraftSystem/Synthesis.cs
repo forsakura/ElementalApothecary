@@ -12,7 +12,7 @@ public class Synthesis : MonoBehaviour, ISynthesis
     private SOListForCraft SOList;
 
     private Dictionary<int, IDataItem> Materials;
-    private IDataItem production;
+    private DataItem production;
 
     [SerializeField]
     private int maxMaterialEnum;
@@ -23,7 +23,7 @@ public class Synthesis : MonoBehaviour, ISynthesis
     }
 
     [SerializeField]
-    private bool isExplosive;
+    private bool isExplosive = true;
     public bool IsExplosive
     {
         get => isExplosive;
@@ -125,7 +125,7 @@ public class Synthesis : MonoBehaviour, ISynthesis
         }
     }
 
-    public IDataItem output()
+    public DataItem output()
     {
         production = new DataItem();
 
@@ -167,12 +167,14 @@ public class Synthesis : MonoBehaviour, ISynthesis
         return production;
     }
 
-    public async Task<IDataItem> OutputAsync()
+    public async Task<DataItem> OutputAsync()
     {
         production = new DataItem();
 
         production.currentElementCount = CalculateElement(out EElement outBaseElement);
         production.BaseElement = outBaseElement;
+
+        production.ID.BaseId = 0;//ÁÙÊ±µÄ
 
         initATTRpool(production.BaseElement, AttributeType.Main);
         initATTRpool(production.BaseElement, AttributeType.Aux);

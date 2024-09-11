@@ -72,7 +72,7 @@ public abstract class BaseAttribute : ScriptableObject
     //这些GameObject估计要改
     public virtual void OnApply(GameObject target) { }
     public virtual void OnExpired(GameObject target) { }
-    public virtual void Update(GameObject target, float deltaTime) { }
+    public virtual void OnUpdate(GameObject target, float deltaTime) { }
     public virtual bool IsExpired()
     {
         return !IsPermanent && _remainingTime <= 0;

@@ -1,0 +1,12 @@
+diff a/Assets/Resources/UI/BagPanel.prefab b/Assets/Resources/UI/BagPanel.prefab	(rejected hunks)
+@@ -752,6 +752,10 @@
+       propertyPath: m_PreserveAspect
+       value: 1
+       objectReference: {fileID: 0}
++    - target: {fileID: 8320467980241429115, guid: 30c2048e8ec765647a3d992db9ef4e19, type: 3}
++      propertyPath: m_FillCenter
++      value: 1
++      objectReference: {fileID: 0}
+     m_RemovedComponents: []
+     m_RemovedGameObjects: []
+     m_AddedGameObjects: []
