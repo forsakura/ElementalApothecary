@@ -11,5 +11,8 @@ public class OnLeaveCampsite : PlayerInteraction
     {
         PlayerController.Instance.transform.position = targetPos;
         SceneManager.LoadScene("Sample Level");
+        //SceneMgr.Instance.LoadSceneAsync("Sample Level", false, () =>{
+        //    PlayerController.Instance.transform.position = targetPos;
+        //});
     }
 }
