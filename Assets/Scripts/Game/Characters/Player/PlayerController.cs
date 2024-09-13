@@ -10,7 +10,7 @@ using CharacterDelegates;
 public class PlayerController : SingletonScript<PlayerController>
 {
 
-    private CinemachineVirtualCamera cv=>GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCamera>();
+    private CinemachineVirtualCamera cv => GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCamera>();
     // public PlayerInputActions inputActions;
     public EPlayerAttackState currentAttackState;
     [HideInInspector]
@@ -52,6 +52,7 @@ public class PlayerController : SingletonScript<PlayerController>
 
     private void UpdateCamera()
     {
+        cv.Follow = transform;
         mousePos = Mouse.current.position.ReadValue();
         mouseWorldPos = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, Camera.main.nearClipPlane));
         CinemachineTransposer ct = cv.GetCinemachineComponent<CinemachineTransposer>();
