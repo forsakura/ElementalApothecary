@@ -5,12 +5,12 @@ using UnityEngine;
 public class ItemInWord : MonoBehaviour
 {
     public ItemID itemID;
-    public Sprite spriteOnWorld;
+    private Sprite spriteOnWorld;
     public Vector2 worldPos;
     void Start()
     {
-        //spriteOnWorld = GetComponent<Sprite>();
         spriteOnWorld=InventoryManager.Instance.GetItemDetails(itemID).itemIcon;
+        //print(spriteOnWorld);
         gameObject.GetComponent<SpriteRenderer>().sprite = spriteOnWorld;
     }
     public void SetPos()

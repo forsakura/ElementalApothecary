@@ -20,6 +20,7 @@ public class HealthBatController : MonoBehaviour
     
     void Start()
     {
+        player=PlayerController.Instance?.GetComponent<Player>();
         // bar = GetComponent<Image>();
         // parentBar = GetComponentInParent<Image>();
         maxHealth = player.characterData.MaxHealth;

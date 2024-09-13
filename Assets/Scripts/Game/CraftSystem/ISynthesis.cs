@@ -20,7 +20,7 @@ public interface ISynthesis
     int GachaATTR(List<int> pool);
     void init();
     void initATTRpool(EElement baseElement, BaseAttribute.AttributeType attributeType);
-    IDataItem output();
-    Task<IDataItem> OutputAsync();
+    DataItem output();
+    Task<DataItem> OutputAsync();
     void removeMaterial(int order);
 }

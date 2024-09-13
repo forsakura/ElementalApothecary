@@ -38,16 +38,16 @@ public class InventoryManager : Utilities.Singleton<InventoryManager>
     public bool haveDistiller;
     public bool haveFurnace;
     public bool havePot;
-    private void Start()
+    protected override void Awake()
     {
-        itemDetailsList=new List<DataItem>();
+        base.Awake();
+        itemDetailsList = new List<DataItem>();
         ReadTable();
         EventHandler.CallUpdateInventoryUI(InventoryLocation.Box, boxBag.itemList);
         //EventHandler.CallUpdateInventoryUI(InventoryLocation.Pot, potBag.itemList);
         //EventHandler.CallUpdateInventoryUI(InventoryLocation.Distiller, distillerBag.itemList);
         //DontDestroyOnLoad(this);
         DontDestroyOnLoad(this);
-        
     }
     //目前没有表，先做测试
     public void ReadTable()
@@ -61,6 +61,7 @@ public class InventoryManager : Utilities.Singleton<InventoryManager>
             itemDetails.itemName = item.itemName;
             itemDetails.itemDescription = item.itemDescription;
             itemDetailsList.Add(itemDetails);
+            //print(itemDetails.ID.BaseId);
         }
         
         //foreach(var itemID in materials_SO.MaterialEntities)
@@ -135,7 +136,7 @@ public class InventoryManager : Utilities.Singleton<InventoryManager>
         if(id1 == null || id2 == null) return false;
         if(id1.id == id2.id && id1.BaseId == id2.BaseId)
         {
-            if(id1.ATTR.SequenceEqual(id2.ATTR))return true;
+            if(id1.ATTR.SequenceEqual(id2.ATTR)) return true;
         }
         return false;
     }
@@ -279,7 +280,6 @@ public class InventoryManager : Utilities.Singleton<InventoryManager>
         List<InventoryItem> targetList = GetItemList(locationTarget);
 
         InventoryItem currentItem = currentList[fromIndex];
-        print(targetIndex);
 
         if (targetIndex < targetList.Count)
         {
@@ -287,6 +287,7 @@ public class InventoryManager : Utilities.Singleton<InventoryManager>
 
             if (targetItem.itemAmount>0 && !EqualID(currentItem.itemID, targetItem.itemID))  //有不相同的两个物品
             {
+                //print(targetIndex);
                 currentList[fromIndex] = targetItem;
                 targetList[targetIndex] = currentItem;
             }

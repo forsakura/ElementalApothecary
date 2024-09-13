@@ -8,9 +8,13 @@ public class FlaskPanel : BasePanel
     public SlotUI[] falskSlots;//前三个为素材，后两个为产物和副产物
     public InputField falskInputs;//炼制的数量
 
+    ISynthesis synthesis;
+
     protected override void Awake()
     {
         base.Awake();
+        synthesis = GetComponent<Synthesis>();
+
         GetControl<Button>("QuitBtn").onClick.AddListener(() =>
         {
             
@@ -32,6 +36,19 @@ public class FlaskPanel : BasePanel
         });
         GetControl<Button>("SureBtn").onClick.AddListener(() =>
         {
+            for(int i=0;i < synthesis.MaxMaterialEnum; i++)
+            {
+                synthesis.addMaterial(i, falskSlots[i].itemDetails);
+            }
+
+            falskSlots[synthesis.MaxMaterialEnum].UpdateSlot(synthesis.output(),1);
+
+            synthesis.init();
+
+            for (int i = 0; i < synthesis.MaxMaterialEnum; i++)
+            {
+                 falskSlots[i].UpdateEmptySlot();
+            }
             //合成功能
         });
     }

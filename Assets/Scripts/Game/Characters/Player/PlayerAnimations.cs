@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerAnimations : MonoBehaviour
 {
-    public PlayerController playerController;
+    //private PlayerController playerController;
     public Animator anim;
 
     public float direction;
@@ -12,14 +12,14 @@ public class PlayerAnimations : MonoBehaviour
     private void Start()
     {
         anim = GetComponent<Animator>();
-        playerController = GetComponent<PlayerController>();
+        //playerController = GetComponent<PlayerController>();
     }
 
     private void Update()
     {
-        direction = playerController.mouseWorldPos.x - transform.position.x;
+        direction = PlayerController.Instance.mouseWorldPos.x - transform.position.x;
         anim.SetFloat("direction", direction);
-        anim.SetFloat("speed", playerController.rb.velocity.magnitude);
+        anim.SetFloat("speed", PlayerController.Instance.rb.velocity.magnitude);
     }
 
     public void ShootAnimation()

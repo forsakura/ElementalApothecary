@@ -16,7 +16,7 @@ namespace SelfCollections
         /// <summary>
         /// Custom comparer used to order the heap.
         /// </summary>
-        private readonly IComparer<TPriority>? _comparer;
+        private readonly IComparer<TPriority> _comparer;
 
         /// <summary>
         /// The number of nodes in the heap.
@@ -88,7 +88,7 @@ namespace SelfCollections
         /// <exception cref="ArgumentOutOfRangeException">
         ///  The specified <paramref name="initialCapacity"/> was negative.
         /// </exception>
-        public PriorityQueue(int initialCapacity, IComparer<TPriority>? comparer)
+        public PriorityQueue(int initialCapacity, IComparer<TPriority> comparer)
         {
             if (initialCapacity < 0)
             {
@@ -102,7 +102,7 @@ namespace SelfCollections
         /// <summary>
         /// Initializes the custom comparer to be used internally by the heap.
         /// </summary>
-        private static IComparer<TPriority>? InitializeComparer(IComparer<TPriority>? comparer)
+        private static IComparer<TPriority> InitializeComparer(IComparer<TPriority> comparer)
         {
             if (typeof(TPriority).IsValueType)
             {

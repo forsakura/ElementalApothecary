@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public class InventoryUI : MonoBehaviour
 {
     public ItemToolTip itemToolTip;
-    private string itemToolTipPath = "Prefab/UI/ItemToolTip";
+    //private string itemToolTipPath = "Prefab/UI/ItemToolTip";
     
     //public ItemDataList_SO itemList;
 
@@ -208,7 +208,7 @@ public class InventoryUI : MonoBehaviour
                     {
                         SlotUI cell = ResManager.LoadResource<GameObject>("Prefab/UI/Solt_bag").GetComponent<SlotUI>();
                         if (content != null)
-                            cell.transform.parent = content;
+                            cell.transform.SetParent(content);
                         cell.slotType = ContainerType.Box;
                         boxSlots.Add(cell);
                         DataItem item = InventoryManager.Instance.GetItemDetails(list[i].itemID);

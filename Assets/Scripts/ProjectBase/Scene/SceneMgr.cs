@@ -40,7 +40,7 @@ namespace ProjectBase.Scene
         
         IEnumerator IELoadScene(string sceneName, bool isAddType, UnityAction callback)
         {
-            UIManager.Instance.ShowPanel<BasePanel>("loadingPanel", E_UI_Layer.top);
+            UIManager.Instance.ShowPanel<BasePanel>("LoadingPanel", E_UI_Layer.top);
             var res = SceneManager.LoadSceneAsync(sceneName, isAddType ? LoadSceneMode.Additive : LoadSceneMode.Single);
             while (!res.isDone)
             {
@@ -48,7 +48,7 @@ namespace ProjectBase.Scene
                 yield return res.progress;
             }
             GC.Collect();
-            UIManager.Instance.HidePanel("loadingPanel");
+            UIManager.Instance.HidePanel("LoadingPanel");
             callback?.Invoke();
         }
 

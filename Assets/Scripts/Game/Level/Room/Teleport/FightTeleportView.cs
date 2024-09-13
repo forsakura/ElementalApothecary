@@ -16,7 +16,6 @@ namespace Game.Level.Room.Teleport
         //????????????
         protected override void TransformToNext()
         {
-            print(6);
             base.TransformToNext();
             GameObject.Find("Player").transform.position = ((FightTeleportData)data).destinationPoint.position;
         }

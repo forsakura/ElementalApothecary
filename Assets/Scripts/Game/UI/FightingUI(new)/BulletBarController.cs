@@ -14,6 +14,7 @@ public class BulletBarController : MonoBehaviour
 
     private void Start()
     {
+        player = PlayerController.Instance?.GetComponent<Player>();
         bar = GetComponent<Image>();
         maxCount = 1;
         currentCount = 0;
