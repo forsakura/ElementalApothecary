@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ProjectBase.Scene;
 using UnityEngine.SceneManagement;
+using ProjectBase.UI;
 
 public class OnLeaveCampsite : PlayerInteraction
 {
@@ -10,9 +11,12 @@ public class OnLeaveCampsite : PlayerInteraction
     public override void Interact()
     {
         PlayerController.Instance.transform.position = targetPos;
+        UIManager.Instance.ShowPanel<FightingUIPanel>("FightingUI", E_UI_Layer.top);
         SceneManager.LoadScene("Sample Level");
-        //SceneMgr.Instance.LoadSceneAsync("Sample Level", false, () =>{
+        //SceneMgr.Instance.LoadSceneAsync("Sample Level", false, () =>
+        //{
         //    PlayerController.Instance.transform.position = targetPos;
+        //    UIManager.Instance.ShowPanel<FightingUIPanel>("FightingUI", E_UI_Layer.top);
         //});
     }
 }

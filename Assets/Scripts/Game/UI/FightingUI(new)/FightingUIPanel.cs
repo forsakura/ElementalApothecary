@@ -5,5 +5,12 @@ using UnityEngine;
 
 public class FightingUIPanel : BasePanel
 {
-    
+    public override void ShowMe()
+    {
+    }
+
+    public override void HideMe()
+    {
+
+    }
 }
