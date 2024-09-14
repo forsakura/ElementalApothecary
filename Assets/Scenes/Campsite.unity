@@ -412,17 +412,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InteractTip: {fileID: 6388231075827059222, guid: eec9a89e7ae845f44879577f468bcd44, type: 3}
---- !u!114 &439568570 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2553519820158217588, guid: 244c885f7e43d4e47aeff6bb65fb7b6e, type: 3}
-  m_PrefabInstance: {fileID: 699624518}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &468681818
 GameObject:
   m_ObjectHideFlags: 0
@@ -2056,26 +2045,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 2719344920713117594, guid: cce4f77973f1a2249b7c6eaaeab4a762, type: 3}
-      propertyPath: m_FlipX
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2719344920713117594, guid: cce4f77973f1a2249b7c6eaaeab4a762, type: 3}
-      propertyPath: m_FlipY
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2719344920713117594, guid: cce4f77973f1a2249b7c6eaaeab4a762, type: 3}
-      propertyPath: m_SortingOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4180930107975332994, guid: cce4f77973f1a2249b7c6eaaeab4a762, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8433630079253054987, guid: cce4f77973f1a2249b7c6eaaeab4a762, type: 3}
-      propertyPath: cv
-      value: 
-      objectReference: {fileID: 439568570}
     - target: {fileID: 8856804756395645599, guid: cce4f77973f1a2249b7c6eaaeab4a762, type: 3}
       propertyPath: m_LocalPosition.x
       value: 18.17

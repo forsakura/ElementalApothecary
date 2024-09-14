@@ -27,14 +27,14 @@ namespace Enemy.JungleKid
             Shoot(target.transform.position);
         }
 
-        public override void OnBulletHitTarget(BulletControl bullet, Collider2D collision)
+        public override void OnShootHitTarget(BulletControl bullet, Characters go)
         {
-            if (collision.transform.parent == null || !collision.transform.parent.CompareTag("Player"))
+            if (go.transform.parent == null || !go.transform.parent.CompareTag("Player"))
             {
                 return;
             }
             InitHit();
-            collision.GetComponent<HitArea>().GetHit(enemyHit);
+            go.GetComponent<HitArea>().GetHit(enemyHit);
             Destroy(bullet.gameObject);
         }
     }

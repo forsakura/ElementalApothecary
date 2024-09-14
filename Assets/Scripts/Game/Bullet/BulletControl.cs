@@ -13,8 +13,9 @@ public class BulletControl : MonoBehaviour
     Rigidbody2D rb;
     float timer = 0.0f;
 
-    public delegate void OnBulletHitEventHandler(BulletControl bullet, Collider2D collision);
-    public event OnBulletHitEventHandler OnBulletHitTarget;
+    public delegate void OnBulletHitEventHandler(BulletControl bullet, Characters go);
+    public event OnBulletHitEventHandler OnShootHitTarget;
+    public event OnBulletHitEventHandler OnThrowHitTarget;
 
     private void Start()
     {
@@ -32,8 +33,16 @@ public class BulletControl : MonoBehaviour
                     transform.position = Parabola.ClaculateCurrentPoint(start, target, timer, 1.0f, 2.0f);
                     if (timer > 1.0f)
                     {
+                        List<Characters> characters = CharacterManager.Instance.GetAllCharacters();
+                        foreach (var item in characters)
+                        {
+                            if ((item.transform.position - transform.position).magnitude < 2.0f)
+                            {
+                                Debug.Log("BulletThrowHit");
+                                OnThrowHitTarget?.Invoke(this, item);
+                            }
+                        }
                         Destroy(gameObject);
-                        OnBulletHitTarget?.Invoke(this, null);
                     }
                     break;
                 case BulletType.Shoot:
@@ -44,8 +53,8 @@ public class BulletControl : MonoBehaviour
                     }
                     break;
             }
+            timer += Time.deltaTime;
         }
-        timer += Time.deltaTime;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -59,7 +68,7 @@ public class BulletControl : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        OnBulletHitTarget?.Invoke(this, collision);
+        OnShootHitTarget?.Invoke(this, collision.GetComponent<Characters>());
     }
 
     public void SetBullet(Vector2 target, BulletType type)

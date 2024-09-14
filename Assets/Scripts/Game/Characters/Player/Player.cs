@@ -28,6 +28,14 @@ public class Player : Characters
         //DontDestroyOnLoad(gameObject);
     }
 
+    private void Update()
+    {
+        if (isDead)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     // 使用List存储交互物体，后进入的在List最后，离开某个时将其移除，若为最后一个，则显示移出后倒数第一个的交互提示
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -80,24 +88,40 @@ public class Player : Characters
         }
     }
 
-    public override void OnBulletHitTarget(BulletControl bullet, Collider2D collision)
+    public override void OnShootHitTarget(BulletControl bullet, Characters go)
     {
-        if (collision.transform.parent == null)
+        if (go.transform.parent == null || go == null)
         {
             return;
         }
-        if (collision.transform.parent.CompareTag("Enemy"))
+        if (go.transform.parent.CompareTag("Enemy"))
         {
             HitInstance hitInstance = new()
             {
                 Source = gameObject,
                 Damage = characterData.Damage
             };
-            if (collision.GetComponent<IHitable>().GetHit(hitInstance))
+            if (go.GetComponent<IHitable>().GetHit(hitInstance))
             {
                 Destroy(bullet.gameObject);
             }
         }
+    }
+
+    public override void OnThrowHitTarget(BulletControl bullet, Characters go)
+    {
+        if (go == null)
+        {
+            Debug.Log("HitNothing");
+            return;
+        }
+        HitInstance hitInstance = new()
+        {
+            Source = gameObject,
+            Damage = characterData.Damage
+        };
+        Debug.Log("HitSomething");
+        go.GetHit(hitInstance);
     }
 
     public void Drink()

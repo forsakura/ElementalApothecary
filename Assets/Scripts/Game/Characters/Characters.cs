@@ -151,14 +151,14 @@ public class Characters : MonoBehaviour
             return;
         }
         GameObject bul = Instantiate(bulletPrefab, transform.position, new Quaternion());
-        HitInstance hit = new()
-        {
-            Source = gameObject,
-            Damage = characterData.Damage
-        };
+        //HitInstance hit = new()
+        //{
+        //    Source = gameObject,
+        //    Damage = characterData.Damage
+        //};
         BulletControl bulletControl = bul.GetComponent<BulletControl>();
         bulletControl.SetBullet(target, BulletType.Shoot);
-        bulletControl.OnBulletHitTarget += OnBulletHitTarget;
+        bulletControl.OnShootHitTarget += OnShootHitTarget;
         remainingBullet -= 1;
         OnShoot?.Invoke(this, 1);
     }
@@ -166,12 +166,14 @@ public class Characters : MonoBehaviour
     public virtual void Throw(Vector2 target)
     {
         GameObject bul = Instantiate(bulletPrefab, transform.position, new Quaternion());
-        HitInstance hit = new()
-        {
-            Source = gameObject,
-            Damage = characterData.Damage
-        };
-        bul.GetComponent<BulletControl>().SetBullet(target, BulletType.Throw);
+        //HitInstance hit = new()
+        //{
+        //    Source = gameObject,
+        //    Damage = characterData.Damage
+        //};
+        BulletControl bulletControl = bul.GetComponent<BulletControl>();
+        bulletControl.SetBullet(target, BulletType.Throw);
+        bulletControl.OnThrowHitTarget += OnThrowHitTarget;
         OnThrow?.Invoke(this);
     }
 
@@ -181,7 +183,12 @@ public class Characters : MonoBehaviour
         OnFill?.Invoke(this, remainingBullet);
     }
 
-    public virtual void OnBulletHitTarget(BulletControl bullet, Collider2D collision)
+    public virtual void OnShootHitTarget(BulletControl bullet, Characters go)
+    {
+
+    }
+
+    public virtual void OnThrowHitTarget(BulletControl bullet, Characters go)
     {
 
     }

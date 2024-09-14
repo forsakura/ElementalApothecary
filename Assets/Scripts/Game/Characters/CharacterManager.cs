@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CharacterManager : SingletonByQing<CharacterManager>
 {
-    List<Characters> characters = new List<Characters>();
+    List<Characters> characters = new();
 
     public CharacterManager()
     {
@@ -24,7 +24,7 @@ public class CharacterManager : SingletonByQing<CharacterManager>
 
     public List<Characters> FindCharacters(ECharacterType characterType)
     {
-        List<Characters> charactersList = new List<Characters>();
+        List<Characters> charactersList = new();
         foreach (var character in characters)
         {
             if (character.characterType == characterType)
@@ -37,7 +37,7 @@ public class CharacterManager : SingletonByQing<CharacterManager>
 
     public List<Characters> FindCharacters(int characterID)
     {
-        List<Characters> charactersList = new List<Characters>();
+        List<Characters> charactersList = new();
         foreach (var character in characters)
         {
             if (character.characterData.ID == characterID)
@@ -46,5 +46,10 @@ public class CharacterManager : SingletonByQing<CharacterManager>
             }
         }
         return charactersList;
+    }
+
+    public List<Characters> GetAllCharacters()
+    {
+        return characters;
     }
 }
