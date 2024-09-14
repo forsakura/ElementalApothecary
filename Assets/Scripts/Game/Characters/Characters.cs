@@ -183,12 +183,12 @@ public class Characters : MonoBehaviour
         OnFill?.Invoke(this, remainingBullet);
     }
 
-    public virtual void OnShootHitTarget(BulletControl bullet, Characters go)
+    public virtual void OnShootHitTarget(BulletControl bullet, Collider2D go)
     {
 
     }
 
-    public virtual void OnThrowHitTarget(BulletControl bullet, Characters go)
+    public virtual void OnThrowHitTarget(BulletControl bullet, Collider2D go)
     {
 
     }

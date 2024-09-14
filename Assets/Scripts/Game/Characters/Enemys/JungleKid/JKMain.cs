@@ -27,7 +27,7 @@ namespace Enemy.JungleKid
             Shoot(target.transform.position);
         }
 
-        public override void OnShootHitTarget(BulletControl bullet, Characters go)
+        public override void OnShootHitTarget(BulletControl bullet, Collider2D go)
         {
             if (go.transform.parent == null || !go.transform.parent.CompareTag("Player"))
             {

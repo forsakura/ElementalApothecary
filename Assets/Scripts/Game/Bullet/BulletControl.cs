@@ -13,7 +13,7 @@ public class BulletControl : MonoBehaviour
     Rigidbody2D rb;
     float timer = 0.0f;
 
-    public delegate void OnBulletHitEventHandler(BulletControl bullet, Characters go);
+    public delegate void OnBulletHitEventHandler(BulletControl bullet, Collider2D go);
     public event OnBulletHitEventHandler OnShootHitTarget;
     public event OnBulletHitEventHandler OnThrowHitTarget;
 
@@ -38,8 +38,8 @@ public class BulletControl : MonoBehaviour
                         {
                             if ((item.transform.position - transform.position).magnitude < 2.0f)
                             {
-                                Debug.Log("BulletThrowHit");
-                                OnThrowHitTarget?.Invoke(this, item);
+                                Collider2D collider2D = item.transform.GetChild(0).GetComponent<Collider2D>();
+                                OnThrowHitTarget?.Invoke(this, collider2D);
                             }
                         }
                         Destroy(gameObject);
@@ -68,7 +68,7 @@ public class BulletControl : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        OnShootHitTarget?.Invoke(this, collision.GetComponent<Characters>());
+        OnShootHitTarget?.Invoke(this, collision);
     }
 
     public void SetBullet(Vector2 target, BulletType type)
