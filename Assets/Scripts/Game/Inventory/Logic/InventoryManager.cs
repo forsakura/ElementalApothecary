@@ -94,6 +94,10 @@ public class InventoryManager : Utilities.Singleton<InventoryManager>
         //    itemDetailsList.Add(itemDetails);
         //}
     }
+    //private void Update()
+    //{
+    //    Debug.Log(ProjectBase.UI.UIManager.Instance);
+    //}
 
     private bool HasTableContain(ItemID id)
     {
