@@ -2909,6 +2909,10 @@ PrefabInstance:
       propertyPath: itemID.BaseId
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 3705378077959965393, guid: d3b607baf2cc5d444905f47fb2301ebc, type: 3}
+      propertyPath: m_DrawMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9138242115509836438, guid: d3b607baf2cc5d444905f47fb2301ebc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.17
