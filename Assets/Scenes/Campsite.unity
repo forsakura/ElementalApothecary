@@ -1319,6 +1319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0951bf40d7fd591409fc3e8bb2ea3e9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemDetailsList: []
   itemDataList_SO: {fileID: 11400000, guid: a0b392f1cbb7eb94295e4fd503b3c7d6, type: 2}
   materials_SO: {fileID: 0}
   potions_SO: {fileID: 0}

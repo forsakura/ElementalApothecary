@@ -11,7 +11,7 @@ public class Synthesis : MonoBehaviour, ISynthesis
     [SerializeField]
     private SOListForCraft SOList;
 
-    private Dictionary<int, IDataItem> Materials;
+    private Dictionary<int, IDataItem> Materials = new();
     private DataItem production;
 
     [SerializeField]
@@ -98,14 +98,7 @@ public class Synthesis : MonoBehaviour, ISynthesis
     {
         if(order < MaxMaterialEnum)
         {
-            try
-            {
-                Materials.Add(order, Item);
-            }
-            catch (ArgumentException)
-            {
-            Console.WriteLine("An element with the same key already exists.");
-            }
+            Materials.Add(order, Item);
         }
         else
         {

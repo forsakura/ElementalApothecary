@@ -38,6 +38,8 @@ public class FlaskPanel : BasePanel
         {
             for(int i=0;i < synthesis.MaxMaterialEnum; i++)
             {
+                if (falskSlots[i].itemDetails == null)
+                    Debug.Log($"debug!!!{i}");
                 synthesis.addMaterial(i, falskSlots[i].itemDetails);
             }
 
