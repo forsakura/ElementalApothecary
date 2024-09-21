@@ -413,4 +413,16 @@ public class InventoryManager : Utilities.Singleton<InventoryManager>
         }
         EventHandler.CallUpdateInventoryUI(InventoryLocation.Bag,playerBag.itemList);
     }
+    /// <summary>
+    /// 物品放回仓库
+    /// </summary>
+    public void ItemBackBox(InventoryLocation locationFrom, int fromIndex)
+    {
+        List<InventoryItem> currentList = GetItemList(locationFrom);
+        InventoryItem currentItem = currentList[fromIndex];
+        AddItem(currentItem.itemID, currentItem.itemAmount);
+        InventoryItem empty=new InventoryItem();
+        currentList[fromIndex]=empty;
+        EventHandler.CallUpdateInventoryUI(locationFrom,currentList);
+    }
 }
