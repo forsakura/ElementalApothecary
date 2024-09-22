@@ -1,0 +1,17 @@
+{
+    "teleportPrefabPaths": [
+        "Prefab/Teleports/CommonTeleportEnter",
+        "Prefab/Teleports/CommonTeleportExit"
+    ],
+    "teleportInfos": [],
+    "materialPrefabPaths": [
+        "Prefab/Materials/material1",
+        "Prefab/Materials/material2"
+    ],
+    "materialInfos": [],
+    "enemyPrefabPaths": [
+        "Prefab/Enemies/Enemy1",
+        "Prefab/Enemies/Enemy2"
+    ],
+    "enemyInfos": []
+}

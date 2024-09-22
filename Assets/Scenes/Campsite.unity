@@ -1319,6 +1319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0951bf40d7fd591409fc3e8bb2ea3e9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemDetailsList: []
   itemDataList_SO: {fileID: 11400000, guid: a0b392f1cbb7eb94295e4fd503b3c7d6, type: 2}
   materials_SO: {fileID: 0}
   potions_SO: {fileID: 0}
@@ -2908,6 +2909,10 @@ PrefabInstance:
     - target: {fileID: 3244755795570979304, guid: d3b607baf2cc5d444905f47fb2301ebc, type: 3}
       propertyPath: itemID.BaseId
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3705378077959965393, guid: d3b607baf2cc5d444905f47fb2301ebc, type: 3}
+      propertyPath: m_DrawMode
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9138242115509836438, guid: d3b607baf2cc5d444905f47fb2301ebc, type: 3}
       propertyPath: m_LocalPosition.x

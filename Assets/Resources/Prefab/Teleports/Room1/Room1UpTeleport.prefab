@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3145525413888099121}
   - component: {fileID: -5214763018892815962}
   m_Layer: 0
-  m_Name: FightTeleportExit
+  m_Name: Room1UpTeleport
   m_TagString: Fight
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

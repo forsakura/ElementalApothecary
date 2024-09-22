@@ -23,7 +23,7 @@ namespace Game.Level.Room.Teleport
             {
                 
             });
-            GameObject.Find("Player").transform.position = ((SpecialTeleportData)data).destinationPoint.position;
+            GameObject.Find("Player").transform.position = ((SpecialTeleportData)data).destinationPoint;
             SceneMgr.Instance.UnloadSceneAsync(((SpecialTeleportData)data).currentSceneName, () =>
             {
                 
@@ -36,7 +36,7 @@ namespace Game.Level.Room.Teleport
             if (other.CompareTag("Player")&&((SpecialTeleportData)data).type==PointType.Enter)
             {
                 UIManager.Instance.ShowPanel<TranslateTipPanel>(tipPanelName, E_UI_Layer.system);
-                EventCenter.Instance.AddEventListener("?????", TransformToNext);
+                EventCenter.Instance.AddEventListener("´«ËÍ", TransformToNext);
             }
         }
 
@@ -46,7 +46,7 @@ namespace Game.Level.Room.Teleport
             if (other.CompareTag("Player")&&((SpecialTeleportData)data).type==PointType.Enter)
             {
                 UIManager.Instance.HidePanel(tipPanelName);
-                EventCenter.Instance.RemoveEventLister("?????", TransformToNext);
+                EventCenter.Instance.RemoveEventLister("´«ËÍ", TransformToNext);
             }
         }
     }
