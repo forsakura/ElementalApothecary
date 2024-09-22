@@ -46,8 +46,8 @@ public class Synthesis : MonoBehaviour, ISynthesis
         set => explosion = value;
     }
 
-    private List<int> mainATTR;
-    private List<int> auxATTR;
+    private List<int> mainATTR = new();
+    private List<int> auxATTR = new();
 
     [SerializeField]
     private int mainGachaTimes = 1; // Ä¬ÈÏÖµ  
@@ -203,10 +203,11 @@ public class Synthesis : MonoBehaviour, ISynthesis
 
     public void checkSucceed()
     {
-        if (production.BaseElement != EElement.None ||
+        if (production.BaseElement == EElement.None ||
             production.GetATTRID().Count == 0)
         {
             IsSuccess = false;
+            Debug.Log($"it's about production!! {production.GetATTRID().Count} {production.BaseElement}");
             if (Explosion > 0)
             {
                 IsExploded = true;//´ý¶¨
@@ -214,6 +215,7 @@ public class Synthesis : MonoBehaviour, ISynthesis
         }
         else if (!AddStabilizers && Explosion > 0)
         {
+            Debug.Log("it's about Explosion!!");
             IsSuccess = false;
             IsExploded = true;
         }
@@ -232,16 +234,16 @@ public class Synthesis : MonoBehaviour, ISynthesis
             switch(material.BaseElement)
             {
                 case EElement.Aer:
-                    origin.x += material.currentElementCount;
+                    elementCount.x += material.currentElementCount;
                     break;
                 case EElement.Terra:
-                    origin.x -= material.currentElementCount;
+                    elementCount.x -= material.currentElementCount;
                     break;
                 case EElement.Ignis:
-                    origin.y += material.currentElementCount;
+                    elementCount.y += material.currentElementCount;
                     break;
                 case EElement.Aqua:
-                    origin.y -= material.currentElementCount;
+                    elementCount.y -= material.currentElementCount;
                     break;
             }
 
@@ -282,8 +284,6 @@ public class Synthesis : MonoBehaviour, ISynthesis
 
     public void initATTRpool(EElement baseElement, AttributeType attributeType)
     {
-        mainATTR = new();
-        auxATTR = new();
         foreach (var material in Materials.Values)
         {
             foreach (var ATTR in material.GetATTRID())
@@ -333,6 +333,8 @@ public class Synthesis : MonoBehaviour, ISynthesis
     public void init()
     {
         Materials.Clear();
+        mainATTR = new();
+        auxATTR = new();
         production = null;
 
         Explosion = 0;

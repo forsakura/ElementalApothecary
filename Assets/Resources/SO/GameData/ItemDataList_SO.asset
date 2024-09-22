@@ -16,18 +16,18 @@ MonoBehaviour:
   - itemID:
       id: 1
       BaseId: 1
-      ATTR: 
+      ATTR: 01000000
     itemName: "\u57FA\u5E95\u836F\u6C34"
     itemType: 1
     itemIcon: {fileID: 21300000, guid: a65a0c8d1e0051640bdc00189156bb71, type: 2}
     itemOnWorldSprite: {fileID: 21300000, guid: a65a0c8d1e0051640bdc00189156bb71, type: 2}
     itemDescription: "\u5E73\u5E73\u65E0\u5947\u7684\u836F\u6C34\uFF0C\u4E0D\u8FC7\u8C8C\u4F3C\u6BD4\u666E\u901A\u6CC9\u6C34\u8981\u597D\u559D\u4E00\u70B9"
     itemUseRadius: 5
-    foeverEffect: 0
+    foeverEffect: 3
   - itemID:
       id: 2
       BaseId: 2
-      ATTR: 
+      ATTR: 02000000
     itemName: "\u56FA\u5316\u71C3\u6599"
     itemType: 1
     itemIcon: {fileID: 21300000, guid: 3cd4a1b4312db9340b304ed5b4629cd6, type: 2}
@@ -38,7 +38,7 @@ MonoBehaviour:
   - itemID:
       id: 3
       BaseId: 3
-      ATTR: 
+      ATTR: 03000000
     itemName: "\u5411\u65E5\u8475"
     itemType: 1
     itemIcon: {fileID: 21300000, guid: eedf17680edda9b438c0c700cf9906b5, type: 2}

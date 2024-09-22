@@ -587,6 +587,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 283160280a343f940a84fc41307b3345, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SOList:
+    ItemTempletList: {fileID: 0}
+    AttributeList: {fileID: 11400000, guid: 1c2cbc9872eb3904aa301fd48c9adfd5, type: 2}
   maxMaterialEnum: 3
   isExplosive: 1
   isExploded: 0
@@ -631,7 +634,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00010113059}
+  m_AnchoredPosition: {x: 0, y: -0.0000052452087}
   m_SizeDelta: {x: 0, y: 734.1355}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &3560144907510784171

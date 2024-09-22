@@ -29,10 +29,9 @@ public class DataItem : TrItem, IDataItem
     {
         this.useTimes = 0;
         this.itemUseRadius = 0;
-        this.itemDescription = null;
+        this.itemDescription = "";
         this.itemIcon = null;
-        this.itemName = null;
-        this.tags = null;
+        this.itemName = "";
         BaseElement = EElement.None;
         this.currentElementCount = 0;
     }

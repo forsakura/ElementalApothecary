@@ -44,7 +44,8 @@ public class TrItem : ITrItem
     {
         material,
         consumable,
-        QuestItem
+        QuestItem,
+        None
     }
 }
 

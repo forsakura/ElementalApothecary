@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38ec8afe0df42a44c9492f08e13f67a4, type: 3}
+  m_Name: testAux1
+  m_EditorClassIdentifier: 
+  Name: 
+  id: 4
+  effectId: 
+  buffId: 
+  description: 
+  Type: 1
+  baseElement: 2
+  Duration: 0
+  _remainingTime: 0
+  leak: 0
+  IsPermanent: 1
