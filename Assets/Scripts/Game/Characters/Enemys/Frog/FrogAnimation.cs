@@ -24,15 +24,20 @@ namespace Enemy.Frog
             frog = GetComponent<Frog>();
             anim = GetComponent<Animator>();
             IdleStart();
+            frog.OnDeath += Die;
         }
 
         private void FixedUpdate()
         {
-            rb.velocity = speedDir * frog.characterData.MoveSpeed;
+            rb.velocity = speedDir * frog.CurrentSpeed;
         }
 
         private void Update()
         {
+            if (frog.isDead)
+            {
+                return;
+            }
             if (rb.velocity.x > 0.0f)
             {
                 dir = 1.0f;
@@ -45,6 +50,10 @@ namespace Enemy.Frog
 
             if (timer > 0.0f)
             {
+                if(frog.getTaunt && timer > 1.0f)
+                {
+                    timer = 1.0f;
+                }
                 timer -= Time.deltaTime;
                 if (timer <= 0.0f)
                 {
@@ -94,6 +103,18 @@ namespace Enemy.Frog
         private void IdleStart()
         {
             timer = frog.getTaunt ? 1.0f : Random.Range(3.0f, 5.0f);
+        }
+
+        private void Die(Characters go, HitInstance hit)
+        {
+            speedDir = Vector2.zero;
+            transform.GetChild(0).gameObject.SetActive(false);
+            anim.SetTrigger("Dead");
+        }
+
+        private void DestroySelf()
+        {
+            Destroy(gameObject);
         }
     }
 }
