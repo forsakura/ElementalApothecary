@@ -32,7 +32,7 @@ namespace ProjectBase.Mono
 
         protected virtual void Init()
         {
-            
+            DontDestroyOnLoad(this);
         }
     }
 }

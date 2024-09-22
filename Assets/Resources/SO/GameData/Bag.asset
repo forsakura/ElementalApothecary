@@ -16,7 +16,12 @@ MonoBehaviour:
   - itemID:
       id: 0
       BaseId: 0
-      ATTR: 
+      ATTR: 00000000
+    itemAmount: 0
+  - itemID:
+      id: 0
+      BaseId: 0
+      ATTR: 00000000
     itemAmount: 0
   - itemID:
       id: 0
@@ -26,12 +31,7 @@ MonoBehaviour:
   - itemID:
       id: 0
       BaseId: 0
-      ATTR: 
-    itemAmount: 0
-  - itemID:
-      id: 0
-      BaseId: 0
-      ATTR: 
+      ATTR: 00000000
     itemAmount: 0
   - itemID:
       id: 0

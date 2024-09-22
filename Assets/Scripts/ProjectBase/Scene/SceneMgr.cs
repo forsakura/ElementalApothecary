@@ -6,6 +6,7 @@ using ProjectBase.UI;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace ProjectBase.Scene
 {
@@ -47,6 +48,8 @@ namespace ProjectBase.Scene
                 EventCenter.Instance.EventTrigger("进度更新", res.progress);
                 yield return res.progress;
             }
+
+            UIManager.Instance.GetPanel<BasePanel>("LoadingPanel").GetControl<Slider>("加载进度条").value = 1;
             GC.Collect();
             UIManager.Instance.HidePanel("LoadingPanel");
             callback?.Invoke();

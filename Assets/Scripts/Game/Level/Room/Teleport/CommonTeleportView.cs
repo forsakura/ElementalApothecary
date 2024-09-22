@@ -19,7 +19,7 @@ namespace Game.Level.Room.Teleport
             if (other.CompareTag("Player"))
             {
                 UIManager.Instance.ShowPanel<TranslateTipPanel>(tipPanelName, E_UI_Layer.system);
-                EventCenter.Instance.AddEventListener("?????", TransformToNext);
+                EventCenter.Instance.AddEventListener("´«ËÍ", TransformToNext);
             }
         }
 
@@ -29,14 +29,14 @@ namespace Game.Level.Room.Teleport
             if (other.CompareTag("Player"))
             {
                 UIManager.Instance.HidePanel(tipPanelName);
-                EventCenter.Instance.RemoveEventLister("?????", TransformToNext);
+                EventCenter.Instance.RemoveEventLister("´«ËÍ", TransformToNext);
             }
         }
 
         protected override void TransformToNext()
         {
             base.TransformToNext();
-            GameObject.Find("Player").transform.position = ((CommonTeleportData)data).destinationPoint.position;
+            GameObject.Find("Player").transform.position = ((CommonTeleportData)data).destinationPoint;
         }
     }
 }

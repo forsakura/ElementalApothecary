@@ -41,7 +41,7 @@ namespace Game.Level.Room
                     int i1 = i;
                     ResManager.LoadResourceAsync<GameObject>(_bossRoomData.enemyPrefabPaths[i1], arg0 =>
                     {
-                        SetGameObject(arg0, _bossRoomData.enemyPositions[i1], gameObject.transform);
+                        SetGameObject(arg0, _bossRoomData.enemyInfos[i1], gameObject.transform);
                     });
                 }
         }
@@ -55,7 +55,7 @@ namespace Game.Level.Room
                     int i1 = i;
                     ResManager.LoadResourceAsync<GameObject>(_bossRoomData.teleportPrefabPaths[i1], arg0 =>
                     {
-                        SetGameObject(arg0, _bossRoomData.teleportPositions[i1], gameObject.transform);
+                        SetGameObject(arg0, _bossRoomData.teleportInfos[i1], gameObject.transform);
                         SetTransformView(arg0);
                     });
                 }

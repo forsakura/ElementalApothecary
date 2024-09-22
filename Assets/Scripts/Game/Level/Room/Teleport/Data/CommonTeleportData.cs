@@ -20,7 +20,7 @@ namespace Game.Level.TranslatePoints.Data
             base.InitData(fileName);
             var res = SaveSystem.LoadGameFromJson<CommonTeleportData>(fileName, JsonType.LitJson);
             destinationPointName = res.destinationPointName;
-            destinationPoint = GameObject.Find(destinationPointName).transform;
+            destinationPoint = GameObject.Find(destinationPointName).transform.position;
             type = res.type;
         }
 

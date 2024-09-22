@@ -17,7 +17,7 @@ namespace Game.Level.Room.Teleport
         protected override void TransformToNext()
         {
             base.TransformToNext();
-            GameObject.Find("Player").transform.position = ((FightTeleportData)data).destinationPoint.position;
+            GameObject.Find("Player").transform.position = ((FightTeleportData)data).destinationPoint;
         }
 
         protected override void OnTriggerEnter2D(Collider2D other)
@@ -26,7 +26,7 @@ namespace Game.Level.Room.Teleport
             if (other.CompareTag("Player")&&((FightTeleportData)data).isTransform)
             {
                 UIManager.Instance.ShowPanel<TranslateTipPanel>(tipPanelName, E_UI_Layer.system);
-                EventCenter.Instance.AddEventListener("?????", TransformToNext);
+                EventCenter.Instance.AddEventListener("´«ËÍ", TransformToNext);
             } 
         }
 
@@ -36,7 +36,7 @@ namespace Game.Level.Room.Teleport
             if (other.CompareTag("Player") && ((FightTeleportData)data).isTransform)
             {
                 UIManager.Instance.HidePanel(tipPanelName);
-                EventCenter.Instance.RemoveEventLister("?????", TransformToNext);
+                EventCenter.Instance.RemoveEventLister("´«ËÍ", TransformToNext);
             }
         }
     }

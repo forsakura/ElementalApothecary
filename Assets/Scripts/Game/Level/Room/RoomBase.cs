@@ -20,9 +20,11 @@ namespace Game.Level.Room
         /// <param name="gb">物品对象</param>
         /// <param name="tr">对象坐标</param>
         /// <param name="parentTransform">对象父节点</param>
-        protected void SetGameObject(GameObject gb, Vector3 tr, Transform parentTransform)
+        protected void SetGameObject(GameObject gb, GameObjectInfo info, Transform parentTransform)
         {
-            gb.transform.position = tr;
+            gb.transform.localPosition = info.position * 5;
+            gb.transform.localRotation = Quaternion.Euler(info.rotation);
+            gb.transform.localScale = info.scale * 5;
             gb.transform.SetParent(parentTransform);
         }
 

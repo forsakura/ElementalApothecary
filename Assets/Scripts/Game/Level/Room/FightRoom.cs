@@ -37,13 +37,13 @@ namespace Game.Level.Room
 
         public void InitEnemies()
         {
-            if (_fightRoomData != null)
+            if (_fightRoomData != null && _fightRoomData.enemyInfos.Count>0)
                 for (int i = 0; i < _fightRoomData.enemyPrefabPaths.Count; i++)
                 {
                     int i1 = i;
                     ResManager.LoadResourceAsync<GameObject>(_fightRoomData.enemyPrefabPaths[i1], arg0 =>
                     {
-                        SetGameObject(arg0, _fightRoomData.enemyPositions[i1], gameObject.transform);
+                        SetGameObject(arg0, _fightRoomData.enemyInfos[i1], gameObject.transform);
                     });
                 }
         }
@@ -56,7 +56,7 @@ namespace Game.Level.Room
                     int i1 = i;
                     ResManager.LoadResourceAsync<GameObject>(_fightRoomData.teleportPrefabPaths[i1], arg0 =>
                     {
-                        SetGameObject(arg0, _fightRoomData.teleportPositions[i1], gameObject.transform);
+                        SetGameObject(arg0, _fightRoomData.teleportInfos[i1], gameObject.transform);
                         SetTransformView(arg0);
                     });
                 }
@@ -70,7 +70,7 @@ namespace Game.Level.Room
                     int i1 = i;
                     ResManager.LoadResourceAsync<GameObject>(_fightRoomData.materialPrefabPaths[i1], arg0 =>
                     {
-                        SetGameObject(arg0, _fightRoomData.materialPositions[i1], gameObject.transform);
+                        SetGameObject(arg0, _fightRoomData.materialInfos[i1], gameObject.transform);
                     });
                 }
         }

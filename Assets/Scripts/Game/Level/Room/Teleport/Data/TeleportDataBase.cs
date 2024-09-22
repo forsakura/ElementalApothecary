@@ -11,7 +11,7 @@ namespace Game.Level.Room.Teleport.Data
     {
         public string destinationPointName;
         
-        public Transform destinationPoint;
+        public Vector3 destinationPoint;
 
         public PointType type;
 
