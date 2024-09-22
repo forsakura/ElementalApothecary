@@ -1,0 +1,17 @@
+{
+    "teleportPrefabPaths": [
+        "Prefab/Teleports/FightTeleportEnter",
+        "Prefab/Teleports/FightTeleportExit"
+    ],
+    "teleportInfos": [],
+    "materialPrefabPaths": [
+        "Prefab/Characters/Enemies/Mushroom",
+        "Prefab/Characters/Enemies/Mushroom"
+    ],
+    "materialInfos": [],
+    "enemyPrefabPaths": [
+        "Prefab/Characters/Enemies/Mushroom",
+        "Prefab/Characters/Enemies/Mushroom"
+    ],
+    "enemyInfos": []
+}

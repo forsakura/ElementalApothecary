@@ -7,10 +7,10 @@ namespace Game.Level.Room.SO_RoomData1
     public class SO_RoomDataBase : ScriptableObject
     {
         public List<string> teleportPrefabPaths;
-        public List<Vector3> teleportPositions;
+        public List<GameObjectInfo> teleportInfos;
         public List<string> materialPrefabPaths;
-        public List<Vector3> materialPositions;
+        public List<GameObjectInfo> materialInfos;
         public List<string> enemyPrefabPaths;
-        public List<Vector3> enemyPositions;
+        public List<GameObjectInfo> enemyInfos;
     }
 }

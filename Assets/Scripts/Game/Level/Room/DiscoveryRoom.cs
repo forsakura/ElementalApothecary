@@ -41,7 +41,7 @@ namespace Game.Level.Room
                     int i1 = i;
                     ResManager.LoadResourceAsync<GameObject>(_discoveryRoomData.enemyPrefabPaths[i1], arg0 =>
                     {
-                        SetGameObject(arg0, _discoveryRoomData.enemyPositions[i1], gameObject.transform);
+                        SetGameObject(arg0, _discoveryRoomData.enemyInfos[i1], gameObject.transform);
                     });
                 }
             }
@@ -56,7 +56,7 @@ namespace Game.Level.Room
                     int i1 = i;
                     ResManager.LoadResourceAsync<GameObject>(_discoveryRoomData.materialPrefabPaths[i1], arg0 =>
                     {
-                        SetGameObject(arg0, _discoveryRoomData.materialPositions[i1], gameObject.transform);
+                        SetGameObject(arg0, _discoveryRoomData.materialInfos[i1], gameObject.transform);
                     });
                 }
             }
@@ -71,7 +71,7 @@ namespace Game.Level.Room
                     int i1 = i;
                     ResManager.LoadResourceAsync<GameObject>(_discoveryRoomData.teleportPrefabPaths[i1], arg0 =>
                     {
-                        SetGameObject(arg0, _discoveryRoomData.teleportPositions[i1], gameObject.transform);
+                        SetGameObject(arg0, _discoveryRoomData.teleportInfos[i1], gameObject.transform);
                         SetTransformView(arg0);
                     });
                 }

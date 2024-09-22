@@ -90,7 +90,7 @@ namespace ProjectBase.Date
             var path = Application.streamingAssetsPath + "/" + fileName + ".json";
             var jsonStr = type switch
             {
-                JsonType.JsonUtility => JsonUtility.ToJson(obj),
+                JsonType.JsonUtility => JsonUtility.ToJson(obj, true),
                 JsonType.LitJson => JsonMapper.ToJson(obj),
                 _ => null
             };
