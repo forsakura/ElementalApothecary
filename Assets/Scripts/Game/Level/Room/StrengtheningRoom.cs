@@ -40,7 +40,7 @@ namespace Game.Level.Room
                 int i1 = i;
                 ResManager.LoadResourceAsync<GameObject>(_strengtheningRoomData.teleportPrefabPaths[i1], arg0 =>
                 {
-                    SetGameObject(arg0, _strengtheningRoomData.teleportPositions[i1], gameObject.transform);
+                    SetGameObject(arg0, _strengtheningRoomData.teleportInfos[i1], gameObject.transform);
                     SetTransformView(arg0);
                 });
             }
@@ -53,7 +53,7 @@ namespace Game.Level.Room
                 int i1 = i;
                 ResManager.LoadResourceAsync<GameObject>(_strengtheningRoomData.materialPrefabPaths[i1], arg0 =>
                 {
-                    SetGameObject(arg0, _strengtheningRoomData.materialPositions[i1], gameObject.transform);
+                    SetGameObject(arg0, _strengtheningRoomData.materialInfos[i1], gameObject.transform);
                 });
             }
         }
