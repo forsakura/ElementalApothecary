@@ -21,3 +21,22 @@ public class LegacyItemDetails
     public int itemUseRadius;
     public int foeverEffect;
 }
+
+[System.Serializable]
+public struct ElementVector
+{
+    public Vector2 elementVector;
+    
+    public EElement[] GetEElements()
+    {
+        EElement[] eElements = new EElement[2];
+        if (elementVector.x > 0) eElements[1] = EElement.Terra;
+        else eElements[1] = EElement.Aer;
+        if (elementVector.y > 0) eElements[2] = EElement.Ignis;
+        else eElements[2] = EElement.Aqua;
+        return eElements;
+    }
+
+    
+
+}

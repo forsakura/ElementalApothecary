@@ -13,8 +13,11 @@ public class Characters : MonoBehaviour
     public float CurrentSpeed;
 
     // [水/火, 风/土]
-    public int[] ElementContain = new int[2] { 0, 0 };
-    public EElement[] ElementName = new EElement[2];
+    //public int[] ElementContain = new int[2] { 0, 0 };
+    //public Vector2 element;
+    //public EElement[] ElementName = new EElement[2];
+
+    public ElementVector elementState;
 
     public int remainingBullet;
     public GameObject bulletPrefab;
@@ -52,8 +55,9 @@ public class Characters : MonoBehaviour
         CurrentHealth = characterData.MaxHealth;
         OnHealthChange?.Invoke(this, CurrentHealth);
         CurrentSpeed = characterData.MoveSpeed;
-        ElementContain = new int[2] { 0, 0 };
-        ElementName = new EElement[2] {EElement.None, EElement.None};
+        elementState = new ElementVector();
+        //ElementContain = new int[2] { 0, 0 };
+        //ElementName = new EElement[2] {EElement.None, EElement.None};
 
         isInvincible = false;
     }
@@ -79,7 +83,6 @@ public class Characters : MonoBehaviour
         {
             return false;
         }
-
         BeforeGetHit?.Invoke(this, hit);
 
         int totalDmg = hit.Damage + CalculateElementDamage(hit);
@@ -91,6 +94,7 @@ public class Characters : MonoBehaviour
             OnDeath?.Invoke(this, hit);
         }
 
+        print(elementState.elementVector);
         isInvincible = true;
         invincibleTimer = characterData.InvincibleTime;
         StartCoroutine(InvincibleCountDown());
@@ -99,49 +103,61 @@ public class Characters : MonoBehaviour
 
         return true;
     }
-    
+    /// <summary>
+    /// 元素伤害计算相关
+    /// </summary>
+    /// <param name="hit"></param>
+    /// <returns></returns>
     protected virtual int CalculateElementDamage(HitInstance hit)
     {
         int dmg = 0;
-        for (int i = 0; i < 2; i++)
+        
+        if (hit.IgnoreInvincible)
         {
-            EElement en = hit.ElementName[i];
-            int ec = hit.ElementContain[i];
-            if (en == EElement.None)
-            {
-                continue;
-            }
-            if (this.ElementName[i] == EElement.None)
-            {
-                this.ElementName[i] = en;
-                this.ElementContain[i] = ec;
-            }
-            else if (this.ElementName[i] == en)
-            {
-                // 缺少限制上限的内容，设想是直接对自己造成dmg=9999伤害直接暴毙（
-                this.ElementContain[i] += ec;
-            }
-            else
-            {
-                if (this.ElementContain[i] == ec)
-                {
-                    this.ElementName[i] = EElement.None;
-                    this.ElementContain[i] = 0;
-                    dmg += ec;
-                }
-                else if (this.ElementContain[i] > ec)
-                {
-                    dmg += ec;
-                    this.ElementContain[i] -= ec;
-                }
-                else
-                {
-                    dmg += this.ElementContain[i];
-                    this.ElementContain[i] = ec - this.ElementContain[i];
-                    this.ElementName[i] = en;
-                }
-            }
+            //额外造成抵消元素的伤害
         }
+
+        elementState.elementVector += hit.elementState.elementVector;
+
+        //for (int i = 0; i < 2; i++)
+        //{
+        //    EElement en = hit.ElementName[i];
+        //    int ec = hit.ElementContain[i];
+        //    if (en == EElement.None)
+        //    {
+        //        continue;
+        //    }
+        //    if (this.ElementName[i] == EElement.None)
+        //    {
+        //        this.ElementName[i] = en;
+        //        this.ElementContain[i] = ec;
+        //    }
+        //    else if (this.ElementName[i] == en)
+        //    {
+        //        // 缺少限制上限的内容，设想是直接对自己造成dmg=9999伤害直接暴毙（
+        //        this.ElementContain[i] += ec;
+        //    }
+        //    else
+        //    {
+        //        if (this.ElementContain[i] == ec)
+        //        {
+        //            this.ElementName[i] = EElement.None;
+        //            this.ElementContain[i] = 0;
+        //            dmg += ec;
+        //        }
+        //        else if (this.ElementContain[i] > ec)
+        //        {
+        //            dmg += ec;
+        //            this.ElementContain[i] -= ec;
+        //        }
+        //        else
+        //        {
+        //            dmg += this.ElementContain[i];
+        //            this.ElementContain[i] = ec - this.ElementContain[i];
+        //            this.ElementName[i] = en;
+        //        }
+        //    }
+        //}
         return dmg;
     }
 

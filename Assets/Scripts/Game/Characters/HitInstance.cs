@@ -7,7 +7,8 @@ public class HitInstance
 {
     public GameObject Source;
     public int Damage = 0;
-    public int[] ElementContain = { 0, 0 };
-    public EElement[] ElementName = { EElement.None, EElement.None };
+    public ElementVector elementState;
+    //public int[] ElementContain = { 0, 0 };
+    //public EElement[] ElementName = { EElement.None, EElement.None };
     public bool IgnoreInvincible = false;
 }

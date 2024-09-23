@@ -81,5 +81,15 @@ public class BulletControl : MonoBehaviour
 
         initFinish = true;
     }
+    public void SetBullet(Vector2 target, BulletType type,Vector2 elementVector)
+    {
+        this.target = target;
+        this.bulletType = type;
+        
+        float direction = (target - start).x > 0 ? -1 : 1;
+        transform.rotation = Quaternion.Euler(0, 0, Vector3.Angle(Vector3.up, target - start) * direction);
+
+        initFinish = true;
+    }
 }
 
