@@ -108,7 +108,11 @@ public class Player : Characters
             HitInstance hitInstance = new()
             {
                 Source = gameObject,
-                Damage = characterData.Damage
+                Damage = characterData.Damage,
+                elementState=new ElementVector()
+                {
+                    elementVector=new Vector2(10,0)
+                }
             };
             if (go.GetComponent<IHitable>().GetHit(hitInstance))
             {
