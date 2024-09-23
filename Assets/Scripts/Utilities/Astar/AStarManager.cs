@@ -62,6 +62,11 @@ namespace AStarPathFinding
 
         public List<AStarCell> GetPath(Vector2Int startPos, Vector2Int endPos)
         {
+            if (startPos.x - startX < 0 || startPos.x - startX >= mapWidth || startPos.y - startY < 0 || startPos.y - startY >= mapHeight)
+            {
+                return new List<AStarCell>();
+            }
+
             PriorityQueue<AStarCell, float> frontier = new PriorityQueue<AStarCell, float>();
 
             AStarCell start = GetCell(startPos);
