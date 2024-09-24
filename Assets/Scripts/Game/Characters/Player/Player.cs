@@ -31,10 +31,6 @@ public class Player : Characters
         //DontDestroyOnLoad(gameObject);
     }
 
-    private void Update()
-    {
-    }
-
     // 使用List存储交互物体，后进入的在List最后，离开某个时将其移除，若为最后一个，则显示移出后倒数第一个的交互提示
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -111,7 +107,7 @@ public class Player : Characters
                 Damage = characterData.Damage,
                 elementState=new ElementVector()
                 {
-                    elementVector=new Vector2(10,0)
+                    elementVector=new Vector2(10,5)
                 }
             };
             if (go.GetComponent<IHitable>().GetHit(hitInstance))

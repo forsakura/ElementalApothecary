@@ -30,13 +30,23 @@ public struct ElementVector
     public EElement[] GetEElements()
     {
         EElement[] eElements = new EElement[2];
-        if (elementVector.x > 0) eElements[1] = EElement.Terra;
-        else eElements[1] = EElement.Aer;
-        if (elementVector.y > 0) eElements[2] = EElement.Ignis;
-        else eElements[2] = EElement.Aqua;
+        if (elementVector.x > 0)
+        {
+            eElements[1] = EElement.Aer;
+        }
+        else if (elementVector.x == 0) eElements[0] = EElement.None;
+        else eElements[0] = EElement.Terra;
+      
+        if (elementVector.y > 0) eElements[1] = EElement.Ignis;
+        else if (elementVector.y == 0) eElements[1] = EElement.None;
+        else eElements[1] = EElement.Aqua;
         return eElements;
     }
-
-    
-
+}
+/// <summary>
+/// 全局变量（
+/// </summary>
+public static class GlobalValue
+{
+    public static int EnviormentLeak=1;
 }

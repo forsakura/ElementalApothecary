@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using CharacterDelegates;
 using UnityEditor.TerrainTools;
+using System;
 
 public class Characters : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class Characters : MonoBehaviour
     public Vector3 bulletInitOffset = Vector3.zero;
 
     private float invincibleTimer;
+    private bool elementLossing;
 
     public bool isInvincible;
     public bool isDead = false;
@@ -36,8 +38,6 @@ public class Characters : MonoBehaviour
     public event ShootEventHandler OnShoot;
     public event ThrowEventHandler OnThrow;
     public event FillBulletEventHandler OnFill;
-
-    
 
     private void Awake()
     {
@@ -60,8 +60,34 @@ public class Characters : MonoBehaviour
         //ElementName = new EElement[2] {EElement.None, EElement.None};
 
         isInvincible = false;
+        elementLossing = false;
     }
-    
+    private void Update()
+    {
+        //元素相邻
+        if (Vector2.Angle(elementState.elementVector,Vector2.right)%90 > 0.1f&&!elementLossing)
+        {
+            elementLossing = true;
+            StartCoroutine(ElementLoss());
+            
+        }
+    }
+
+    IEnumerator ElementLoss()
+    {
+        float x=elementState.elementVector.x;
+        float y=elementState.elementVector.y;
+        if (x > 0)
+            elementState.elementVector.x = Math.Max(x - GlobalValue.EnviormentLeak, 0);
+        else elementState.elementVector.x = Math.Min(x + GlobalValue.EnviormentLeak, 0);
+        if (y > 0)
+            elementState.elementVector.y = Math.Max(y - GlobalValue.EnviormentLeak, 0);
+        else elementState.elementVector.y = Math.Min(y - GlobalValue.EnviormentLeak, 0);
+        //print(elementState.elementVector);
+        yield return new WaitForSeconds(1f);
+        elementLossing=false;
+    }
+
 
     private void OnEnable()
     {
@@ -111,10 +137,15 @@ public class Characters : MonoBehaviour
     protected virtual int CalculateElementDamage(HitInstance hit)
     {
         int dmg = 0;
-        
-        if (hit.IgnoreInvincible)
+        Vector2 hitVector = hit.elementState.elementVector;
+        Vector2 currentVector = elementState.elementVector;
+
+        if (!hit.IgnoreInvincible)
         {
             //额外造成抵消元素的伤害
+            float res = GetCausedDamage(currentVector.x, hitVector.x);
+            float res2 = GetCausedDamage(currentVector.y, hitVector.y);
+            //dmg+=(int)Cause(res+res2);
         }
 
         elementState.elementVector += hit.elementState.elementVector;
@@ -161,6 +192,22 @@ public class Characters : MonoBehaviour
         return dmg;
     }
 
+    private float GetCausedDamage(float x, float y)
+    {
+
+        if (x * (x + y) < 0)
+        {
+            return Math.Abs(x);
+        }
+        else
+        {
+            if (Math.Abs(x + y) - Math.Abs(x) < 0)
+            {
+                return Math.Abs(y);
+            }
+            else return 0f;
+        }
+    }
     public virtual void Shoot(Vector2 target)
     {
         if (remainingBullet == 0 && characterType == ECharacterType.Player)
