@@ -27,5 +27,15 @@ namespace Enemy
                 collision.gameObject.GetComponent<HitArea>().GetHit(enemyParent.enemyHit);
             }
         }
+
+        public override bool GetHit(HitInstance hit)
+        {
+            Characters characters = hit.Source.GetComponent<Characters>();
+            if (characters != null)
+            {
+                enemyParent.HaveTaunt(characters);
+            }
+            return base.GetHit(hit);
+        }
     }
 }

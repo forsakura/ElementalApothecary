@@ -410,19 +410,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5756763590051429896, guid: 244c885f7e43d4e47aeff6bb65fb7b6e, type: 3}
       propertyPath: m_FollowOffset.x
-      value: 1.012263
+      value: 0.9109704
       objectReference: {fileID: 0}
     - target: {fileID: 5756763590051429896, guid: 244c885f7e43d4e47aeff6bb65fb7b6e, type: 3}
       propertyPath: m_FollowOffset.y
-      value: 4.531646
+      value: 4.021033
       objectReference: {fileID: 0}
     - target: {fileID: 5909307488808126182, guid: 244c885f7e43d4e47aeff6bb65fb7b6e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 19.182262
+      value: 19.08097
       objectReference: {fileID: 0}
     - target: {fileID: 5909307488808126182, guid: 244c885f7e43d4e47aeff6bb65fb7b6e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.861646
+      value: 9.351032
       objectReference: {fileID: 0}
     - target: {fileID: 5909307488808126182, guid: 244c885f7e43d4e47aeff6bb65fb7b6e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1520,7 +1520,7 @@ Transform:
   m_GameObject: {fileID: 1574126605}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.515944, y: 9.860849, z: -10}
+  m_LocalPosition: {x: 18.517862, y: 9.35036, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1704,7 +1704,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InteractTip: {fileID: 6388231075827059222, guid: eec9a89e7ae845f44879577f468bcd44, type: 3}
-  targetPos: {x: -21.13136, y: -2.8527415, z: 0}
+  targetPos: {x: -17.674784, y: -0.59501034, z: 0}
 --- !u!1 &1682247949
 GameObject:
   m_ObjectHideFlags: 0
@@ -2911,7 +2911,19 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3705378077959965393, guid: d3b607baf2cc5d444905f47fb2301ebc, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3705378077959965393, guid: d3b607baf2cc5d444905f47fb2301ebc, type: 3}
       propertyPath: m_DrawMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3705378077959965393, guid: d3b607baf2cc5d444905f47fb2301ebc, type: 3}
+      propertyPath: m_SpriteSortPoint
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3708232277453117798, guid: d3b607baf2cc5d444905f47fb2301ebc, type: 3}
+      propertyPath: m_SpriteTilingProperty.drawMode
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9138242115509836438, guid: d3b607baf2cc5d444905f47fb2301ebc, type: 3}

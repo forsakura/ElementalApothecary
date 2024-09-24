@@ -129,14 +129,20 @@ public class SlotUI : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, ID
 
         if (eventData.pointerCurrentRaycast.gameObject != null)
         {
-            
+            //print(eventData.pointerCurrentRaycast.gameObject.name);
             if (eventData.pointerCurrentRaycast.gameObject.GetComponent<SlotUI>() == null)
             {
                 if(eventData.pointerCurrentRaycast.gameObject.name== "InventoryBK")
                 {
-                    if (slotType == ContainerType.Flask)
+                    switch (slotType)
                     {
-                        InventoryManager.Instance.ItemBackBox(InventoryLocation.Flask, slotIndex);
+                       case ContainerType.Bag:
+                            InventoryManager.Instance.ItemBackBox(InventoryLocation.Bag, slotIndex);
+                            break;
+                        case ContainerType.Flask:
+                            InventoryManager.Instance.ItemBackBox(InventoryLocation.Flask, slotIndex);
+                            break;
+
                     }
                 }
                 return;
