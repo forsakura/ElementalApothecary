@@ -173,7 +173,7 @@ public class Characters : MonoBehaviour
         //};
         BulletControl bulletControl = bul.GetComponent<BulletControl>();
         bulletControl.SetBullet(target, BulletType.Throw);
-        bulletControl.OnThrowHitTarget += OnThrowHitTarget;
+        //bulletControl.OnThrowHitTarget += OnThrowHitTarget;//先去了，不由角色决定效果
         OnThrow?.Invoke(this);
     }
 
