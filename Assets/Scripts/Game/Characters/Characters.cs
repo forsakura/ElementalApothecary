@@ -41,6 +41,7 @@ public class Characters : MonoBehaviour
 
     private void Awake()
     {
+        
         if (GetComponent<PlayerController>()  != null)
         {
             characterType = ECharacterType.Player;
@@ -69,7 +70,6 @@ public class Characters : MonoBehaviour
         {
             elementLossing = true;
             StartCoroutine(ElementLoss());
-            
         }
     }
 
@@ -83,7 +83,6 @@ public class Characters : MonoBehaviour
         if (y > 0)
             elementState.elementVector.y = Math.Max(y - GlobalValue.EnviormentLeak, 0);
         else elementState.elementVector.y = Math.Min(y - GlobalValue.EnviormentLeak, 0);
-        //print(elementState.elementVector);
         yield return new WaitForSeconds(1f);
         elementLossing=false;
     }
@@ -120,7 +119,7 @@ public class Characters : MonoBehaviour
             OnDeath?.Invoke(this, hit);
         }
 
-        print(elementState.elementVector);
+        //print(elementState.elementVector);
         isInvincible = true;
         invincibleTimer = characterData.InvincibleTime;
         StartCoroutine(InvincibleCountDown());
@@ -145,11 +144,13 @@ public class Characters : MonoBehaviour
             //额外造成抵消元素的伤害
             float res = GetCausedDamage(currentVector.x, hitVector.x);
             float res2 = GetCausedDamage(currentVector.y, hitVector.y);
-            //dmg+=(int)Cause(res+res2);
+            dmg+=(int)/*Cause*/(res+res2);
         }
 
         elementState.elementVector += hit.elementState.elementVector;
-
+        elementState.elementVector = new Vector2(
+            Mathf.Clamp(elementState.elementVector.x, -100, 100), 
+            Mathf.Clamp(elementState.elementVector.y, -100, 100));
         //for (int i = 0; i < 2; i++)
         //{
         //    EElement en = hit.ElementName[i];

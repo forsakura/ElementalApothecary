@@ -30,7 +30,6 @@ namespace Enemy.Mushroom
         {
             base.InitHit();
             enemyHit.elementState.elementVector = new Vector2(-10, 0);
-
             //enemyHit.ElementName[1] = EElement.Terra;
             //enemyHit.ElementContain[1] = 10;
         }
