@@ -4,6 +4,7 @@ using ProjectBase.Event;
 using ProjectBase.Scene;
 using ProjectBase.UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Game.Level.Room.Teleport
 {
@@ -11,26 +12,28 @@ namespace Game.Level.Room.Teleport
     {
         private void Start()
         {
-            data = new SpecialTeleportData(gameObject.name);
+            data = new SpecialTeleportData(fileName);
+            Debug.Log(((SpecialTeleportData)data).destinationSceneName);
         }
 
         //?????????????????????§Ý?????????????????
         protected override void TransformToNext()
         {
             base.TransformToNext();
-            UIManager.Instance.ShowPanel<LoadingPanel>("LoadingPanel", E_UI_Layer.system);
-            SceneMgr.Instance.LoadSceneAsync(((SpecialTeleportData)data).nextSceneName, true, () =>
+            Vector3 initPosition = ((SpecialTeleportData)data).destinationPoint;
+            SceneMgr.Instance.LoadSceneAsync(((SpecialTeleportData)data).destinationSceneName, false, () =>
             {
-                
-            });
-            GameObject.Find("Player").transform.position = ((SpecialTeleportData)data).destinationPoint;
-            SceneMgr.Instance.UnloadSceneAsync(((SpecialTeleportData)data).currentSceneName, () =>
-            {
-                
+                GameObject.Find("Player").transform.position = initPosition;
             });
         }
 
-        protected override void OnTriggerEnter2D(Collider2D other)
+        public override void Interact()
+        {
+            base.Interact();
+            TransformToNext();
+        }
+
+        /*protected override void OnTriggerEnter2D(Collider2D other)
         {
             base.OnTriggerExit2D(other);
             if (other.CompareTag("Player")&&((SpecialTeleportData)data).type==PointType.Enter)
@@ -38,9 +41,9 @@ namespace Game.Level.Room.Teleport
                 UIManager.Instance.ShowPanel<TranslateTipPanel>(tipPanelName, E_UI_Layer.system);
                 EventCenter.Instance.AddEventListener("´«ËÍ", TransformToNext);
             }
-        }
+        }*/
 
-        protected override void OnTriggerExit2D(Collider2D other)
+        /*protected override void OnTriggerExit2D(Collider2D other)
         {
             base.OnTriggerEnter2D(other);
             if (other.CompareTag("Player")&&((SpecialTeleportData)data).type==PointType.Enter)
@@ -48,7 +51,7 @@ namespace Game.Level.Room.Teleport
                 UIManager.Instance.HidePanel(tipPanelName);
                 EventCenter.Instance.RemoveEventLister("´«ËÍ", TransformToNext);
             }
-        }
+        }*/
     }
 }
 

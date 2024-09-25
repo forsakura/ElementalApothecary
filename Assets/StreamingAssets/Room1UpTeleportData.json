@@ -1,0 +1,10 @@
+{
+    "destinationSceneName": "Sample Level",
+    "destinationPoint": {
+        "x": 1.25,
+        "y": -10.0,
+        "z": 0.0
+    },
+    "type": 0,
+    "isOpen": false
+}

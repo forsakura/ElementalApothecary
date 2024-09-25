@@ -1,13 +1,11 @@
 using ProjectBase.Date;
+using UnityEngine.SceneManagement;
 
 namespace Game.Level.Room.Teleport.Data
 {
     public class SpecialTeleportData : TeleportDataBase
     {
-        public string nextSceneName;
         public string currentSceneName;
-
-
         public SpecialTeleportData()
         {
             
@@ -22,8 +20,8 @@ namespace Game.Level.Room.Teleport.Data
             var res = SaveSystem.LoadGameFromJson<SpecialTeleportData>(fileName, JsonType.LitJson);
             destinationPoint = res.destinationPoint;
             type = res.type;
-            nextSceneName = res.nextSceneName;
-            currentSceneName = res.currentSceneName;
+            destinationSceneName = res.destinationSceneName;
+            currentSceneName = SceneManager.GetActiveScene().name;
         }
 
         public override void SaveData(string fileName)

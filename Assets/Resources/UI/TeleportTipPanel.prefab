@@ -84,8 +84,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3864942064085340656}
-  - component: {fileID: 5664023001824455279}
   - component: {fileID: 4809202820569223232}
+  - component: {fileID: 4529469548976016636}
   m_Layer: 5
   m_Name: TeleportTipPanel
   m_TagString: Untagged
@@ -113,20 +113,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &5664023001824455279
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8726175691415358989}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2220ab9efd12870428ecc5333dd38b5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  destinationPoint: {fileID: 0}
-  isTranLate: 0
 --- !u!222 &4809202820569223232
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -135,3 +121,15 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8726175691415358989}
   m_CullTransparentMesh: 1
+--- !u!114 &4529469548976016636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8726175691415358989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fd1a7882af39614b89b03d4cbfce71c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
