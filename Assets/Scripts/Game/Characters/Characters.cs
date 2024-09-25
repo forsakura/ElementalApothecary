@@ -5,6 +5,7 @@ using UnityEngine;
 using CharacterDelegates;
 using UnityEditor.TerrainTools;
 using System;
+using ProjectBase.UI;
 
 public class Characters : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class Characters : MonoBehaviour
     public ECharacterType characterType;
     public int CurrentHealth;
     public float CurrentSpeed;
-
+    public DataItem currentBulletValue;
     // [Ë®/»ð, ·ç/ÍÁ]
     //public int[] ElementContain = new int[2] { 0, 0 };
     //public Vector2 element;
@@ -244,6 +245,8 @@ public class Characters : MonoBehaviour
 
     public virtual void Fill()
     {
+        currentBulletValue = UIManager.Instance.GetPanel<FightingUIPanel>("FightingUIPanel").GetCurrentBullet();
+        if (currentBulletValue == null) return;
         remainingBullet = characterData.MaxBulletCount;
         OnFill?.Invoke(this, remainingBullet);
     }

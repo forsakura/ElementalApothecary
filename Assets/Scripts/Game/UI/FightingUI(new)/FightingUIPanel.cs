@@ -3,9 +3,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class FightingUIPanel : BasePanel
+public class FightingUIPanel : BasePanel, IScrollHandler
 {
     private Player player;
 
@@ -15,8 +16,10 @@ public class FightingUIPanel : BasePanel
     private Image elementPointer;
 
     public SlotUI[] bagSlots;
+    public SlotUI[] bulletSlots;
     private List<InventoryItem> itemList;
     public int usingBagIndex;
+    public int usingBulletIndex;
 
     int maxCount;
     int currentCount;
@@ -29,29 +32,8 @@ public class FightingUIPanel : BasePanel
     protected override void Awake()
     {
         base.Awake();
-        itemList = InventoryManager.Instance.playerBag.itemList;
-        usingBagIndex = 0;
-        ChangeBagSlot(usingBagIndex%itemList.Count);
     }
-
-    public void ChangeBagSlot(int index)
-    {
-        for (int i = 0; i < bagSlots.Length; i++)
-        {
-            DataItem _item = InventoryManager.Instance.GetItemDetails(itemList[index].itemID);
-            
-            if (itemList[index].itemAmount>0)
-            {
-                bagSlots[i].UpdateSlot(_item, itemList[index].itemAmount);
-            }
-            else
-            {
-                bagSlots[i].UpdateEmptySlot();
-            }
-            index=(index+1)%itemList.Count;
-            
-        }
-    }
+    
 
     void Start()
     {
@@ -77,6 +59,65 @@ public class FightingUIPanel : BasePanel
             usingBagIndex = (usingBagIndex + 1) % itemList.Count;
             ChangeBagSlot(usingBagIndex);
         });
+        GetControl<Button>("LeftMoveBullet").onClick.AddListener(() =>
+        {
+            usingBulletIndex = (usingBulletIndex - 1 + itemList.Count) % itemList.Count;
+            ChangeBulletSlot(usingBulletIndex);
+        });
+        GetControl<Button>("RightMoveBullet").onClick.AddListener(() =>
+        {
+            usingBulletIndex = (usingBulletIndex + 1) % itemList.Count;
+            ChangeBulletSlot(usingBulletIndex);
+        });
+        itemList = InventoryManager.Instance.playerBag.itemList;
+        usingBagIndex = 0;
+        usingBulletIndex = 0;
+        ChangeBagSlot(usingBagIndex % itemList.Count);
+        ChangeBulletSlot(usingBulletIndex % itemList.Count);
+    }
+
+    /// <summary>
+    /// 切换正在使用的背包物品，暂时没想好怎么写，先用着
+    /// </summary>
+    /// <param name="index"></param>
+    public void ChangeBagSlot(int index)
+    {
+        index = (index - 1 + itemList.Count) % itemList.Count;
+        for (int i = 0; i < bagSlots.Length; i++)
+        {
+            DataItem _item = InventoryManager.Instance.GetItemDetails(itemList[index].itemID);
+
+            if (itemList[index].itemAmount > 0)
+            {
+                bagSlots[i].UpdateSlot(_item, itemList[index].itemAmount);
+            }
+            else
+            {
+                bagSlots[i].UpdateEmptySlot();
+            }
+            index = (index + 1) % itemList.Count;
+
+        }
+    }
+
+    public void ChangeBulletSlot(int index)
+    {
+        index = (index - 1 + itemList.Count) % itemList.Count;
+        for (int i = 0; i < bulletSlots.Length; i++)
+        {
+            DataItem _item = InventoryManager.Instance.GetItemDetails(itemList[index].itemID);
+
+            if (itemList[index].itemAmount > 0)
+            {
+                bulletSlots[i].UpdateSlot(_item, itemList[index].itemAmount);
+            }
+            else
+            {
+                bulletSlots[i].UpdateEmptySlot();
+            }
+            index = (index + 1) % itemList.Count;
+
+        }
     }
 
     private void OnBulletFill(Characters go, int max)
@@ -118,5 +159,29 @@ public class FightingUIPanel : BasePanel
         currentHealth = health;
         childBar.fillAmount = 1.0f * currentHealth / maxHealth;
         timer = delayTime;
+    }
+
+    public void OnScroll(PointerEventData eventData)
+    {
+        throw new NotImplementedException();
+    }
+
+    public DataItem GetCurrentBullet()
+    {
+        if(itemList[usingBulletIndex].itemAmount<1) return null;
+        InventoryItem item = new InventoryItem();
+        item.itemID = itemList[usingBulletIndex].itemID;
+        item.itemAmount = itemList[usingBulletIndex].itemAmount-1;
+        itemList[usingBulletIndex] = item;
+        return InventoryManager.Instance.GetItemDetails(itemList[usingBulletIndex].itemID);
+    }
+    public DataItem GetCurrentItem()
+    {
+        if (itemList[usingBagIndex].itemAmount < 1) return null;
+        InventoryItem item = new InventoryItem();
+        item.itemID = itemList[usingBagIndex].itemID;
+        item.itemAmount = itemList[usingBagIndex].itemAmount - 1;
+        itemList[usingBagIndex] = item;
+        return InventoryManager.Instance.GetItemDetails(itemList[usingBagIndex].itemID);
     }
 }

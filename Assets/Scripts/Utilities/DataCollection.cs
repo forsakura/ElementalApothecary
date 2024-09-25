@@ -49,4 +49,5 @@ public struct ElementVector
 public static class GlobalValue
 {
     public static int EnviormentLeak=1;
+    public static int ElementInterval = 1;
 }
