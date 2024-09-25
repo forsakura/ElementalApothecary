@@ -18,6 +18,7 @@ public class Characters : MonoBehaviour
 
     public int remainingBullet;
     public GameObject bulletPrefab;
+    public Vector3 bulletInitOffset = Vector3.zero;
 
     private float invincibleTimer;
 
@@ -146,11 +147,11 @@ public class Characters : MonoBehaviour
 
     public virtual void Shoot(Vector2 target)
     {
-        if (remainingBullet == 0)
+        if (remainingBullet == 0 && characterType == ECharacterType.Player)
         {
             return;
         }
-        GameObject bul = Instantiate(bulletPrefab, transform.position, new Quaternion());
+        GameObject bul = Instantiate(bulletPrefab, transform.position + bulletInitOffset, new Quaternion());
         //HitInstance hit = new()
         //{
         //    Source = gameObject,
@@ -165,7 +166,7 @@ public class Characters : MonoBehaviour
 
     public virtual void Throw(Vector2 target)
     {
-        GameObject bul = Instantiate(bulletPrefab, transform.position, new Quaternion());
+        GameObject bul = Instantiate(bulletPrefab, transform.position + bulletInitOffset, new Quaternion());
         //HitInstance hit = new()
         //{
         //    Source = gameObject,

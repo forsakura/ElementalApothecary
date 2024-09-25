@@ -39,15 +39,13 @@ namespace Enemy.Mushroom
             {
                 // Start animation;
                 anim.FSM.ChangeStateTo("CreateSpore");
+                anim.CreateArea();
                 if (moveCoroutine != null)
                 {
                     StopCoroutine(moveCoroutine);
                     moveCoroutine = null;
                 }
                 rb.velocity = Vector2.zero;
-
-                CreateSporeArea();
-                anim.FinishCreateSpore();
 
                 target = gameObject;
                 AfterGetHit -= ThresholdCheck;

@@ -38,17 +38,25 @@ public class FlaskPanel : BasePanel
         {
             for(int i=0;i < synthesis.MaxMaterialEnum; i++)
             {
-                synthesis.addMaterial(i, falskSlots[i].itemDetails);
+                if (falskSlots[i].itemDetails != null)
+                {           
+                    synthesis.addMaterial(i, falskSlots[i].itemDetails);
+                }    
             }
 
-            falskSlots[synthesis.MaxMaterialEnum].UpdateSlot(synthesis.output(),1);
-
-            synthesis.init();
-
-            for (int i = 0; i < synthesis.MaxMaterialEnum; i++)
+            DataItem output = synthesis.output();
+            if (output != null)
             {
-                 falskSlots[i].UpdateEmptySlot();
+                output.DebugDisplayData();
+                falskSlots[synthesis.MaxMaterialEnum].UpdateSlot(output, 1);
+            
+                for (int i = 0; i < synthesis.MaxMaterialEnum; i++)
+                {
+                    falskSlots[i].UpdateEmptySlot();
+                }
             }
+            
+            synthesis.init();
             //合成功能
         });
     }

@@ -31,8 +31,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -10.5, y: 4.67, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1866384769882957009}
   m_Father: {fileID: 0}
@@ -122,9 +122,12 @@ MonoBehaviour:
   ElementName: 0000000000000000
   remainingBullet: 0
   bulletPrefab: {fileID: 0}
+  bulletInitOffset: {x: 0, y: 0, z: 0}
   isInvincible: 0
   isDead: 0
   target: {fileID: 0}
+  getTaunt: 0
+  tauntTime: 10
   enemyHit:
     Source: {fileID: 0}
     Damage: 0
@@ -182,7 +185,7 @@ Animator:
   m_GameObject: {fileID: 812722933542968851}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 704472f1c9dda5044923c95033ad672f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

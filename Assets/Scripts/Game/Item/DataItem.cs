@@ -4,26 +4,34 @@ using UnityEngine;
 
 /// <summary>
 /// 背包物品数据，尽量还是通过id从SO调用固有数据
-/// </summary>
+/// </summary> 
+[System.Serializable]
 public class DataItem : TrItem, IDataItem
 {
+    [SerializeField]
     private int _useTimes;
+    [SerializeField]
     private int _itemUseRadius;
+    [SerializeField]
     private string _itemDescription;
-    private Sprite _itemIcon; // 如果需要，可以取消注释并添加相应的属性  
+    [SerializeField]
+    private Sprite _itemIcon;
+    [SerializeField]
     private string _itemName;
+    [SerializeField]
     private List<TrItem.ItemTag> _tags = new List<TrItem.ItemTag>();
-    private EElement _baseElement ;
+    [SerializeField]
+    private EElement _baseElement;
+    [SerializeField]
     private float _currentElementCount;
 
     public DataItem()
     {
         this.useTimes = 0;
         this.itemUseRadius = 0;
-        this.itemDescription = null;
+        this.itemDescription = "";
         this.itemIcon = null;
-        this.itemName = null;
-        this.tags = null;
+        this.itemName = "";
         BaseElement = EElement.None;
         this.currentElementCount = 0;
     }
