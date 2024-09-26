@@ -6,12 +6,18 @@ public class ItemInWord : MonoBehaviour
 {
     public ItemID itemID;
     private Sprite spriteOnWorld;
+    private SpriteRenderer spriteRenderer;
     public Vector2 worldPos;
+    private BoxCollider2D coll;
     void Start()
     {
         spriteOnWorld=InventoryManager.Instance.GetItemDetails(itemID).itemIcon;
-        //print(spriteOnWorld);
-        gameObject.GetComponent<SpriteRenderer>().sprite = spriteOnWorld;
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite=spriteOnWorld;
+        coll=GetComponent<BoxCollider2D>();
+        //Vector2 newSize = new Vector2(spriteRenderer.sprite.bounds.size.x, spriteRenderer.sprite.bounds.size.y);
+        //coll.size = newSize;
+        //coll.offset = new Vector2(0, spriteRenderer.sprite.bounds.center.y);
     }
     public void SetPos()
     {

@@ -1,1 +1,8 @@
-{"teleportPrefabPaths":[],"teleportPositions":[],"materialPrefabPaths":[],"materialPositions":[],"enemyPrefabPaths":[],"enemyPositions":[]}
+{
+    "teleportPrefabPaths": [],
+    "teleportInfos": [],
+    "materialPrefabPaths": [],
+    "materialInfos": [],
+    "enemyPrefabPaths": [],
+    "enemyInfos": []
+}
