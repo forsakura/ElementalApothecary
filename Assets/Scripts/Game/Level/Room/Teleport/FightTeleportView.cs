@@ -12,7 +12,7 @@ namespace Game.Level.Room.Teleport
         private void Start()
         {
             data = new FightTeleportData(fileName);
-            Debug.Log(data.destinationPoint);
+            //Debug.Log(data.destinationPoint);
         }
 
         //????????????

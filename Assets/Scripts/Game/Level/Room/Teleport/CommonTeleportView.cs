@@ -11,7 +11,7 @@ namespace Game.Level.Room.Teleport
         private void Start()
         {
             data = new CommonTeleportData(fileName);
-            Debug.Log(data.destinationPoint);
+            //Debug.Log(data.destinationPoint);
         }
 
         /*protected override void OnTriggerEnter2D(Collider2D other)

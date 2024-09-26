@@ -140,4 +140,5 @@ public class Player : Characters
     {
         OnDrink?.Invoke(this);
     }
+
 }

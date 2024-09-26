@@ -18,7 +18,7 @@ namespace Game.Level.TranslatePoints.Data
         public override void InitData(string fileName)
         {
             base.InitData(fileName);
-            Debug.Log(fileName);
+            //Debug.Log(fileName);
             var res = SaveSystem.LoadGameFromJson<CommonTeleportData>(fileName, JsonType.LitJson);
             //destinationPointName = res.destinationPointName;
             destinationPoint = res.destinationPoint;
