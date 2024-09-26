@@ -12,6 +12,7 @@ namespace Enemy.Mushroom
         Rigidbody2D rb;
         Mushroom mushroom;
 
+        float dir = 1.0f;
         bool finishCreateSpore = false;
 
         // Start is called before the first frame update
@@ -26,7 +27,16 @@ namespace Enemy.Mushroom
         // Update is called once per frame
         void Update()
         {
-
+            animator.SetFloat("Speed", rb.velocity.magnitude);
+            if (rb.velocity.x > 0.0f)
+            {
+                dir = 1.0f;
+            }
+            else if (rb.velocity.x < 0.0f)
+            {
+                dir = -1.0f;
+            }
+            animator.SetFloat("Direction", dir);
             FSM.Excute();
         }
 
@@ -34,14 +44,9 @@ namespace Enemy.Mushroom
         {
             FSM = new();
             FSM.AddState("Idle", new State()
-                .SetStay(() =>
-                {
-                    animator.SetFloat("Direction", rb.velocity.x);
-                    animator.SetFloat("Speed", rb.velocity.magnitude);
-                })
                 .AddLeavingCondition("Move", () =>
                 {
-                    return rb.velocity.magnitude > 0.1;
+                    return rb.velocity.magnitude > 0.01;
                 })
                 .AddLeavingCondition("Death", () =>
                 {
@@ -50,14 +55,9 @@ namespace Enemy.Mushroom
             );
 
             FSM.AddState("Move", new State()
-                .SetStay(() =>
-                {
-                    animator.SetFloat("Direction", rb.velocity.x);
-                    animator.SetFloat("Speed", rb.velocity.magnitude);
-                })
                 .AddLeavingCondition("Idle", () =>
                 {
-                    return rb.velocity.magnitude < 0.1;
+                    return rb.velocity.magnitude < 0.01;
                 })
                 .AddLeavingCondition("Death", () =>
                 {
@@ -69,23 +69,18 @@ namespace Enemy.Mushroom
                 .SetEnter(() =>
                 {
                     mushroom.CurrentSpeed = 0;
-                    Destroy(gameObject);
+                    animator.SetTrigger("Dead");
                 })
             );
 
             FSM.AddState("CreateSpore", new State()
-                .SetStay(() =>
-                {
-                    animator.SetFloat("Direction", rb.velocity.x);
-                    animator.SetFloat("Speed", rb.velocity.magnitude);
-                })
                 .AddLeavingCondition("Idle", () =>
                 {
-                    return finishCreateSpore && rb.velocity.magnitude < 0.1;
+                    return finishCreateSpore && rb.velocity.magnitude < 0.01;
                 })
                 .AddLeavingCondition("Move", () =>
                 {
-                    return finishCreateSpore && rb.velocity.magnitude > 0.1;
+                    return finishCreateSpore && rb.velocity.magnitude > 0.01;
                 })
                 .AddLeavingCondition("Death", () =>
                 {
@@ -94,11 +89,22 @@ namespace Enemy.Mushroom
             );
 
             FSM.SetInitState("Idle");
+            FSM.EnterStateMachine();
+        }
+
+        public void CreateArea()
+        {
+            animator.SetTrigger("CreateArea");
         }
 
         public void FinishCreateSpore()
         {
             finishCreateSpore = true;
+        }
+
+        public void DestroySelf()
+        {
+            Destroy(gameObject);
         }
     }
 }

@@ -19,11 +19,15 @@ namespace Enemy.JungleKid
 
         private void Update()
         {
-            
+            if (isDead)
+            {
+                Destroy(gameObject);
+            }
         }
 
         public void Attack()
         {
+            bulletInitOffset = new Vector3(0, 1, 0);
             Shoot(target.transform.position);
         }
 

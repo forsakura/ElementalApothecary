@@ -31,10 +31,6 @@ public class Player : Characters
         //DontDestroyOnLoad(gameObject);
     }
 
-    private void Update()
-    {
-    }
-
     // 使用List存储交互物体，后进入的在List最后，离开某个时将其移除，若为最后一个，则显示移出后倒数第一个的交互提示
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -51,6 +47,7 @@ public class Player : Characters
         else
         {
             PlayerInputManager.Instance.GamePlay.Interact.started += Interact;
+            
         }
         interactableObject = interactObject;
         interactableObjects.Add(interactableObject);
@@ -89,6 +86,7 @@ public class Player : Characters
 
     public void OnPlayerDead(Characters go, HitInstance hit)
     {
+        //todo
         transform.position = new(18.17f, 5.33f, 0);
         CurrentHealth = characterData.MaxHealth;
         isDead = false;
@@ -96,6 +94,28 @@ public class Player : Characters
         UIManager.Instance.HidePanel("FightingUI");
         SceneManager.LoadScene("Campsite");
     }
+    public Vector2 ReturnBulletElementVector()
+    {
+        Vector2 result = Vector2.zero;
+        if(currentBulletValue == null) return result;
+        switch (currentBulletValue.BaseElement)
+        {
+            case EElement.Aqua:
+                result = Vector2.right;
+                break;
+            case EElement.Terra:
+                result = Vector2.up;
+                break;
+            case EElement.Aer:
+                result = Vector2.left;
+                break;
+            case EElement.Ignis:
+                result = Vector2.down;
+                break;
+        }
+        return result*currentBulletValue.currentElementCount;
+    }
+
 
     public override void OnShootHitTarget(BulletControl bullet, Collider2D go)
     {
@@ -105,10 +125,15 @@ public class Player : Characters
         }
         if (go.transform.parent.CompareTag("Enemy"))
         {
+
             HitInstance hitInstance = new()
             {
                 Source = gameObject,
-                Damage = characterData.Damage
+                Damage = characterData.Damage,
+                elementState=new ElementVector()
+                {
+                    elementVector = ReturnBulletElementVector()
+                }
             };
             if (go.GetComponent<IHitable>().GetHit(hitInstance))
             {

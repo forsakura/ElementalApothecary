@@ -14,17 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemList:
   - itemID:
-      id: 1
-      BaseId: 1
-      ATTR: 
-    itemAmount: 1
-  - itemID:
       id: 3
       BaseId: 3
-      ATTR: 
+      ATTR: 03000000
     itemAmount: 3
   - itemID:
       id: 2
       BaseId: 2
-      ATTR: 
-    itemAmount: 2
+      ATTR: 02000000
+    itemAmount: 10
+  - itemID:
+      id: 1
+      BaseId: 1
+      ATTR: 01000000
+    itemAmount: 1

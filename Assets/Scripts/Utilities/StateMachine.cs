@@ -9,6 +9,7 @@ public class StateMachine
     private Dictionary<string, State> states = new();
     private State currentState = null;
     private State previousState = null;
+    private State enterState = null;
 
     //public string Name
     //{
@@ -35,7 +36,7 @@ public class StateMachine
     {
         if (states.TryGetValue(name, out currentState))
         {
-            currentState.Enter();
+            enterState = currentState;
         }
 
     }
@@ -90,6 +91,17 @@ public class StateMachine
         currentState.Exit();
         currentState = states[name];
         currentState.Enter();
+    }
+
+    public void EnterStateMachine()
+    {
+        if (currentState != null)
+        {
+            currentState.Exit();
+        }
+        currentState = enterState;
+        currentState.Enter();
+        previousState = null;
     }
 
     public void ExitStateMachine()

@@ -29,8 +29,9 @@ namespace Enemy.Mushroom
         public override void InitHit()
         {
             base.InitHit();
-            enemyHit.ElementName[1] = EElement.Terra;
-            enemyHit.ElementContain[1] = 10;
+            enemyHit.elementState.elementVector = new Vector2(-10, 0);
+            //enemyHit.ElementName[1] = EElement.Terra;
+            //enemyHit.ElementContain[1] = 10;
         }
 
         private void ThresholdCheck(Characters character, HitInstance hit)
@@ -39,15 +40,13 @@ namespace Enemy.Mushroom
             {
                 // Start animation;
                 anim.FSM.ChangeStateTo("CreateSpore");
+                anim.CreateArea();
                 if (moveCoroutine != null)
                 {
                     StopCoroutine(moveCoroutine);
                     moveCoroutine = null;
                 }
                 rb.velocity = Vector2.zero;
-
-                CreateSporeArea();
-                anim.FinishCreateSpore();
 
                 target = gameObject;
                 AfterGetHit -= ThresholdCheck;

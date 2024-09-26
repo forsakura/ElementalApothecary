@@ -5,8 +5,10 @@ using UnityEngine;
 [System.Serializable]
 public class CharacterData
 {
-    public string Name;
     public int ID;
+    public string Name;
+    public Vector2 BaseElement;
+
     public int MaxHealth;
     // ·çÍÁ»ğË®
     public int MaxAer;
@@ -18,7 +20,6 @@ public class CharacterData
     public int MaxBulletCount;
     public float AttackInterval;
     public float AttackDistance;
-
     public float MoveSpeed;
     public float InvincibleTime;
 }

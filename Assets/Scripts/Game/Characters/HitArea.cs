@@ -12,7 +12,7 @@ public class HitArea : MonoBehaviour, IHitable
         tag = transform.parent.tag;
     }
 
-    public bool GetHit(HitInstance hit)
+    public virtual bool GetHit(HitInstance hit)
     {
         return parent.GetHit(hit);
     }

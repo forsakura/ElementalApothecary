@@ -5,9 +5,11 @@ using UnityEngine;
 /// <summary>
 /// 最表层去使用的一个item数据类基础(看子类！！！)
 /// </summary>
+[System.Serializable]
 public class TrItem : ITrItem
 {
-    private ItemID id;
+    [SerializeField]
+    private ItemID id = new();
     public ItemID ID 
     {
         get => id;
@@ -42,13 +44,15 @@ public class TrItem : ITrItem
     {
         material,
         consumable,
-        QuestItem
+        QuestItem,
+        None
     }
 }
-[System.Serializable]
+
 /// <summary>
 /// id数组使得随机组合获得可能
 /// </summary>
+[System.Serializable]
 public class ItemID
 {
     public int id;//物品自己的id（只是同类区分用的）还要搞guid生成
