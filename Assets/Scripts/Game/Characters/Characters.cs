@@ -66,8 +66,7 @@ public class Characters : MonoBehaviour
     }
     private void Update()
     {
-        //ÔªËØÏàÁÚ
-        if (Vector2.Angle(elementState.elementVector,Vector2.right)%90 > 0.1f&&!elementLossing)
+        if (!elementLossing)
         {
             elementLossing = true;
             StartCoroutine(ElementLoss());
