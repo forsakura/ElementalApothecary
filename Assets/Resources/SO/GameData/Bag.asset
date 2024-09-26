@@ -17,7 +17,7 @@ MonoBehaviour:
       id: 1
       BaseId: 1
       ATTR: 01000000
-    itemAmount: 1
+    itemAmount: 2
   - itemID:
       id: 2
       BaseId: 2

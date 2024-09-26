@@ -8,8 +8,7 @@ using UnityEngine;
 [System.Serializable]
 public class DataItem : TrItem, IDataItem
 {
-    [SerializeField]
-    private int _useTimes;
+    
     [SerializeField]
     private int _itemUseRadius;
     [SerializeField]
@@ -27,7 +26,7 @@ public class DataItem : TrItem, IDataItem
 
     public DataItem()
     {
-        this.useTimes = 0;
+        
         this.itemUseRadius = 0;
         this.itemDescription = "";
         this.itemIcon = null;
@@ -36,12 +35,28 @@ public class DataItem : TrItem, IDataItem
         this.currentElementCount = 0;
     }
 
-    public int useTimes
+    public Vector2 ReturnElementVector()
     {
-        get => _useTimes;
-        set => _useTimes = value;
+        Vector2 result = Vector2.zero;
+        switch (BaseElement)
+        {
+            case EElement.Aqua:
+                result = Vector2.right;
+                break;
+            case EElement.Terra:
+                result = Vector2.up;
+                break;
+            case EElement.Aer:
+                result = Vector2.left;
+                break;
+            case EElement.Ignis:
+                result = Vector2.down;
+                break;
+        }
+        return result * currentElementCount;
     }
 
+    
     public int itemUseRadius
     {
         get => _itemUseRadius;
@@ -110,7 +125,6 @@ public class DataItem : TrItem, IDataItem
                            $"Base ID: {ID.BaseId}\n" +  
                            $"Attributes: {string.Join(", ", ID.ATTR)}\n"+ 
                            $"Item Name: {itemName}\n" +
-                           $"Use Times: {useTimes}\n" +
                            $"Item Use Radius: {itemUseRadius}\n" +
                            $"Item Description: {itemDescription}\n" +
                            $"Tags: {tagList}\n" +

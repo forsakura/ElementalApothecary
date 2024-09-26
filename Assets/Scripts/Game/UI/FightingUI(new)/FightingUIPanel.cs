@@ -168,12 +168,15 @@ public class FightingUIPanel : BasePanel, IScrollHandler
 
     public DataItem GetCurrentBullet()
     {
+        print(1);
         if(itemList[usingBulletIndex].itemAmount<1) return null;
         InventoryItem item = new InventoryItem();
         item.itemID = itemList[usingBulletIndex].itemID;
         item.itemAmount = itemList[usingBulletIndex].itemAmount-1;
         itemList[usingBulletIndex] = item;
-        return InventoryManager.Instance.GetItemDetails(itemList[usingBulletIndex].itemID);
+        DataItem itemDetails = InventoryManager.Instance.GetItemDetails(item.itemID);
+        bulletSlots[1].UpdateSlot(itemDetails, item.itemAmount);
+        return itemDetails;
     }
     public DataItem GetCurrentItem()
     {
@@ -182,6 +185,8 @@ public class FightingUIPanel : BasePanel, IScrollHandler
         item.itemID = itemList[usingBagIndex].itemID;
         item.itemAmount = itemList[usingBagIndex].itemAmount - 1;
         itemList[usingBagIndex] = item;
-        return InventoryManager.Instance.GetItemDetails(itemList[usingBagIndex].itemID);
+        DataItem itemDetails = InventoryManager.Instance.GetItemDetails(item.itemID);
+        bagSlots[1].UpdateSlot(itemDetails, item.itemAmount);
+        return itemDetails;
     }
 }

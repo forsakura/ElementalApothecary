@@ -53,7 +53,7 @@ public class DistillerPanel : BasePanel
     //    int purityNum = (int)(newPurity * 100);
     //    int newitemID=int.Parse(potion1.itemID.ToString().Substring(0,3)+(purityNum*100).ToString());
     //    DataItem newItem=new DataItem();
-    //    foreach (var VARIABLE in InventoryManager.Instance.itemDataList_SO.itemDetailsList)
+    //    foreach (var VARIABLE in InventoryManager.Instance.itemDataList_SO.dataItems)
     //    {
     //        if (int.Parse(potion1.itemID.ToString().Substring(0, 3)) == VARIABLE.itemID)
     //        {
@@ -74,7 +74,7 @@ public class DistillerPanel : BasePanel
     //            return VARIABLE;
     //        }
     //    }
-    //    InventoryManager.Instance.itemDataList_SO.itemDetailsList.Add(newItem);
+    //    InventoryManager.Instance.itemDataList_SO.dataItems.Add(newItem);
     //    return newPotion;
     //}
 

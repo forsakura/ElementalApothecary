@@ -245,8 +245,9 @@ public class Characters : MonoBehaviour
 
     public virtual void Fill()
     {
-        currentBulletValue = UIManager.Instance.GetPanel<FightingUIPanel>("FightingUIPanel").GetCurrentBullet();
+        currentBulletValue = UIManager.Instance.GetPanel<FightingUIPanel>("FightingUI").GetCurrentBullet();
         if (currentBulletValue == null) return;
+
         remainingBullet = characterData.MaxBulletCount;
         OnFill?.Invoke(this, remainingBullet);
     }

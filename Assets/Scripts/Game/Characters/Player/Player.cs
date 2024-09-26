@@ -94,27 +94,7 @@ public class Player : Characters
         UIManager.Instance.HidePanel("FightingUI");
         SceneManager.LoadScene("Campsite");
     }
-    public Vector2 ReturnBulletElementVector()
-    {
-        Vector2 result = Vector2.zero;
-        if(currentBulletValue == null) return result;
-        switch (currentBulletValue.BaseElement)
-        {
-            case EElement.Aqua:
-                result = Vector2.right;
-                break;
-            case EElement.Terra:
-                result = Vector2.up;
-                break;
-            case EElement.Aer:
-                result = Vector2.left;
-                break;
-            case EElement.Ignis:
-                result = Vector2.down;
-                break;
-        }
-        return result*currentBulletValue.currentElementCount;
-    }
+    
 
 
     public override void OnShootHitTarget(BulletControl bullet, Collider2D go)
@@ -130,9 +110,9 @@ public class Player : Characters
             {
                 Source = gameObject,
                 Damage = characterData.Damage,
-                elementState=new ElementVector()
+                elementState = new ElementVector()
                 {
-                    elementVector = ReturnBulletElementVector()
+                    elementVector = currentBulletValue.ReturnElementVector()
                 }
             };
             if (go.GetComponent<IHitable>().GetHit(hitInstance))

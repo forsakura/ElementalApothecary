@@ -222,7 +222,6 @@ GameObject:
   - component: {fileID: 7782984510926064359}
   - component: {fileID: 7704748713372681278}
   - component: {fileID: 6447013689888638897}
-  - component: {fileID: 262791780713259013}
   - component: {fileID: 7568875984732608260}
   m_Layer: 5
   m_Name: Solt_bag (4)
@@ -368,18 +367,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &262791780713259013
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 275366234053539821}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee27aa807154c454982a408133741f46, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7568875984732608260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -702,7 +689,7 @@ MonoBehaviour:
   button: {fileID: 3518394241167979994}
   slotType: 0
   isSelected: 0
-  slotIndex: 0
+  slotIndex: 1
   itemDetails:
     id:
       id: 0
@@ -817,7 +804,6 @@ GameObject:
   - component: {fileID: 3334668298454026194}
   - component: {fileID: 3399763153249199241}
   - component: {fileID: 3119290559546492368}
-  - component: {fileID: 7212887152519722880}
   - component: {fileID: 3915448813531407852}
   m_Layer: 5
   m_Name: Solt_bag
@@ -963,18 +949,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7212887152519722880
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1937061176691094251}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee27aa807154c454982a408133741f46, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3915448813531407852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2538,7 +2512,6 @@ GameObject:
   - component: {fileID: 8821710920579562393}
   - component: {fileID: 2196346263789162350}
   - component: {fileID: 6524883114209082020}
-  - component: {fileID: 8554940089546072745}
   - component: {fileID: 5390605071417778279}
   m_Layer: 5
   m_Name: Solt_bag (3)
@@ -2684,18 +2657,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8554940089546072745
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3854855719519089136}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee27aa807154c454982a408133741f46, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &5390605071417778279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2899,7 +2860,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -240, y: 0}
+  m_AnchoredPosition: {x: -120, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8546062920479040650
@@ -2928,7 +2889,7 @@ MonoBehaviour:
   button: {fileID: 4546246776110308871}
   slotType: 0
   isSelected: 0
-  slotIndex: 0
+  slotIndex: 4
   itemDetails:
     id:
       id: 0
@@ -3723,7 +3684,6 @@ GameObject:
   - component: {fileID: 8734106463047321494}
   - component: {fileID: 5530473232836506651}
   - component: {fileID: 6077610279829893875}
-  - component: {fileID: 1803789065705259471}
   - component: {fileID: 4271106516069612366}
   m_Layer: 5
   m_Name: Solt_bag (1)
@@ -3869,18 +3829,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1803789065705259471
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5796314413655643381}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee27aa807154c454982a408133741f46, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4271106516069612366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4038,7 +3986,7 @@ MonoBehaviour:
   button: {fileID: 6630866224835748899}
   slotType: 0
   isSelected: 0
-  slotIndex: 0
+  slotIndex: 2
   itemDetails:
     id:
       id: 0
@@ -4673,7 +4621,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -120, y: 0}
+  m_AnchoredPosition: {x: -240, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3109132678350713263
@@ -4702,7 +4650,7 @@ MonoBehaviour:
   button: {fileID: 1895387787741013385}
   slotType: 0
   isSelected: 0
-  slotIndex: 0
+  slotIndex: 3
   itemDetails:
     id:
       id: 0
@@ -4892,7 +4840,6 @@ GameObject:
   - component: {fileID: 7901166352246193507}
   - component: {fileID: 8158820163981207363}
   - component: {fileID: 7330749466311473213}
-  - component: {fileID: 791447522445781431}
   - component: {fileID: 1470939994363536961}
   m_Layer: 5
   m_Name: Solt_bag (2)
@@ -5038,18 +4985,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &791447522445781431
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8041523508785541739}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee27aa807154c454982a408133741f46, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1470939994363536961
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5654,11 +5589,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bagSlots:
+  - {fileID: 4043209112178297615}
   - {fileID: 9177555216334258451}
   - {fileID: 2651902396337902148}
-  - {fileID: 8768444094017031312}
-  - {fileID: 2190605934071407929}
-  - {fileID: 4043209112178297615}
+  bulletSlots:
+  - {fileID: 8821710920579562393}
+  - {fileID: 3334668298454026194}
+  - {fileID: 8734106463047321494}
+  usingBagIndex: 0
+  usingBulletIndex: 0
 --- !u!1001 &8068515867071203180
 PrefabInstance:
   m_ObjectHideFlags: 0
