@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class ItemEntityCtrl : MonoBehaviour
 {
-    DataItem Data;
-    ATTRManager AttributeManager;
+    [SerializeField]
+    DataItem data;
+    [SerializeField]
+    IATTRManager AttributeManager;
+    [SerializeField]
     BulletControl BulletComponent;
+
+    public DataItem Data { get => data; set => data = value; }
 
     private void Awake()
     {

@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 2378562373968282893}
   - component: {fileID: 7315180725245738904}
   - component: {fileID: -8986007289853619617}
+  - component: {fileID: 8788443475874905345}
+  - component: {fileID: 3294701178963558122}
   m_Layer: 0
   m_Name: PotionTest
   m_TagString: Bullet
@@ -161,3 +163,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02274b9304f55bf449ccf2aea5522368, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8788443475874905345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21768292203493295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eabab4cf5a5cfeb4b9d1add981fc97e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3294701178963558122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21768292203493295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff308a9be0df2224499de80611341e01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Data:
+    id:
+      id: 0
+      BaseId: 0
+      ATTR: 
+    _useTimes: 0
+    _itemUseRadius: 0
+    _itemDescription: 
+    _itemIcon: {fileID: 0}
+    _itemName: 
+    _tags: 03000000
+    _baseElement: 0
+    _currentElementCount: 0
+  BulletComponent: {fileID: -8986007289853619617}

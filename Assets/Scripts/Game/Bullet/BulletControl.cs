@@ -13,9 +13,11 @@ public class BulletControl : MonoBehaviour
     Rigidbody2D rb;
     float timer = 0.0f;
 
+    public Vector2 Target { get => target; set => target = value; }
+
     public delegate void OnBulletHitEventHandler(BulletControl bullet, Collider2D go);
     public event OnBulletHitEventHandler OnShootHitTarget;
-    public event OnBulletHitEventHandler OnThrowHitTarget;
+    //public event OnBulletHitEventHandler OnThrowHitTarget;
 
     private void Start()
     {
@@ -31,19 +33,19 @@ public class BulletControl : MonoBehaviour
             {
                 case BulletType.Throw:
                     transform.position = Parabola.ClaculateCurrentPoint(start, target, timer, 1.0f, 2.0f);
-                    if (timer > 1.0f)
-                    {
-                        List<Characters> characters = CharacterManager.Instance.GetAllCharacters();
-                        foreach (var item in characters)
-                        {
-                            if ((item.transform.position - transform.position).magnitude < 2.0f)
-                            {
-                                Collider2D collider2D = item.transform.GetChild(0).GetComponent<Collider2D>();
-                                OnThrowHitTarget?.Invoke(this, collider2D);
-                            }
-                        }
-                        Destroy(gameObject);
-                    }
+                    //if (timer > 1.0f)
+                    //{
+                    //    //List<Characters> characters = CharacterManager.Instance.GetAllCharacters();
+                    //    //foreach (var item in characters)
+                    //    //{
+                    //    //    if ((item.transform.position - transform.position).magnitude < 2.0f)
+                    //    //    {
+                    //    //        //Collider2D collider2D = item.transform.GetChild(0).GetComponent<Collider2D>();
+                    //    //        //OnThrowHitTarget?.Invoke(this, collider2D);
+                    //    //    }
+                    //    //}
+                    //    Destroy(gameObject);//包括销毁都交给另外代码(attrbute体系（也许该改名？）)去做，这里基本只执行运动功能
+                    //}
                     break;
                 case BulletType.Shoot:
                     rb.velocity = (target - start).normalized * 10.0f; //dir * speed
