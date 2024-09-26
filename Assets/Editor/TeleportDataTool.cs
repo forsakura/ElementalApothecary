@@ -8,7 +8,7 @@ namespace Editor
 {
     public class TeleportDataTool
     {
-        private static readonly string teleportDataPath = Application.dataPath + "Resources/Room/Teleport";
+        private static readonly string teleportDataPath = Application.dataPath + "/Resources/Room/Teleport";
 
         [MenuItem("GameTool/RoomTool/生成传送点json数据文件")]
         public static void InitTeleportData()

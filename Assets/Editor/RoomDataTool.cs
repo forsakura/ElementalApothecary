@@ -9,7 +9,7 @@ namespace Editor
     {
         private static readonly string dataPath = Application.dataPath + "/Resources/Room";
 
-        [MenuItem("GameTool/RoomTool/生成房间json数据文件")]
+        [MenuItem("GameTool/RoomTool/鐢熸垚鎴块棿json鏁版嵁鏂囦欢")]
         public static void InitRoomDataJson()
         {
             DirectoryInfo directoryInfo = new DirectoryInfo(dataPath);
@@ -19,7 +19,7 @@ namespace Editor
                 if (fileInfo.Extension == ".asset")
                 {
                     string[] strs = fileInfo.Name.Split('.');
-                    string fileName = strs[0];
+                   string fileName = strs[0];
                     string filePath = "Room/" + fileName;
                     var obj = Resources.Load(filePath);
                     SaveSystem.SaveGameByJson(fileName, obj, JsonType.JsonUtility);

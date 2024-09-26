@@ -44,7 +44,7 @@ namespace Game.Level.Room
                     ResManager.LoadResourceAsync<GameObject>(_shopRoomData.teleportPrefabPaths[i1], arg0 =>
                     {
                         SetGameObject(arg0, _shopRoomData.teleportInfos[i1], gameObject.transform);
-                        SetTransformView(arg0);
+                        SetTransformView(arg0, _shopRoomData.teleportFileNames[i1]);
                     });
                 }
             }

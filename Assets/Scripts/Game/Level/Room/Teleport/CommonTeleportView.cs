@@ -10,33 +10,40 @@ namespace Game.Level.Room.Teleport
     {
         private void Start()
         {
-            data = new CommonTeleportData(gameObject.name);
+            data = new CommonTeleportData(fileName);
+            Debug.Log(data.destinationPoint);
         }
 
-        protected override void OnTriggerEnter2D(Collider2D other)
+        /*protected override void OnTriggerEnter2D(Collider2D other)
         {
             base.OnTriggerEnter2D(other);
             if (other.CompareTag("Player"))
             {
                 UIManager.Instance.ShowPanel<TranslateTipPanel>(tipPanelName, E_UI_Layer.system);
-                EventCenter.Instance.AddEventListener("¥´ÀÕ", TransformToNext);
+                EventCenter.Instance.AddEventListener("‰º†ÈÄÅ", TransformToNext);
             }
-        }
+        }*/
 
-        protected override void OnTriggerExit2D(Collider2D other)
+        /*protected override void OnTriggerExit2D(Collider2D other)
         {
             base.OnTriggerExit2D(other);
             if (other.CompareTag("Player"))
             {
                 UIManager.Instance.HidePanel(tipPanelName);
-                EventCenter.Instance.RemoveEventLister("¥´ÀÕ", TransformToNext);
+                EventCenter.Instance.RemoveEventLister("‰º†ÈÄÅ", TransformToNext);
             }
-        }
+        }*/
 
         protected override void TransformToNext()
         {
             base.TransformToNext();
             GameObject.Find("Player").transform.position = ((CommonTeleportData)data).destinationPoint;
+        }
+        
+        public override void Interact()
+        {
+            base.Interact();
+            TransformToNext();
         }
     }
 }

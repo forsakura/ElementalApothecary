@@ -6,6 +6,7 @@ namespace Game.Level.Room.SO_RoomData1
     [CreateAssetMenu(fileName = "new SO_RoomData", menuName = "ScriptableObjects/Room Data/new RoomData")]
     public class SO_RoomDataBase : ScriptableObject
     {
+        public List<string> teleportFileNames;
         public List<string> teleportPrefabPaths;
         public List<GameObjectInfo> teleportInfos;
         public List<string> materialPrefabPaths;

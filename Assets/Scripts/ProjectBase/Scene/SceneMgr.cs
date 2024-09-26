@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Game.Level.Room.UI;
 using ProjectBase.Event;
 using ProjectBase.Mono;
 using ProjectBase.UI;
@@ -41,7 +42,7 @@ namespace ProjectBase.Scene
         
         IEnumerator IELoadScene(string sceneName, bool isAddType, UnityAction callback)
         {
-            UIManager.Instance.ShowPanel<BasePanel>("LoadingPanel", E_UI_Layer.top);
+            UIManager.Instance.ShowPanel<LoadingPanel>("LoadingPanel", E_UI_Layer.top);
             var res = SceneManager.LoadSceneAsync(sceneName, isAddType ? LoadSceneMode.Additive : LoadSceneMode.Single);
             while (!res.isDone)
             {
@@ -49,7 +50,7 @@ namespace ProjectBase.Scene
                 yield return res.progress;
             }
 
-            UIManager.Instance.GetPanel<BasePanel>("LoadingPanel").GetControl<Slider>("加载进度条").value = 1;
+            UIManager.Instance.GetPanel<LoadingPanel>("LoadingPanel").GetControl<Slider>("加载进度条").value = 1;
             GC.Collect();
             UIManager.Instance.HidePanel("LoadingPanel");
             callback?.Invoke();
