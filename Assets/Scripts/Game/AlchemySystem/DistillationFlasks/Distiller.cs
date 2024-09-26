@@ -16,7 +16,7 @@ public class Distiller : MonoBehaviour
     //    var newPurity = Mathf.Ceil((potion1.purity + potion2.purity + 2) / 4) > 1
     //        ? 1
     //        : Mathf.Ceil((potion1.purity + potion2.purity + 2) / 4);
-    //    foreach (var VARIABLE in InventoryManager.Instance.itemDataList_SO.itemDetailsList)
+    //    foreach (var VARIABLE in InventoryManager.Instance.itemDataList_SO.dataItems)
     //    {
     //        if (VARIABLE.itemID == potion1.id)
     //        {

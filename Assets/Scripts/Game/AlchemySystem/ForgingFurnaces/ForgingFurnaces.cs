@@ -34,7 +34,7 @@ public class ForgingFurnaces : MonoSingleton<ForgingFurnaces>
     //        if (potion.id == VARIABLE1.productionId)
     //        {
     //            var newID = VARIABLE1.productionId;
-    //            foreach (var potion1 in from VARIABLE2 in InventoryManager.Instance.itemDataList_SO.itemDetailsList
+    //            foreach (var potion1 in from VARIABLE2 in InventoryManager.Instance.itemDataList_SO.dataItems
     //                     where VARIABLE2.itemID == newID
     //                     select new DataItem()
     //                     {

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1596130250196623067}
   - component: {fileID: 3808681879306470494}
   - component: {fileID: 175970625745632099}
-  - component: {fileID: 3261524066686507187}
   m_Layer: 5
   m_Name: BulletBar
   m_TagString: Untagged
@@ -76,19 +75,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3261524066686507187
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 270043312209350453}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be63ce61052dd0240a396e1b1cf7bf46, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
 --- !u!1 &543529221091141166
 GameObject:
   m_ObjectHideFlags: 0
@@ -100,7 +86,6 @@ GameObject:
   - component: {fileID: 2528726421263985941}
   - component: {fileID: 6373837020580722460}
   - component: {fileID: 6408727790625071644}
-  - component: {fileID: 5405509218375054143}
   m_Layer: 5
   m_Name: ChildBar
   m_TagString: Untagged
@@ -165,21 +150,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5405509218375054143
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 543529221091141166}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7b1039df7d9e9f48aad29f9380fcda9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  bar: {fileID: 6408727790625071644}
-  parentBar: {fileID: 4208187835044522503}
 --- !u!1 &860972725523195236
 GameObject:
   m_ObjectHideFlags: 0
@@ -191,7 +161,6 @@ GameObject:
   - component: {fileID: 7999637011054058074}
   - component: {fileID: 1476441816398646790}
   - component: {fileID: 8023290543183912556}
-  - component: {fileID: 1474435519915351772}
   m_Layer: 5
   m_Name: StateUI
   m_TagString: Untagged
@@ -258,18 +227,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1474435519915351772
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 860972725523195236}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4ba7c166aebdb44cb214bdc3c810aba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6127865122475765743
 GameObject:
   m_ObjectHideFlags: 0

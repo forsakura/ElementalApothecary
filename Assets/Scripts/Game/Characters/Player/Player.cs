@@ -47,6 +47,7 @@ public class Player : Characters
         else
         {
             PlayerInputManager.Instance.GamePlay.Interact.started += Interact;
+            
         }
         interactableObject = interactObject;
         interactableObjects.Add(interactableObject);
@@ -85,6 +86,7 @@ public class Player : Characters
 
     public void OnPlayerDead(Characters go, HitInstance hit)
     {
+        //todo
         transform.position = new(18.17f, 5.33f, 0);
         CurrentHealth = characterData.MaxHealth;
         isDead = false;
@@ -92,6 +94,8 @@ public class Player : Characters
         UIManager.Instance.HidePanel("FightingUI");
         SceneManager.LoadScene("Campsite");
     }
+    
+
 
     public override void OnShootHitTarget(BulletControl bullet, Collider2D go)
     {
@@ -101,13 +105,14 @@ public class Player : Characters
         }
         if (go.transform.parent.CompareTag("Enemy"))
         {
+
             HitInstance hitInstance = new()
             {
                 Source = gameObject,
                 Damage = characterData.Damage,
-                elementState=new ElementVector()
+                elementState = new ElementVector()
                 {
-                    elementVector=new Vector2(10,5)
+                    elementVector = currentBulletValue.ReturnElementVector()
                 }
             };
             if (go.GetComponent<IHitable>().GetHit(hitInstance))

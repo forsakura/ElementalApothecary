@@ -23,6 +23,7 @@ namespace Enemy
         {
             enemyHit.Source = gameObject;
             enemyHit.Damage = characterData.Damage;
+            enemyHit.elementState.elementVector = new Vector2(10, 0);
         }
 
         public virtual void SetTarget(GameObject targetObj)

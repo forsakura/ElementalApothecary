@@ -12,7 +12,7 @@ using Utilities;
 public class InventoryManager : Utilities.Singleton<InventoryManager>
 {
     [Header("神奇的表")]
-    public List<DataItem> itemDetailsList;
+    public DataItemList_SO dataItems;
     [Header("物品数据")]
     public ItemDataList_SO itemDataList_SO;
     [Header("读表")]
@@ -41,7 +41,6 @@ public class InventoryManager : Utilities.Singleton<InventoryManager>
     protected override void Awake()
     {
         base.Awake();
-        itemDetailsList = new List<DataItem>();
         ReadTable();
         EventHandler.CallUpdateInventoryUI(InventoryLocation.Box, boxBag.itemList);
         //EventHandler.CallUpdateInventoryUI(InventoryLocation.Pot, potBag.itemList);
@@ -52,15 +51,16 @@ public class InventoryManager : Utilities.Singleton<InventoryManager>
     //目前没有表，先做测试
     public void ReadTable()
     {
-        itemDetailsList.Clear();
-        foreach(var item in itemDataList_SO.itemDetailsList)
+        int index = 0;
+        foreach(var item in dataItems.itemList)
         {
+            LegacyItemDetails readItem = itemDataList_SO.itemDetailsList[index++];
+            item.ID = readItem.itemID;
+            item.itemIcon = readItem.itemIcon;
+            item.itemName = readItem.itemName;
+            item.itemDescription = readItem.itemDescription;
             DataItem itemDetails = new DataItem();
-            itemDetails.ID = item.itemID;
-            itemDetails.itemIcon = item.itemIcon;
-            itemDetails.itemName = item.itemName;
-            itemDetails.itemDescription = item.itemDescription;
-            itemDetailsList.Add(itemDetails);
+
             //print(itemDetails.ID.BaseId);
         }
         
@@ -75,7 +75,7 @@ public class InventoryManager : Utilities.Singleton<InventoryManager>
         //    itemDetails.itemUseRadius = potionUseEffectRadius;
         //    itemDetails.itemIcon = ReturnIcon(itemID.id);
         //    itemDetails.itemOnWorldSprite=ReturnIcon(itemID.id);
-        //    itemDetailsList.Add(itemDetails);
+        //    dataItems.Add(itemDetails);
         //}
         //foreach(var itemID in potions_SO.PotionEntities)
         //{
@@ -91,7 +91,7 @@ public class InventoryManager : Utilities.Singleton<InventoryManager>
         //    itemDetails.foeverEffect = itemID.foreverEffectId;
         //    //itemDetails.effectsIDs.Add(itemID.toEnemyEffectIds);
         //    itemDetails.purity = 80;
-        //    itemDetailsList.Add(itemDetails);
+        //    dataItems.Add(itemDetails);
         //}
     }
     //private void Update()
@@ -101,7 +101,7 @@ public class InventoryManager : Utilities.Singleton<InventoryManager>
 
     private bool HasTableContain(ItemID id)
     {
-        foreach(var item in itemDetailsList)
+        foreach(var item in dataItems.itemList)
         {
             if(EqualID(id,item.ID)) return true;
         }
@@ -133,7 +133,7 @@ public class InventoryManager : Utilities.Singleton<InventoryManager>
     /// <returns></returns>
     public DataItem GetItemDetails(ItemID ID)
     {
-        return itemDetailsList.Find(i => EqualID(ID,i.ID));
+        return dataItems.itemList.Find(i => EqualID(ID,i.ID));
     }
     public bool EqualID(ItemID id1,ItemID id2)
     {
