@@ -6,20 +6,18 @@ using UnityEngine;
 public class CharacterData
 {
     public int ID;
-    public string Name;
-    public Vector2 BaseElement;
-
-    public int MaxHealth;
+    public string name;
+    public EElement baseElement;
+    public float maxElement;
+    public float moveSpeed;
+    public int maxHealth;
     // ·çÍÁ»ðË®
-    public int MaxAer;
-    public int MaxTerra;
-    public int MaxIgnis;
-    public int MaxAqua;
+    public int maxAer;
+    public int maxTerra;
+    public int maxIgnis;
+    public int maxAqua;
 
-    public int Damage;
-    public int MaxBulletCount;
-    public float AttackInterval;
-    public float AttackDistance;
-    public float MoveSpeed;
-    public float InvincibleTime;
+    public int damage;
+    public int maxBulletCount;
+    
 }

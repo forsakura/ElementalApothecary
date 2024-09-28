@@ -88,7 +88,7 @@ public class Player : Characters
     {
         //todo
         transform.position = new(18.17f, 5.33f, 0);
-        CurrentHealth = characterData.MaxHealth;
+        currentHealth = characterData.maxHealth;
         isDead = false;
         // Debug.Log(UIManager.Instance.GetPanel<FightingUIPanel>("FightingUI"));
         UIManager.Instance.HidePanel("FightingUI");
@@ -109,7 +109,7 @@ public class Player : Characters
             HitInstance hitInstance = new()
             {
                 Source = gameObject,
-                Damage = characterData.Damage,
+                Damage = characterData.damage,
                 elementState = new ElementVector()
                 {
                     elementVector = currentBulletValue.ReturnElementVector()
@@ -131,7 +131,7 @@ public class Player : Characters
         HitInstance hitInstance = new()
         {
             Source = gameObject,
-            Damage = characterData.Damage
+            Damage = characterData.damage
         };
         go.GetComponent<HitArea>().GetHit(hitInstance);
     }

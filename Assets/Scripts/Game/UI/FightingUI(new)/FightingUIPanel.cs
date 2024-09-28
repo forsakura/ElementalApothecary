@@ -38,7 +38,7 @@ public class FightingUIPanel : BasePanel, IScrollHandler
     void Start()
     {
         player = PlayerController.Instance?.GetComponent<Player>();
-        maxHealth = player.characterData.MaxHealth;
+        maxHealth = player.characterData.maxHealth;
         player.OnHealthChange += OnPlayerHealthChange;
         childBar = GetControl<Image>("ChildBar");
         parentBar = GetControl<Image>("HealthBar");

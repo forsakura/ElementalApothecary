@@ -62,7 +62,7 @@ public class PlayerController : SingletonScript<PlayerController>
     private void PlayerMove()
     {
         playerDirection = PlayerInputManager.Instance.GamePlay.Move.ReadValue<Vector2>();
-        rb.velocity = playerDirection * player.characterData.MoveSpeed;
+        rb.velocity = playerDirection * player.characterData.moveSpeed;
     }
 
     private void Shoot(InputAction.CallbackContext context)

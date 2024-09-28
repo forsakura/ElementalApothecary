@@ -6,13 +6,15 @@ using CharacterDelegates;
 using UnityEditor.TerrainTools;
 using System;
 using ProjectBase.UI;
+using ProjectBase.Pool;
+using static DG.Tweening.DOTweenModuleUtils;
 
 public class Characters : MonoBehaviour
 {
     public CharacterData characterData;
     public ECharacterType characterType;
-    public int CurrentHealth;
-    public float CurrentSpeed;
+    public int currentHealth;
+    public float currentSpeed;
     public DataItem currentBulletValue;
     // [Ë®/»ð, ·ç/ÍÁ]
     //public int[] ElementContain = new int[2] { 0, 0 };
@@ -23,7 +25,12 @@ public class Characters : MonoBehaviour
 
     public int remainingBullet;
     public GameObject bulletPrefab;
+    public bool immunePhysical;
+
     public Vector3 bulletInitOffset = Vector3.zero;
+    public float attackInterval;
+    public float attackDistance;
+    public float invincibleTime;
 
     private float invincibleTimer;
     private bool elementLossing;
@@ -54,9 +61,9 @@ public class Characters : MonoBehaviour
             characterType = ECharacterType.Enemy;
             tag = "Enemy";
         }
-        CurrentHealth = characterData.MaxHealth;
-        OnHealthChange?.Invoke(this, CurrentHealth);
-        CurrentSpeed = characterData.MoveSpeed;
+        currentHealth = characterData.maxHealth;
+        OnHealthChange?.Invoke(this, currentHealth);
+        currentSpeed = characterData.moveSpeed;
         elementState = new ElementVector();
         //ElementContain = new int[2] { 0, 0 };
         //ElementName = new EElement[2] {EElement.None, EElement.None};
@@ -111,9 +118,9 @@ public class Characters : MonoBehaviour
         BeforeGetHit?.Invoke(this, hit);
 
         int totalDmg = hit.Damage + CalculateElementDamage(hit);
-        CurrentHealth -= totalDmg;
-        OnHealthChange?.Invoke(this, CurrentHealth);
-        if (CurrentHealth <= 0)
+        currentHealth -= totalDmg;
+        OnHealthChange?.Invoke(this, currentHealth);
+        if (currentHealth <= 0)
         {
             isDead = true;
             OnDeath?.Invoke(this, hit);
@@ -121,7 +128,7 @@ public class Characters : MonoBehaviour
 
         //print(elementState.elementVector);
         isInvincible = true;
-        invincibleTimer = characterData.InvincibleTime;
+        invincibleTimer = invincibleTime;
         StartCoroutine(InvincibleCountDown());
 
         AfterGetHit?.Invoke(this, hit);
@@ -215,11 +222,12 @@ public class Characters : MonoBehaviour
         {
             return;
         }
+        //PoolManager.Instance.AddPoolDic(20, "Prefab/Bullets/Bullet");
         GameObject bul = Instantiate(bulletPrefab, transform.position + bulletInitOffset, new Quaternion());
         //HitInstance hit = new()
         //{
         //    Source = gameObject,
-        //    Damage = characterData.Damage
+        //    damage = characterData.damage
         //};
         BulletControl bulletControl = bul.GetComponent<BulletControl>();
         bulletControl.SetBullet(target, BulletType.Shoot);
@@ -234,7 +242,7 @@ public class Characters : MonoBehaviour
         //HitInstance hit = new()
         //{
         //    Source = gameObject,
-        //    Damage = characterData.Damage
+        //    damage = characterData.damage
         //};
         BulletControl bulletControl = bul.GetComponent<BulletControl>();
         bulletControl.SetBullet(target, BulletType.Throw);
@@ -247,7 +255,7 @@ public class Characters : MonoBehaviour
         currentBulletValue = UIManager.Instance.GetPanel<FightingUIPanel>("FightingUI").GetCurrentBullet();
         if (currentBulletValue == null) return;
 
-        remainingBullet = characterData.MaxBulletCount;
+        remainingBullet = characterData.maxBulletCount;
         OnFill?.Invoke(this, remainingBullet);
     }
 

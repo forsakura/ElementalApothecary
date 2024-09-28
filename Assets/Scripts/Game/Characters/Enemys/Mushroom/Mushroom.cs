@@ -22,7 +22,7 @@ namespace Enemy.Mushroom
         {
             anim = GetComponent<MushroomAnimation>();
             rb = GetComponent<Rigidbody2D>();
-            CurrentSpeed = 0.0f;
+            currentSpeed = 0.0f;
             AfterGetHit += ThresholdCheck;
         }
 
@@ -36,7 +36,7 @@ namespace Enemy.Mushroom
 
         private void ThresholdCheck(Characters character, HitInstance hit)
         {
-            if((1.0f * CurrentHealth / characterData.MaxHealth) < threshold)
+            if((1.0f * currentHealth / characterData.maxHealth) < threshold)
             {
                 // Start animation;
                 anim.FSM.ChangeStateTo("CreateSpore");
@@ -75,7 +75,7 @@ namespace Enemy.Mushroom
         public void AssembleTo(GameObject target)
         {
             this.target = target;
-            CurrentSpeed = characterData.MoveSpeed;
+            currentSpeed = characterData.moveSpeed;
             // Start Move FSM
             Debug.Log(moveCoroutine == null);
             if (moveCoroutine != null)
@@ -98,7 +98,7 @@ namespace Enemy.Mushroom
                 Vector2? next = AStarPathFinding.AStarManager.Instance.GetNext(new Vector2Int(Mathf.FloorToInt(transform.position.x), Mathf.FloorToInt(transform.position.y)), new Vector2Int(Mathf.FloorToInt(target.x), Mathf.FloorToInt(target.y)));
                 if (next != null)
                 {
-                    rb.velocity = CurrentSpeed * ((Vector2)next - new Vector2(transform.position.x, transform.position.y)).normalized;
+                    rb.velocity = currentSpeed * ((Vector2)next - new Vector2(transform.position.x, transform.position.y)).normalized;
                 }
                 else
                 {

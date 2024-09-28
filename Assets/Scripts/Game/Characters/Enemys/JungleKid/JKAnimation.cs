@@ -71,7 +71,7 @@ namespace Enemy.JungleKid
 
         private void FixedUpdate()
         {
-            rb.velocity = speedDir * jk.CurrentSpeed;
+            rb.velocity = speedDir * jk.currentSpeed;
         }
 
         private void InitFSM()
@@ -93,8 +93,8 @@ namespace Enemy.JungleKid
             commonFSM.SetInitState("Idle");
 
             followFSM.AddState("Idle", new State()
-                .AddLeavingCondition("Attack", () => canAttack && (jk.target.transform.position - transform.position).magnitude < jk.characterData.AttackDistance)
-                .AddLeavingCondition("Move", () => (jk.target.transform.position - transform.position).magnitude < jk.characterData.AttackDistance - 2 || (jk.target.transform.position - transform.position).magnitude > jk.characterData.AttackDistance)
+                .AddLeavingCondition("Attack", () => canAttack && (jk.target.transform.position - transform.position).magnitude < jk.attackDistance)
+                .AddLeavingCondition("Move", () => (jk.target.transform.position - transform.position).magnitude < jk.attackDistance - 2 || (jk.target.transform.position - transform.position).magnitude > jk.attackDistance)
             );
             followFSM.AddState("Move", new State()
                 // .SetEnter(FollowMove)
@@ -108,8 +108,8 @@ namespace Enemy.JungleKid
                     CountDown();
                 })
                 .SetExit(MoveExit)
-                .AddLeavingCondition("Attack", () => canAttack && (jk.target.transform.position - transform.position).magnitude < jk.characterData.AttackDistance)
-                .AddLeavingCondition("Idle", () => ((jk.target.transform.position - transform.position).magnitude > jk.characterData.AttackDistance - 2 && (jk.target.transform.position - transform.position).magnitude < jk.characterData.AttackDistance) || timer < 0)
+                .AddLeavingCondition("Attack", () => canAttack && (jk.target.transform.position - transform.position).magnitude < jk.attackDistance)
+                .AddLeavingCondition("Idle", () => ((jk.target.transform.position - transform.position).magnitude > jk.attackDistance - 2 && (jk.target.transform.position - transform.position).magnitude < jk.attackDistance) || timer < 0)
             );
             followFSM.AddState("Attack", new State()
                 .SetEnter(() => 
@@ -138,7 +138,7 @@ namespace Enemy.JungleKid
 
         private void FollowMove()
         {
-            if ((jk.target.transform.position - transform.position).magnitude < jk.characterData.AttackDistance - 1)
+            if ((jk.target.transform.position - transform.position).magnitude < jk.attackDistance - 1)
             {
                 Debug.Log("Close.");
                 int targetNumbers;
@@ -149,7 +149,7 @@ namespace Enemy.JungleKid
                 {
                     // target = (Vector2)transform.position + Random.insideUnitCircle * enemyData.WalkMaxDistance;
                     
-                    targetNumbers = Physics2D.Raycast(transform.position, Quaternion.Euler(0, 0, 30 * count) * dir, contactFilter, hit2D, 1.5f * jk.CurrentSpeed);
+                    targetNumbers = Physics2D.Raycast(transform.position, Quaternion.Euler(0, 0, 30 * count) * dir, contactFilter, hit2D, 1.5f * jk.currentSpeed);
                     // Debug.Log(targetNumbers);
                     count++;
                 } while (targetNumbers != 0 && count < 12);
@@ -162,7 +162,7 @@ namespace Enemy.JungleKid
                     speedDir = (Quaternion.Euler(0, 0, 30 * count) * dir).normalized;
                 }
             }
-            else if ((jk.target.transform.position - transform.position).magnitude > jk.characterData.AttackDistance)
+            else if ((jk.target.transform.position - transform.position).magnitude > jk.attackDistance)
             {
                 Debug.Log("Far.");
                 Vector2? next = AStarPathFinding.AStarManager.Instance.GetNext(new Vector2Int(Mathf.FloorToInt(transform.position.x), Mathf.FloorToInt(transform.position.y)), new Vector2Int(Mathf.FloorToInt(jk.target.transform.position.x), Mathf.FloorToInt(jk.target.transform.position.y)));
@@ -187,7 +187,7 @@ namespace Enemy.JungleKid
             {
                 speedDir = Random.insideUnitCircle;
                 // target = (Vector2)transform.position + Random.insideUnitCircle * enemyData.WalkMaxDistance;
-                targetNumbers = Physics2D.Raycast(transform.position, speedDir, contactFilter, hit2D, 1.5f * jk.CurrentSpeed);
+                targetNumbers = Physics2D.Raycast(transform.position, speedDir, contactFilter, hit2D, 1.5f * jk.currentSpeed);
                 // Debug.Log(targetNumbers);
                 count++;
             } while (targetNumbers != 0 && count < 10);
@@ -207,7 +207,7 @@ namespace Enemy.JungleKid
 
         IEnumerator AttackCountDown()
         {
-            attackTimer = jk.characterData.AttackInterval;
+            attackTimer = jk.attackInterval;
             while(attackTimer > 0)
             {
                 attackTimer -= Time.deltaTime;
