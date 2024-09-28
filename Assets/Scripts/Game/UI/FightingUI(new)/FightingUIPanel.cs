@@ -44,7 +44,7 @@ public class FightingUIPanel : BasePanel, IScrollHandler
         parentBar = GetControl<Image>("HealthBar");
         bulletBar = GetControl<Image>("BulletBar");
         elementPointer = GetControl<Image>("ElementPointer");
-        maxCount = 1;
+        maxCount = 10;
         currentCount = 0;
         bulletBar.fillAmount = 1.0f * currentCount / maxCount;
         player.OnFill += OnBulletFill;
@@ -172,11 +172,12 @@ public class FightingUIPanel : BasePanel, IScrollHandler
 
     public DataItem GetCurrentBullet()
     {
-        if(itemList[usingBulletIndex].itemAmount<1) return null;
+        if(itemList[usingBulletIndex].itemAmount < 1) return null;
         InventoryItem item = new InventoryItem();
         item.itemID = itemList[usingBulletIndex].itemID;
         item.itemAmount = itemList[usingBulletIndex].itemAmount-1;
         itemList[usingBulletIndex] = item;
+        print(usingBulletIndex);
         DataItem itemDetails = InventoryManager.Instance.GetItemDetails(item.itemID);
         bulletSlots[1].UpdateSlot(itemDetails, item.itemAmount);
         return itemDetails;

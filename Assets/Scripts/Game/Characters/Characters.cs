@@ -73,7 +73,7 @@ public class Characters : MonoBehaviour
     }
     private void Update()
     {
-        if (!elementLossing)
+        if (!elementLossing && elementState.GetEElements() !=new EElement[2]{EElement.None,EElement.None })
         {
             elementLossing = true;
             StartCoroutine(ElementLoss());
@@ -83,13 +83,15 @@ public class Characters : MonoBehaviour
     IEnumerator ElementLoss()
     {
         float x=elementState.elementVector.x;
-        float y=elementState.elementVector.y;
-        if (x > 0)
+        float y= elementState.elementVector.y;
+        if (x > 0.1)
             elementState.elementVector.x = Math.Max(x - GlobalValue.EnviormentLeak, 0);
-        else elementState.elementVector.x = Math.Min(x + GlobalValue.EnviormentLeak, 0);
-        if (y > 0)
+        else if(x<-0.1)
+            elementState.elementVector.x = Math.Min(x + GlobalValue.EnviormentLeak, 0);
+        if (y > 0.1)
             elementState.elementVector.y = Math.Max(y - GlobalValue.EnviormentLeak, 0);
-        else elementState.elementVector.y = Math.Min(y - GlobalValue.EnviormentLeak, 0);
+        else if(y<-0.1)
+            elementState.elementVector.y = Math.Min(y - GlobalValue.EnviormentLeak, 0);
         yield return new WaitForSeconds(1f);
         elementLossing=false;
     }
