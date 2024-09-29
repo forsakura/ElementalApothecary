@@ -48,7 +48,10 @@ public class AreaCreate : BaseAttribute
             {
                 Source = null,//直接由物品决定应该是不需要角色作为“源”
                 Damage = 0,
-
+                elementState = new ElementVector()
+                {
+                    elementVector = itemData.ReturnElementVector()
+                }
             };
         }
     }

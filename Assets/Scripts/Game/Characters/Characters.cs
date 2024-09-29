@@ -237,7 +237,10 @@ public class Characters : MonoBehaviour
         //    Source = gameObject,
         //    Damage = characterData.Damage
         //};
-        BulletControl bulletControl = bul.GetComponent<BulletControl>();
+        ItemEntityCtrl itemEntity = bul.GetComponent<ItemEntityCtrl>();
+        BulletControl bulletControl = itemEntity.BulletComponent;
+
+        itemEntity.Data = currentBulletValue;
         bulletControl.SetBullet(target, BulletType.Throw);
         //bulletControl.OnThrowHitTarget += OnThrowHitTarget;//先去了，不由角色决定效果
         OnThrow?.Invoke(this);

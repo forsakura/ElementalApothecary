@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: AeraCreate
   m_EditorClassIdentifier: 
   Name: 
-  id: 0
-  effectId: 
+  id: 10
   buffId: 
   description: 
   Type: 0
@@ -24,5 +23,11 @@ MonoBehaviour:
   leak: 0
   IsPermanent: 1
   Pos_target: {x: 0, y: 0, z: 0}
-  AreaPrefab: {fileID: 0}
+  hitData:
+    Source: {fileID: 0}
+    Damage: 0
+    elementState:
+      elementVector: {x: 0, y: 0}
+    IgnoreInvincible: 0
+  AreaPrefab: {fileID: 8765541613010772342, guid: 8457d9e830450124193314fcfdf5c6de, type: 3}
   bulletCrtl: {fileID: 0}

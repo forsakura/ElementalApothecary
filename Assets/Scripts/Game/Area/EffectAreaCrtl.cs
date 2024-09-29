@@ -15,7 +15,7 @@ public class EffectAreaCrtl : MonoBehaviour
     [SerializeField]
     HitInstance hit = null;
 
-    private List<Character> targets = new();
+    private List<Characters> targets = new();
     private Timer timer;
 
     public HitInstance Hit { get => hit; set => hit = value; }
@@ -24,6 +24,8 @@ public class EffectAreaCrtl : MonoBehaviour
     {
         // 初始化 Timer  
         timer = new Timer(duration, interval, OnEnter, OnInterval, OnEnd);
+
+        transform.localScale = new Vector3(effectRadius, effectRadius, effectRadius);
     }
 
     private void OnEnter()
@@ -35,10 +37,10 @@ public class EffectAreaCrtl : MonoBehaviour
     private void OnInterval()
     {
         // 每个间隔施加效果  
-        foreach (Character target in targets)
+        foreach (Characters target in targets)
         {
             Debug.Log("Applying effect to: " + target.name);
-            //target.ApplyEffect();
+            target.GetHit(hit);
         }
     }
 
@@ -46,16 +48,16 @@ public class EffectAreaCrtl : MonoBehaviour
     {
         // 效果结束时调用  
         Debug.Log("Effect ended for targets in the area.");
-        foreach (Character target in targets)
+        foreach (Characters target in targets)
         {
-            //target.RemoveEffect(); // 恢复目标的状态  
+            
         }
         targets.Clear(); // 清空目标列表  
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        Character character = collider.gameObject.GetComponent<Character>();
+        Characters character = collider.gameObject.GetComponent<Characters>();
         if (character != null && !targets.Contains(character))
         {
             targets.Add(character);
@@ -66,7 +68,7 @@ public class EffectAreaCrtl : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collider)
     {
-        Character character = collider.gameObject.GetComponent<Character>();
+        Characters character = collider.gameObject.GetComponent<Characters>();
         if (character != null)
         {
             targets.Remove(character);

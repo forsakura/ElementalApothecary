@@ -14,31 +14,38 @@ public class ATTRManager : MonoBehaviour,IATTRManager
     {
         attribute.OnApply(gameObject);
         activeATTR.Add(attribute);
+
+        // 启动协程处理该属性的生命周期  
+        StartCoroutine(HandleAttribute(attribute));
     }
-    
-    void Update()
+
+    private IEnumerator HandleAttribute(BaseAttribute attribute)
     {
-        float deltaTime = Time.deltaTime;
-        for (int i = activeATTR.Count - 1; i >= 0; i--)
+        while (true)
         {
-            activeATTR[i].OnUpdate(gameObject, deltaTime);
-            if (!activeATTR[i].IsPermanent)
+            // 更新属性  
+            float deltaTime = Time.deltaTime;
+            attribute.OnUpdate(gameObject, deltaTime);
+
+            // 检查属性是否过期  
+            if (!attribute.IsPermanent && attribute.IsExpired())
             {
-                if (activeATTR[i].IsExpired())
-                {
-                    activeATTR[i].OnExpired(gameObject);
-                    activeATTR.RemoveAt(i);
-                }
+                attribute.OnExpired(gameObject);
+                activeATTR.Remove(attribute);
+                yield break; // 结束协程  
             }
+
+            // 等待下一帧  
+            yield return null;
         }
     }
 
-    /// <summary>
-    /// 处理对外
-    /// </summary>
-    /// <param name="collision"></param>
+    /// <summary>  
+    /// 处理对外  
+    /// </summary>  
+    /// <param name="collision"></param>  
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        
+        // 碰撞处理逻辑  
     }
 }

@@ -51,8 +51,11 @@ public abstract class BaseAttribute : ScriptableObject
 {
     public string Name;
     public int id;
-    public List<int> effectId;//涉及的效果id(意思说属性可以组合)
-    public List<int> buffId;//涉及的buffid
+    //public List<int> effectId;//涉及的效果id(意思说属性可以组合)
+    /// <summary>
+    /// 涉及的buffid
+    /// </summary>
+    public List<int> buffId;
     public string description;
     public AttributeType Type;
     public EElement baseElement;
