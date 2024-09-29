@@ -25,7 +25,7 @@ namespace Game.Level.Room.Teleport.Data
         {
             base.InitData(fileName);
             var res = SaveSystem.LoadGameFromJson<FightTeleportData>(fileName, JsonType.LitJson);
-            destinationPointName = res.destinationPointName;
+            //destinationPointName = res.destinationPointName;
             destinationPoint = res.destinationPoint;
             type = res.type;
             isTransform = res.isTransform;

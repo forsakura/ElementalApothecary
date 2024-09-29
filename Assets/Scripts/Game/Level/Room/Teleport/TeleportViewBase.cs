@@ -4,9 +4,11 @@ using UnityEngine;
 namespace Game.Level.Room.Teleport
 {
     //???????????§Õ???
-    public class TeleportViewBase : MonoBehaviour
+    public class TeleportViewBase : PlayerInteraction
     {
-        public string tipPanelName;
+        public string fileName;
+        
+        public string tipPanelName = "TeleportTipPanel";
 
         public TeleportDataBase data;
 
@@ -21,6 +23,11 @@ namespace Game.Level.Room.Teleport
         }
 
         protected virtual void TransformToNext()
+        {
+            
+        }
+
+        public override void Interact()
         {
             
         }

@@ -22,7 +22,7 @@ namespace Enemy
         public virtual void InitHit()
         {
             enemyHit.Source = gameObject;
-            enemyHit.Damage = characterData.Damage;
+            enemyHit.Damage = characterData.damage;
             enemyHit.elementState.elementVector = new Vector2(10, 0);
         }
 

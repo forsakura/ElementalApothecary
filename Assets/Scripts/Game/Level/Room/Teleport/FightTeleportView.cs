@@ -1,5 +1,6 @@
 using Game.Level.Room.Teleport.Data;
 using Game.Level.Room.UI;
+using ProjectBase.Date;
 using ProjectBase.Event;
 using ProjectBase.UI;
 using UnityEngine;
@@ -10,35 +11,42 @@ namespace Game.Level.Room.Teleport
     {
         private void Start()
         {
-            data = new FightTeleportData(gameObject.name);
+            data = new FightTeleportData(fileName);
+            //Debug.Log(data.destinationPoint);
         }
 
         //????????????
         protected override void TransformToNext()
         {
             base.TransformToNext();
-            GameObject.Find("Player").transform.position = ((FightTeleportData)data).destinationPoint;
+            GameObject.Find("Player").transform.position = (data).destinationPoint;
+        }
+        
+        public override void Interact()
+        {
+            base.Interact();
+            TransformToNext();
         }
 
-        protected override void OnTriggerEnter2D(Collider2D other)
+        /*protected override void OnTriggerEnter2D(Collider2D other)
         {
             base.OnTriggerEnter2D(other);
             if (other.CompareTag("Player")&&((FightTeleportData)data).isTransform)
             {
                 UIManager.Instance.ShowPanel<TranslateTipPanel>(tipPanelName, E_UI_Layer.system);
-                EventCenter.Instance.AddEventListener("¥´ÀÕ", TransformToNext);
+                EventCenter.Instance.AddEventListener("‰º†ÈÄÅ", TransformToNext);
             } 
-        }
+        }*/
 
-        protected override void OnTriggerExit2D(Collider2D other)
+        /*protected override void OnTriggerExit2D(Collider2D other)
         {
             base.OnTriggerExit2D(other);
             if (other.CompareTag("Player") && ((FightTeleportData)data).isTransform)
             {
                 UIManager.Instance.HidePanel(tipPanelName);
-                EventCenter.Instance.RemoveEventLister("¥´ÀÕ", TransformToNext);
+                EventCenter.Instance.RemoveEventLister("‰º†ÈÄÅ", TransformToNext);
             }
-        }
+        }*/
     }
 }
 

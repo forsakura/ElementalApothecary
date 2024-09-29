@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d51aaaf4b5e18a8459d601f7d823d5a9, type: 3}
   m_Name: Room1DownTeleportData
   m_EditorClassIdentifier: 
-  destinationSceneName: 
-  destinationPoint: {x: 0, y: 0, z: 0}
+  destinationSceneName: Sample Level
+  destinationPoint: {x: 1.25, y: 10, z: 0}
   type: 0
   isOpen: 0

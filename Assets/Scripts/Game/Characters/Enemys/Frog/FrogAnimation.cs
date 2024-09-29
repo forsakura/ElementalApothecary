@@ -29,7 +29,7 @@ namespace Enemy.Frog
 
         private void FixedUpdate()
         {
-            rb.velocity = speedDir * frog.CurrentSpeed;
+            rb.velocity = speedDir * frog.currentSpeed;
         }
 
         private void Update()
@@ -87,7 +87,7 @@ namespace Enemy.Frog
                 {
                     speedDir = Random.insideUnitCircle;
                     // target = (Vector2)transform.position + Random.insideUnitCircle * enemyData.WalkMaxDistance;
-                    targetNumbers = Physics2D.Raycast(transform.position, speedDir, contactFilter, hit2D, 2 * frog.characterData.MoveSpeed);
+                    targetNumbers = Physics2D.Raycast(transform.position, speedDir, contactFilter, hit2D, 2 * frog.characterData.moveSpeed);
                     // Debug.Log(targetNumbers);
                     count++;
                 } while (targetNumbers != 0 && count < 10);

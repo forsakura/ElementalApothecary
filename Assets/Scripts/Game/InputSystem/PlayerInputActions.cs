@@ -71,6 +71,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChangeBullet"",
+                    ""type"": ""Button"",
+                    ""id"": ""e1d88cf9-b9b8-4f9c-b657-d8882ed488eb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -216,6 +225,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""UsePotion"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""07664bdd-ef2f-4fa7-b67e-e46a9d37800c"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeBullet"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -229,6 +249,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_GamePlay_Fill = m_GamePlay.FindAction("Fill", throwIfNotFound: true);
         m_GamePlay_UsePotion = m_GamePlay.FindAction("UsePotion", throwIfNotFound: true);
         m_GamePlay_Interact = m_GamePlay.FindAction("Interact", throwIfNotFound: true);
+        m_GamePlay_ChangeBullet = m_GamePlay.FindAction("ChangeBullet", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -295,6 +316,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_GamePlay_Fill;
     private readonly InputAction m_GamePlay_UsePotion;
     private readonly InputAction m_GamePlay_Interact;
+    private readonly InputAction m_GamePlay_ChangeBullet;
     public struct GamePlayActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -304,6 +326,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Fill => m_Wrapper.m_GamePlay_Fill;
         public InputAction @UsePotion => m_Wrapper.m_GamePlay_UsePotion;
         public InputAction @Interact => m_Wrapper.m_GamePlay_Interact;
+        public InputAction @ChangeBullet => m_Wrapper.m_GamePlay_ChangeBullet;
         public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -328,6 +351,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
+            @ChangeBullet.started += instance.OnChangeBullet;
+            @ChangeBullet.performed += instance.OnChangeBullet;
+            @ChangeBullet.canceled += instance.OnChangeBullet;
         }
 
         private void UnregisterCallbacks(IGamePlayActions instance)
@@ -347,6 +373,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
+            @ChangeBullet.started -= instance.OnChangeBullet;
+            @ChangeBullet.performed -= instance.OnChangeBullet;
+            @ChangeBullet.canceled -= instance.OnChangeBullet;
         }
 
         public void RemoveCallbacks(IGamePlayActions instance)
@@ -371,5 +400,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnFill(InputAction.CallbackContext context);
         void OnUsePotion(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnChangeBullet(InputAction.CallbackContext context);
     }
 }

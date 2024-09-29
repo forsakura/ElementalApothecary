@@ -50,7 +50,7 @@ namespace Enemy.Mushroom
                 })
                 .AddLeavingCondition("Death", () =>
                 {
-                    return mushroom.CurrentHealth < 1;
+                    return mushroom.currentHealth < 1;
                 })
             );
 
@@ -61,14 +61,14 @@ namespace Enemy.Mushroom
                 })
                 .AddLeavingCondition("Death", () =>
                 {
-                    return mushroom.CurrentHealth < 1;
+                    return mushroom.currentHealth < 1;
                 })
             );
 
             FSM.AddState("Death", new State()
                 .SetEnter(() =>
                 {
-                    mushroom.CurrentSpeed = 0;
+                    mushroom.currentSpeed = 0;
                     animator.SetTrigger("Dead");
                 })
             );
@@ -84,7 +84,7 @@ namespace Enemy.Mushroom
                 })
                 .AddLeavingCondition("Death", () =>
                 {
-                    return mushroom.CurrentHealth < 1;
+                    return mushroom.currentHealth < 1;
                 })
             );
 

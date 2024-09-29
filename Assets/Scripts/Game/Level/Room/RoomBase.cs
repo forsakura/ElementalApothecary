@@ -15,35 +15,38 @@ namespace Game.Level.Room
         public abstract void SaveData();
         
         /// <summary>
-        /// ÉèÖÃÎïÆ·¸¸½ÚµãºÍÎ»ÖÃ
+        /// è®¾ç½®ç‰©å“çˆ¶èŠ‚ç‚¹å’Œä½ç½®
         /// </summary>
-        /// <param name="gb">ÎïÆ·¶ÔÏó</param>
-        /// <param name="tr">¶ÔÏó×ø±ê</param>
-        /// <param name="parentTransform">¶ÔÏó¸¸½Úµã</param>
+        /// <param name="gb">ç‰©å“å¯¹è±¡</param>
+        /// <param name="tr">å¯¹è±¡åæ ‡</param>
+        /// <param name="parentTransform">å¯¹è±¡çˆ¶èŠ‚ç‚¹</param>
         protected void SetGameObject(GameObject gb, GameObjectInfo info, Transform parentTransform)
         {
-            gb.transform.localPosition = info.position * 5;
-            gb.transform.localRotation = Quaternion.Euler(info.rotation);
+            gb.transform.position = info.position * 5;
+            gb.transform.rotation = Quaternion.Euler(info.rotation);
             gb.transform.localScale = info.scale * 5;
             gb.transform.SetParent(parentTransform);
         }
 
         /// <summary>
-        /// ÉèÖÃ´«ËÍµã½Å±¾ÀàĞÍ
+        /// è®¾ç½®ä¼ é€ç‚¹è„šæœ¬ç±»å‹
         /// </summary>
-        /// <param name="gb">´«ËÍµã¶ÔÏó</param>
-        protected void SetTransformView(GameObject gb)
+        /// <param name="gb">ä¼ é€ç‚¹å¯¹è±¡</param>
+        protected void SetTransformView(GameObject gb, string fileName)
         {
             switch (gb.tag)
             {
                 case "Common" :
                     gb.AddComponent<CommonTeleportView>();
+                    gb.GetComponent<CommonTeleportView>().fileName = fileName;
                     break;
                 case "Special" :
                     gb.AddComponent<SpecialTeleportView>();
+                    gb.GetComponent<SpecialTeleportView>().fileName = fileName;
                     break;
                 case "Fight" :
                     gb.AddComponent<FightTeleportView>();
+                    gb.GetComponent<FightTeleportView>().fileName = fileName;
                     break;
             }
         }

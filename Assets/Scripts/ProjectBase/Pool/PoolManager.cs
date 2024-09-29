@@ -23,7 +23,7 @@ namespace ProjectBase.Pool
         /// </summary>
         /// <param name="prefabPath"></param>
         /// <param name="capacity"></param>
-        private void AddPoolDic(int capacity, string prefabPath)
+        public void AddPoolDic(int capacity, string prefabPath)
         {
             if (poolDic.ContainsKey(prefabPath)) return;
             var gb = new GameObject(prefabPath + " pool");
@@ -37,7 +37,7 @@ namespace ProjectBase.Pool
         /// É¾³ý³Ø¶ÔÏó
         /// </summary>
         /// <param name="prefabPath"></param>
-        private void RmPoolDic(string prefabPath)
+        public void RmPoolDic(string prefabPath)
         {
             if (!poolDic.ContainsKey(prefabPath)) return;
             poolDic.Remove(prefabPath);

@@ -22,7 +22,7 @@ MonoBehaviour:
       id: 2
       BaseId: 2
       ATTR: 02000000
-    itemAmount: 1
+    itemAmount: 2
   - itemID:
       id: 3
       BaseId: 3

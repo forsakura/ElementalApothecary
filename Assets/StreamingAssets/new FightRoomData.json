@@ -1,4 +1,5 @@
 {
+    "teleportFileNames": [],
     "teleportPrefabPaths": [
         "Prefab/Teleports/FightTeleportEnter",
         "Prefab/Teleports/FightTeleportExit"

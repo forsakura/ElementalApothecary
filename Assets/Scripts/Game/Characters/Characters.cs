@@ -6,13 +6,15 @@ using CharacterDelegates;
 using UnityEditor.TerrainTools;
 using System;
 using ProjectBase.UI;
+using ProjectBase.Pool;
+using static DG.Tweening.DOTweenModuleUtils;
 
 public class Characters : MonoBehaviour
 {
     public CharacterData characterData;
     public ECharacterType characterType;
-    public int CurrentHealth;
-    public float CurrentSpeed;
+    public int currentHealth;
+    public float currentSpeed;
     public DataItem currentBulletValue;
     // [水/火, 风/土]
     //public int[] ElementContain = new int[2] { 0, 0 };
@@ -23,7 +25,12 @@ public class Characters : MonoBehaviour
 
     public int remainingBullet;
     public GameObject bulletPrefab;
+    public bool immunePhysical;
+
     public Vector3 bulletInitOffset = Vector3.zero;
+    public float attackInterval;
+    public float attackDistance;
+    public float invincibleTime;
 
     private float invincibleTimer;
     private bool elementLossing;
@@ -54,9 +61,9 @@ public class Characters : MonoBehaviour
             characterType = ECharacterType.Enemy;
             tag = "Enemy";
         }
-        CurrentHealth = characterData.MaxHealth;
-        OnHealthChange?.Invoke(this, CurrentHealth);
-        CurrentSpeed = characterData.MoveSpeed;
+        currentHealth = characterData.maxHealth;
+        OnHealthChange?.Invoke(this, currentHealth);
+        currentSpeed = characterData.moveSpeed;
         elementState = new ElementVector();
         //ElementContain = new int[2] { 0, 0 };
         //ElementName = new EElement[2] {EElement.None, EElement.None};
@@ -66,8 +73,7 @@ public class Characters : MonoBehaviour
     }
     private void Update()
     {
-        //元素相邻
-        if (Vector2.Angle(elementState.elementVector,Vector2.right)%90 > 0.1f&&!elementLossing)
+        if (!elementLossing && elementState.GetEElements() !=new EElement[2]{EElement.None,EElement.None })
         {
             elementLossing = true;
             StartCoroutine(ElementLoss());
@@ -77,13 +83,15 @@ public class Characters : MonoBehaviour
     IEnumerator ElementLoss()
     {
         float x=elementState.elementVector.x;
-        float y=elementState.elementVector.y;
-        if (x > 0)
+        float y= elementState.elementVector.y;
+        if (x > 0.1)
             elementState.elementVector.x = Math.Max(x - GlobalValue.EnviormentLeak, 0);
-        else elementState.elementVector.x = Math.Min(x + GlobalValue.EnviormentLeak, 0);
-        if (y > 0)
+        else if(x<-0.1)
+            elementState.elementVector.x = Math.Min(x + GlobalValue.EnviormentLeak, 0);
+        if (y > 0.1)
             elementState.elementVector.y = Math.Max(y - GlobalValue.EnviormentLeak, 0);
-        else elementState.elementVector.y = Math.Min(y - GlobalValue.EnviormentLeak, 0);
+        else if(y<-0.1)
+            elementState.elementVector.y = Math.Min(y - GlobalValue.EnviormentLeak, 0);
         yield return new WaitForSeconds(1f);
         elementLossing=false;
     }
@@ -112,9 +120,9 @@ public class Characters : MonoBehaviour
         BeforeGetHit?.Invoke(this, hit);
 
         int totalDmg = hit.Damage + CalculateElementDamage(hit);
-        CurrentHealth -= totalDmg;
-        OnHealthChange?.Invoke(this, CurrentHealth);
-        if (CurrentHealth <= 0)
+        currentHealth -= totalDmg;
+        OnHealthChange?.Invoke(this, currentHealth);
+        if (currentHealth <= 0)
         {
             isDead = true;
             OnDeath?.Invoke(this, hit);
@@ -122,7 +130,7 @@ public class Characters : MonoBehaviour
 
         //print(elementState.elementVector);
         isInvincible = true;
-        invincibleTimer = characterData.InvincibleTime;
+        invincibleTimer = invincibleTime;
         StartCoroutine(InvincibleCountDown());
 
         AfterGetHit?.Invoke(this, hit);
@@ -216,11 +224,12 @@ public class Characters : MonoBehaviour
         {
             return;
         }
+        //PoolManager.Instance.AddPoolDic(20, "Prefab/Bullets/Bullet");
         GameObject bul = Instantiate(bulletPrefab, transform.position + bulletInitOffset, new Quaternion());
         //HitInstance hit = new()
         //{
         //    Source = gameObject,
-        //    Damage = characterData.Damage
+        //    damage = characterData.damage
         //};
         BulletControl bulletControl = bul.GetComponent<BulletControl>();
         bulletControl.SetBullet(target, BulletType.Shoot);
@@ -235,7 +244,7 @@ public class Characters : MonoBehaviour
         //HitInstance hit = new()
         //{
         //    Source = gameObject,
-        //    Damage = characterData.Damage
+        //    damage = characterData.damage
         //};
         ItemEntityCtrl itemEntity = bul.GetComponent<ItemEntityCtrl>();
         BulletControl bulletControl = itemEntity.BulletComponent;
@@ -251,7 +260,7 @@ public class Characters : MonoBehaviour
         currentBulletValue = UIManager.Instance.GetPanel<FightingUIPanel>("FightingUI").GetCurrentBullet();
         if (currentBulletValue == null) return;
 
-        remainingBullet = characterData.MaxBulletCount;
+        remainingBullet = characterData.maxBulletCount;
         OnFill?.Invoke(this, remainingBullet);
     }
 

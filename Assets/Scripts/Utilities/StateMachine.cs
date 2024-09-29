@@ -11,12 +11,12 @@ public class StateMachine
     private State previousState = null;
     private State enterState = null;
 
-    //public string Name
+    //public string name
     //{
-    //    get => currentState.Name;
+    //    get => currentState.name;
     //    set
     //    {
-    //        if (value == Name || !states.TryGetValue(value, out State nextState))
+    //        if (value == name || !states.TryGetValue(value, out State nextState))
     //        {
     //            return;
     //        }

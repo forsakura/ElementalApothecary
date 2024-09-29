@@ -1,9 +1,9 @@
 using ProjectBase.UI;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class FightingUIPanel : BasePanel, IScrollHandler
@@ -38,13 +38,13 @@ public class FightingUIPanel : BasePanel, IScrollHandler
     void Start()
     {
         player = PlayerController.Instance?.GetComponent<Player>();
-        maxHealth = player.characterData.MaxHealth;
+        maxHealth = player.characterData.maxHealth;
         player.OnHealthChange += OnPlayerHealthChange;
         childBar = GetControl<Image>("ChildBar");
         parentBar = GetControl<Image>("HealthBar");
         bulletBar = GetControl<Image>("BulletBar");
         elementPointer = GetControl<Image>("ElementPointer");
-        maxCount = 1;
+        maxCount = 10;
         currentCount = 0;
         bulletBar.fillAmount = 1.0f * currentCount / maxCount;
         player.OnFill += OnBulletFill;
@@ -69,11 +69,15 @@ public class FightingUIPanel : BasePanel, IScrollHandler
             usingBulletIndex = (usingBulletIndex + 1) % itemList.Count;
             ChangeBulletSlot(usingBulletIndex);
         });
+        
         itemList = InventoryManager.Instance.playerBag.itemList;
         usingBagIndex = 0;
         usingBulletIndex = 0;
         ChangeBagSlot(usingBagIndex % itemList.Count);
         ChangeBulletSlot(usingBulletIndex % itemList.Count);
+
+        PlayerInputManager.Instance.FightUI.SwitchLeft.started += BulletLeftSwitch;
+        PlayerInputManager.Instance.FightUI.SwitchRight.started += BulletRightSwitch;
     }
 
     /// <summary>
@@ -168,12 +172,12 @@ public class FightingUIPanel : BasePanel, IScrollHandler
 
     public DataItem GetCurrentBullet()
     {
-        print(1);
-        if(itemList[usingBulletIndex].itemAmount<1) return null;
+        if(itemList[usingBulletIndex].itemAmount < 1) return null;
         InventoryItem item = new InventoryItem();
         item.itemID = itemList[usingBulletIndex].itemID;
         item.itemAmount = itemList[usingBulletIndex].itemAmount-1;
         itemList[usingBulletIndex] = item;
+        print(usingBulletIndex);
         DataItem itemDetails = InventoryManager.Instance.GetItemDetails(item.itemID);
         bulletSlots[1].UpdateSlot(itemDetails, item.itemAmount);
         return itemDetails;
@@ -188,5 +192,16 @@ public class FightingUIPanel : BasePanel, IScrollHandler
         DataItem itemDetails = InventoryManager.Instance.GetItemDetails(item.itemID);
         bagSlots[1].UpdateSlot(itemDetails, item.itemAmount);
         return itemDetails;
+    }
+
+    private void BulletLeftSwitch(InputAction.CallbackContext context)
+    {
+        usingBulletIndex = (usingBulletIndex - 1 + itemList.Count) % itemList.Count;
+        ChangeBulletSlot(usingBulletIndex);
+    }
+    private void BulletRightSwitch(InputAction.CallbackContext context)
+    {
+        usingBulletIndex = (usingBulletIndex + 1) % itemList.Count;
+        ChangeBulletSlot(usingBulletIndex);
     }
 }

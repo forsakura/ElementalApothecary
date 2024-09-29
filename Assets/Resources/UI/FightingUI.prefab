@@ -284,7 +284,6 @@ MonoBehaviour:
       id: 0
       BaseId: 0
       ATTR: 
-    _useTimes: 0
     _itemUseRadius: 0
     _itemDescription: 
     _itemIcon: {fileID: 0}
@@ -695,7 +694,6 @@ MonoBehaviour:
       id: 0
       BaseId: 0
       ATTR: 
-    _useTimes: 0
     _itemUseRadius: 0
     _itemDescription: 
     _itemIcon: {fileID: 0}
@@ -866,7 +864,6 @@ MonoBehaviour:
       id: 0
       BaseId: 0
       ATTR: 
-    _useTimes: 0
     _itemUseRadius: 0
     _itemDescription: 
     _itemIcon: {fileID: 0}
@@ -2574,7 +2571,6 @@ MonoBehaviour:
       id: 0
       BaseId: 0
       ATTR: 
-    _useTimes: 0
     _itemUseRadius: 0
     _itemDescription: 
     _itemIcon: {fileID: 0}
@@ -2895,7 +2891,6 @@ MonoBehaviour:
       id: 0
       BaseId: 0
       ATTR: 
-    _useTimes: 0
     _itemUseRadius: 0
     _itemDescription: 
     _itemIcon: {fileID: 0}
@@ -3066,7 +3061,6 @@ MonoBehaviour:
       id: 0
       BaseId: 0
       ATTR: 
-    _useTimes: 0
     _itemUseRadius: 0
     _itemDescription: 
     _itemIcon: {fileID: 0}
@@ -3746,7 +3740,6 @@ MonoBehaviour:
       id: 0
       BaseId: 0
       ATTR: 
-    _useTimes: 0
     _itemUseRadius: 0
     _itemDescription: 
     _itemIcon: {fileID: 0}
@@ -3992,7 +3985,6 @@ MonoBehaviour:
       id: 0
       BaseId: 0
       ATTR: 
-    _useTimes: 0
     _itemUseRadius: 0
     _itemDescription: 
     _itemIcon: {fileID: 0}
@@ -4656,7 +4648,6 @@ MonoBehaviour:
       id: 0
       BaseId: 0
       ATTR: 
-    _useTimes: 0
     _itemUseRadius: 0
     _itemDescription: 
     _itemIcon: {fileID: 0}
@@ -4902,7 +4893,6 @@ MonoBehaviour:
       id: 0
       BaseId: 0
       ATTR: 
-    _useTimes: 0
     _itemUseRadius: 0
     _itemDescription: 
     _itemIcon: {fileID: 0}

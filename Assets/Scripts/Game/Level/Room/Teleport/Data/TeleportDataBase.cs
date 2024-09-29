@@ -9,7 +9,7 @@ namespace Game.Level.Room.Teleport.Data
     }
     public class TeleportDataBase
     {
-        public string destinationPointName;
+        public string destinationSceneName;
         
         public Vector3 destinationPoint;
 
